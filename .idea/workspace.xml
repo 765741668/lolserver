@@ -719,7 +719,7 @@
       <created>1491845589554</created>
       <updated>1491845589554</updated>
       <workItem from="1491845589548" duration="96293000" />
-      <workItem from="1492188745998" duration="85695000" />
+      <workItem from="1492188745998" duration="86267000" />
     </task>
     <task id="LOCAL-00001" summary="GameWorker 工作线程版">
       <created>1492662590222</created>
@@ -729,7 +729,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="181988000" />
+    <option name="totallyTimeSpent" value="182560000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
