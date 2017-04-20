@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    %p: 输出日志信息优先级，即DEBUG ，INFO ，WARN ，ERROR ，FATAL,
+    %d: 输出日志时间点的日期或时间，默认格式为ISO8601 ，也可以在其后指定格式，比如：%d{yyy MMM dd HH:mm:ss,SSS} ，
+       	输出类似：2002 年10 月18 日 22 ：10 ：28 ，921
+    %r: 输出自应用启动到输出该log 信息耗费的毫秒数
+    %c: 输出日志信息所属的类目，通常就是所在类的全名
+    %t: 输出产生该日志事件的线程名
+    %l: 输出日志事件的发生位置，相当于%C.%M(%F:%L) 的组合, 包括类目名、发生的线程，以及在代码中的行数。举例：Testlog4.main(TestLog4.java:10)
+    %x: 输出和当前线程相关联的NDC( 嵌套诊断环境), 尤其用到像java servlets 这样的多客户多线程的应用中。
+    %%: 输出一个"%" 字符
+    %F: 输出日志消息产生时所在的文件名称
+    %L: 输出代码中的行号
+    %m: 输出代码中指定的消息, 产生的日志具体信息
+    %n: 输出一个回车换行符，Windows 平台为"/r/n" ，Unix 平台为"/n" 输出日志信息换行
+       可以在% 与模式字符之间加上修饰符来控制其最小宽度、最大宽度、和文本的对齐方式。如：
+      1)%20c ：指定输出category 的名称，最小的宽度是20 ，如果category 的名称小于20 的话，默认的情况下右对齐。
+      2)%-20c: 指定输出category 的名称，最小的宽度是20 ，如果category 的名称小于20 的话，"-" 号指定左对齐。
+      3)%.30c: 指定输出category 的名称，最大的宽度是30 ，如果category 的名称大于30 的话，就会将左边多出的字符截掉，但小于30 的话也不会有空格。
+      4)%20.30c: 如果category 的名称小于20 就补空格，并且右对齐，如果其名称长于30 字符，就从左边交远销出的字符截掉。
+    
+        示例：
+	log4j.appender.R.layout.ConversionPattern=%d{yyyy-MMM-dd HH:mm:ss,SSS}-[TS] %p %t %c - %m%n
+	输出：2012-06-06 10:45:30,000-[TS] INFO thread30 TestClass - 记录的日志
+	-->
+<!--
+	这里上面三个步骤是对前面Log4j 组件说明的一个简化；下面给出一个具体配置例子，在程序中可以参照执行：
+	　　log4j.rootLogger=INFO,A1 ，B2
+	　　log4j.appender.A1=org.apache.log4j.ConsoleAppender
+	　　log4j.appender.A1.layout=org.apache.log4j.PatternLayout
+	　　log4j.appender.A1.layout.ConversionPattern=%-4r %-5p %d{yyyy-MM-dd HH:mm:ssS} %c %m%n
+	  　　根据上面的日志格式，某一个程序的输出结果如下：
+	　　0 　　INFO 　2003-06-13 13:23:46968 ClientWithLog4j Client socket: Socket[addr=localhost/127.0.0.1,port=8002,localport=2014]
+	         16 　 DEBUG 2003-06-13 13:23:46984 ClientWithLog4j Server says: 'Java server with log4j, Fri Jun 13 13:23:46 CST 2003'
+	　　16 　 DEBUG 2003-06-13 13:23:46984 ClientWithLog4j GOOD
+	　　16 　 DEBUG 2003-06-13 13:23:46984 ClientWithLog4j Server responds: 'Command 'HELLO' not understood.'
+	　　16 　 DEBUG 2003-06-13 13:23:46984 ClientWithLog4j HELP
+	　　16 　 DEBUG 2003-06-13 13:23:46984 ClientWithLog4j Server responds: 'Vocabulary: HELP QUIT'
+	　　16 　 DEBUG 2003-06-13 13:23:46984 ClientWithLog4j QUIT
+	 
+	      4. 当输出信息于回滚文件时
+	
+	          log4j.appender.ROLLING_FILE=org.apache.log4j.RollingFileAppender   // 指定以文件的方式输出日志
+	           log4j.appender.ROLLING_FILE.Threshold=ERROR 
+	           log4j.appender.ROLLING_FILE.File=rolling.log  // 文件位置, 也可以用变量${java.home} 、rolling.log
+	           log4j.appender.ROLLING_FILE.Append=true 
+	           log4j.appender.ROLLING_FILE.MaxFileSize=10KB  // 文件最大尺寸
+	           log4j.appender.ROLLING_FILE.MaxBackupIndex=1  // 备份数
+	           log4j.appender.ROLLING_FILE.layout=org.apache.log4j.PatternLayout 
+	           log4j.appender.ROLLING_FILE.layout.ConversionPattern=[framework] %d - %c -%-4r [%t] %-5p %c %x - %m%n  　　
+	
+	          5. Log4J 对应用性能的影响
+	
+	         如果在程序运行中输出大量日志，显然会对应用的性能造成一定的影响。Log4J 对性能的影响取决于以下因素：
+	
+	    日志输出目的地：输出到控制台的速度和输出到文件系统的速度是不一样的。
+	    日志输出格式：格式简单，速度也更快。
+	    日志级别：日志级别设置的越低，输出的日志内容越多，对性能的影响也越大。
+-->
+
+<configuration scan="true">
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <property resource="log/logback.properties"/>
+    <!-- <property resource="jms/jms.properties" /> -->
+
+    <!-- To enable JMX Management -->
+    <jmxConfigurator/>
+
+    <!-- 控制台输出日志 -->
+    <appender name="ConsoleCfg" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} | [thread:%t] | %-5level | %c | %F | line:%L | %m%n</pattern>
+        </encoder>
+        <!-- or -->
+        <!-- <layout class="ch.qos.logback.classic.PatternLayout">
+              <pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} | [%thread] | %-5level | %logger{36} | %msg%n</pattern>
+           </layout>   -->
+    </appender>
+
+    <!-- 文件输出日志 (文件大小策略进行文件输出，超过指定大小对文件备份)-->
+    <appender name="LogCfg" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <param name="file" value="${location.log}/${file.prefix}trace.log"/>
+        <param name="append" value="true"/>
+        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+            <fileNamePattern>${location.log.archive}/${file.prefix}trace.%i.log.zip</fileNamePattern>
+            <minIndex>1</minIndex>
+            <maxIndex>10</maxIndex>
+        </rollingPolicy>
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <maxFileSize>100MB</maxFileSize>
+        </triggeringPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} | [thread:%t] | %-5level | %c | %F | line:%L | %m%n</pattern>
+        </encoder>
+    </appender>
+    <!-- Asyn文件输出 -->
+    <appender name="AsyncLogCfg" class="ch.qos.logback.classic.AsyncAppender">
+        <param name="discardingThreshold" value="0"/>
+        <appender-ref ref="LogCfg"/>
+    </appender>
+
+    <!-- jms activemq support -->
+    <!-- <appender name="JmsActivemqCfg" class="ch.qos.logback.classic.net.JMSQueueAppender">
+        <InitialContextFactoryName>${jms.activemq.initialContextFactoryName}</InitialContextFactoryName>
+        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+            <evaluator class="ch.qos.logback.classic.boolex.GEventEvaluator">
+                <expression>e.level.toInt()>= WARN.toInt()</expression>
+            </evaluator>
+            <OnMismatch>DENY</OnMismatch>
+            <OnMatch>ACCEPT</OnMatch>
+        </filter>
+        <ProviderURL>${jms.activemq.lookupUrl}</ProviderURL>
+        <QueueConnectionFactoryBindingName>${jms.activemq.lookupQueueName}</QueueConnectionFactoryBindingName>
+        <QueueBindingName>${jms.activemq.test.queue}</QueueBindingName>
+    </appender> -->
+
+    <!--这里指定logger name , listent package prefix -->
+    <!-- Spring Framework -->
+    <logger name="org.springframework" level="error"/>
+    <!-- Apache (activemq) -->
+    <logger name="org.apache" level="error"/>
+    <!-- Oracle -->
+    <logger name="oracle" level="error"/>
+    <!-- Sqlserver -->
+    <logger name="com.microsoft.sqlserver" level="error"/>
+    <!-- Logback -->
+    <logger name="ch.qos.logback" level="error"/>
+    <!-- jms kafka -->
+    <logger name="kafka" level="error"/>
+    <logger name="scala.reflect" level="error"/>
+    <!-- my project -->
+    <logger name="com.yzh" level="${log.level}"/>
+    <logger name="hkjc.cap" level="${log.level}"/>
+
+    <root>
+        <level value="error"/>
+        <appender-ref ref="ConsoleCfg"/>
+        <appender-ref ref="AsyncLogCfg"/>
+        <!-- <appender-ref ref="JmsActivemqCfg"/> -->
+    </root>
+</configuration>

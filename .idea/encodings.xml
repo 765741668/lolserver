@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/Framework" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Framework/src/main/java/com/lol/demo/common/NettyMessage.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Framework/src/main/java/com/lol/util/SerializeProtobufUtil.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LOLServer" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LOLServer/src/main/java/com/lol/logic/login/LoginHandler.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LOLServer/src/main/java/com/lol/tool/EventUtil.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LOLServer/src/main/resources/env" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LOLServer/src/main/resources/log" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LOLServer/src/main/resources/logback.xml" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LOLServer/src/main/resources/netty" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LOLServer/src/main/resources/tools" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LOLServer/src/test/java/lumbdar/evenutil/EvenUtilTest.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/FightProtocol.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/LoginProtocol.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/MatchProtocol.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/PlayerProtocol.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/Protocol.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/SelectProtocol.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/constans/BuildData.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/constans/BuildDataModel.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/constans/HeroData.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/constans/HeroDataModel.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/constans/ISkill.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/constans/Skill/SkillAttack.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/constans/SkillData.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/constans/SkillDataModel.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/constans/SkillLevelData.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/constans/SkillProcessMap.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/dto/AcountInfoDTO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/dto/PlayerDTO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/dto/SelectModel.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/dto/SelectRoomDTO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/dto/fight/AbsFightModel.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/dto/fight/AttackDTO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/dto/fight/DamageDTO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/dto/fight/FightBuildModel.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/dto/fight/FightPlayerModel.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/dto/fight/FightRoomModel.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/dto/fight/FightSkill.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/dto/fight/ModelType.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/dto/fight/MoveDTO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/dto/fight/SkillAtkModel.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/dto/fight/SkillTarget.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Protocol/src/main/java/com/lol/dto/fight/SkillType.java" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>
+

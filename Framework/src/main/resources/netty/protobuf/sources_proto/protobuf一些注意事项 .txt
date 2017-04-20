@@ -1,0 +1,212 @@
+	 读完protobuf一些文档，写点东西，权作记忆。
+	
+	https://github.com/google/protobuf/blob/master/CHANGES.txt：
+	
+	google发布了protobuf v3，为了pb更好用，更跨语言，他对protobuf v2做了以下change：
+	
+	      1. Removal of field presence logic for primitive value fields（匪夷所思，留存以待以后翻译出来）, 
+	      	  删除required（大大地赞同，即保留repeated，required和optional都不要了，默认就是optional），
+	      	  删除默认值（不明白）。谷歌生成这些改变视为了更好的兼容Android Java、Objective C和Go语言；
+	
+	      2. 删除对unknown field的支持；
+	
+	      3. 不再支持继承，以Any type代之；
+	
+	      4 修正了enum中的unknown类型；
+	
+	      5 支持map；
+	
+	         protobuf v2和v3都支持map了，其声明形式如下： 
+	
+	         message Foo {
+	                map<string, string> values = 1;
+	         }
+	
+	         注意，此处的map是unordered_map。
+	
+	      6 添加了一些类型集，以支持表述时间、动态数据等；
+	
+	      7 默认以json形式代替二进制进行编码。
+	
+	目前v3 alpha版仅仅实现了1-5这五个feature，6和7还未支持。新添加了syntax关键字，以指明proto文件的protobuf协议版本，不指明则是v2。如：
+	
+	 // foo.proto
+	
+	      syntax = "proto3";
+	
+	      message Bar {...}
+	
+	如果你目前使用了v2，那么暂时不支持你切换到v3，我们还会对v2提供支持。如果你是新手，那就大胆使用v3吧。
+	
+	https://github.com/golang/protobuf：
+	
+	1 go的protobuf实现不支持RPC。
+	
+	2 go的protobuf实现了一个go的插件protoc-gen-go，他放置的地方必须在$GOBIN里面，默认放在$GOPATH/bin。它也必须在$PATH里面，
+	    以让protoc编译器找到。protoc把proto文件编译成go的源码文件，其名称后缀是.pb.go，protoc命令格式如下：
+	
+	protoc --go_out=. *.proto
+	
+	3 .pb.go源码的一些事项如下：
+	
+	  - 变量名称采用骆驼命名法，如camel_case被编译为CamelCase.
+	
+	  - 不会为field生成set方法，直接为成员赋值即可。 
+	
+	  - 没有setter，但是有getter方法，如果field被设置了值，则返回设置的值。如果没有设置，则返回默认值。如果连message都没有收到，就返回nil。
+	
+	  - struct的所有成员初始值都是零值，如果要给其成员赋值，就必须在序列化之前。序列化后再修改struct的成员值，没有任何意义。
+	
+	  - struc的 Reset()会将struct的所有field的值清零。
+	
+	  - 非repeated的field成员的类型都是指针类型，当它为空时，意味着其值为空。如 "required field int32 f " 或者 "optional field int32 f " 
+	        被编译后的类型都是F *int32。
+	
+	  - Repeated类型的fields被编译后则是slices.
+	
+	  - 与其他语言一样，go会生成Helper函数，以便于设置field的值。针对获取值得Helper函数不再建议使用。                        
+	    msg.Foo = proto.String("hello") // set field
+	
+	  - 一个field如果有default值，则这个值会被编译为一个常量，其名称的规则为Default_StructName_FieldName，
+	        而且相关的Get方法会默认返回这个值。不见直接用这些const值。
+
+	message Test {
+	    optional int32 type = 2 [default=77];
+	    extensions 100 to 199;
+	}
+	
+	type Test struct {
+	
+	    Type  *int32  `protobuf:"varint,2,opt,name=type,def=77" json:"type,omitempty"`
+	}
+
+	const Default_Test_Type int32 = 77
+	
+	func (m *Test) GetType() int32 {
+	    if m != nil && m.Type != nil {
+	        return *m.Type
+	    }
+	    return Default_Test_Type
+	}
+	
+	  -  Enum类型会对类型名称和其值分别处理，其值的Enum名称以类型做前缀，每个field的名称和值会形成map，可以互相查找。
+	
+	enum FOO {
+	    X = 17; 
+	    Y = 18; 
+	};
+	
+	==>
+	
+	type FOO int32
+	const (
+	    FOO_X FOO = 17
+	    FOO_Y FOO = 18
+	)
+	
+	var FOO_name = map[int32]string{
+	    17: "X",
+	    18: "Y",
+	}
+	
+	var FOO_value = map[string]int32{
+	    "X": 17, 
+	    "Y": 18, 
+	}
+	
+	func (x FOO) Enum() *FOO {
+	    p := new(FOO)
+	    *p = x 
+	    return p
+	}
+	
+	func (x FOO) String() string {
+	    return proto.EnumName(FOO_name, int32(x))
+	}
+	
+	func (x *FOO) UnmarshalJSON(data []byte) error {
+	    value, err := proto.UnmarshalJSONEnum(FOO_value, data, "FOO")
+	    if err != nil {
+	        return err
+	    }
+	    *x = FOO(value)
+	    return nil
+	}
+	
+	  - 如果group和enum是内置在message中的，则其名称的前缀会有message的名称。 
+	
+	  - Extensions会被编译为一个变量，其名称开头为E_。extension相关的方法有 HasExtension, ClearExtension, GetExtension， SetExtension .
+	
+	  - 序列化方法有Marshal和Unmarshal.
+	
+	https://developers.google.com/protocol-buffers/docs/proto：
+	
+	1 default value。bool的默认值是false，数值的默认值是0，enum的默认值是其第一个元素，string的默认值是空字符串。
+	
+	2 tag id. id 1-15占用1个字节，16到2047占用两个字节。所以1-15要留个频繁使用的字段，不要刚开始定义字段的是时候都分配出去。
+	
+	  tag值最小是1, 最大是(2^29 - 1)即536,870,911,但是要避开19000到19999，这是protobuf内置的类型要用到的tag id。 
+	
+	3 enum可以有alias。enum的值不能为负数。
+	
+	 enum EnumAllowingAlias {
+	  option allow_alias = true;
+	  UNKNOWN = 0;
+	  STARTED = 1;
+	  RUNNING = 1;
+	}
+	
+	enum EnumNotAllowingAlias {
+	  UNKNOWN = 0;
+	  STARTED = 1;
+	  // RUNNING = 1;  // Uncommenting this line will cause a compile error inside Google and a warning message outside.
+	}
+	
+	 4 当协议更新的时候，如果某个字段过时了，就可以更改field的name，如"OBSOLETE_xxx"，以告诉使用者不要在使用这个field。
+	
+	   也可以更改field type，前提是tag id不变，这些类型就是兼容的(之所以能兼容，按照我的理解，一个field就是一个kay-value对，
+	   tag id为key，value即为值，而type只是在序列化和反序列化的时候起到解释值的作用，并无其他作用；key = (tag << 3) | wire_type，
+	      即类型占用最多3个字节，所以有上面的tag范围是2^29 - 1)。如下几个类型是兼容的：
+	
+	   A int32 uint32 int64 uint64 bool    
+	
+	   B sint32 siint64
+	
+	   C string bytes （字符类型是UTF8）
+	
+	   D fixed32 sfixed32 fixed64 sfixed64
+	
+	   E optional repeated
+	
+	   F default([default = value])value也可以被修改
+	
+	 5 protoc --proto-path= --cpp_out= --java_out= file.proto
+	
+	   --proto-path可以被-I代替。
+	
+	 6 protobuf对repeated压缩不够好，所以尽量在后面加上[packed = true]。
+	
+	 7 序列化的时候不能把多个message序列化后的内容放在一起发出去，尽量以len1 + msg1 + len2 + msg2这种形式发送。
+	
+	 8 不要让protobuf对象成为全局变量或者类成员，因为其clear方法只会把占用的内存空间清零，而不会释放，使得进程空间越来越大，可参考《Protobuf使用不当导致的程序内存上涨问题》。 
+	
+	https://developers.google.com/protocol-buffers/docs/encoding:
+	
+	1 正常field的kv对的编码顺序是：1 小端序；2 varints，即每7个bit为一个byte，在byte的第一个bit赋值1，最后一个byte的第一个bit赋值0；
+	  3 对field的tag加type构成key，值为value，即((tag_id << 3) | wire_type) + value。但是针对repeated这种，
+	   其结果为((tag_id << 3) | wire_type) + len + value，长度len为array size，prootbuf解析度时候，会根据wire_type为2知道这是个array。
+	
+	2 如果序列化的时候，多个kv对用了一个tag id，则这个kv对应的field的值为最后一次出现的kv对的值。
+	
+	3 repeated的[packed = true]只有type为数值的时候才能用。
+	
+	https://github.com/google/protobuf/tree/v3.0.0-alpha-1
+	
+	1 安装步骤：
+	
+	$ ./configure --prefix=/home/user/bin/
+	$ make
+	$ make check
+	$ make install
+	
+	2 如果不想生成动态protobuf库，则用命令./configure --disable-shared。

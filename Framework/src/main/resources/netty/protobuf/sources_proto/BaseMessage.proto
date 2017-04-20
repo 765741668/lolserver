@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package google.protobuf;
+
+option java_outer_classname = "BaseMessageProto";  
+
+message BaseMessage
+{
+  uint32 fid = 1;
+  string updateTime = 2;
+}

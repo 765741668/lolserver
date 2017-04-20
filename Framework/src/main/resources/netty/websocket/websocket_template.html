@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>websocket demo</title>
+</head>
+<script type="text/javascript">
+    var socket;
+
+    if (!window.WebSocket) {
+
+        window.WebSocket = window.MozWebSocket;
+    }
+
+    if (window.WebSocket) {
+        socket = new WebSocket("websocketlocation");
+
+        socket.onmessage = function (event) {
+
+            var ta = document.getElementById('responseText');
+            ta.value += event.data + "\r\n";
+        };
+
+        socket.onopen = function (event) {
+
+            var ta = document.getElementById('responseText');
+            ta.value = "open WebSoket service success，your browser support WebSoket!" + "\r\n";
+
+        };
+
+        socket.onclose = function (event) {
+
+            var ta = document.getElementById('responseText');
+            ta.value = "";
+            ta.value = "WebSocket Close" + "\r\n";
+        };
+    } else {
+        alert("your browser is not support WebSocket protocal！");
+    }
+
+    function send(message) {
+        if (!window.WebSocket) {
+            return;
+        }
+        if (socket.readyState == WebSocket.OPEN) {
+            socket.send(message);
+        } else {
+            alert("WebSocket connect fail！");
+        }
+
+
+    }
+</script>
+<body>
+
+<form onSubmit="return false;">
+    <h3>Client request messsage</h3>
+    <textarea id="requestText" style="width: 1024px; height: 300px;"></textarea> <br/>
+    <hr color="blue"/>
+    <br/> <input type="button" value="send WebSocket request message"
+                 onClick="send(this.form.requestText.value)"/>
+
+    <h3>server response messsage</h3>
+    <textarea id="responseText" style="width: 1024px; height: 300px;"></textarea>
+</form>
+</body>
+</html>

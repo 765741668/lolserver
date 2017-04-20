@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package netty;  
+
+// 定义生成java文件所在的包名
+option java_package = "com.yzh.netty.encode.protobuf";  
+
+// 生成对应外部类名称
+option java_outer_classname = "TestV3Proto";
+//import "Parent.proto";
+
+message TestV3   
+{  
+  enum Humour {  
+    UNKNOWN = 0;  
+    PUNS = 1;  
+    SLAPSTICK = 2;  
+    BILL_BAILEY = 33;  
+  }  
+  
+  string name = 1;  
+  
+  Humour hilarity = 2;  
+  
+  uint32 height_in_cm = 3;  
+  
+  bytes data = 4;  
+  
+  //定义list,list里边item类型为uint64
+  //带有[packed=true]选项的可重复项（type为2）
+  repeated uint64 key = 5[packed = true];  
+  
+  //定义map
+  map<string, Humour> enummap = 6;
+  
+  int64 result_count = 7;  
+  
+  bool true_scotsman = 8;  
+  
+  float score = 9;
+  
+}  
+  
+message TestV3Array  
+{  
+   //Parent any_field = 1;
+   //定义map
+   map<string, TestV3> objmmap = 2;
+   
+   //定义list,list里边item类型为uint64
+   repeated TestV3 enumlist = 3;
+   
+   
+}    
