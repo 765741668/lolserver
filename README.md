@@ -1,1 +1,1 @@
-#LOLServer
+#LOLServer 1
