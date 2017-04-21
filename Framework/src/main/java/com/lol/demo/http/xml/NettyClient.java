@@ -1,6 +1,6 @@
 package com.lol.demo.http.xml;
 
-import hk.hkjc.yzh.schema.test.jaxb.shiporder_v1.CTshiporder;
+import hk.hkjc.yzh.schema.test.jibx.shiporderv1.CTshiporder;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;

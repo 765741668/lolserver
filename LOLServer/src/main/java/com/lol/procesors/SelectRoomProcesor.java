@@ -9,14 +9,14 @@ import com.lol.SelectProtocol;
 import com.lol.buffer.GameDownBuffer;
 import com.lol.buffer.GameUpBuffer;
 import com.lol.channel.GameRoomChannelManager;
-import com.lol.common.ChannelCategory;
-import com.lol.dao.model.USER;
+import com.lol.dao.bean.Player;
 import com.lol.dto.SelectModel;
 import com.lol.handler.GameProcessor;
 import com.lol.protobuf.MessageDownProto;
 import com.lol.tool.EventUtil;
 import com.lol.tool.ScheduleUtil;
 import com.lol.util.Utils;
+import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,7 +28,7 @@ import java.util.concurrent.ConcurrentMap;
  * Created by YangZH on 2017/4/6
  * 20:11
  */
-
+@Component
 public class SelectRoomProcesor extends BaseProsesor implements GameProcessor {
 
     public ConcurrentMap<Integer, SelectModel> teamOne = new ConcurrentHashMap<>();
@@ -161,7 +161,7 @@ public class SelectRoomProcesor extends BaseProsesor implements GameProcessor {
 
     private void ready(GameUpBuffer buffer) {
         //判断玩家是否在房间里
-        if (!isEntered(buffer, ChannelCategory.ROOM)) {
+        if (!isEntered(buffer)) {
             return;
         }
         int userId = getPlayerIdByConnection(buffer.getConnection());
@@ -195,7 +195,7 @@ public class SelectRoomProcesor extends BaseProsesor implements GameProcessor {
                 GameDownBuffer data = Utils.packgeDownData(buffer.getMsgType(), buffer.getArea(), SelectProtocol.READY_BRO, sm);
                 GameRoomChannelManager.getInstance().getRoomChannel(getRoomName(buffer)).broadcastRoom(data);
             } catch (Exception e) {
-                //TODO::log
+                //TODO::env.log
                 e.printStackTrace();
             }
             //添加进准备列表
@@ -220,7 +220,7 @@ public class SelectRoomProcesor extends BaseProsesor implements GameProcessor {
         try {
             GameRoomChannelManager.getInstance().getRoomChannel(getRoomName(buffer)).broadcastRoom(data);
         } catch (Exception e) {
-            //TODO: log
+            //TODO: env.log
             e.printStackTrace();
         }
         //TODO::通知选择房间管理器 销毁当前房间
@@ -229,13 +229,13 @@ public class SelectRoomProcesor extends BaseProsesor implements GameProcessor {
 
     private void talk(GameUpBuffer buffer) throws Exception {
         //判断玩家是否在房间里
-        if (!isEntered(buffer, ChannelCategory.ROOM)) {
+        if (!isEntered(buffer)) {
             return;
         }
-        USER user = getPlayerByConnection(buffer.getConnection());
+        Player player = getPlayerByConnection(buffer.getConnection());
 
         MessageDownProto.SelectDownBody.Builder selectData = MessageDownProto.SelectDownBody.newBuilder();
-        selectData.setTalkRes(user.getName() + ":" + buffer.getBody().getSelect().getTalk());
+        selectData.setTalkRes(player.getName() + ":" + buffer.getBody().getSelect().getTalk());
 
         GameDownBuffer data = Utils.packgeDownData(buffer.getMsgType(), buffer.getArea(), SelectProtocol.TALK_BRO, selectData);
 
@@ -256,13 +256,13 @@ public class SelectRoomProcesor extends BaseProsesor implements GameProcessor {
 
     private void select(GameUpBuffer buffer) throws Exception {
         //判断玩家是否在房间里
-        if (!isEntered(buffer, ChannelCategory.ROOM)) {
+        if (!isEntered(buffer)) {
             return;
         }
-        USER user = getPlayerByConnection(buffer.getConnection());
+        Player player = getPlayerByConnection(buffer.getConnection());
         //判断玩家是否拥有此英雄
         int selectedHero = buffer.getBody().getSelect().getSelect();
-        if (!Arrays.asList(user.getheroList()).contains(selectedHero)) {
+        if (!Arrays.asList(player.getHerolist()).contains(selectedHero)) {
             GameDownBuffer data = Utils.packgeDownData(buffer.getMsgType(), buffer.getArea(), SelectProtocol.SELECT_SRES, null);
             buffer.getConnection().writeDown(data);
             return;
@@ -270,13 +270,13 @@ public class SelectRoomProcesor extends BaseProsesor implements GameProcessor {
         //判断英雄队友是否已选
         MessageDownProto.SelectModel.Builder selectModelPro = MessageDownProto.SelectModel.newBuilder();
         MessageDownProto.SelectDownBody.Builder selectData = MessageDownProto.SelectDownBody.newBuilder();
-        if (teamOne.containsKey(user.getId())) {
+        if (teamOne.containsKey(player.getId())) {
             for (SelectModel item : teamOne.values()) {
                 if (item.getHero() == selectedHero) {
                     return;
                 }
             }
-            SelectModel selectModel = teamOne.get(user.getId());
+            SelectModel selectModel = teamOne.get(player.getId());
             selectModelPro.setPlayerId(selectModel.getPlayerId());
             selectModelPro.setNickName(selectModel.getNickName());
             selectModelPro.setReady(selectModel.isReady());
@@ -288,7 +288,7 @@ public class SelectRoomProcesor extends BaseProsesor implements GameProcessor {
                     return;
                 }
             }
-            SelectModel selectModel = teamTwo.get(user.getId());
+            SelectModel selectModel = teamTwo.get(player.getId());
             selectModelPro.setPlayerId(selectModel.getPlayerId());
             selectModelPro.setNickName(selectModel.getNickName());
             selectModelPro.setReady(selectModel.isReady());
@@ -314,7 +314,7 @@ public class SelectRoomProcesor extends BaseProsesor implements GameProcessor {
             return;
         }
         //判断用户是否已经在房间 不在则计算累加 否则无视
-        if (isEntered(buffer, ChannelCategory.ROOM)) {
+        if (isEntered(buffer)) {
             enterCount++;
         }
         //进入成功 发送房间信息给进入的玩家 并通知在房间内的其他玩家 有人进入了

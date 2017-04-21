@@ -1,4 +1,4 @@
-﻿package com.lol.tool;
+package com.lol.tool;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;

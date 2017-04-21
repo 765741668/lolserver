@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="http://www.yzh.hkjc.hk/Schema/Test/Jibx/Common"
+           targetNamespace="http://www.yzh.hkjc.hk/Schema/Test/Jibx/Common"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+
+    <xs:simpleType name="booleantype">
+        <xs:restriction base="xs:boolean"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="inttype">
+        <xs:restriction base="xs:int"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="dateTimetype">
+        <xs:restriction base="xs:dateTime"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="stringtype">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+
+    <xs:complexType name="absOrder" abstract="true">
+        <xs:sequence>
+            <xs:element name="updateTime" type="dateTimetype"/>
+            <xs:element name="deleted" type="booleantype"/>
+            <xs:element name="id" type="inttype"/>
+            <xs:element name="map" type="maptype" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="maptype">
+        <xs:sequence>
+            <xs:element name="key" type="stringtype"/>
+            <xs:element name="value" type="booleantype"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

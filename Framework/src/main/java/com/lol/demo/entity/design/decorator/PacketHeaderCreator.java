@@ -2,9 +2,9 @@
  *
  * Module Name:  entity.design.decorator - PecketHeaderCreator.java
  * Version: 1.0.0
- * Original Author: randyzhyang
+ * Original Author: java
  * Created Date: May 3, 2016
- * Last Updated By: randyzhyang
+ * Last Updated By: java
  * Last Updated Date: May 3, 2016
  * Description:
  *

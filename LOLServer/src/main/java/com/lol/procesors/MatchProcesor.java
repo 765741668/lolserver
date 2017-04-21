@@ -11,10 +11,11 @@ import com.lol.buffer.GameUpBuffer;
 import com.lol.core.Connection;
 import com.lol.handler.GameProcessor;
 import com.lol.logic.match.MatchRoom;
-import com.lol.service.BizFactory;
 import com.lol.service.IPlayerService;
 import com.lol.tool.EventUtil;
 import com.lol.util.Utils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Stack;
 import java.util.concurrent.ConcurrentHashMap;
@@ -25,10 +26,11 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Created by YangZH on 2017/4/6
  * 20:11
  */
-
+@Component
 public class MatchProcesor implements GameProcessor {
 
-    private IPlayerService playerBiz = BizFactory.playerBiz;
+    @Autowired
+    private IPlayerService playerService;
 
     /**
      * 多线程处理类中  防止数据竞争导致脏数据  使用线程安全字典
@@ -64,7 +66,7 @@ public class MatchProcesor implements GameProcessor {
     private void leave(Connection connection) {
 
         //取出用户唯一ID
-        int userId = playerBiz.getPlayerId(connection);
+        int userId = playerService.getPlayerId(connection);
         System.out.println("用户取消匹配" + userId);
         //判断用户是否有房间映射关系
         if (!userRoom.containsKey(userId)) {
@@ -93,7 +95,7 @@ public class MatchProcesor implements GameProcessor {
 
     private void enter(GameUpBuffer buffer) {
 
-        int userId = playerBiz.getPlayerId(buffer.getConnection());
+        int userId = playerService.getPlayerId(buffer.getConnection());
         System.out.println("用户开始匹配" + userId);
         //判断玩家当前是否正在匹配队列中
         if (!userRoom.containsKey(userId)) {
@@ -158,8 +160,8 @@ public class MatchProcesor implements GameProcessor {
                 GameDownBuffer data = Utils.packgeDownData(Protocol.TYPE_MATCH, 0, MatchProtocol.ENTER_SELECT_BRO, null);
 
                 //TODO:: 检查登陆连接绑定的标识与玩家标识是否一致
-                room.teamOne.stream().forEach(id -> playerBiz.getConnection(id).writeDown(data));
-                room.teamTwo.stream().forEach(id -> playerBiz.getConnection(id).writeDown(data));
+                room.teamOne.stream().forEach(id -> playerService.getConnection(id).writeDown(data));
+                room.teamTwo.stream().forEach(id -> playerService.getConnection(id).writeDown(data));
 
                 //移除玩家与房间映射
                 room.teamOne.forEach(userRoom::remove);

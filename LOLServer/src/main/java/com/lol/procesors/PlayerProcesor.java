@@ -13,6 +13,7 @@ import com.lol.protobuf.MessageDownProto;
 import com.lol.service.IPlayerService;
 import com.lol.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 
@@ -21,7 +22,7 @@ import java.util.Collections;
  * Created by YangZH on 2017/4/6
  * 20:11
  */
-
+@Component
 public class PlayerProcesor implements GameProcessor {
 
     @Autowired

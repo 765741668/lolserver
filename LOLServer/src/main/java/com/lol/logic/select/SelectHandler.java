@@ -1,4 +1,4 @@
-﻿package com.lol.logic.select;
+package com.lol.logic.select;
 
 
 import com.lol.Protocol;

@@ -1,0 +1,25 @@
+syntax = "proto3";
+package env.netty;
+option java_package = "com.yzh.env.netty.encode.protobuf";
+option java_outer_classname = "SubscribeRespProto";  
+
+message SubscribeResp{  
+	enum MsgType {  
+		DEFAULT = 0;
+	    LOGIN_REQ = 1;
+	    LOGIN_RESP = 2;
+	    LOGIN_OK = 3;
+	    LOGIN_OUT_OF_WHITE_IP = 4;
+	    LOGIN_DENY = 5;
+	    HEARTBEAT_REQ = 6;
+	    HEARTBEAT_RESP = 7;
+	    GAME_REQ = 8;
+	    GAME_RESP = 9;
+	}  
+	
+	
+    int32 subReqID = 1;  
+    string respCode = 2;  
+    string desc = 3;  
+	MsgType msgType = 4;
+}

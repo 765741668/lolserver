@@ -1,4 +1,4 @@
-﻿package com.lol.service;
+package com.lol.service;
 
 
 import com.lol.core.Connection;
@@ -21,7 +21,7 @@ public interface IPlayerService {
      * @param connection
      * @return
      */
-    int getPlayerId(Connection connection) throws ServiceException;
+    int getPlayerId(Connection connection);
 
     /**
      * 获取连接对应的用户信息
@@ -29,7 +29,7 @@ public interface IPlayerService {
      * @param connection
      * @return
      */
-    Player getPlayerByConnection(Connection connection) throws ServiceException;
+    Player getPlayerByConnection(Connection connection);
 
     /**
      * 通过ID获取用户信息
@@ -37,7 +37,7 @@ public interface IPlayerService {
      * @param id
      * @return
      */
-    Player getPlayerById(int id) throws ServiceException;
+    Player getPlayerById(int id);
 
     /**
      * 用户上线
@@ -45,14 +45,14 @@ public interface IPlayerService {
      * @param connection
      * @return
      */
-    Player online(Connection connection) throws ServiceException;
+    Player online(Connection connection);
 
     /**
      * 用户下线
      *
      * @param connection
      */
-    void offline(Connection connection) throws ServiceException;
+    void offline(Connection connection);
 
     /**
      * 通过id获取连接对象
@@ -60,7 +60,7 @@ public interface IPlayerService {
      * @param id
      * @return
      */
-    Connection getConnection(int id) throws ServiceException;
+    Connection getConnection(int id);
 
     /**
      * 通过帐号的连接对象获取 仅在初始登录验证角色时有效
@@ -68,6 +68,6 @@ public interface IPlayerService {
      * @param connection
      * @return
      */
-    Player getByAcount(Connection connection) throws ServiceException;
+    Player getByAcount(Connection connection);
 
 }

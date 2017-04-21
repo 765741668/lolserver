@@ -1,4 +1,4 @@
-﻿package com.lol.tool;
+package com.lol.tool;
 
 import java.util.Date;
 import java.util.concurrent.ConcurrentHashMap;

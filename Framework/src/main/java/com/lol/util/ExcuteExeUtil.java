@@ -122,21 +122,20 @@ public class ExcuteExeUtil {
 
     public static void main(String[] args) {
         //way 1: just java code
-//        String propertiesPathString = "/netty/protobuf/config/cmdargs.properties";
-//        String location = PropertiesExUtils.getProperties(propertiesPathString,"protobuf.location");
-//        String sourcePath = PropertiesExUtils.getProperties(propertiesPathString,"protobuf.source.path");
-//        String output = PropertiesExUtils.getProperties(propertiesPathString,"protobuf.output");
-//        String sourceFile1 = PropertiesExUtils.getProperties(propertiesPathString,"protobuf.source.file1");
-//        String sourceFile2 = PropertiesExUtils.getProperties(propertiesPathString,"protobuf.source.file2");
+//        String propertiesPathString = "/env.netty/protobuf/config/cmdargs.properties";
+//        String location = PropertiesExUtils.getPropertiesValue(propertiesPathString,"protobuf.location");
+//        String sourcePath = PropertiesExUtils.getPropertiesValue(propertiesPathString,"protobuf.source.path");
+//        String output = PropertiesExUtils.getPropertiesValue(propertiesPathString,"protobuf.output");
+//        String sourceFile1 = PropertiesExUtils.getPropertiesValue(propertiesPathString,"protobuf.source.file1");
+//        String sourceFile2 = PropertiesExUtils.getPropertiesValue(propertiesPathString,"protobuf.source.file2");
 
         String location = args[0];
-        String sourcePath = args[1];
-        String output = args[2];
-        String sourceFiles = args[3];
+        String output = args[1];
+        String sourceFiles = args[2];
 
         for (String sourceFile : sourceFiles.split(",")) {
-            String[] cmds = new String[]{sourcePath.substring(0, 2), "cd " + sourcePath, "protoc " + sourceFile + ".proto --java_out=" + output};
-            openBat2(sourcePath, sourceFile, cmds);
+            String[] cmds = new String[]{location.substring(0, 2), "cd " + location, "protoc " + sourceFile + ".proto --java_out=" + output};
+            openBat2(location, sourceFile, cmds);
         }
 
 

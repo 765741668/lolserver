@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Module Name:  netty.http - HttpXmlClientHandle.java
+ * Module Name:  env.netty.http - HttpXmlClientHandle.java
  * Version: 1.0.0
  * Original Author: java
  * Created Date: May 26, 2016
@@ -23,7 +23,7 @@
  ******************************************************************************/
 package com.lol.demo.http.xml;
 
-import com.yzh.jibx.ObjectFactory;
+import com.lol.demo.jibx.ObjectFactory;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;

@@ -38,7 +38,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<MessageUpProto.Me
         System.out.println("有客户端连接了 : " + ctx.channel().remoteAddress());
         Connection c = ConnectionManager.getInstance().addConnection("userAcount_yzh", ctx);
         ctx.attr(conn).set(c);
-        GameOnlineChannelManager.getInstance().addOnlineChannel(0).addOnlineConnection(c);
+        GameOnlineChannelManager.getInstance().addOnlineChannel("AllUser").addOnlineConnection(c);
         super.channelActive(ctx);
     }
 
@@ -46,7 +46,7 @@ public class ServerHandler extends SimpleChannelInboundHandler<MessageUpProto.Me
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         super.channelInactive(ctx);
         ConnectionManager.getInstance().removeConnection(ctx.attr(conn).get());
-        GameOnlineChannelManager.getInstance().getOnlineChannel(0).removeOnlineConnection(ctx.attr(conn).get());
+        GameOnlineChannelManager.getInstance().getOnlineChannel("AllUser").removeOnlineConnection(ctx.attr(conn).get());
 
         GameUpBuffer msg = Utils.packgeUpData(ctx.attr(conn).get(), Protocol.TYPE_CONNECT, -1, ConnectProtocol.DISCONNECT, null);
 

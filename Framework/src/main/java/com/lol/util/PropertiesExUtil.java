@@ -23,6 +23,8 @@
  ******************************************************************************/
 package com.lol.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.env.ConfigurablePropertyResolver;
 import org.springframework.core.env.MutablePropertySources;
 import org.springframework.core.env.PropertiesPropertySource;
@@ -32,8 +34,17 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class PropertiesExUtil {
+    private static Logger logger = LoggerFactory.getLogger(PropertiesExUtil.class.getName());
 
-    public static String getProperties(String filePath, String prefix) {
+    public static PropertiesExUtil getInstance() {
+        return PropertiesExUtilHolder.instance;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(PropertiesExUtil.getInstance().getPropertie("/env/netty/config/netty.properties").getProperty("netty.host"));
+    }
+
+    public String getPropertiesValue(String filePath, String prefix) {
         MutablePropertySources propertySources = new MutablePropertySources();
         ConfigurablePropertyResolver propertyResolver = new PropertySourcesPropertyResolver(propertySources);
         Properties properties = new Properties();
@@ -46,6 +57,24 @@ public class PropertiesExUtil {
 
         return propertyResolver.getProperty(prefix);
     }
+
+    public ConfigurablePropertyResolver getPropertie(String filePath) {
+        MutablePropertySources propertySources = new MutablePropertySources();
+        ConfigurablePropertyResolver propertyResolver = new PropertySourcesPropertyResolver(propertySources);
+        Properties properties = new Properties();
+        try {
+            properties.load(PropertiesExUtil.class.getResourceAsStream(filePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        propertySources.addFirst(new PropertiesPropertySource("testProperties", properties));
+        return propertyResolver;
+    }
+
+    private static class PropertiesExUtilHolder {
+        private static PropertiesExUtil instance = new PropertiesExUtil();
+    }
+
 
 }
 

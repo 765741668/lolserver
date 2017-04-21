@@ -85,7 +85,7 @@ public final class MessageUpProto {
                         "\n\006target\030\001 \003(\005B\002\020\001\"d\n\rSkillAtkModel\022\020\n\010p" +
                         "layerId\030\001 \001(\005\022\014\n\004type\030\002 \001(\005\022\r\n\005skill\030\003 \001",
                 "(\005\022\024\n\010position\030\004 \003(\002B\002\020\001\022\016\n\006target\030\005 \001(\005" +
-                        "B(\n\026com.lol.netty.protobufB\016MessageUpPro" +
+                        "B(\n\026com.lol.env.netty.protobufB\016MessageUpPro" +
                         "tob\006proto3"
         };
         com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =

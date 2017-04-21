@@ -1,4 +1,4 @@
-﻿package com.lol.tool;
+package com.lol.tool;
 
 import com.sun.corba.se.impl.orbutil.concurrent.Mutex;
 

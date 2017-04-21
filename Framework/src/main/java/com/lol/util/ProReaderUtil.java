@@ -1,9 +1,15 @@
 package com.lol.util;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.core.env.ConfigurablePropertyResolver;
+import org.springframework.core.env.MutablePropertySources;
+import org.springframework.core.env.PropertiesPropertySource;
+import org.springframework.core.env.PropertySourcesPropertyResolver;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Properties;
 
@@ -15,14 +21,14 @@ import java.util.Properties;
  */
 public class ProReaderUtil {
 
-    private static Logger logger = Logger.getLogger(ProReaderUtil.class.getName());
+    private static Logger logger = LoggerFactory.getLogger(ProReaderUtil.class.getName());
 
     private static ProReaderUtil instance = new ProReaderUtil();
 
     /**
      * 配置文件路径
      */
-    private String confPath = "gameFiles";
+    private String confPath = "/env";
 
     /**
      * redis配置缓存
@@ -54,31 +60,22 @@ public class ProReaderUtil {
     /**
      * 读取配置文件内容
      *
-     * @param file
+     * @param filePath
      * @return
      */
-    private Properties getPro(String file) {
+    private ConfigurablePropertyResolver getPro(String filePath) {
+        String fileAbsPath = confPath + filePath + ".properties";
+        logger.info("file : " + fileAbsPath);
+        MutablePropertySources propertySources = new MutablePropertySources();
+        ConfigurablePropertyResolver propertyResolver = new PropertySourcesPropertyResolver(propertySources);
         Properties properties = new Properties();
-        FileInputStream inputStream = null;
-        logger.info("configPath : " + confPath);
         try {
-            inputStream = new FileInputStream(confPath + "/conf/" + file + ".properties");
-            properties.load(inputStream);
-            inputStream.close();
-        } catch (Exception e) {
-            logger.error(file + " config file not found.");
+            properties.load(PropertiesExUtil.class.getResourceAsStream(fileAbsPath));
+        } catch (IOException e) {
+            logger.error(filePath + " config file not found.");
         }
-
-        return properties;
-    }
-
-    /**
-     * 获取log4j配置
-     *
-     * @return
-     */
-    public Properties getLog4jPro() {
-        return getPro("log4j");
+        propertySources.addFirst(new PropertiesPropertySource("testProperties", properties));
+        return propertyResolver;
     }
 
     /**
@@ -89,7 +86,7 @@ public class ProReaderUtil {
     public HashMap<String, String> getRedisPro() {
         if (redisConf == null) {
             redisConf = new HashMap<String, String>();
-            Properties properties = getPro("redis");
+            ConfigurablePropertyResolver properties = getPro("/db/redis");
             redisConf.put("host", properties.getProperty("redis.host").trim());
             redisConf.put("port", properties.getProperty("redis.port").trim());
             redisConf.put("maxTotal", properties.getProperty("redis.maxTotal").trim());
@@ -108,7 +105,7 @@ public class ProReaderUtil {
      */
     public HashMap<String, String> getNettyPro() {
         HashMap<String, String> conf = new HashMap<String, String>();
-        Properties properties = getPro("netty");
+        ConfigurablePropertyResolver properties = getPro("/netty/config/netty");
         conf.put("port", properties.getProperty("netty.port").trim());
         conf.put("host", properties.getProperty("netty.host").trim());
         conf.put("heartBeatTimeOut", properties.getProperty("netty.heartBeatTimeOut").trim());
@@ -122,7 +119,7 @@ public class ProReaderUtil {
      * @return
      */
     public String getWorkersPro() {
-        Properties properties = getPro("workers");
+        ConfigurablePropertyResolver properties = getPro("/workers");
         return properties.getProperty("workers.member").trim();
     }
 
@@ -133,7 +130,7 @@ public class ProReaderUtil {
      */
     public HashMap<String, String> getJdbcPro() {
         HashMap<String, String> conf = new HashMap<String, String>();
-        Properties properties = getPro("jdbc");
+        ConfigurablePropertyResolver properties = getPro("/db/jdbc");
         conf.put("driver", properties.getProperty("jdbc.driver").trim());
         conf.put("url", properties.getProperty("jdbc.url").trim());
         conf.put("userName", properties.getProperty("jdbc.userName").trim());
@@ -186,7 +183,7 @@ public class ProReaderUtil {
      * @throws Exception
      */
     public FileInputStream getMyBatisPro() throws Exception {
-        return new FileInputStream(confPath + "/conf/mybatisConf.xml");
+        return new FileInputStream(confPath + "/db/mybatisConf.xml");
     }
 
     /**
@@ -196,6 +193,6 @@ public class ProReaderUtil {
      * @throws Exception
      */
     public File getModulePro() throws Exception {
-        return new File(confPath + "/conf/moduleConf.xml");
+        return new File(confPath + "/moduleConf.xml");
     }
 }

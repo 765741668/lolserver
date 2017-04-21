@@ -151,7 +151,7 @@ public final class MessageDownProto {
                         "\n\010POSITION\020\002\022\013\n\007PASSIVE\020\003\"b\n\013SkillTarget",
                 "\022\010\n\004SELF\020\000\022\007\n\003F_H\020\001\022\t\n\005F_N_B\020\002\022\t\n\005F_ALL\020" +
                         "\004\022\007\n\003E_H\020\005\022\t\n\005E_N_B\020\006\022\t\n\005E_S_N\020\007\022\013\n\007N_F_" +
-                        "ALL\020\010B*\n\026com.lol.netty.protobufB\020Message" +
+                        "ALL\020\010B*\n\026com.lol.env.netty.protobufB\020Message" +
                         "DownProtob\006proto3"
         };
         com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =

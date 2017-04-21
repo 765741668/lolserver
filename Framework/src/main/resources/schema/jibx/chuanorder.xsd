@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:common="http://www.yzh.hkjc.hk/Schema/Test/Jibx/Common"
+           xmlns="http://www.yzh.hkjc.hk/Schema/Test/Jibx/ChuanOrder_v1"
+           targetNamespace="http://www.yzh.hkjc.hk/Schema/Test/Jibx/ChuanOrder_v1"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+
+    <xs:import namespace="http://www.yzh.hkjc.hk/Schema/Test/Jibx/Common" schemaLocation="../common/common.xsd"/>
+
+    <xs:simpleType name="string">
+        <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="integer">
+        <xs:restriction base="xs:positiveInteger"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="decimal">
+        <xs:restriction base="xs:decimal"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="orderid">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{6}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="country">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="China"/>
+            <xs:enumeration value="English"/>
+            <xs:enumeration value="JaPan"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="postaddr">
+        <xs:sequence>
+            <xs:element name="name" type="string"/>
+            <xs:element name="address" type="string"/>
+            <xs:element name="city" type="string"/>
+            <xs:element name="country" type="country"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="chuanItemType">
+        <xs:sequence>
+            <xs:element name="title" type="string"/>
+            <xs:element name="note" type="string" minOccurs="0"/>
+            <xs:element name="quantity" type="integer"/>
+            <xs:element name="price" type="decimal"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="chuanOrder">
+        <xs:complexContent>
+            <xs:extension base="common:absOrder">
+                <xs:sequence>
+                    <xs:element name="orderperson" type="string"/>
+                    <xs:element name="chuanto" type="postaddr"/>
+                    <xs:element name="item" maxOccurs="unbounded" type="chuanItemType"/>
+                </xs:sequence>
+                <xs:attribute name="orderid" type="orderid" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="chuanorder" type="chuanOrder"/>
+
+</xs:schema>

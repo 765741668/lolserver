@@ -13,13 +13,14 @@ import com.lol.protobuf.MessageDownProto;
 import com.lol.service.IAcountService;
 import com.lol.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Description :
  * Created by YangZH on 2017/4/6
  * 20:11
  */
-
+@Component
 public class LoginProcesor implements GameProcessor {
 
     @Autowired

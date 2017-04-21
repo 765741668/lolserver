@@ -17,12 +17,12 @@ public final class SubscribeRespProto {
                 "\n!sources_proto/SubscribeResp.proto\022\005net" +
                         "ty\"\245\002\n\rSubscribeResp\022\020\n\010subReqID\030\001 \001(\005\022\020" +
                         "\n\010respCode\030\002 \001(\t\022\014\n\004desc\030\003 \001(\t\022-\n\007msgTyp" +
-                        "e\030\004 \001(\0162\034.netty.SubscribeResp.MsgType\"\262\001" +
+                        "e\030\004 \001(\0162\034.env.netty.SubscribeResp.MsgType\"\262\001" +
                         "\n\007MsgType\022\013\n\007DEFAULT\020\000\022\r\n\tLOGIN_REQ\020\001\022\016\n" +
                         "\nLOGIN_RESP\020\002\022\014\n\010LOGIN_OK\020\003\022\031\n\025LOGIN_OUT" +
                         "_OF_WHITE_IP\020\004\022\016\n\nLOGIN_DENY\020\005\022\021\n\rHEARTB" +
                         "EAT_REQ\020\006\022\022\n\016HEARTBEAT_RESP\020\007\022\014\n\010GAME_RE" +
-                        "Q\020\010\022\r\n\tGAME_RESP\020\tB3\n\035com.yzh.netty.enco" +
+                        "Q\020\010\022\r\n\tGAME_RESP\020\tB3\n\035com.yzh.env.netty.enco" +
                         "de.protobufB\022SubscribeRespProtob\006proto3"
         };
         com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
@@ -59,7 +59,7 @@ public final class SubscribeRespProto {
     }
 
     public interface SubscribeRespOrBuilder extends
-            // @@protoc_insertion_point(interface_extends:netty.SubscribeResp)
+            // @@protoc_insertion_point(interface_extends:env.netty.SubscribeResp)
             com.google.protobuf.MessageOrBuilder {
 
         /**
@@ -90,22 +90,22 @@ public final class SubscribeRespProto {
         getDescBytes();
 
         /**
-         * <code>optional .netty.SubscribeResp.MsgType msgType = 4;</code>
+         * <code>optional .env.netty.SubscribeResp.MsgType msgType = 4;</code>
          */
         int getMsgTypeValue();
 
         /**
-         * <code>optional .netty.SubscribeResp.MsgType msgType = 4;</code>
+         * <code>optional .env.netty.SubscribeResp.MsgType msgType = 4;</code>
          */
         SubscribeResp.MsgType getMsgType();
     }
 
     /**
-     * Protobuf type {@code netty.SubscribeResp}
+     * Protobuf type {@code env.netty.SubscribeResp}
      */
     public static final class SubscribeResp extends
             com.google.protobuf.GeneratedMessage implements
-            // @@protoc_insertion_point(message_implements:netty.SubscribeResp)
+            // @@protoc_insertion_point(message_implements:env.netty.SubscribeResp)
             SubscribeRespOrBuilder {
         public static final int SUBREQID_FIELD_NUMBER = 1;
         public static final int RESPCODE_FIELD_NUMBER = 2;
@@ -130,7 +130,7 @@ public final class SubscribeRespProto {
                     }
                 };
         private static final long serialVersionUID = 0L;
-        // @@protoc_insertion_point(class_scope:netty.SubscribeResp)
+        // @@protoc_insertion_point(class_scope:env.netty.SubscribeResp)
         private static final SubscribeResp DEFAULT_INSTANCE;
 
         static {
@@ -382,14 +382,14 @@ public final class SubscribeRespProto {
         }
 
         /**
-         * <code>optional .netty.SubscribeResp.MsgType msgType = 4;</code>
+         * <code>optional .env.netty.SubscribeResp.MsgType msgType = 4;</code>
          */
         public int getMsgTypeValue() {
             return msgType_;
         }
 
         /**
-         * <code>optional .netty.SubscribeResp.MsgType msgType = 4;</code>
+         * <code>optional .env.netty.SubscribeResp.MsgType msgType = 4;</code>
          */
         public MsgType getMsgType() {
             MsgType result = MsgType.valueOf(msgType_);
@@ -472,7 +472,7 @@ public final class SubscribeRespProto {
         }
 
         /**
-         * Protobuf enum {@code netty.SubscribeResp.MsgType}
+         * Protobuf enum {@code env.netty.SubscribeResp.MsgType}
          */
         public enum MsgType
                 implements com.google.protobuf.ProtocolMessageEnum {
@@ -641,15 +641,15 @@ public final class SubscribeRespProto {
                 return getDescriptor();
             }
 
-            // @@protoc_insertion_point(enum_scope:netty.SubscribeResp.MsgType)
+            // @@protoc_insertion_point(enum_scope:env.netty.SubscribeResp.MsgType)
         }
 
         /**
-         * Protobuf type {@code netty.SubscribeResp}
+         * Protobuf type {@code env.netty.SubscribeResp}
          */
         public static final class Builder extends
                 com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-                // @@protoc_insertion_point(builder_implements:netty.SubscribeResp)
+                // @@protoc_insertion_point(builder_implements:env.netty.SubscribeResp)
                 SubscribeRespOrBuilder {
             private int subReqID_;
             private Object respCode_ = "";
@@ -949,14 +949,14 @@ public final class SubscribeRespProto {
             }
 
             /**
-             * <code>optional .netty.SubscribeResp.MsgType msgType = 4;</code>
+             * <code>optional .env.netty.SubscribeResp.MsgType msgType = 4;</code>
              */
             public int getMsgTypeValue() {
                 return msgType_;
             }
 
             /**
-             * <code>optional .netty.SubscribeResp.MsgType msgType = 4;</code>
+             * <code>optional .env.netty.SubscribeResp.MsgType msgType = 4;</code>
              */
             public Builder setMsgTypeValue(int value) {
                 msgType_ = value;
@@ -965,7 +965,7 @@ public final class SubscribeRespProto {
             }
 
             /**
-             * <code>optional .netty.SubscribeResp.MsgType msgType = 4;</code>
+             * <code>optional .env.netty.SubscribeResp.MsgType msgType = 4;</code>
              */
             public MsgType getMsgType() {
                 MsgType result = MsgType.valueOf(msgType_);
@@ -973,7 +973,7 @@ public final class SubscribeRespProto {
             }
 
             /**
-             * <code>optional .netty.SubscribeResp.MsgType msgType = 4;</code>
+             * <code>optional .env.netty.SubscribeResp.MsgType msgType = 4;</code>
              */
             public Builder setMsgType(MsgType value) {
                 if (value == null) {
@@ -986,7 +986,7 @@ public final class SubscribeRespProto {
             }
 
             /**
-             * <code>optional .netty.SubscribeResp.MsgType msgType = 4;</code>
+             * <code>optional .env.netty.SubscribeResp.MsgType msgType = 4;</code>
              */
             public Builder clearMsgType() {
 
@@ -1006,7 +1006,7 @@ public final class SubscribeRespProto {
             }
 
 
-            // @@protoc_insertion_point(builder_scope:netty.SubscribeResp)
+            // @@protoc_insertion_point(builder_scope:env.netty.SubscribeResp)
         }
 
     }

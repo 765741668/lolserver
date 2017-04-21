@@ -121,7 +121,7 @@ public final class WebSocketServerIndexPage {
 
     public static void main(String[] args) {
         String location = WebSocketServerIndexPage.class.getResource("/").getPath().substring(1);
-        Path path = Paths.get(location + "/netty/websocket/websocket_template.html");
+        Path path = Paths.get(location + "/env/netty/websocket/websocket_template.html");
         WebSocketServerIndexPage.getContent(path, "ws://127.0.0.1:8083/websocket");
 
     }

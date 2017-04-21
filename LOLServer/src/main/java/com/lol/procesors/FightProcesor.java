@@ -14,6 +14,7 @@ import com.lol.service.IPlayerService;
 import com.lol.tool.EventUtil;
 import com.lol.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Stack;
 import java.util.concurrent.ConcurrentHashMap;
@@ -24,7 +25,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Created by YangZH on 2017/4/6
  * 20:11
  */
-
+@Component
 public class FightProcesor extends BaseProsesor implements GameProcessor {
 
     @Autowired
@@ -53,7 +54,7 @@ public class FightProcesor extends BaseProsesor implements GameProcessor {
     }
 
     @Override
-    public void process(GameUpBuffer buffer) throws Exception {
+    public void process(GameUpBuffer buffer) {
 
         if (FightProtocol.DESTORY_FIGHT == buffer.getCmd()) {
             /**判断玩家是否在某场战斗中

@@ -1,4 +1,4 @@
-﻿package com.lol.logic.fight;
+package com.lol.logic.fight;
 
 
 import com.lol.FightProtocol;

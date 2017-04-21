@@ -1,4 +1,4 @@
-﻿package com.lol.logic.match;
+package com.lol.logic.match;
 
 /**
  * 战斗匹配房间模型

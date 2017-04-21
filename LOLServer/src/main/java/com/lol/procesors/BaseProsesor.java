@@ -10,6 +10,8 @@ import com.lol.core.Connection;
 import com.lol.dao.bean.Player;
 import com.lol.protobuf.MessageUpProto;
 import com.lol.service.IPlayerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -19,6 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 
 public class BaseProsesor {
+
+    private Logger logger = LoggerFactory.getLogger(BaseProsesor.class);
 
     @Autowired
     private IPlayerService playerService;

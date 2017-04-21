@@ -2,9 +2,9 @@
  *
  * Module Name:  entity - XiangYuan.java
  * Version: 1.0.0
- * Original Author: randyzhyang
+ * Original Author: java
  * Created Date: Apr 22, 2016
- * Last Updated By: randyzhyang
+ * Last Updated By: java
  * Last Updated Date: Apr 22, 2016
  * Description:
  *

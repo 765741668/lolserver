@@ -1,4 +1,4 @@
-﻿package com.lol.service;
+package com.lol.service;
 
 
 import com.lol.core.Connection;
@@ -23,7 +23,7 @@ public interface IAcountService {
      * @param password   密码
      * @return 登录结果 0 成功   -1 账号不存在    -2 账号在线 -3 密码错误 -4 输入不合法
      */
-    int login(Connection connection, String acount, String password) throws ServiceException;
+    int login(Connection connection, String acount, String password);
 
     /**
      * 客户端断开连接（下线）
@@ -38,5 +38,5 @@ public interface IAcountService {
      * @param connection
      * @return 返回用户的登陆账号ID
      */
-    int getAcountId(Connection connection) throws ServiceException;
+    int getAcountId(Connection connection);
 }

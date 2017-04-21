@@ -10,10 +10,12 @@ import com.lol.buffer.GameUpBuffer;
 import com.lol.channel.GameRoomChannelManager;
 import com.lol.core.GameBoss;
 import com.lol.handler.GameProcessor;
-import com.lol.service.BizFactory;
 import com.lol.service.IPlayerService;
 import com.lol.tool.EventUtil;
 import com.lol.util.Utils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Stack;
@@ -25,10 +27,12 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Created by YangZH on 2017/4/6
  * 20:11
  */
-
+@Component
 public class SelectProcesor extends BaseProsesor implements GameProcessor {
 
-    private IPlayerService playerBiz = BizFactory.playerBiz;
+    @Autowired
+    @Qualifier("playerServiceImpl")
+    private IPlayerService playerService;
     /**
      * 多线程处理类中  防止数据竞争导致脏数据  使用线程同步Map
      * 玩家所在匹配房间映射
@@ -48,7 +52,7 @@ public class SelectProcesor extends BaseProsesor implements GameProcessor {
     private AtomicInteger index = new AtomicInteger(0);
 
     //TODO : 调用
-    SelectProcesor() {
+    public SelectProcesor() {
 
         EventUtil.createSelect = this::create;
         EventUtil.destorySelect = this::destory;
@@ -60,7 +64,7 @@ public class SelectProcesor extends BaseProsesor implements GameProcessor {
         if (SelectProtocol.DESTORY_BRO == buffer.getCmd()) {
             colse(buffer);
         } else {
-            int userId = playerBiz.getPlayerId(buffer.getConnection());
+            int userId = playerService.getPlayerId(buffer.getConnection());
             if (userRoom.containsKey(userId)) {
                 int roomId = userRoom.get(userId);
                 if (roomMap.containsKey(roomId)) {
@@ -73,7 +77,7 @@ public class SelectProcesor extends BaseProsesor implements GameProcessor {
     }
 
     private void colse(GameUpBuffer buffer) {
-        int userId = playerBiz.getPlayerId(buffer.getConnection());
+        int userId = playerService.getPlayerId(buffer.getConnection());
         //判断当前玩家是否有房间
         if (userRoom.containsKey(userId)) {
             int roomId = 0;

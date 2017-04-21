@@ -2,9 +2,9 @@
  *
  * Module Name:  entity - Info.java
  * Version: 1.0.0
- * Original Author: randyzhyang
+ * Original Author: java
  * Created Date: Aug 24, 2015
- * Last Updated By: randyzhyang
+ * Last Updated By: java
  * Last Updated Date: Aug 24, 2015
  * Description: 
  *
@@ -32,6 +32,7 @@ package com.lol.demo.entity.design.singleton;
  */
 public class Singleton {
     private static Singleton instance = new Singleton();
+    private int id;
 
     private Singleton() {
         System.out.println("Singleton is created");
@@ -44,5 +45,14 @@ public class Singleton {
     public static void createString() {
         System.out.println("createString in singleton");
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 
 }

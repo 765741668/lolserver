@@ -17,7 +17,7 @@
         <java.source.version>1.8</java.source.version>
         <java.target.version>1.8</java.target.version>
         <org.springframework.version>4.3.7.RELEASE</org.springframework.version>
-        <org.spring.security.version>4.2.2.RELEASE</org.spring.security.version>
+        <org.env.spring.security.version>4.2.2.RELEASE</org.env.spring.security.version>
         <hibernate.version>5.2.9.Final</hibernate.version>
         <mysql.version>6.0.6</mysql.version>
         <c3p0.version>0.9.5.2</c3p0.version>
@@ -25,50 +25,56 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.lol</groupId>
+            <artifactId>protocol</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
+            <artifactId>env.spring-tx</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
+            <artifactId>env.spring-orm</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-oxm</artifactId>
+            <artifactId>env.spring-oxm</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-messaging</artifactId>
+            <artifactId>env.spring-messaging</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
+            <artifactId>env.spring-core</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
+            <artifactId>env.spring-context-support</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
+            <artifactId>env.spring-context</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
+            <artifactId>env.spring-aop</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <version>${org.spring.security.version}</version>
+            <artifactId>env.spring-security-core</artifactId>
+            <version>${org.env.spring.security.version}</version>
         </dependency>
 
         <dependency>
@@ -80,12 +86,6 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>5.4.1.Final</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.lol</groupId>
-            <artifactId>protocol</artifactId>
-            <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
@@ -149,8 +149,8 @@
         </dependency>
 
 
-        <!-- log start -->
-        <!-- slf4j log -->
+        <!-- env.log start -->
+        <!-- slf4j env.log -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -197,11 +197,11 @@
             <artifactId>jul-to-slf4j</artifactId>
             <version>1.7.9</version>
         </dependency>
-        <!-- log end -->
+        <!-- env.log end -->
 
         <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-all</artifactId>
+            <groupId>io.env.netty</groupId>
+            <artifactId>env.netty-all</artifactId>
             <version>5.0.0.Alpha2</version>
         </dependency>
 
@@ -312,7 +312,7 @@
 
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
+            <artifactId>env.spring-test</artifactId>
             <version>4.2.4.RELEASE</version>
         </dependency>
 
@@ -357,7 +357,7 @@
                         </goals>
                         <configuration>
                             <files>
-                                <file>${basedir}/src/main/resources/netty/protobuf/config/cmdargs.properties</file>
+                                <file>${basedir}/src/main/resources/env.netty/protobuf/config/cmdargs.properties</file>
                                 <file>${basedir}/src/main/resources/env/pom-path.properties</file>
                             </files>
                         </configuration>
@@ -381,9 +381,8 @@
                         <configuration>
                             <mainClass>com.lol.util.ExcuteExeUtil</mainClass>
                             <arguments>
-                                <!--<argument>${env.pom.mainResources}/netty/protobuf/config/cmdargs.properties</argument>-->
-                                <argument>${env.pom.mainResources}\tools\protoc-3.0.0-alpha-3-win32</argument>
-                                <argument>${basedir}\src\main\java\com\lol\netty\protobuf</argument>
+                                <!--<argument>${env.pom.mainResources}/env.netty/protobuf/config/cmdargs.properties</argument>-->
+                                <argument>${basedir}\src\main\java\com\lol\env.netty\protobuf</argument>
                                 <argument>${basedir}\src\main\java</argument>
                                 <!--多个文件 以,分隔-->
                                 <argument>MessageUp,MessageDown</argument>
@@ -397,9 +396,9 @@
                         <phase>generate-sources</phase>
                         <goals><goal>exec</goal></goals>
                         <configuration>
-                            <executable>${env.pom.mainResources}/netty/protobuf/bin/generate.bat</executable>
+                            <executable>${env.pom.mainResources}/env.netty/protobuf/bin/generate.bat</executable>
                             <arguments>
-                                <argument>${env.pom.mainResources}/netty/protobuf/config/cmdargs.properties</argument>
+                                <argument>${env.pom.mainResources}/env.netty/protobuf/config/cmdargs.properties</argument>
                             </arguments>
                         </configuration>
                     </execution> -->
@@ -417,7 +416,7 @@
                 </configuration>
             </plugin>
 
-            <!-- jibx start -->
+            <!-- hk.hkjc.yzh.schema.test.jibx start -->
             <plugin>
                 <groupId>org.jibx</groupId>
                 <artifactId>jibx-maven-plugin</artifactId>
@@ -437,7 +436,7 @@
                         </goals>
                         <phase>clean</phase>
                         <configuration>
-                            <schemaLocation>${basedir}/src/main/resources/schema/jibx</schemaLocation>
+                            <schemaLocation>${basedir}/src/main/resources/schema</schemaLocation>
                             <includeSchemas>
                                 <includeSchema>*.xsd</includeSchema>
                                 <includeSchema>**/*.xsd</includeSchema>
@@ -458,8 +457,7 @@
                         <configuration>
                             <schemaBindingDirectory>${basedir}/target/generated-sources</schemaBindingDirectory>
                             <includeSchemaBindings>
-                                <!-- <includeSchemaBindings>binding.xml</includeSchemaBindings> -->
-                                <!-- <includeSchemaBindings>**/binding.xml</includeSchemaBindings> -->
+                                <includeSchemaBindings>binding.xml</includeSchemaBindings>
                             </includeSchemaBindings>
                             <load>true</load>
                             <validate>true</validate>
@@ -468,13 +466,13 @@
                         </configuration>
                     </execution>
 
-                    <!-- <execution> <id>compare-jibx-docs</id> <phase>test</phase> <goals><goal>document-compare</goal></goals>
+                    <!-- <execution> <id>compare-hk.hkjc.yzh.schema.test.jibx-docs</id> <phase>test</phase> <goals><goal>document-compare</goal></goals>
                         <configuration> <inFile>${basedir}/src/main/resources/schema/xml/ChuanOrder.xml</inFile>
                         <outFile>${basedir}/src/main/resources/schema/xml/CTshiporder.xml</outFile>
                         </configuration> </execution> -->
                 </executions>
             </plugin>
-            <!-- jibx end -->
+            <!-- hk.hkjc.yzh.schema.test.jibx end -->
 
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -490,7 +488,7 @@
                         <configuration>
                             <sources>
                                 <!-- choise one source -->
-                                <!-- jibx auto to ${basedir}/target/generated-sources,and it is
+                                <!-- hk.hkjc.yzh.schema.test.jibx auto to ${basedir}/target/generated-sources,and it is
                                     fixed can bot be changed -->
                                 <source>${basedir}/target/generated-sources</source>
                                 <!-- jaxb need config,can be any where -->
@@ -504,7 +502,7 @@
                 </executions>
             </plugin>
 
-            <!-- use this plugin not assembly to solve excute the jar throw spring xsd not find exception -->
+            <!-- use this plugin not assembly to solve excute the jar throw env.spring xsd not find exception -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -523,7 +521,7 @@
                     <transformers>
                         <transformer
                                 implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-                            <resource>META-INF/spring.handlers</resource>
+                            <resource>META-INF/env.env.spring.handlers</resource>
                         </transformer>
                         <transformer
                                 implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
@@ -531,7 +529,7 @@
                         </transformer>
                         <transformer
                                 implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-                            <resource>META-INF/spring.schemas</resource>
+                            <resource>META-INF/env.env.spring.schemas</resource>
                         </transformer>
                     </transformers>
                 </configuration>
@@ -551,18 +549,18 @@
 
     <!-- 配置部署的远程仓库 -->
     <!-- 用于配置分发管理，配置相应的产品发布信息,主要用于发布，在执行mvn deploy后表示要发布的位置 -->
-    <distributionManagement>
-        <snapshotRepository>
-            <id>nexus-snapshots-testCoder</id>
-            <name>nexus testCoder Snapshot repository</name>
-            <url>http://127.0.0.1:8081/nexus/content/repositories/testCoder-Snapshot</url>
-        </snapshotRepository>
+    <!--<distributionManagement>-->
+    <!--<snapshotRepository>-->
+    <!--<id>nexus-snapshots-testCoder</id>-->
+    <!--<name>nexus testCoder Snapshot repository</name>-->
+    <!--<url>http://127.0.0.1:8081/nexus/content/repositories/testCoder-Snapshot</url>-->
+    <!--</snapshotRepository>-->
 
-        <!-- 配置到文件系统 -->
-        <repository>
-            <id>nexus-releases-testCoder</id>
-            <name>nexus testCoder Releases repository</name>
-            <url>http://127.0.0.1:8081/nexus/content/repositories/testCoder-Releases</url>
-        </repository>
-    </distributionManagement>
+    <!--&lt;!&ndash; 配置到文件系统 &ndash;&gt;-->
+    <!--<repository>-->
+    <!--<id>nexus-releases-testCoder</id>-->
+    <!--<name>nexus testCoder Releases repository</name>-->
+    <!--<url>http://127.0.0.1:8081/nexus/content/repositories/testCoder-Releases</url>-->
+    <!--</repository>-->
+    <!--</distributionManagement>-->
 </project>

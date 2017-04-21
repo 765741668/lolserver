@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Module Name:  netty.http - HttpXmlRequestEncoder.java
+ * Module Name:  env.netty.http - HttpXmlRequestEncoder.java
  * Version: 1.0.0
  * Original Author: java
  * Created Date: May 25, 2016

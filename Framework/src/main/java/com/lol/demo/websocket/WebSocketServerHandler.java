@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Module Name:  netty.websocket - WebSocketServerHandler.java
+ * Module Name:  env.netty.websocket - WebSocketServerHandler.java
  * Version: 1.0.0
  * Original Author: java
  * Created Date: May 31, 2016

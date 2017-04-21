@@ -16,6 +16,7 @@ import com.lol.protobuf.MessageDownProto;
 import com.lol.protobuf.MessageUpProto;
 import com.lol.tool.EventUtil;
 import com.lol.util.Utils;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
@@ -24,7 +25,7 @@ import java.util.*;
  * Created by YangZH on 2017/4/6
  * 20:11
  */
-
+@Component
 public class FightRoomProcesor extends BaseProsesor implements GameProcessor {
 
     public Map<Integer, AbsFightModel> teamOne = new HashMap<>();

@@ -3,7 +3,6 @@ package com.lol.core;
 import com.lol.util.ModuleUtil;
 import com.lol.util.ProReaderUtil;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 
 /**
  * 服务初始化类
@@ -19,17 +18,6 @@ public class ServerInit {
 
     public static ServerInit getInstance() {
         return instance;
-    }
-
-    /**
-     * 初始化log4j
-     */
-    public void initLog4j() {
-        try {
-            PropertyConfigurator.configure(ProReaderUtil.getInstance().getLog4jPro());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
     }
 
     /**

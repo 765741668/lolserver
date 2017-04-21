@@ -1,4 +1,4 @@
-﻿package com.lol.service.impl;
+package com.lol.service.impl;
 
 import com.lol.channel.GameOnlineChannelManager;
 import com.lol.common.Constans;
@@ -53,7 +53,7 @@ public class AcountServiceImpl implements IAcountService {
         return 0;
     }
 
-    public final int login(Connection connection, String acount, String password) throws ServiceException {
+    public final int login(Connection connection, String acount, String password) {
         //账号密码为空 输入不合法
         if (acount == null || password == null) {
             return -4;
@@ -81,7 +81,7 @@ public class AcountServiceImpl implements IAcountService {
         return 0;
     }
 
-    public final void close(Connection connection, String acount) throws ServiceException {
+    public final void close(Connection connection, String acount) {
         //如果当前连接有登陆 进行移除
         ChannelHandlerContext ctx = connection.getChannelHandlerContext();
         ctx.attr(Constans.conn).remove();
@@ -89,7 +89,7 @@ public class AcountServiceImpl implements IAcountService {
         GameOnlineChannelManager.getInstance().getOnlineChannel(acount).removeOnlineConnection(connection);
     }
 
-    public final int getAcountId(Connection connection) throws ServiceException {
+    public final int getAcountId(Connection connection) {
         //判断在线字典中是否有此连接的记录  没有说明此连接没有登陆 无法获取到账号id
         if (!isOnline(connection.getAcount())) {
             return -1;

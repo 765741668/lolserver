@@ -1,4 +1,4 @@
-﻿package com.lol.service.impl;
+package com.lol.service.impl;
 
 
 import com.lol.core.Connection;
@@ -77,7 +77,7 @@ public class PlayerServiceImpl implements IPlayerService {
     }
 
     @Override
-    public int getPlayerId(Connection connection) throws ServiceException {
+    public int getPlayerId(Connection connection) {
 
         Player player = getPlayerByConnection(connection);
         if (player == null) {
@@ -86,7 +86,7 @@ public class PlayerServiceImpl implements IPlayerService {
         return player.getId();
     }
 
-    public final Player getByAcount(Connection connection) throws ServiceException {
+    public final Player getByAcount(Connection connection) {
         //帐号是否登陆 获取帐号ID
         int acountId = acountService.getAcountId(connection);
         if (acountId == -1) {
@@ -97,11 +97,11 @@ public class PlayerServiceImpl implements IPlayerService {
 
     }
 
-    public final Player getPlayerById(int id) throws ServiceException {
+    public final Player getPlayerById(int id) {
         return idToModel.get(id);
     }
 
-    public final Player online(Connection connection) throws ServiceException {
+    public final Player online(Connection connection) {
         int acountId = acountService.getAcountId(connection);
         if (acountId == -1) {
             return null;
@@ -117,7 +117,7 @@ public class PlayerServiceImpl implements IPlayerService {
         return user;
     }
 
-    public final void offline(Connection connection) throws ServiceException {
+    public final void offline(Connection connection) {
         if (connectionToId.containsKey(connection)) {
             if (idToToken.containsKey(connectionToId.get(connection))) {
                 idToToken.remove(connectionToId.get(connection));
@@ -126,7 +126,7 @@ public class PlayerServiceImpl implements IPlayerService {
         }
     }
 
-    public final Connection getConnection(int id) throws ServiceException {
+    public final Connection getConnection(int id) {
         return idToToken.get(id);
     }
 
@@ -140,7 +140,7 @@ public class PlayerServiceImpl implements IPlayerService {
 
     }
 
-    public final Player getPlayerByConnection(Connection connection) throws ServiceException {
+    public final Player getPlayerByConnection(Connection connection) {
         if (!connectionToId.containsKey(connection)) {
             return null;
         }

@@ -2,9 +2,9 @@
  *
  * Module Name:  entity - Test.java
  * Version: 1.0.0
- * Original Author: randyzhyang
+ * Original Author: java
  * Created Date: Apr 22, 2016
- * Last Updated By: randyzhyang
+ * Last Updated By: java
  * Last Updated Date: Apr 22, 2016
  * Description:
  *
@@ -23,19 +23,32 @@
  ******************************************************************************/
 package com.lol.demo.entity.design.singleton;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class Test {
 
-    public static void main(String[] args) {
-        System.out.println("~~~~~~1~~~~~~~~~");
-        StaticSingleton.createString();
+    public static void main(String[] args) throws InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+//        System.out.println("~~~~~~1~~~~~~~~~");
+//        StaticSingleton.createString();
+//        
+//        System.out.println("~~~~~~2~~~~~~~~~");
+//        Singleton.createString();
+//        
+//        System.out.println("~~~~~~3~~~~~~~~~");
+//        StaticSingleton.getInstance();
+//
+//        System.out.println("~~~~~~4~~~~~~~~~");
+//        new StaticSingleton().doSomething();
+//        
+//        System.out.println("~~~~~~5~~~~~~~~~");
+//        ThreadPoolDoSomething.RunSingletonWithThreadPool(3*10);
 
-        System.out.println("~~~~~~2~~~~~~~~~");
-        Singleton.createString();
+        StaticSingleton s = StaticSingleton.getInstance();
+        s.setId(1);
 
-        System.out.println("~~~~~~3~~~~~~~~~");
-        StaticSingleton.getInstance();
+        StaticSingleton ss = StaticSingleton.class.getConstructor(new Class[]{}).newInstance(new Object[]{});
 
-        System.out.println("~~~~~~4~~~~~~~~~");
+        System.out.println(ss.getId());
     }
 
 }

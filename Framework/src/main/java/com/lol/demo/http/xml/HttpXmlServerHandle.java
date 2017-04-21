@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Module Name:  netty.http - HttpXmlServerHandle.java
+ * Module Name:  env.netty.http - HttpXmlServerHandle.java
  * Version: 1.0.0
  * Original Author: java
  * Created Date: May 26, 2016
@@ -23,7 +23,7 @@
  ******************************************************************************/
 package com.lol.demo.http.xml;
 
-import hk.hkjc.yzh.schema.test.jaxb.shiporder_v1.CTshiporder;
+import hk.hkjc.yzh.schema.test.jibx.shiporderv1.CTshiporder;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;

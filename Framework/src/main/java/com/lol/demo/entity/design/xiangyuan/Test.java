@@ -2,9 +2,9 @@
  *
  * Module Name:  entity.xiangyuan - Test.java
  * Version: 1.0.0
- * Original Author: randyzhyang
+ * Original Author: java
  * Created Date: Apr 22, 2016
- * Last Updated By: randyzhyang
+ * Last Updated By: java
  * Last Updated Date: Apr 22, 2016
  * Description: 
  *
@@ -24,8 +24,11 @@
 package com.lol.demo.entity.design.xiangyuan;
 
 
+import com.lol.demo.threadpool.ThreadPoolDoSomething;
+
 public class Test {
     public static void main(String[] args) {
         XiangyuanReportFactory factory = new XiangyuanReportFactory();
+        ThreadPoolDoSomething.RunXiangYuanWithThreadPool(factory, 3 * 10);
     }
 }
