@@ -1,1 +1,1 @@
-#LOLServer master
+#LOLServer yzh
