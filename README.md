@@ -1,1 +1,1 @@
-#LOLServer test
+#LOLServer master
