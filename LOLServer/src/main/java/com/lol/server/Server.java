@@ -12,7 +12,6 @@ import com.lol.util.ProReaderUtil;
 public class Server {
 
     public void init() throws Exception {
-
 //        ServerInit.getInstance().initConfPath("/env");
 //        ServerInit.getInstance().initLog4j();
 //        ServerInit.getInstance().initGameWorkers();
