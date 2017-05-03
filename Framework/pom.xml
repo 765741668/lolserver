@@ -17,7 +17,7 @@
         <java.source.version>1.8</java.source.version>
         <java.target.version>1.8</java.target.version>
         <org.springframework.version>4.3.7.RELEASE</org.springframework.version>
-        <org.env.spring.security.version>4.2.2.RELEASE</org.env.spring.security.version>
+        <org.spring.security.version>4.2.2.RELEASE</org.spring.security.version>
         <hibernate.version>5.2.9.Final</hibernate.version>
         <mysql.version>6.0.6</mysql.version>
         <c3p0.version>0.9.5.2</c3p0.version>
@@ -32,49 +32,49 @@
 
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>env.spring-tx</artifactId>
+            <artifactId>spring-tx</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>env.spring-orm</artifactId>
+            <artifactId>spring-orm</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>env.spring-oxm</artifactId>
+            <artifactId>spring-oxm</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>env.spring-messaging</artifactId>
+            <artifactId>spring-messaging</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>env.spring-core</artifactId>
+            <artifactId>spring-core</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>env.spring-context-support</artifactId>
+            <artifactId>spring-context-support</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>env.spring-context</artifactId>
+            <artifactId>spring-context</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>env.spring-aop</artifactId>
+            <artifactId>spring-aop</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.security</groupId>
-            <artifactId>env.spring-security-core</artifactId>
-            <version>${org.env.spring.security.version}</version>
+            <artifactId>spring-security-core</artifactId>
+            <version>${org.spring.security.version}</version>
         </dependency>
 
         <dependency>
@@ -149,8 +149,8 @@
         </dependency>
 
 
-        <!-- env.log start -->
-        <!-- slf4j env.log -->
+        <!-- log start -->
+        <!-- slf4j log -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -197,11 +197,11 @@
             <artifactId>jul-to-slf4j</artifactId>
             <version>1.7.9</version>
         </dependency>
-        <!-- env.log end -->
+        <!-- log end -->
 
         <dependency>
-            <groupId>io.env.netty</groupId>
-            <artifactId>env.netty-all</artifactId>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
             <version>5.0.0.Alpha2</version>
         </dependency>
 
@@ -312,7 +312,7 @@
 
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>env.spring-test</artifactId>
+            <artifactId>spring-test</artifactId>
             <version>4.2.4.RELEASE</version>
         </dependency>
 
@@ -357,7 +357,7 @@
                         </goals>
                         <configuration>
                             <files>
-                                <file>${basedir}/src/main/resources/env.netty/protobuf/config/cmdargs.properties</file>
+                                <file>${basedir}/src/main/resources/env/netty/protobuf/config/cmdargs.properties</file>
                                 <file>${basedir}/src/main/resources/env/pom-path.properties</file>
                             </files>
                         </configuration>
@@ -371,7 +371,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.5.0</version>
                 <executions>
-                    <!-- way 1: -->
+                    <!-- way 1 for java code: -->
                     <execution>
                         <id>java excute command</id>
                         <phase>generate-sources</phase>
@@ -381,27 +381,26 @@
                         <configuration>
                             <mainClass>com.lol.util.ExcuteExeUtil</mainClass>
                             <arguments>
-                                <!--<argument>${env.pom.mainResources}/env.netty/protobuf/config/cmdargs.properties</argument>-->
-                                <argument>${basedir}\src\main\java\com\lol\env.netty\protobuf</argument>
-                                <argument>${basedir}\src\main\java</argument>
+                                <argument>${mainJava}\com\lol\protobuf</argument>
+                                <argument>${mainJava}</argument>
                                 <!--多个文件 以,分隔-->
-                                <argument>MessageUp,MessageDown</argument>
+                                <argument>MessageUp,MessageDown,SubscribeReq,SubscribeResp,testV3</argument>
                             </arguments>
                         </configuration>
                     </execution>
 
-                    <!-- way 2: -->
-                    <!-- <execution>
-                        <id>excute command bat2</id>
-                        <phase>generate-sources</phase>
-                        <goals><goal>exec</goal></goals>
-                        <configuration>
-                            <executable>${env.pom.mainResources}/env.netty/protobuf/bin/generate.bat</executable>
-                            <arguments>
-                                <argument>${env.pom.mainResources}/env.netty/protobuf/config/cmdargs.properties</argument>
-                            </arguments>
-                        </configuration>
-                    </execution> -->
+                    <!-- way 2 for maven: -->
+                     <!--<execution>-->
+                        <!--<id>maven excute command bat2</id>-->
+                        <!--<phase>generate-sources</phase>-->
+                        <!--<goals><goal>exec</goal></goals>-->
+                        <!--<configuration>-->
+                            <!--<executable>${mainResources}/env/netty/protobuf/bin/generate.bat</executable>-->
+                            <!--<arguments>-->
+                                <!--<argument>${mainResources}/env/netty/protobuf/config/cmdargs.properties</argument>-->
+                            <!--</arguments>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
                 </executions>
             </plugin>
 
@@ -502,7 +501,7 @@
                 </executions>
             </plugin>
 
-            <!-- use this plugin not assembly to solve excute the jar throw env.spring xsd not find exception -->
+            <!-- use this plugin not assembly to solve excute the jar throw spring xsd not find exception -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -521,7 +520,7 @@
                     <transformers>
                         <transformer
                                 implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-                            <resource>META-INF/env.env.spring.handlers</resource>
+                            <resource>META-INF/spring.handlers</resource>
                         </transformer>
                         <transformer
                                 implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
@@ -529,7 +528,7 @@
                         </transformer>
                         <transformer
                                 implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-                            <resource>META-INF/env.env.spring.schemas</resource>
+                            <resource>META-INF/spring.schemas</resource>
                         </transformer>
                     </transformers>
                 </configuration>
@@ -556,7 +555,7 @@
     <!--<url>http://127.0.0.1:8081/nexus/content/repositories/testCoder-Snapshot</url>-->
     <!--</snapshotRepository>-->
 
-    <!--&lt;!&ndash; 配置到文件系统 &ndash;&gt;-->
+    <!-- 配置到文件系统 -->
     <!--<repository>-->
     <!--<id>nexus-releases-testCoder</id>-->
     <!--<name>nexus testCoder Releases repository</name>-->

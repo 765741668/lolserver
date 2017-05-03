@@ -122,7 +122,7 @@ public class ExcuteExeUtil {
 
     public static void main(String[] args) {
         //way 1: just java code
-//        String propertiesPathString = "/env.netty/protobuf/config/cmdargs.properties";
+//        String propertiesPathString = "/netty/protobuf/config/cmdargs.properties";
 //        String location = PropertiesExUtils.getPropertiesValue(propertiesPathString,"protobuf.location");
 //        String sourcePath = PropertiesExUtils.getPropertiesValue(propertiesPathString,"protobuf.source.path");
 //        String output = PropertiesExUtils.getPropertiesValue(propertiesPathString,"protobuf.output");

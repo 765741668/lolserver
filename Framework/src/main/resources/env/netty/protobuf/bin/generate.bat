@@ -4,7 +4,6 @@ set configPath=%1%
 for /f "eol=;tokens=2,2 delims==" %%i in ('findstr /i "protobuf.location" %configPath%') do set location=%%i
 for /f "eol=;tokens=2,2 delims==" %%i in ('findstr /i "protobuf.source.path" %configPath%') do set sourcePath=%%i
 for /f "eol=;tokens=2,2 delims==" %%i in ('findstr /i "protobuf.output" %configPath%') do set output=%%i
-
 for /f "eol=;tokens=2,2 delims==" %%i in ('findstr /i "protobuf.source.files" %configPath%') do set files=%%i
 
 for %%a in (%configPath%) do (

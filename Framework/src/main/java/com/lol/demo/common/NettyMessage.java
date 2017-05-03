@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Module Name:  env.netty - NeetyMessage.java
+ * Module Name:  netty - NeetyMessage.java
  * Version: 1.0.0
  * Original Author: java
  * Created Date: May 12, 2016

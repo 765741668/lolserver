@@ -1,8 +1,8 @@
 package com.lol.core;
 
 import com.lol.buffer.GameUpBuffer;
-import com.lol.handler.GameHandlerManager;
 import com.lol.handler.GameProcessor;
+import com.lol.handler.GameProcessorManager;
 import com.lol.util.StackTraceUtil;
 import org.apache.log4j.Logger;
 
@@ -89,7 +89,8 @@ public class GameWorker implements Runnable {
                 try {
                     System.out.println("cmd: " + cmd);
                     System.out.println("name: " + name);
-                    GameProcessor handler = GameHandlerManager.getInstance().getProcessor(cmd + "-" + name);
+//                    GameProcessor handler = GameProcessorManager.getInstance().getProcessor(cmd + "-" + name);
+                    GameProcessor handler = GameProcessorManager.getInstance().getProcessor(cmd);
                     if (handler != null) {
                         //记录执行时间过长的指令
                         long startTime = System.currentTimeMillis();

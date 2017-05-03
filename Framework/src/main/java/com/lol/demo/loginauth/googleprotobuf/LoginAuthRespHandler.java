@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Module Name:  env.netty - LoginAuthReqHandler.java
+ * Module Name:  netty - LoginAuthReqHandler.java
  * Version: 1.0.0
  * Original Author: java
  * Created Date: May 13, 2016
@@ -41,7 +41,7 @@ public class LoginAuthRespHandler extends ChannelHandlerAdapter {
     private static Map<String, Boolean> nodeCheck = new ConcurrentHashMap<String, Boolean>();
     private final Logger logger = LoggerFactory.getLogger(LoginAuthRespHandler.class);
     private String whiteList = PropertiesExUtil.getInstance()
-            .getPropertiesValue("/env.spring/config/handle.properties", "handle.login.response.whiteList");
+            .getPropertiesValue("/spring/config/handle.properties", "handle.login.response.whiteList");
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {

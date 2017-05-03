@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package env.netty;
+package netty;
 
 // 定义生成java文件所在的包名
-option java_package = "com.yzh.env.netty.encode.protobuf";
+option java_package = "com.lol.demo.encode.protobuf";
 
 // 生成对应外部类名称
 option java_outer_classname = "TestV3Proto";

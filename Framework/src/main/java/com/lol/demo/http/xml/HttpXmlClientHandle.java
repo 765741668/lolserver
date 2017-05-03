@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Module Name:  env.netty.http - HttpXmlClientHandle.java
+ * Module Name:  netty.http - HttpXmlClientHandle.java
  * Version: 1.0.0
  * Original Author: java
  * Created Date: May 26, 2016

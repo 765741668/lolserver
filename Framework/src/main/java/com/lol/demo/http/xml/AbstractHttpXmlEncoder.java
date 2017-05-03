@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Module Name:  env.netty.http - AbstractHttpXmlEncoder.java
+ * Module Name:  netty.http - AbstractHttpXmlEncoder.java
  * Version: 1.0.0
  * Original Author: java
  * Created Date: May 25, 2016

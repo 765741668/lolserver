@@ -14,8 +14,8 @@ public class C3P0Util {
     static {
         try {
             DbConfig config = new DbConfig();
-            // Logger env.log = Logger.getLogger("com.mchange"); // 日志
-            // env.log.setLevel(Level.WARNING);
+            // Logger log = Logger.getLogger("com.mchange"); // 日志
+            // log.setLevel(Level.WARNING);
             ds = new ComboPooledDataSource();
             // 设置JDBC的Driver类
             ds.setDriverClass(config.getDriver());  // 参数由 Config 类根据配置文件读取

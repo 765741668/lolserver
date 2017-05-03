@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Module Name:  env.netty.test - TestBuf.java
+ * Module Name:  netty.test - TestBuf.java
  * Version: 1.0.0
  * Original Author: java
  * Created Date: Jun 2, 2016

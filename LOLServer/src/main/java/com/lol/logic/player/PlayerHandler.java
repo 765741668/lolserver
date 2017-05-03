@@ -28,7 +28,7 @@ public class PlayerHandler extends SimpleChannelInboundHandler<MessageUpProto.Me
 
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, MessageUpProto.MessageUp message) throws Exception {
-        if (message.getHeader().getMsgType() == Protocol.TYPE_USER) {
+        if (message.getHeader().getMsgType() == Protocol.TYPE_PLYAER) {
             MessageUpProto.PlayerUpBody player = message.getBody().getPlayer();
             if (player != null) {
                 GameBoss.getInstance().getProcessor().process(new GameUpBuffer(message, ctx.attr(Constans.conn).get()));
@@ -45,7 +45,7 @@ public class PlayerHandler extends SimpleChannelInboundHandler<MessageUpProto.Me
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
         super.channelInactive(ctx);
 
-        GameUpBuffer msg = Utils.packgeUpData(ctx.attr(Constans.conn).get(), Protocol.TYPE_USER, -1, PlayerProtocol.OFFLINE_CREQ, null);
+        GameUpBuffer msg = Utils.packgeUpData(ctx.attr(Constans.conn).get(), Protocol.TYPE_PLYAER, -1, PlayerProtocol.OFFLINE_CREQ, null);
         GameBoss.getInstance().getProcessor().process(msg);
     }
 

@@ -42,7 +42,7 @@
 	
 	          log4j.appender.ROLLING_FILE=org.apache.log4j.RollingFileAppender   // 指定以文件的方式输出日志
 	           log4j.appender.ROLLING_FILE.Threshold=ERROR 
-	           log4j.appender.ROLLING_FILE.File=rolling.env.log  // 文件位置, 也可以用变量${java.home} 、rolling.env.log
+	           log4j.appender.ROLLING_FILE.File=rolling.log  // 文件位置, 也可以用变量${java.home} 、rolling.log
 	           log4j.appender.ROLLING_FILE.Append=true 
 	           log4j.appender.ROLLING_FILE.MaxFileSize=10KB  // 文件最大尺寸
 	           log4j.appender.ROLLING_FILE.MaxBackupIndex=1  // 备份数
@@ -63,7 +63,7 @@
         <resetJUL>true</resetJUL>
     </contextListener>
 
-    <property resource="/env/log/logback.properties"/>
+    <property resource="env/log/logback.properties"/>
     <!-- <property resource="jms/jms.properties" /> -->
 
     <!-- To enable JMX Management -->
@@ -82,10 +82,10 @@
 
     <!-- 文件输出日志 (文件大小策略进行文件输出，超过指定大小对文件备份)-->
     <appender name="LogCfg" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <param name="file" value="${location.env.log}/${file.prefix}trace.env.log"/>
+        <param name="file" value="${location.log}/${file.prefix}trace.log"/>
         <param name="append" value="true"/>
         <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <fileNamePattern>${location.env.env.log.archive}/${file.prefix}trace.%i.env.env.log.zip</fileNamePattern>
+            <fileNamePattern>${location.log.archive}/${file.prefix}trace.%i.log.zip</fileNamePattern>
             <minIndex>1</minIndex>
             <maxIndex>10</maxIndex>
         </rollingPolicy>
@@ -132,8 +132,8 @@
     <logger name="kafka" level="error"/>
     <logger name="scala.reflect" level="error"/>
     <!-- my project -->
-    <logger name="com.yzh" level="${env.log.level}"/>
-    <logger name="hkjc.cap" level="${env.log.level}"/>
+    <logger name="com.yzh" level="${log.level}"/>
+    <logger name="hkjc.cap" level="${log.level}"/>
 
     <root>
         <level value="error"/>

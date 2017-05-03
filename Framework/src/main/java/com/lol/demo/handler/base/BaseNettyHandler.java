@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Module Name:  env.netty.handle.base - BaseNettyHandler.java
+ * Module Name:  netty.handle.base - BaseNettyHandler.java
  * Version: 1.0.0
  * Original Author: java
  * Created Date: Jun 3, 2016

@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Module Name:  env.netty - MarshallingEncoder.java
+ * Module Name:  netty - MarshallingEncoder.java
  * Version: 1.0.0
  * Original Author: java
  * Created Date: May 12, 2016

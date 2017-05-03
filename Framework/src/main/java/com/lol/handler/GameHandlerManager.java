@@ -16,8 +16,6 @@ public class GameHandlerManager {
     /**
      * 业务逻辑集合
      */
-    private Map<String, GameProcessor> processorMap = new HashMap<>();
-
     private Map<Integer, ChannelHandler> channelHandlerMap = new HashMap<>();
 
     public static GameHandlerManager getInstance() {
@@ -51,31 +49,6 @@ public class GameHandlerManager {
      */
     public Map<Integer, ChannelHandler> getAllHandler() {
         return channelHandlerMap;
-    }
-
-    /**
-     * 注册业务逻辑
-     *
-     * @param cls
-     * @param msgType
-     * @param aera
-     * @throws Exception
-     */
-    public void registerProcessor(GameProcessor cls, int msgType, int aera) throws Exception {
-        processorMap.put(msgType + "-" + aera, cls);
-    }
-
-    /**
-     * 获取业务逻辑
-     *
-     * @param msgType_aera
-     * @return
-     */
-    public GameProcessor getProcessor(String msgType_aera) {
-        for (Map.Entry<String, GameProcessor> map : processorMap.entrySet()) {
-            System.out.println(map.getKey());
-        }
-        return processorMap.get(msgType_aera);
     }
 
     private static class GameHandlerManagerHolder {

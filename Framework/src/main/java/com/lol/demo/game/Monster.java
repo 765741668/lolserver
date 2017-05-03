@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Module Name:  env.netty - Monster.java
+ * Module Name:  netty - Monster.java
  * Version: 1.0.0
  * Original Author: java
  * Created Date: Apr 21, 2016

@@ -12,7 +12,7 @@ public class Protocol {
     /**
      * 用户模块
      */
-    public static final byte TYPE_USER = 3;
+    public static final byte TYPE_PLYAER = 3;
     /**
      * 匹配模块
      */

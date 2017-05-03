@@ -195,7 +195,7 @@ public class SelectRoomProcesor extends BaseProsesor implements GameProcessor {
                 GameDownBuffer data = Utils.packgeDownData(buffer.getMsgType(), buffer.getArea(), SelectProtocol.READY_BRO, sm);
                 GameRoomChannelManager.getInstance().getRoomChannel(getRoomName(buffer)).broadcastRoom(data);
             } catch (Exception e) {
-                //TODO::env.log
+                //TODO::log
                 e.printStackTrace();
             }
             //添加进准备列表
@@ -220,7 +220,7 @@ public class SelectRoomProcesor extends BaseProsesor implements GameProcessor {
         try {
             GameRoomChannelManager.getInstance().getRoomChannel(getRoomName(buffer)).broadcastRoom(data);
         } catch (Exception e) {
-            //TODO: env.log
+            //TODO: log
             e.printStackTrace();
         }
         //TODO::通知选择房间管理器 销毁当前房间

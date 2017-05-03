@@ -13,8 +13,8 @@ import io.netty.handler.ssl.util.SelfSignedCertificate;
 
 public final class WebSocketServer {
 
-    static final boolean SSL = System.getProperty("env.netty.websocket.ssl") != null;
-    static final int PORT = Integer.parseInt(System.getProperty("env.netty.websocket.port", SSL ? "8443" : "8083"));
+    static final boolean SSL = System.getProperty("netty.websocket.ssl") != null;
+    static final int PORT = Integer.parseInt(System.getProperty("netty.websocket.port", SSL ? "8443" : "8083"));
 
     public static void main(String[] args) throws Exception {
         // Configure SSL.

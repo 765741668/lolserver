@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Module Name:  env.netty.websocket - Global.java
+ * Module Name:  netty.websocket - Global.java
  * Version: 1.0.0
  * Original Author: java
  * Created Date: Jun 2, 2016

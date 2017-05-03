@@ -35,8 +35,9 @@ public class LoginHandler extends SimpleChannelInboundHandler<MessageUpProto.Mes
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        super.channelInactive(ctx);
+        logger.info("有客户端断开连接了 : {}", ctx.channel().remoteAddress());
 
+        super.channelInactive(ctx);
         GameUpBuffer msg = Utils.packgeUpData(ctx.attr(Constans.conn).get(), Protocol.TYPE_LOGIN, -1, LoginProtocol.LOGIN_FAIL, null);
         GameBoss.getInstance().getProcessor().process(msg);
     }

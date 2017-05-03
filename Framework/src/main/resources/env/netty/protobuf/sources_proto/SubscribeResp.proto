@@ -1,6 +1,6 @@
 syntax = "proto3";
-package env.netty;
-option java_package = "com.yzh.env.netty.encode.protobuf";
+package netty;
+option java_package = "com.lol.demo.encode.protobuf";
 option java_outer_classname = "SubscribeRespProto";  
 
 message SubscribeResp{  

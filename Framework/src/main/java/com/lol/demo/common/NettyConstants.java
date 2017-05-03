@@ -1,6 +1,6 @@
 /******************************************************************************
  *
- * Module Name:  env.netty - NettyConstans.java
+ * Module Name:  netty - NettyConstans.java
  * Version: 1.0.0
  * Original Author: java
  * Created Date: May 11, 2016
