@@ -14,10 +14,6 @@ public class LOLClientReqHandler extends ChannelHandlerAdapter {
 
     private Logger logger = LoggerFactory.getLogger(LOLClientReqHandler.class);
 
-    public LOLClientReqHandler() {
-
-    }
-
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         logger.info("connected -->> [{}]",ctx.channel().remoteAddress().toString());
