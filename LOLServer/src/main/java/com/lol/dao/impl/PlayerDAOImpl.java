@@ -29,14 +29,14 @@ public class PlayerDAOImpl extends BaseDao<Player> implements IPlayerDAO {
         hql.append("from Player a where 1 = 1 ");
         Object[] param = new Object[1];
         if (!condiction.isEmpty()) {
-            String acount = (String) condiction.get("acount");
-            if (!StringUtils.isEmpty(acount)) {
-                hql.append(" and acount = ? ");
-                param[0] = acount;
+            Object acountId = condiction.get("acountId");
+            if (acountId != null) {
+                hql.append(" and acountId = ? ");
+                param[0] = acountId;
             }
 
-            String id = (String) condiction.get("id");
-            if (!StringUtils.isEmpty(acount)) {
+            Object id = condiction.get("id");
+            if (id != null) {
                 hql.append(" and id = ? ");
                 param[0] = id;
             }

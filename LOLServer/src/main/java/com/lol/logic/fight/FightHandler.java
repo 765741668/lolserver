@@ -17,10 +17,18 @@ public class FightHandler extends SimpleChannelInboundHandler<MessageUpProto.Mes
 
     private static Logger logger = LoggerFactory.getLogger(FightHandler.class);
 
+    private MessageUpProto.MessageUp tempMessage = null;
+
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, MessageUpProto.MessageUp message) throws Exception {
         if (message.getHeader().getMsgType() == Protocol.TYPE_FIGHT) {
-            GameBoss.getInstance().getProcessor().process(new GameUpBuffer(message, ctx.attr(Constans.conn).get()));
+            MessageUpProto.FightUpBody fight = message.getBody().getFight();
+            if (fight != null) {
+                logger.info("收到战斗模块消息: {} ({})",fight,ctx.channel().remoteAddress());
+                GameBoss.getInstance().getProcessor().process(new GameUpBuffer(message, ctx.attr(Constans.conn).get()));
+            }
+        }else {
+            ctx.fireChannelRead(message);
         }
     }
 
@@ -31,10 +39,14 @@ public class FightHandler extends SimpleChannelInboundHandler<MessageUpProto.Mes
 
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        super.channelInactive(ctx);
+        logger.info("有客户端断开连接了 : {}, 准备从战斗房间连接管理器移除客户端链接。", ctx.channel().remoteAddress());
 
-        GameUpBuffer msg = Utils.packgeUpData(ctx.attr(Constans.conn).get(), Protocol.TYPE_FIGHT, -1, FightProtocol.DESTORY_FIGHT, null);
+        GameUpBuffer msg = Utils.packgeUpData(ctx.attr(Constans.conn).get(), Protocol.TYPE_FIGHT, -1,
+                FightProtocol.DESTORY_FIGHT, tempMessage);
         GameBoss.getInstance().getProcessor().process(msg);
+
+        super.channelInactive(ctx);
+        ctx.close();
     }
 
     @Override
@@ -44,7 +56,8 @@ public class FightHandler extends SimpleChannelInboundHandler<MessageUpProto.Mes
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        cause.printStackTrace();
+//        logger.error("服务器异常!",cause);
+        ctx.fireExceptionCaught(cause);
         ctx.close();
     }
 }

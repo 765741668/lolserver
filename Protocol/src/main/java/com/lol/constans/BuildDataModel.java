@@ -1,15 +1,15 @@
 package com.lol.constans;
 
 public class BuildDataModel {
-    public int code; //箭塔编码
-    public int hp; //箭塔血量
-    public int atk; //箭塔攻击
-    public int def; //箭塔防御
-    public boolean initiative; //是否攻击型建筑
-    public boolean infrared; //不可否认，这货字面意思是红外线，但是红外代表夜视，所以这里咱用来表示是否反隐吧
-    public String name; //还是给个名字 用来区分下吧
-    public boolean reborn; //是否复活
-    public int rebornTime; //复活时间，单位秒
+    private int code; //箭塔编码
+    private int hp; //箭塔血量
+    private int atk; //箭塔攻击
+    private int def; //箭塔防御
+    private boolean initiative; //是否攻击型建筑
+    private boolean infrared; //不可否认，这货字面意思是红外线，但是红外代表夜视，所以这里咱用来表示是否反隐吧
+    private String name; //还是给个名字 用来区分下吧
+    private boolean reborn; //是否复活
+    private int rebornTime; //复活时间，单位秒
 
     public BuildDataModel() {
     }

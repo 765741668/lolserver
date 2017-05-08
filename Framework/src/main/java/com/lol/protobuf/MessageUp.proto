@@ -26,8 +26,9 @@ message MsgHeader{
 message MsgUpBody{
     LoginUpBody login = 1;
     PlayerUpBody player = 2;
-    SelectUpBody select = 3;
-    FightUpBody fight = 4;
+    MatchUpBody match = 3;
+    SelectUpBody select = 4;
+    FightUpBody fight = 5;
 }
 
 message LoginUpBody{
@@ -39,18 +40,22 @@ message PlayerUpBody{
     string nickName = 1;
 }
 
+message MatchUpBody{
+    bool agreed = 1;
+    int32 teamMax = 2;
+}
+
 message SelectUpBody{
     int32 select = 1;
     string talk = 2;
-    sint64 roomName = 3;
+    bool isTeamTalk = 3;
 }
 
 message FightUpBody{
     int32 attackOrSkillUp = 1;
-    sint64 roomName = 2;
-    MoveInfo move = 3;
-    DamageInfo damage = 4;
-    SkillAtkModel skillAtk = 5;
+    MoveInfo move = 2;
+    DamageInfo damage = 3;
+    SkillAtkModel skillAtk = 4;
 }
 
 message MoveInfo{
@@ -72,9 +77,9 @@ message Target{
 }
 
 message SkillAtkModel{
-    int32 playerId = 1;
-    int32 type = 2;
-    int32 skill = 3;
-    repeated float position = 4[packed = true];
-    int32 target = 5;
+    int32 playerId = 1; //玩家ID
+    int32 type = 2; //0表示目标攻击 1表示指定点
+    int32 skill = 3; //技能
+    repeated float position = 4[packed = true]; //位置
+    int32 target = 5; //目标
 }

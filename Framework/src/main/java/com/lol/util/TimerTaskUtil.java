@@ -1,6 +1,7 @@
 package com.lol.util;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -18,7 +19,7 @@ public class TimerTaskUtil {
      * 定时器设置
      */
     private final static ScheduledExecutorService timer = Executors.newSingleThreadScheduledExecutor();
-    private static Logger logger = Logger.getLogger(TimerTaskUtil.class);
+    private static Logger logger = LoggerFactory.getLogger(TimerTaskUtil.class);
 
     public static TimerTaskUtil getInstance() {
         return TimerTaskUtilHolder.instance;

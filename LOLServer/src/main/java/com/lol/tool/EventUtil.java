@@ -2,6 +2,7 @@ package com.lol.tool;
 
 
 import com.lol.buffer.GameUpBuffer;
+import com.lol.core.Connection;
 import com.lol.dto.SelectModel;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public class EventUtil {
      * @param teamOne
      * @param teamTwo
      */
-    public static InitSelectRoom<List, GameUpBuffer> initSelectRoom;
+    public static InitSelectRoom<List> initSelectRoom;
 
     /**
      * 初始化选人房间事件
@@ -23,7 +24,7 @@ public class EventUtil {
      * @param teamOne
      * @param teamTwo
      */
-    public static InitFightRoom<SelectModel, GameUpBuffer> initFightRoom;
+    public static InitFightRoom<SelectModel> initFightRoom;
 
     /**
      * 创建选人模块事件
@@ -53,14 +54,19 @@ public class EventUtil {
      */
     public static Consumer<Integer> destoryFight;
 
+    /**
+     * 客户端断开链接
+     */
+    public static Consumer<Connection> disconnect;
+
     @FunctionalInterface
-    public interface InitSelectRoom<List, GameUpBuffer> {
-        void init(List teamOne, List teamTwo, GameUpBuffer buffer);
+    public interface InitSelectRoom<List> {
+        void init(List teamOne, List teamTwo);
     }
 
     @FunctionalInterface
-    public interface InitFightRoom<SelectModel, GameUpBuffer> {
-        void init(SelectModel[] teamOne, SelectModel[] teamTwo, GameUpBuffer buffer);
+    public interface InitFightRoom<SelectModel> {
+        void init(SelectModel[] teamOne, SelectModel[] teamTwo);
     }
 
     @FunctionalInterface

@@ -35,7 +35,7 @@ message LoginDownBody{
 }
 
 message PlayerDownBody{
-    bool create = 1;
+    int32 create = 1;
     Player playerModel = 2;
 }
 
@@ -62,7 +62,9 @@ message Player{
     int32 winCount = 4;
     int32 loseCount = 5;
     int32 ranCount = 6;
-    repeated int32 hero = 7[packed = true];
+    //repeated int32 hero = 7[packed = true];
+    //格式 1,2,3,4,5,6,7,8
+    string hero = 7;
 }
 
 message SelectModel{
@@ -74,9 +76,8 @@ message SelectModel{
 }
 
 message SelectRoom{
-    sint64 roomName = 1;
-    repeated SelectModel teamOne = 2[packed = false];
-    repeated SelectModel teamTwo = 3[packed = false];
+    repeated SelectModel teamOne = 1[packed = false];
+    repeated SelectModel teamTwo = 2[packed = false];
 }
 
 message FightRoomModel{
@@ -103,11 +104,11 @@ message Target{
 }
 
 message SkillAtkModel{
-    int32 playerId = 1;
-    int32 type = 2;
-    int32 skill = 3;
-    repeated float position = 4[packed = true];
-    int32 target = 5;
+    int32 playerId = 1; //玩家ID
+    int32 type = 2; //0表示目标攻击 1表示指定点
+    int32 skill = 3; //技能
+    repeated float position = 4[packed = true]; //位置
+    int32 target = 5; //目标
 }
 
 message FightModel{

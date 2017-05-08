@@ -1,21 +1,21 @@
 package com.lol.constans;
 
 public class HeroDataModel {
-    public int code; //策划定义的唯一编号
-    public String name; //英雄名称
-    public int atkBase; //初始(基础)攻击力
-    public int defBase; //初始防御
-    public int hpBase; //初始血量
-    public int mpBase; //初始蓝
-    public int atkArr; //攻击成长、
-    public int defArr; //防御成长
-    public int hpArr; //血量成长
-    public int mpArr; //蓝成长
-    public float speed; //移动速度
-    public float aSpeed; //攻击速度
-    public float range; //攻击距离
-    public float eyeRange; //视野范围
-    public int[] skills; //拥有技能
+    private int code; //策划定义的唯一编号
+    private String name; //英雄名称
+    private int atkBase; //初始(基础)攻击力
+    private int defBase; //初始防御
+    private int hpBase; //初始血量
+    private int mpBase; //初始蓝
+    private int atkArr; //攻击成长、
+    private int defArr; //防御成长
+    private int hpArr; //血量成长
+    private int mpArr; //蓝成长
+    private float speed; //移动速度
+    private float aSpeed; //攻击速度
+    private float range; //攻击距离
+    private float eyeRange; //视野范围
+    private int[] skills; //拥有技能
 
     public HeroDataModel() {
     }

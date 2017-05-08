@@ -3,10 +3,14 @@ package com.lol.core;
 import com.lol.util.ProReaderUtil;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import org.apache.log4j.Logger;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 服务启动类
@@ -16,7 +20,7 @@ import org.apache.log4j.Logger;
  */
 public class Bootstrap {
 
-    private static Logger logger = Logger.getLogger(Bootstrap.class);
+    private static Logger logger = LoggerFactory.getLogger(Bootstrap.class);
     /**
      * 监听端口号
      */
@@ -38,11 +42,19 @@ public class Bootstrap {
         try {
             ServerBootstrap b = new ServerBootstrap();
             b.group(bossGroup, workerGroup)
+                    .option(ChannelOption.SO_BACKLOG, 1024) // 连接数
+                    .option(ChannelOption.TCP_NODELAY, true) // 不延迟，消息立即发送
+                    .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 30000)
+                    .option(ChannelOption.SO_SNDBUF, 2048)
+                    .option(ChannelOption.SO_KEEPALIVE, true) // 长连接
+                    .option(ChannelOption.SO_REUSEADDR, true)
+                    .option(ChannelOption.ALLOW_HALF_CLOSURE, true)
+                    .handler(new LoggingHandler(LogLevel.INFO))
                     .channel(NioServerSocketChannel.class)
                     .childHandler(new GameChannelInitializer());
 
             ChannelFuture f = b.bind(port).sync();
-            logger.info("Server started at port:" + port + "......");
+            logger.info("Server started at port: {} ......", port);
             f.channel().closeFuture().sync();
         } finally {
             workerGroup.shutdownGracefully();

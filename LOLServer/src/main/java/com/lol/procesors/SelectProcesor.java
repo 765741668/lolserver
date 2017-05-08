@@ -8,19 +8,19 @@ import com.lol.Protocol;
 import com.lol.SelectProtocol;
 import com.lol.buffer.GameUpBuffer;
 import com.lol.channel.GameRoomChannelManager;
+import com.lol.core.Connection;
 import com.lol.core.GameBoss;
 import com.lol.handler.GameProcessor;
-import com.lol.service.IPlayerService;
 import com.lol.tool.EventUtil;
 import com.lol.util.Utils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Stack;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.LongAdder;
 
 /**
  * Description :
@@ -30,14 +30,12 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 public class SelectProcesor extends BaseProsesor implements GameProcessor {
 
-    @Autowired
-    @Qualifier("playerServiceImpl")
-    private IPlayerService playerService;
+    private Logger logger = LoggerFactory.getLogger(SelectProcesor.class);
     /**
      * 多线程处理类中  防止数据竞争导致脏数据  使用线程同步Map
-     * 玩家所在匹配房间映射
+     * 玩家角色所在匹配房间映射
      */
-    private ConcurrentHashMap<Integer, Integer> userRoom = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Integer, Integer> playerRoom = new ConcurrentHashMap<>();
     /**
      * 房间id与模型映射
      */
@@ -49,9 +47,8 @@ public class SelectProcesor extends BaseProsesor implements GameProcessor {
     /**
      * 房间ID自增器
      */
-    private AtomicInteger index = new AtomicInteger(0);
+    private LongAdder index = new LongAdder();
 
-    //TODO : 调用
     public SelectProcesor() {
 
         EventUtil.createSelect = this::create;
@@ -60,32 +57,38 @@ public class SelectProcesor extends BaseProsesor implements GameProcessor {
 
     @Override
     public void process(GameUpBuffer buffer) throws Exception {
+        Connection connection = buffer.getConnection();
+        if(connection == null){
+            logger.info("客户端未登陆或已下线。忽略此次请求");
+            return;
+        }
 
         if (SelectProtocol.DESTORY_BRO == buffer.getCmd()) {
             colse(buffer);
         } else {
-            int userId = playerService.getPlayerId(buffer.getConnection());
-            if (userRoom.containsKey(userId)) {
-                int roomId = userRoom.get(userId);
-                if (roomMap.containsKey(roomId)) {
-                    GameUpBuffer data = Utils.packgeUpData(buffer.getConnection(), Protocol.TYPE_SELECT_ROOM,
+            int playerI = playerService.getPlayerId(connection);
+            if (playerRoom.containsKey(playerI)) {
+                int roomName = playerRoom.get(playerI);
+                if (roomMap.containsKey(roomName)) {
+                    GameUpBuffer data = Utils.packgeUpData(connection, Protocol.TYPE_SELECT_ROOM,
                             buffer.getArea(), buffer.getCmd(), buffer.getBuffer());
                     GameBoss.getInstance().getProcessor().process(data);
                 }
             }
         }
+
     }
 
     private void colse(GameUpBuffer buffer) {
-        int userId = playerService.getPlayerId(buffer.getConnection());
+        Connection connection = buffer.getConnection();
+        int playerId = playerService.getPlayerId(connection);
         //判断当前玩家是否有房间
-        if (userRoom.containsKey(userId)) {
-            int roomId = 0;
+        if (playerRoom.containsKey(playerId)) {
             //移除并获取玩家所在房间
-            userRoom.remove(userId);
-            if (roomMap.containsKey(roomId)) {
+            int roomName = playerRoom.remove(playerId);
+            if (roomMap.containsKey(roomName)) {
                 //通知
-                GameUpBuffer data = Utils.packgeUpData(buffer.getConnection(), Protocol.TYPE_SELECT_ROOM, buffer.getArea(),
+                GameUpBuffer data = Utils.packgeUpData(connection, Protocol.TYPE_SELECT_ROOM, buffer.getArea(),
                         buffer.getCmd(), buffer.getBuffer());
                 GameBoss.getInstance().getProcessor().process(data);
             }
@@ -97,24 +100,30 @@ public class SelectProcesor extends BaseProsesor implements GameProcessor {
         //移除堆栈顶部的对象，并作为此函数的值返回该对象。
         SelectRoomProcesor room = cache.pop();
         if (room == null) {
+            logger.warn("选人房间为空，初始化新房间。");
             room = new SelectRoomProcesor();
             //添加唯一ID
-            buffer = Utils.packgeUpData(buffer.getConnection(), buffer.getMsgType(), index.getAndIncrement(),
+            index.increment();
+            room.setRoomIndex(index.intValue());
+            buffer = Utils.packgeUpData(buffer.getConnection(), buffer.getMsgType(), index.intValue(),
                     SelectProtocol.SELECT_INIT, buffer.getBody());
         }
         GameBoss.getInstance().getProcessor().process(buffer);
         //房间数据初始化
-        EventUtil.initSelectRoom.init(teamOne, teamTwo, buffer);
-//        room.init(teamOne, teamTwo,buffer);
+        logger.info("开始初始化选人房间。。。");
+        EventUtil.initSelectRoom.init(teamOne, teamTwo);
+        logger.info("选人房间初始化完毕，等待玩家角色确认进入房间");
         //绑定映射关系
         for (int item : teamOne) {
-            userRoom.put(item, buffer.getArea());
+            playerRoom.put(item, room.getRoomIndex());
         }
 
         for (int item : teamTwo) {
-            userRoom.put(item, buffer.getArea());
+            playerRoom.put(item, room.getRoomIndex());
         }
-        roomMap.put(buffer.getArea(), room);
+
+        setInSelect(true);
+        roomMap.put(room.getRoomIndex(), room);
     }
 
     public final void destory(int roomId) {
@@ -122,8 +131,8 @@ public class SelectProcesor extends BaseProsesor implements GameProcessor {
         SelectRoomProcesor room = roomMap.remove(roomId);
         if (room != null) {
             //移除角色和房间之间的绑定关系
-            room.teamOne.keySet().forEach(userRoom::remove);
-            room.teamTwo.keySet().forEach(userRoom::remove);
+            room.teamOne.keySet().forEach(playerRoom::remove);
+            room.teamTwo.keySet().forEach(playerRoom::remove);
 
             GameRoomChannelManager.getInstance().getRoomChannel(roomId).clearRoomConnection();
 

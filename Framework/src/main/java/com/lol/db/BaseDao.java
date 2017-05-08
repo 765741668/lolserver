@@ -37,6 +37,8 @@ public class BaseDao<T> extends HibernateDaoSupport implements
 
     Logger logger = LoggerFactory.getLogger(BaseDao.class);
 
+
+
     /**
      * 数据插入
      *
@@ -404,8 +406,7 @@ public class BaseDao<T> extends HibernateDaoSupport implements
                 return 0;
             return ((Long) list.get(0)).intValue();
         } catch (Exception e) {
-            logger.error(
-                    "查询分页总记录数[" + e.getMessage() + "]", e);
+            logger.error("查询分页总记录数[{}]",e.getMessage(),e);
             return 0;
         }
     }

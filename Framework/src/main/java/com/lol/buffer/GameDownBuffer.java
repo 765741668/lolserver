@@ -3,7 +3,7 @@ package com.lol.buffer;
 import com.lol.protobuf.MessageDownProto;
 
 /**
- * 上行消息类
+ * 下行消息类
  *
  * @author Randy
  *         2015-2-3

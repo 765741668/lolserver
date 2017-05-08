@@ -42,9 +42,6 @@ public class GameProcessorManager {
      * @return
      */
     public GameProcessor getProcessor(int msgType) {
-        for (Map.Entry<Integer, GameProcessor> map : processorMap.entrySet()) {
-            System.out.println(map.getKey());
-        }
         return processorMap.get(msgType);
     }
 

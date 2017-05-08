@@ -2,15 +2,13 @@
 <project version="4">
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/Framework" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/Framework/src/main/java/com/lol/demo/common/NettyMessage.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/Framework/src/main/java/com/lol/util/SerializeProtobufUtil.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LOLClient" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/LOLClient/src/main/java/com/lol/demo/util/SerializeProtobufUtil.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/LOLServer" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/LOLServer/src/main/java/com/lol/logic/fight/FightHandler.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/LOLServer/src/main/java/com/lol/logic/fight/FightRoomHandler.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/LOLServer/src/main/java/com/lol/logic/login/LoginHandler.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/LOLServer/src/main/java/com/lol/logic/match/MatchRoom.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/LOLServer/src/main/java/com/lol/logic/select/SelectHandler.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/LOLServer/src/main/java/com/lol/logic/select/SelectRoomHandler.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/LOLServer/src/main/java/com/lol/service/IAcountService.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/LOLServer/src/main/java/com/lol/service/IPlayerService.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/LOLServer/src/main/java/com/lol/service/impl/AcountServiceImpl.java" charset="UTF-8" />

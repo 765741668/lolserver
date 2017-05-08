@@ -2,18 +2,29 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns="http://www.springframework.org/schema/beans"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
             http://www.springframework.org/schema/beans/spring-beans.xsd
-
-
-
-
+            http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop.xsd
+            http://www.springframework.org/schema/mvc
+            http://www.springframework.org/schema/mvc/spring-mvc.xsd
             http://www.springframework.org/schema/context
-            http://www.springframework.org/schema/context/spring-context.xsd">
+            http://www.springframework.org/schema/context/spring-context.xsd"
+       default-autowire="byName">
+    <!-- default-autowire="byName" >>>> 没有的话注解时找不到实例化的sessionFactory，
+    而注入了一个空的,在hibernate检查的时候就报“ 'sessionFactory' or 'hibernateTemplate' is required” -->
 
     <import resource="spring-context.xml"/>
 
-    <context:component-scan base-package="com.lol.dao,com.lol.service,com.lol.procesors"/>
+
+    <!-- 包含了 <context:annotation-config /> 处理器-->
+    <context:component-scan base-package=",com.lol.connect,com.lol.dao,com.lol.service,com.lol.procesors"/>
+    <!--启用注解的模式，默认是不启用的，<context:annotation-config /> 如果是springmvc，<mvc:annotation-driven />-->
+    <!--<context:annotation-config />-->
+    <!--<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>-->
 
     <bean id="server" class="com.lol.server.Server"/>
 

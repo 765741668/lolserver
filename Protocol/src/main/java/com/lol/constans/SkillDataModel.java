@@ -5,12 +5,12 @@ import com.lol.dto.fight.SkillTarget;
 import com.lol.dto.fight.SkillType;
 
 public class SkillDataModel {
-    public int code;
-    public SkillLevelData[] levels; //技能升级等级
-    public String name;
-    public String info;
-    public SkillTarget target; //技能目标类型
-    public SkillType type;
+    private int code;
+    private SkillLevelData[] levels; //技能升级等级
+    private String name; // 技能名称
+    private String info; //技能说明信息
+    private SkillTarget target; //技能目标类型
+    private SkillType type; //技能释放方式
 
     public SkillDataModel() {
     }

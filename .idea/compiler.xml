@@ -22,12 +22,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="LOLClient" />
         <module name="LOLServer" />
         <module name="Protocol" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
       <module name="Framework" target="1.8" />
+      <module name="LOLClient" target="1.8" />
       <module name="LOLServer" target="1.8" />
       <module name="Protocol" target="1.8" />
     </bytecodeTargetLevel>

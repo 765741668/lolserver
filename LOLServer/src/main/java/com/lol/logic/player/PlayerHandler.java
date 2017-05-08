@@ -26,27 +26,29 @@ public class PlayerHandler extends SimpleChannelInboundHandler<MessageUpProto.Me
 
     private static Logger logger = LoggerFactory.getLogger(PlayerHandler.class);
 
+    private MessageUpProto.MessageUp tempMessage = null;
+
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, MessageUpProto.MessageUp message) throws Exception {
         if (message.getHeader().getMsgType() == Protocol.TYPE_PLYAER) {
+            logger.info("收到玩家模块消息: {}",ctx.channel().remoteAddress());
             MessageUpProto.PlayerUpBody player = message.getBody().getPlayer();
             if (player != null) {
                 GameBoss.getInstance().getProcessor().process(new GameUpBuffer(message, ctx.attr(Constans.conn).get()));
             }
+        }else {
+            ctx.fireChannelRead(message);
         }
     }
 
     @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-
-    }
-
-    @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        super.channelInactive(ctx);
-
-        GameUpBuffer msg = Utils.packgeUpData(ctx.attr(Constans.conn).get(), Protocol.TYPE_PLYAER, -1, PlayerProtocol.OFFLINE_CREQ, null);
+        logger.info("有客户端断开连接了 : {}, 玩家准备下线。", ctx.channel().remoteAddress());
+        GameUpBuffer msg = Utils.packgeUpData(ctx.attr(Constans.conn).get(), Protocol.TYPE_PLYAER, -1, PlayerProtocol.OFFLINE_CREQ, tempMessage);
         GameBoss.getInstance().getProcessor().process(msg);
+
+        super.channelInactive(ctx);
+        ctx.close();
     }
 
     @Override
@@ -56,7 +58,8 @@ public class PlayerHandler extends SimpleChannelInboundHandler<MessageUpProto.Me
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        cause.printStackTrace();
+//        logger.error("服务器异常!",cause);
+        ctx.fireExceptionCaught(cause);
         ctx.close();
     }
 }

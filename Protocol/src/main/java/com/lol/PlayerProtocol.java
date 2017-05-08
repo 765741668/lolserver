@@ -28,5 +28,5 @@ public class PlayerProtocol {
     /**
      * 用户下线
      */
-    public static final int OFFLINE_CREQ = 5;
+    public static final int OFFLINE_CREQ = 6;
 }

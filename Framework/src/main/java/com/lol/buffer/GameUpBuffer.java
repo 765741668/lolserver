@@ -75,15 +75,17 @@ public class GameUpBuffer {
         if (acountInfo == null) {
             return null;
         }
-        if (!StringUtils.isEmpty(connection.getAcount()) && !StringUtils.isEmpty(acountInfo.getPassword())) {
+        if (!StringUtils.isEmpty(connection.getAcount())) {
             acount.setacount(connection.getAcount());
+        }
+        if (!StringUtils.isEmpty(acountInfo.getPassword())) {
             acount.setPassword(acountInfo.getPassword());
         }
         return acount;
     }
 
     /**
-     * 获取玩家数据
+     * 获取玩家角色数据
      *
      * @return PlayerDTO
      */

@@ -16,7 +16,8 @@ import com.lol.protobuf.MessageDownProto;
 import com.lol.protobuf.MessageUpProto;
 import com.lol.tool.EventUtil;
 import com.lol.util.Utils;
-import org.springframework.stereotype.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
@@ -25,8 +26,9 @@ import java.util.*;
  * Created by YangZH on 2017/4/6
  * 20:11
  */
-@Component
 public class FightRoomProcesor extends BaseProsesor implements GameProcessor {
+
+    private Logger logger = LoggerFactory.getLogger(SelectProcesor.class);
 
     public Map<Integer, AbsFightModel> teamOne = new HashMap<>();
     public Map<Integer, AbsFightModel> teamTwo = new HashMap<>();
@@ -42,6 +44,7 @@ public class FightRoomProcesor extends BaseProsesor implements GameProcessor {
 
         switch (buffer.getCmd()) {
             case FightProtocol.ENTER_CREQ:
+                logger.info("加载完成，进入游戏（需要数据）。。。。");
                 enterBattle(buffer);
                 break;
             case FightProtocol.MOVE_CREQ:
@@ -63,53 +66,63 @@ public class FightRoomProcesor extends BaseProsesor implements GameProcessor {
                 EventUtil.initFightRoom = this::init;
                 break;
             case FightProtocol.DESTORY_FIGHT:
+                logger.info("开始从战斗房间[{}]移除玩家角色[{}]", getRoomIndex(),buffer.getConnection().getAcount());
                 leave(buffer);
-                int userId = getPlayerIdByConnection(buffer.getConnection());
-                if (teamOne.containsKey(userId) || teamTwo.containsKey(userId)) {
-                    if (!off.contains(userId)) {
-                        off.add(userId);
+                logger.info("移除完毕。");
+                int playerId = getPlayerIdByConnection(buffer.getConnection());
+                if (teamOne.containsKey(playerId) || teamTwo.containsKey(playerId)) {
+                    if (!off.contains(playerId)) {
+                        off.add(playerId);
                     }
                 }
+
+                //TODO: 玩家下线 自动回基地 回血
                 if (off.size() == heroCount) {
-                    EventUtil.destoryFight = (x) -> buffer.getArea();
+                    logger.info("所有玩家角色已断开链接，开始解散战斗房间[{}]。。。",getRoomIndex());
+                    EventUtil.destoryFight.accept(getRoomIndex());
+                    logger.info("战斗房间[{}]解散完毕。",getRoomIndex());
                 }
+
+                EventUtil.disconnect.accept(buffer.getConnection());
                 break;
 
         }
     }
 
-    public final void init(SelectModel[] teamOne, SelectModel[] teamTwo, GameUpBuffer buffer) {
-        super.setArea(buffer.getArea());
+    public final void init(SelectModel[] teamOne, SelectModel[] teamTwo) {
         heroCount = teamTwo.length + teamOne.length;
 
         this.teamOne.clear();
         this.teamTwo.clear();
         off.clear();
-        //初始化英雄数据
+        logger.info("开始初始化英雄数据。。。");
         for (SelectModel item : teamOne) {
             this.teamOne.put(item.getPlayerId(), create(item, 1));
         }
         for (SelectModel item : teamTwo) {
             this.teamTwo.put(item.getPlayerId(), create(item, 2));
         }
-        /**实例化队伍一的建筑
-         预留 ID段 -1到-10为队伍1建筑
-         */
-        for (int i = -1; i >= -3; i--) {
+        logger.info("初始化英雄数据完毕");
+
+        logger.info("开始实例化队伍1建筑，预留 ID段 -1到-10为队伍1建筑。");
+        for (int i = -1; i >= -4; i--) {
             this.teamOne.put(i, createBuild(i, Math.abs(i), 1));
         }
-        /**实例化队伍二的建筑
-         预留 ID段 -11到-20为队伍2建筑
-         */
-        for (int i = -11; i >= -13; i--) {
+        logger.info("队伍1建筑实例化完毕");
+
+        logger.info("开始实例化队伍2建筑，预留 ID段 -11到-20为队伍2建筑。");
+        for (int i = -11; i >= -14; i--) {
             this.teamTwo.put(i, createBuild(i, Math.abs(i) - 10, 2));
         }
+        logger.info("队伍2建筑实例化完毕");
         enterList.clear();
     }
 
     private FightBuildModel createBuild(int id, int code, int team) {
         BuildDataModel data = BuildData.buildMap.get(code);
-        FightBuildModel model = new FightBuildModel(id, code, data.hp, data.hp, data.atk, data.def, data.reborn, data.rebornTime, data.initiative, data.infrared, data.name);
+        FightBuildModel model = new FightBuildModel(id, code, data.getHp(), data.getHp(), data.getAtk(),
+                data.getDef(), data.isReborn(),data.getRebornTime(), data.isInitiative(), data.isInfrared(),
+                data.getName());
         model.setType(ModelType.BUILD);
         model.setTeam(team);
         return model;
@@ -128,16 +141,16 @@ public class FightRoomProcesor extends BaseProsesor implements GameProcessor {
         player.setTeam(team);
         //从配置表里 去出对应的英雄数据
         HeroDataModel data = HeroData.heroMap.get(model.getHero());
-        player.setHp(data.hpBase);
+        player.setHp(data.getHpBase());
         //TODO : check hp or mp
-        player.setMaxMp(data.mpBase);
-        player.setAtk(data.atkBase);
-        player.setDef(data.defBase);
-        player.setaSpeed(data.aSpeed);
-        player.setSpeed(data.speed);
-        player.setaRange(data.range);
-        player.setEyeRange(data.eyeRange);
-        player.setSkills(initSkill(data.skills));
+        player.setMaxHp(data.getHpBase());
+        player.setAtk(data.getAtkBase());
+        player.setDef(data.getDefBase());
+        player.setaSpeed(data.getaSpeed());
+        player.setSpeed(data.getSpeed());
+        player.setaRange(data.getRange());
+        player.setEyeRange(data.getEyeRange());
+        player.setSkills(initSkill(data.getSkills()));
         player.setEqus(new int[3]);
         return player;
     }
@@ -148,8 +161,9 @@ public class FightRoomProcesor extends BaseProsesor implements GameProcessor {
         for (int i = 0; i < value.length; i++) {
             int skillCode = value[i];
             SkillDataModel data = SkillData.skillMap.get(skillCode);
-            SkillLevelData levelData = data.levels[0];
-            FightSkill skill = new FightSkill(skillCode, 0, levelData.level, levelData.time, data.name, levelData.range, data.info, data.target, data.type);
+            SkillLevelData levelData = data.getLevels()[0];
+            FightSkill skill = new FightSkill(skillCode, 0, levelData.getLevel(), levelData.getTime(),
+                    data.getName(), levelData.getRange(), data.getInfo(), data.getTarget(), data.getType());
             skills[i] = skill;
         }
         return skills;
@@ -157,13 +171,25 @@ public class FightRoomProcesor extends BaseProsesor implements GameProcessor {
 
     private void skill(GameUpBuffer buffer) throws Exception {
         MessageDownProto.FightDownBody.Builder fight = MessageDownProto.FightDownBody.newBuilder();
-        MessageDownProto.SkillAtkModel.Builder skillAtkModel = MessageDownProto.SkillAtkModel.newBuilder();
+        MessageDownProto.SkillAtkModel.Builder skillAtkModelDown = MessageDownProto.SkillAtkModel.newBuilder();
 
-        skillAtkModel.setPlayerId(getPlayerIdByConnection(buffer.getConnection()));
-        fight.setSkillAtk(skillAtkModel);
+        MessageUpProto.SkillAtkModel skillAtkModelUp = buffer.getBuffer().getBody().getFight().getSkillAtk();
+        skillAtkModelDown.setSkill(skillAtkModelUp.getSkill());
+        skillAtkModelDown.setTarget(skillAtkModelUp.getTarget());
+        skillAtkModelDown.setType(skillAtkModelUp.getType());
 
-        GameDownBuffer data = Utils.packgeDownData(buffer.getMsgType(), buffer.getArea(), FightProtocol.ATTACK_BRO, fight);
-        GameRoomChannelManager.getInstance().getRoomChannel(getRoomName(buffer)).broadcastRoom(data);
+        List<Float> positions = skillAtkModelUp.getPositionList();
+        for (int i = 0;  i < positions.size(); i++){
+            skillAtkModelDown.setPosition(i,positions.get(i));
+        }
+
+        //更新玩家角色ID
+        //TODO: 是否每次释放技能都更新
+        skillAtkModelDown.setPlayerId(getPlayerIdByConnection(buffer.getConnection()));
+        fight.setSkillAtk(skillAtkModelDown.build());
+
+        GameDownBuffer data = Utils.packgeDownData(buffer.getMsgType(), buffer.getArea(), FightProtocol.ATTACK_BRO, fight.build());
+        GameRoomChannelManager.getInstance().getRoomChannel(getRoomIndex()).broadcastRoom(data);
     }
 
     private void skillUp(GameUpBuffer buffer) {
@@ -180,26 +206,18 @@ public class FightRoomProcesor extends BaseProsesor implements GameProcessor {
             //遍历角色技能列表 判断是否有此技能
             for (FightSkill item : player.getSkills()) {
                 if (item.getCode() == skillUp) {
-                    //判断玩家等级 是否达到技能提升等级
-                    if (item.getNextLevel() != -1 && item.getNextLevel() <= player.getLevel()) {
+                    //判断玩家角色等级 是否达到技能提升等级
+                    //TODO: 并且潜能点大于0
+                    if (item.getNextLevel() != -1 && item.getNextLevel() <= player.getLevel() && player.getFree() > 0) {
                         player.setFree(player.getFree() - 1);
                         int level = item.getLevel() + 1;
-                        SkillLevelData data = SkillData.skillMap.get(skillUp).levels[level];
-                        item.setNextLevel(data.level);
-                        item.setRange(data.range);
-                        item.setTime(data.time);
+                        SkillLevelData data = SkillData.skillMap.get(skillUp).getLevels()[level];
+                        item.setNextLevel(data.getLevel());
+                        item.setRange(data.getRange());
+                        item.setTime(data.getTime());
                         item.setLevel(level);
 
-//                        private int code; //策划编码
-//                        private int level; //等级
-//                        private int nextLevel; //学习需要角色等级
-//                        private int time; //冷却时间--ms
-//                        private String name; //技能名称
-//                        private float range; //释放距离
-//                        private String info; //技能描述
-//                        private SkillTarget target; //技能伤害目标类型
-//                        private SkillType type; //技能释放类型
-
+                        MessageDownProto.FightDownBody.Builder fight = MessageDownProto.FightDownBody.newBuilder();
                         MessageDownProto.FightSkill.Builder fightSkill = MessageDownProto.FightSkill.newBuilder();
                         MessageDownProto.FightSkill.SkillTarget skillTarget = MessageDownProto.FightSkill.SkillTarget
                                 .valueOf(item.getTarget().getCode());
@@ -208,16 +226,18 @@ public class FightRoomProcesor extends BaseProsesor implements GameProcessor {
 
                         fightSkill.setCode(item.getCode());
                         fightSkill.setLevel(level);
-                        fightSkill.setNextLevel(data.level);
-                        fightSkill.setTime(data.time);
+                        fightSkill.setNextLevel(data.getLevel());
+                        fightSkill.setTime(data.getTime());
                         fightSkill.setName(item.getName());
-                        fightSkill.setRange(data.range);
+                        fightSkill.setRange(data.getRange());
                         fightSkill.setInfo(item.getInfo());
                         fightSkill.setTarget(skillTarget);
                         fightSkill.setType(skillType);
 
+                        fight.setFightSkill(fightSkill);
+
                         GameDownBuffer downData = Utils.packgeDownData(buffer.getMsgType(), buffer.getArea(),
-                                FightProtocol.SKILL_UP_SRES, fightSkill);
+                                FightProtocol.SKILL_UP_SRES, fight.build());
                         buffer.getConnection().writeDown(downData);
                     }
                     return;
@@ -239,17 +259,19 @@ public class FightRoomProcesor extends BaseProsesor implements GameProcessor {
             if (damage.getPlayerId() != playerId) {
                 return;
             }
+            logger.debug("攻击者类型为玩家角色，ID：{}",playerId);
             atkModel = getPlayer(playerId);
             if (damage.getSkill() > 0) {
                 skillLevel = ((atkModel instanceof FightPlayerModel) ? atkModel : null) != null ?
-                        ((FightPlayerModel) ((atkModel instanceof FightPlayerModel) ? atkModel : null))
-                                .skillLevel(damage.getSkill()) : 0;
+                        ((FightPlayerModel)atkModel).skillLevel(damage.getSkill()) : 0;
                 if (skillLevel == -1) {
                     return;
                 }
             }
+            logger.info("技能等级：{}",skillLevel);
         } else {
             //TODO:
+            logger.debug("攻击者类型为小兵或中立怪");
             atkModel = getPlayer(playerId);
         }
         //获取技能算法
@@ -283,14 +305,14 @@ public class FightRoomProcesor extends BaseProsesor implements GameProcessor {
             }
         }
 
-        damages.stream().forEach(d -> {
+        damages.parallelStream().forEach(d -> {
             damageInfo.addTarget(MessageDownProto.Target.newBuilder().addAllTarget(Arrays.asList(d)));
         });
 
         fight.setDamageInfo(damageInfo);
 
-        GameDownBuffer data = Utils.packgeDownData(buffer.getMsgType(), buffer.getArea(), FightProtocol.DAMAGE_BRO, fight);
-        GameRoomChannelManager.getInstance().getRoomChannel(getRoomName(buffer)).broadcastRoom(data);
+        GameDownBuffer data = Utils.packgeDownData(buffer.getMsgType(), buffer.getArea(), FightProtocol.DAMAGE_BRO, fight.build());
+        GameRoomChannelManager.getInstance().getRoomChannel(getRoomIndex()).broadcastRoom(data);
 
     }
 
@@ -310,8 +332,9 @@ public class FightRoomProcesor extends BaseProsesor implements GameProcessor {
         attackInfo.setTargetId(targetId);
         fight.setAttackInfo(attackInfo);
 
-        GameDownBuffer data = Utils.packgeDownData(buffer.getMsgType(), buffer.getArea(), FightProtocol.ATTACK_BRO, fight);
-        GameRoomChannelManager.getInstance().getRoomChannel(getRoomName(buffer)).broadcastRoom(data);
+        logger.debug("广播全员，玩家角色[{}]攻击目标[{}]", buffer.getConnection().getAcount(),targetId);
+        GameDownBuffer data = Utils.packgeDownData(buffer.getMsgType(), buffer.getArea(), FightProtocol.ATTACK_BRO, fight.build());
+        GameRoomChannelManager.getInstance().getRoomChannel(getRoomIndex()).broadcastRoom(data);
 
     }
 
@@ -327,22 +350,29 @@ public class FightRoomProcesor extends BaseProsesor implements GameProcessor {
 
         fight.setMoveInfo(moveInfo);
 
-        GameDownBuffer data = Utils.packgeDownData(buffer.getMsgType(), buffer.getArea(), FightProtocol.MOVE_BRO, fight);
-        GameRoomChannelManager.getInstance().getRoomChannel(getRoomName(buffer)).broadcastRoom(data);
+        logger.debug("广播全员，玩家角色[{}]开始移动(x,y,z): {},{},{}",
+                buffer.getConnection().getAcount(), move.getX(), move.getY(), move.getZ());
+        GameDownBuffer data = Utils.packgeDownData(buffer.getMsgType(), buffer.getArea(), FightProtocol.MOVE_BRO, fight.build());
+        GameRoomChannelManager.getInstance().getRoomChannel(getRoomIndex()).broadcastRoom(data);
     }
 
     private void enterBattle(GameUpBuffer buffer) throws Exception {
-
-        int userId = getPlayerIdByConnection(buffer.getConnection());
-        if (isEntered(buffer)) {
+        int playerId = getPlayerIdByConnection(buffer.getConnection());
+        boolean isEntered = isEntered(buffer);
+        if (isEntered) {
+            logger.info("玩家角色已经进入战斗房间,忽略此次请求");
             return;
         }
+
         super.preEnter(buffer);
-        if (!enterList.contains(userId)) {
-            enterList.add(userId);
+        logger.info("战斗房间[{}]新增玩家角色[{}]",getRoomIndex(),buffer.getConnection().getAcount());
+
+        if (!enterList.contains(playerId)) {
+            enterList.add(playerId);
         }
-        //所有人准备了 发送房间信息
+
         if (enterList.size() == heroCount) {
+            logger.info("所有人准备了 广播战斗房间[{}]信息",getRoomIndex());
             FightRoomModel room = new FightRoomModel();
             room.setTeamOne((AbsFightModel[]) teamOne.values().toArray());
             room.setTeamTwo((AbsFightModel[]) teamTwo.values().toArray());
@@ -350,7 +380,7 @@ public class FightRoomProcesor extends BaseProsesor implements GameProcessor {
             MessageDownProto.FightDownBody.Builder fight = MessageDownProto.FightDownBody.newBuilder();
             MessageDownProto.FightRoomModel.Builder fightRoomModel = MessageDownProto.FightRoomModel.newBuilder();
 
-            teamOne.values().stream().forEach(model -> {
+            teamOne.values().parallelStream().forEach(model -> {
                 MessageDownProto.FightModel.Builder fightModel = MessageDownProto.FightModel.newBuilder();
                 MessageDownProto.FightModel.ModelType modelType = MessageDownProto.FightModel.ModelType
                         .valueOf(model.getType().getCode());
@@ -372,7 +402,7 @@ public class FightRoomProcesor extends BaseProsesor implements GameProcessor {
                 fightRoomModel.addTeamOne(fightModel);
             });
 
-            teamTwo.values().stream().forEach(model -> {
+            teamTwo.values().parallelStream().forEach(model -> {
                 MessageDownProto.FightModel.Builder fightModel = MessageDownProto.FightModel.newBuilder();
                 MessageDownProto.FightModel.ModelType modelType = MessageDownProto.FightModel.ModelType
                         .valueOf(model.getType().getCode());
@@ -395,8 +425,8 @@ public class FightRoomProcesor extends BaseProsesor implements GameProcessor {
 
             fight.setFightRoom(fightRoomModel);
 
-            GameDownBuffer data = Utils.packgeDownData(buffer.getMsgType(), buffer.getArea(), FightProtocol.START_BRO, fight);
-            GameRoomChannelManager.getInstance().getRoomChannel(getRoomName(buffer)).broadcastRoom(data);
+            GameDownBuffer data = Utils.packgeDownData(buffer.getMsgType(), buffer.getArea(), FightProtocol.START_BRO, fight.build());
+            GameRoomChannelManager.getInstance().getRoomChannel(getRoomIndex()).broadcastRoom(data);
         }
 
     }

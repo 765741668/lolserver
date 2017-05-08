@@ -3,7 +3,7 @@ package com.lol.channel;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 游戏房间频道管理类
+ * 游戏房间频道管理器类
  *
  * @author Randy
  *         2015-2-5

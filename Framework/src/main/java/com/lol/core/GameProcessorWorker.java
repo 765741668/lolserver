@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
  */
 public class GameProcessorWorker {
 
-    private static Logger logger = LoggerFactory.getLogger(GameProcessorWorker.class);
+    private  static  Logger logger = LoggerFactory.getLogger(GameProcessorWorker.class);
 
     private static class GameProcessorWorkerHolder{
         private static GameProcessorWorker instance = new GameProcessorWorker();
@@ -31,22 +31,24 @@ public class GameProcessorWorker {
      * @param data
      */
     public void work(GameUpBuffer data) {
+        logger.info("开始处理消息...");
         int msgType = data.getMsgType();
         int cmd = data.getCmd();
         try {
-            logger.info("work for msgType-cmd : {}-{} ", msgType,cmd);
-//                    GameProcessor handler = GameProcessorManager.getInstance().getProcessor(cmd + "-" + name);
+            logger.info("处理模块(msgType-cmd) : {}-{} ", msgType,cmd);
             GameProcessor processor = GameProcessorManager.getInstance().getProcessor(msgType);
             if (processor != null) {
                 //记录执行时间过长的指令
                 long startTime = System.currentTimeMillis();
                 processor.process(data);
                 long endTime = System.currentTimeMillis();
-                if ((startTime - endTime) > 500) {
-                    logger.error("process too long time, msgType-cmd : {}-{} ", msgType,cmd);
+                if ((endTime - startTime) > 500) {
+                    logger.error("处理时间过长,大于500毫秒({}), msgType-cmd : {}-{} ", (endTime - startTime),msgType,cmd);
+                }else{
+                    logger.info("消息(msgType-cmd)处理时间: {} ({}-{}) ", (endTime - startTime),msgType,cmd);
                 }
             } else {
-                logger.error("error msgType-cmd : {}-{} ", msgType,cmd);
+                logger.warn("未知模块消息，不处理。 msgType-cmd : {}-{} ", msgType,cmd);
             }
         } catch (Exception e) {
             logger.error(StackTraceUtil.getStackTrace(e));

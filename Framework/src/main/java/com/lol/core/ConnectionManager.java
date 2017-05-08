@@ -14,14 +14,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ConnectionManager {
 
     /**
-     * id生成器
-     */
-//    private AtomicLong idMaker = new AtomicLong(0);
-
-    /**
      * 连接存储集合
      */
-//    private Map<Long, Connection> connections = new ConcurrentHashMap<>();
     private Map<String, Connection> connections = new ConcurrentHashMap<>();
 
     public static ConnectionManager getInstance() {

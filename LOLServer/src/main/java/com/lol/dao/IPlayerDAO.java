@@ -19,7 +19,7 @@ import java.util.Map;
 public interface IPlayerDAO {
 
     /**
-     * 根据条件集合得到一个玩家实体对象
+     * 根据条件集合得到一个玩家角色实体对象
      *
      * @param condiction
      * @return
@@ -27,7 +27,7 @@ public interface IPlayerDAO {
     Player getPlayerByCondiction(Map condiction) throws DAOException;
 
     /**
-     * 根据条件集合得到 玩家对象列表
+     * 根据条件集合得到 玩家角色对象列表
      *
      * @param condiction
      * @return
@@ -35,14 +35,14 @@ public interface IPlayerDAO {
     List<Player> queryPlayersByCondiction(Map condiction) throws DAOException;
 
     /**
-     * 保存玩家对象
+     * 保存玩家角色对象
      *
      * @param player
      */
     void savePlayer(Player player) throws DAOException;
 
     /**
-     * 更新玩家对象
+     * 更新玩家角色对象
      *
      * @param player
      * @return
@@ -50,7 +50,7 @@ public interface IPlayerDAO {
     void updatePlayer(Player player) throws DAOException;
 
     /**
-     * 根据ID删除玩家对象
+     * 根据ID删除玩家角色对象
      *
      * @param id
      * @return

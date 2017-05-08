@@ -26,14 +26,14 @@ public final class JdbcUtil {
         bds.setDriverClassName(config.getDriver());
         bds.setUsername(config.getUserName());
         bds.setPassword(config.getPassword());
-//        bds.setInitialSize(config.getInitialSize());
-//        bds.setMaxTotal(config.getMaxTotal());
-//        bds.setMaxConnLifetimeMillis(config.getMaxConnLifetimeMillis());
-//        bds.setMinIdle(config.getMinIdle());
-//        bds.setMaxIdle(config.getMaxIdle());
-//        bds.setMaxWaitMillis(config.getMaxWaitMillis());
-//        bds.setTestOnBorrow(true);
-//        bds.setValidationQuery("select 1");
+        bds.setInitialSize(config.getInitialSize());
+        bds.setMaxTotal(config.getMaxTotal());
+        bds.setMaxConnLifetimeMillis(config.getMaxConnLifetimeMillis());
+        bds.setMinIdle(config.getMinIdle());
+        bds.setMaxIdle(config.getMaxIdle());
+        bds.setMaxWaitMillis(config.getMaxWaitMillis());
+        bds.setTestOnBorrow(true);
+        bds.setValidationQuery("select 1");
         dataSource = bds;
     }
 

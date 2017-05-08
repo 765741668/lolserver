@@ -36,7 +36,7 @@ public class AcountDAOImpl extends BaseDao<Acount> implements IAcountDAO {
             }
 
             String id = (String) condiction.get("id");
-            if (!StringUtils.isEmpty(acount)) {
+            if (!StringUtils.isEmpty(id)) {
                 hql.append(" and id = ? ");
                 param[0] = id;
             }

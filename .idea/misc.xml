@@ -13,6 +13,7 @@
         <option value="$PROJECT_DIR$/Framework/pom.xml" />
         <option value="$PROJECT_DIR$/Protocol/pom.xml" />
         <option value="$PROJECT_DIR$/LOLServer/pom.xml" />
+        <option value="$PROJECT_DIR$/LOLClient/pom.xml" />
       </list>
     </option>
   </component>

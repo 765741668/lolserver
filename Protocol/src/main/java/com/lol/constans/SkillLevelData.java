@@ -2,10 +2,10 @@ package com.lol.constans;
 
 
 public class SkillLevelData {
-    public int level; //学习等级
-    public int time; //冷却时间
-    public int mp; //耗蓝
-    public float range; //攻击范围
+    private int level; //学习等级(升级的话为下一级需要学习的等级)
+    private int time; //冷却时间
+    private int mp; //耗蓝
+    private float range; //攻击范围
 
     public SkillLevelData() {
     }

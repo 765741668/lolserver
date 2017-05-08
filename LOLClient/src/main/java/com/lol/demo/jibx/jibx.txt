@@ -1,0 +1,20 @@
+1.
+donwload jar from url,no neet pom,just jar
+https://repository.apache.org/content/groups/snapshots/org/apache/bcel/bcel/6.0-SNAPSHOT/bcel-6.0-20150726.222224-123.jar
+https://repository.apache.org/content/repositories/snapshots/org/apache/bcel/bcel/6.0-SNAPSHOT/bcel-6.0-20150726.222224-123.jar
+2.
+cd to F:/JAR Pack/ ,-Dfile=F:/JAR Pack/ojdbc14.jar,remove directory will be success.
+mvn install:install-file -DgroupId=com.oracle -DartifactId=ojdbc14 -Dversion=10.2.0.4.0 -Dpackaging=jar -Dfile=ojdbc14.jar
+mvn install:install-file -Dfile=bcel-6.0-20150726.222224-123.jar -DgroupId=org.apache.bcel -DartifactId=bcel -Dversion=6.0-SNAPSHOT -Dpackaging=jar
+3.
+cd to target/classes
+
+tools:org.com.lol.jibx.binding.generator.BindGen or bind:org.com.lol.jibx.binding.BindingGenerator
+
+java -cp bin;D:\maven_repository\org\com.lol.jibx\com.lol.jibx-tools\1.2.6\com.lol.jibx-tools-1.2.6.jar;D:\maven_repository\org\com.lol.jibx\com.lol.jibx-bind\1.2.6\com.lol.jibx-bind-1.2.6.jar;D:\maven_repository\org\com.lol.jibx\com.lol.jibx-run\1.2.6\com.lol.jibx-run-1.2.6.jar;D:\maven_repository\org\com.lol.jibx\com.lol.jibx-extras\1.2.6\com.lol.jibx-extras-1.2.6.jar;D:\maven_repository\org\apache\bcel\bcel\6.0-SNAPSHOT\bcel-6.0-SNAPSHOT.jar;D:\maven_repository\org\com.lol.jibx\com.lol.jibx-schema\1.2.6\com.lol.jibx-schema-1.2.6.jar;D:\maven_repository\log4j\log4j\1.2.17\log4j-1.2.17.jar;D:\maven_repository\com\thoughtworks\qdox\qdox\1.12.1\qdox-1.12.1.jar;D:\maven_repository\xmlpull\xmlpull\1.1.3.1\xmlpull-1.1.3.1.jar org.com.lol.jibx.binding.generator.BindGen -b binding_test.xml hk.hkjc.yzh.schema.test.service.testxsdv1.CTshiporder
+
+*****
+maven compile binding plugin,common xsd(super class) neet to abstract.
+*****
+
+

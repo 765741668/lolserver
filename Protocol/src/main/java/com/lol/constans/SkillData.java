@@ -29,8 +29,8 @@ public class SkillData {
         create(4, "灵魂突袭", "消耗 100/100/100法力 \n冷却 110/95/80 \n射程 450 \n效果 阿狸像妖魅一般向前冲锋，" +
                         "并向周围的3名敌人（英雄优先）发射元气弹，造成70/110/150(+0.3)魔法伤害。" +
                         "灵魄突袭可以在进入冷却阶段前的10秒内被施放最多3次。", SkillType.POSITION, SkillTarget.E_H,
-                skillLevelData(1, 0, 0, 0), skillLevelData(3, 7, 65, 880), skillLevelData(5, 7, 70, 880),
-                skillLevelData(7, 7, 75, 880), skillLevelData(9, 7, 80, 880), skillLevelData(-1, 7, 85, 880)
+                skillLevelData(6, 110, 0, 880), skillLevelData(11, 95, 65, 880), skillLevelData(16, 80, 70, 880),
+                skillLevelData(-1, 80, 70, 880)
         );
     }
 

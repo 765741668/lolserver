@@ -124,16 +124,10 @@
     <logger name="org.apache" level="error"/>
     <!-- Oracle -->
     <logger name="oracle" level="error"/>
-    <!-- Sqlserver -->
-    <logger name="com.microsoft.sqlserver" level="error"/>
     <!-- Logback -->
     <logger name="ch.qos.logback" level="error"/>
-    <!-- jms kafka -->
-    <logger name="kafka" level="error"/>
-    <logger name="scala.reflect" level="error"/>
     <!-- my project -->
-    <logger name="com.yzh" level="${log.level}"/>
-    <logger name="hkjc.cap" level="${log.level}"/>
+    <logger name="com.lol" level="${log.level}"/>
 
     <root>
         <level value="error"/>

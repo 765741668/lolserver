@@ -10,17 +10,17 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class GameRoomChannelManager {
 
-    private final ConcurrentHashMap<Long, GameRoomChannel> roomChannelMap = new ConcurrentHashMap<>();
+    private final ConcurrentHashMap<Integer, GameRoomChannel> roomChannelMap = new ConcurrentHashMap<>();
 
     public static GameRoomChannelManager getInstance() {
         return GameChannelManagerHolder.instance;
     }
 
-    public GameRoomChannel getRoomChannel(long name) {
+    public GameRoomChannel getRoomChannel(Integer name) {
         return roomChannelMap.get(name);
     }
 
-    public GameRoomChannel addRoomChannel(long name) {
+    public GameRoomChannel addRoomChannel(Integer name) {
         GameRoomChannel channel = roomChannelMap.get(name);
         if (channel != null)
             return channel;

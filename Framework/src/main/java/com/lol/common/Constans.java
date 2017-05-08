@@ -18,4 +18,5 @@ public class Constans {
      * 连接属性
      */
     public static AttributeKey<Connection> conn = AttributeKey.valueOf("Connection.attr");
+
 }

@@ -5,7 +5,7 @@ package com.lol.constans;
  */
 public class HeroData {
 
-    public static final java.util.HashMap<Integer, HeroDataModel> heroMap = new java.util.HashMap<Integer, HeroDataModel>();
+    public static final java.util.HashMap<Integer, HeroDataModel> heroMap = new java.util.HashMap<>();
 
     /**
      静态构造 初次访问的时候自动调用
@@ -14,8 +14,8 @@ public class HeroData {
     static {
         create(1, "阿狸", 100, 20, 500, 300, 5, 2, 30, 10, 1, 0.5f, 200, 200, new int[]{1, 2, 3, 4});
         create(2, "阿木木", 100, 20, 500, 300, 5, 2, 30, 10, 1, 0.5f, 200, 200, new int[]{1, 2, 3, 4});
-        create(3, "埃希", 100, 20, 500, 300, 5, 2, 30, 10, 1, 0.5f, 200, 200, new int[]{6, 2, 3, 4});
-        create(4, "盲僧", 100, 20, 500, 300, 5, 2, 30, 10, 1, 0.5f, 200, 200, new int[]{3, 2, 3, 4});
+        create(3, "埃希", 100, 20, 500, 300, 5, 2, 30, 10, 1, 0.5f, 200, 200, new int[]{1, 2, 3, 4});
+        create(4, "盲僧", 100, 20, 500, 300, 5, 2, 30, 10, 1, 0.5f, 200, 200, new int[]{1, 2, 3, 4});
     }
 
     /**
@@ -39,21 +39,21 @@ public class HeroData {
      */
     private static void create(int code, String name, int atkBase, int defBase, int hpBase, int mpBase, int atkArr, int defArr, int hpArr, int mpArr, float speed, float aSpeed, float range, float eyeRange, int[] skills) {
         HeroDataModel model = new HeroDataModel();
-        model.code = code;
-        model.name = name;
-        model.atkBase = atkBase;
-        model.defBase = defBase;
-        model.hpBase = hpBase;
-        model.mpBase = mpBase;
-        model.atkArr = atkArr;
-        model.defArr = defArr;
-        model.hpArr = hpArr;
-        model.mpArr = mpArr;
-        model.speed = speed;
-        model.aSpeed = aSpeed;
-        model.range = range;
-        model.eyeRange = eyeRange;
-        model.skills = skills;
+        model.setCode(code);
+        model.setName(name);
+        model.setAtkBase(atkBase);
+        model.setDefBase(defBase);
+        model.setHpBase(hpBase);
+        model.setMpBase(mpBase);
+        model.setAtkArr(atkArr);
+        model.setDefArr(defArr);
+        model.setHpArr(hpArr);
+        model.setMpArr(mpArr);
+        model.setaSpeed(speed);
+        model.setaSpeed(aSpeed);
+        model.setRange(range);
+        model.setEyeRange(eyeRange);
+        model.setSkills(skills);
         heroMap.put(code, model);
     }
 }

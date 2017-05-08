@@ -2,7 +2,6 @@ package com.lol.server;
 
 import com.lol.core.GameBoss;
 import com.lol.core.GameProcessorWorker;
-import com.lol.util.ProReaderUtil;
 
 /**
  * 服务启动类
@@ -31,7 +30,6 @@ public class Server {
         //5秒检测一次线程状态，若线程终止则重启线程
 //        TimerTaskUtil.getInstance().scheduleAtFixedRate(() -> ServerInit.getInstance().WorkerRunStatusCheck(),
 //                5, TimeUnit.SECONDS);
-        int port = Integer.parseInt(ProReaderUtil.getInstance().getNettyPro().get("port"));
         GameBoss.getInstance().boot(GameProcessorWorker.getInstance()::work);
     }
 }

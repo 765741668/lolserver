@@ -7,18 +7,18 @@ package com.lol.procesors;/**
 import com.lol.FightProtocol;
 import com.lol.Protocol;
 import com.lol.buffer.GameUpBuffer;
+import com.lol.core.Connection;
 import com.lol.core.GameBoss;
 import com.lol.dto.SelectModel;
 import com.lol.handler.GameProcessor;
-import com.lol.service.IPlayerService;
 import com.lol.tool.EventUtil;
 import com.lol.util.Utils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.Stack;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.LongAdder;
 
 /**
  * Description :
@@ -28,13 +28,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Component
 public class FightProcesor extends BaseProsesor implements GameProcessor {
 
-    @Autowired
-    private IPlayerService playerService;
+    private static org.slf4j.Logger logger = LoggerFactory.getLogger(SelectProcesor.class);
+
     /**
      * 多线程处理类中  防止数据竞争导致脏数据  使用线程安全MAP
      * 玩家所在匹配房间映射
      */
-    private ConcurrentHashMap<Integer, Integer> userRoom = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<Integer, Integer> playerRoom = new ConcurrentHashMap<>();
     /**
      * 房间id与模型映射
      */
@@ -46,7 +46,7 @@ public class FightProcesor extends BaseProsesor implements GameProcessor {
     /**
      * 房间ID自增器
      */
-    private AtomicInteger index = new AtomicInteger();
+    private LongAdder index = new LongAdder();
 
     public FightProcesor() {
         EventUtil.createFight = this::create;
@@ -55,22 +55,31 @@ public class FightProcesor extends BaseProsesor implements GameProcessor {
 
     @Override
     public void process(GameUpBuffer buffer) {
+        Connection connection = buffer.getConnection();
+        if(connection == null){
+            logger.info("客户端未登陆或已下线。忽略此次请求");
+            return;
+        }
 
         if (FightProtocol.DESTORY_FIGHT == buffer.getCmd()) {
-            /**判断玩家是否在某场战斗中
+            /**判断玩家角色是否在某场战斗中
              */
-            if (userRoom.containsKey(playerService.getPlayerId(buffer.getConnection()))) {
+            boolean isInFight = playerRoom.containsKey(playerService.getPlayerId(connection));
+            String acount = connection.getAcount();
+            logger.info("玩家角色[{}]是否在某场战斗中: {}",acount, isInFight);
+            if (isInFight) {
                 //通知
-                GameUpBuffer data = Utils.packgeUpData(buffer.getConnection(), Protocol.TYPE_FIGHT_ROOM, buffer.getArea(),
+                GameUpBuffer data = Utils.packgeUpData(connection, Protocol.TYPE_FIGHT_ROOM, buffer.getArea(),
                         FightProtocol.DESTORY_FIGHT, buffer.getBuffer());
                 GameBoss.getInstance().getProcessor().process(data);
             }
         } else {
             //通知
-            GameUpBuffer data = Utils.packgeUpData(buffer.getConnection(), Protocol.TYPE_FIGHT_ROOM, buffer.getArea(),
+            GameUpBuffer data = Utils.packgeUpData(connection, Protocol.TYPE_FIGHT_ROOM, buffer.getArea(),
                     buffer.getCmd(), buffer.getBuffer());
             GameBoss.getInstance().getProcessor().process(data);
         }
+
     }
 
     /**
@@ -83,8 +92,8 @@ public class FightProcesor extends BaseProsesor implements GameProcessor {
         FightRoomProcesor room = roomMap.remove(roomId);
         if (room != null) {
             //移除角色和房间之间的绑定关系
-            room.teamOne.keySet().forEach(userRoom::remove);
-            room.teamTwo.keySet().forEach(userRoom::remove);
+            room.teamOne.keySet().forEach(playerRoom::remove);
+            room.teamTwo.keySet().forEach(playerRoom::remove);
 
             //将房间丢进缓存队列 供下次选择使用
             cache.push(room);
@@ -101,24 +110,29 @@ public class FightProcesor extends BaseProsesor implements GameProcessor {
         //TODO : check logic
         FightRoomProcesor room = cache.pop();
         if (room == null) {
+            logger.warn("战斗房间为空，初始化新房间。");
             room = new FightRoomProcesor();
             //添加唯一ID
-            buffer = Utils.packgeUpData(buffer.getConnection(), buffer.getMsgType(), index.getAndIncrement(),
+            index.increment();
+            room.setRoomIndex(index.intValue());
+            buffer = Utils.packgeUpData(buffer.getConnection(), buffer.getMsgType(), index.intValue(),
                     FightProtocol.FIGHT_INIT, buffer.getBody());
         }
         GameBoss.getInstance().getProcessor().process(buffer);
-        //房间数据初始化
-        EventUtil.initFightRoom.init(teamOne, teamTwo, buffer);
-//        room.init(teamOne, teamTwo,buffer);
+        logger.info("开始初始化战斗房间。。。");
+        EventUtil.initFightRoom.init(teamOne, teamTwo);
+        logger.info("战斗房间初始化完毕。");
         //绑定映射关系
         for (SelectModel item : teamOne) {
-            userRoom.put(item.getPlayerId(), buffer.getArea());
+            playerRoom.put(item.getPlayerId(), room.getRoomIndex());
         }
 
         for (SelectModel item : teamTwo) {
-            userRoom.put(item.getPlayerId(), buffer.getArea());
+            playerRoom.put(item.getPlayerId(), room.getRoomIndex());
         }
-        roomMap.put(buffer.getArea(), room);
+
+        setInFight(true);
+        roomMap.put(room.getRoomIndex(), room);
     }
 
 }

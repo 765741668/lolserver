@@ -19,7 +19,8 @@ public class TestLongAdder {
         la.increment();
         la.increment();
         System.out.println(la.longValue());
-        la.decrement();
         System.out.println(la.longValue());
+        la.decrement();
+        System.out.println(la.intValue());
     }
 }

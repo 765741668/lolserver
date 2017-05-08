@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,11 +22,16 @@ import java.util.Map;
  */
 @Service("playerServiceImpl")
 public class PlayerServiceImpl implements IPlayerService {
-    private Logger looger = LoggerFactory.getLogger(PlayerServiceImpl.class);
+
+    private static Logger logger = LoggerFactory.getLogger(PlayerServiceImpl.class);
+
     @Autowired
     private IAcountService acountService;
     @Autowired
     private IPlayerDAO playerDAO;
+
+    private Logger looger = LoggerFactory.getLogger(PlayerServiceImpl.class);
+
 
     /**
      * 用户ID和模型的映射表
@@ -38,34 +42,33 @@ public class PlayerServiceImpl implements IPlayerService {
      */
     private Map<Integer, Integer> accToUid = new HashMap<>();
 
-    private Map<Integer, Connection> idToToken = new HashMap<>();
+    private Map<Integer, Connection> idToConnection = new HashMap<>();
     private Map<Connection, Integer> connectionToId = new HashMap<>();
 
-    public final boolean create(Connection connection, String name) throws ServiceException {
-        //帐号是否登陆 获取帐号ID
+    public final int create(Connection connection, String name) throws ServiceException {
         int acountId = acountService.getAcountId(connection);
         if (acountId == -1) {
-            return false;
+            logger.warn("帐号未登陆，获取帐号ID失败：{}",acountId);
+            return -1;
         }
-        //判断当前帐号是否已经拥有角色
         init(acountId);
         if (accToUid.containsKey(acountId)) {
-            return false;
+            logger.warn("当前帐号已经拥有该角色");
+            return -2;
         }
 
         Player player = new Player();
         player.setName(name);
         player.setAcountid(acountId);
-        ArrayList<Integer> list = new ArrayList<>();
-        for (int i = 1; i < 9; i++) {
-            list.add(i);
-        }
-        player.setHerolist(list.toArray(new Integer[list.size()]));
+        //初始化8个英雄
+        //TODO:英雄表
+        player.setHerolist("1,2,3,4,5,6,7,8");
 
         try {
             playerDAO.savePlayer(player);
+            logger.info("新增玩家角色成功");
         } catch (DAOException e) {
-            throw new ServiceException(ServiceErrorCode.ADD.toString(), "新增Player对象失败", e);
+            throw new ServiceException(ServiceErrorCode.ADD.toString(), "新增玩家角色失败", e);
         }
 
         //创建成功 进行帐号ID和用户ID的绑定
@@ -73,7 +76,7 @@ public class PlayerServiceImpl implements IPlayerService {
         //创建成功 进行用户ID和用户模型的绑定
         idToModel.put(player.getId(), player);
 
-        return true;
+        return 0;
     }
 
     @Override
@@ -90,6 +93,7 @@ public class PlayerServiceImpl implements IPlayerService {
         //帐号是否登陆 获取帐号ID
         int acountId = acountService.getAcountId(connection);
         if (acountId == -1) {
+            logger.warn("帐号未否登陆，获取帐号ID失败.");
             return null;
         }
 
@@ -97,8 +101,8 @@ public class PlayerServiceImpl implements IPlayerService {
 
     }
 
-    public final Player getPlayerById(int id) {
-        return idToModel.get(id);
+    public final Player getPlayerById(int playerId) {
+        return idToModel.get(playerId);
     }
 
     public final Player online(Connection connection) {
@@ -106,28 +110,28 @@ public class PlayerServiceImpl implements IPlayerService {
         if (acountId == -1) {
             return null;
         }
-        Player user = getByacountId(acountId);
-        if (idToToken.containsKey(user.getId())) {
+        Player player = getByacountId(acountId);
+        if (idToConnection.containsKey(player.getId())) {
             return null;
         }
 
-        idToToken.put(user.getId(), connection);
-        connectionToId.put(connection, user.getId());
+        idToConnection.put(player.getId(), connection);
+        connectionToId.put(connection, player.getId());
 
-        return user;
+        return player;
     }
 
     public final void offline(Connection connection) {
         if (connectionToId.containsKey(connection)) {
-            if (idToToken.containsKey(connectionToId.get(connection))) {
-                idToToken.remove(connectionToId.get(connection));
+            if (idToConnection.containsKey(connectionToId.get(connection))) {
+                idToConnection.remove(connectionToId.get(connection));
             }
             connectionToId.remove(connection);
         }
     }
 
-    public final Connection getConnection(int id) {
-        return idToToken.get(id);
+    public final Connection getConnection(int playerId) {
+        return idToConnection.get(playerId);
     }
 
     public final Player getByacountId(int accId) {

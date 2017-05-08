@@ -26,23 +26,30 @@ public class MatchHandler extends SimpleChannelInboundHandler<MessageUpProto.Mes
 
     private static Logger logger = LoggerFactory.getLogger(MatchHandler.class);
 
+    private MessageUpProto.MessageUp tempMessage = null;
+
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, MessageUpProto.MessageUp message) throws Exception {
         if (message.getHeader().getMsgType() == Protocol.TYPE_MATCH) {
-            GameBoss.getInstance().getProcessor().process(new GameUpBuffer(message, ctx.attr(Constans.conn).get()));
+            MessageUpProto.MatchUpBody match = message.getBody().getMatch();
+            if (match != null) {
+                logger.info("收到匹配模块消息: {} ({})",match,ctx.channel().remoteAddress());
+                GameBoss.getInstance().getProcessor().process(new GameUpBuffer(message, ctx.attr(Constans.conn).get()));
+            }
+        }else {
+            ctx.fireChannelRead(message);
         }
     }
 
     @Override
-    public void channelActive(ChannelHandlerContext ctx) throws Exception {
-
-    }
-
-    @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        super.channelInactive(ctx);
-        GameUpBuffer msg = Utils.packgeUpData(ctx.attr(Constans.conn).get(), Protocol.TYPE_MATCH, -1, MatchProtocol.LEAVE_CREQ, null);
+        logger.info("有客户端断开连接了 : {}, 准备取消匹配。", ctx.channel().remoteAddress());
+
+        GameUpBuffer msg = Utils.packgeUpData(ctx.attr(Constans.conn).get(), Protocol.TYPE_MATCH, -1, MatchProtocol.LEAVE_CREQ, tempMessage);
         GameBoss.getInstance().getProcessor().process(msg);
+
+        super.channelInactive(ctx);
+        ctx.close();
     }
 
     @Override
@@ -52,7 +59,8 @@ public class MatchHandler extends SimpleChannelInboundHandler<MessageUpProto.Mes
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        cause.printStackTrace();
+//        logger.error("服务器异常!",cause);
+        ctx.fireExceptionCaught(cause);
         ctx.close();
     }
 }

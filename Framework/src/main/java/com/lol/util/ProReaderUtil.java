@@ -135,43 +135,12 @@ public class ProReaderUtil {
         conf.put("url", properties.getProperty("jdbc.url").trim());
         conf.put("userName", properties.getProperty("jdbc.userName").trim());
         conf.put("password", properties.getProperty("jdbc.password").trim());
-//        conf.put("initialSize", properties.getProperty("jdbc.initialSize").trim());
-//        conf.put("maxTotal", properties.getProperty("jdbc.maxTotal").trim());
-//        conf.put("maxConnLifetimeMillis", properties.getProperty("jdbc.maxConnLifetimeMillis").trim());
-//        conf.put("maxIdle", properties.getProperty("jdbc.maxIdle").trim());
-//        conf.put("minIdle", properties.getProperty("jdbc.minIdle").trim());
-//        conf.put("maxWaitMillis", properties.getProperty("jdbc.maxWaitMillis").trim());
-
-//        <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-//        <property name="driverClass">
-//        <value>${database.driver}</value>
-//        </property>
-//        <property name="jdbcUrl">
-//        <value>${database.dbName}</value>
-//        </property>
-//        <property name="player">
-//        <value>${database.username}</value>
-//        </property>
-//        <property name="password">
-//        <value>${database.password}</value>
-//        </property>
-//        <property name="maxPoolSize">
-//        <value>1</value>
-//        </property>
-//        <property name="maxIdleTime">
-//        <value>50</value>
-//        </property>
-//        <property name="maxStatementsPerConnection">
-//        <value>1</value>
-//        </property>
-//        <property name="numHelperThreads">
-//        <value>1</value>
-//        </property>
-//        <property name="idleConnectionTestPeriod">
-//        <value>30</value>
-//        </property>
-//        </bean>
-
+        conf.put("initialSize", properties.getProperty("jdbc.initialSize").trim());
+        conf.put("maxTotal", properties.getProperty("jdbc.maxTotal").trim());
+        conf.put("maxConnLifetimeMillis", properties.getProperty("jdbc.maxConnLifetimeMillis").trim());
+        conf.put("maxIdle", properties.getProperty("jdbc.maxIdle").trim());
+        conf.put("minIdle", properties.getProperty("jdbc.minIdle").trim());
+        conf.put("maxWaitMillis", properties.getProperty("jdbc.maxWaitMillis").trim());
 
         return conf;
     }

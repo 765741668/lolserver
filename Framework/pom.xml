@@ -19,7 +19,7 @@
         <org.springframework.version>4.3.7.RELEASE</org.springframework.version>
         <org.spring.security.version>4.2.2.RELEASE</org.spring.security.version>
         <hibernate.version>5.2.9.Final</hibernate.version>
-        <mysql.version>6.0.6</mysql.version>
+        <mysql.version>5.1.9</mysql.version>
         <c3p0.version>0.9.5.2</c3p0.version>
     </properties>
 
@@ -28,6 +28,17 @@
             <groupId>com.lol</groupId>
             <artifactId>protocol</artifactId>
             <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.8.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.8.9</version>
         </dependency>
 
         <dependency>
@@ -75,6 +86,18 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
             <version>${org.spring.security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>${org.springframework.version}</version>
         </dependency>
 
         <dependency>
@@ -145,7 +168,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.11</version>
+            <version>4.12</version>
         </dependency>
 
 
@@ -311,12 +334,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>4.2.4.RELEASE</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.dyuproject.protostuff</groupId>
             <artifactId>protostuff-runtime</artifactId>
             <version>1.0.9</version>
@@ -357,7 +374,7 @@
                         </goals>
                         <configuration>
                             <files>
-                                <file>${basedir}/src/main/resources/env/netty/protobuf/config/cmdargs.properties</file>
+                                <file>${basedir}/src/main/resources/env/netty/config/cmdargs.properties</file>
                                 <file>${basedir}/src/main/resources/env/pom-path.properties</file>
                             </files>
                         </configuration>
@@ -381,10 +398,10 @@
                         <configuration>
                             <mainClass>com.lol.util.ExcuteExeUtil</mainClass>
                             <arguments>
-                                <argument>${mainJava}\com\lol\protobuf</argument>
-                                <argument>${mainJava}</argument>
+                                <argument>${protobuf.location}</argument>
+                                <argument>${protobuf.output}</argument>
                                 <!--多个文件 以,分隔-->
-                                <argument>MessageUp,MessageDown,SubscribeReq,SubscribeResp,testV3</argument>
+                                <argument>${protobuf.source.files}</argument>
                             </arguments>
                         </configuration>
                     </execution>
@@ -415,7 +432,7 @@
                 </configuration>
             </plugin>
 
-            <!-- hk.hkjc.yzh.schema.test.jibx start -->
+            <!-- com.lol.jibx start -->
             <plugin>
                 <groupId>org.jibx</groupId>
                 <artifactId>jibx-maven-plugin</artifactId>
@@ -465,13 +482,13 @@
                         </configuration>
                     </execution>
 
-                    <!-- <execution> <id>compare-hk.hkjc.yzh.schema.test.jibx-docs</id> <phase>test</phase> <goals><goal>document-compare</goal></goals>
+                    <!-- <execution> <id>compare-com.lol.jibx-docs</id> <phase>test</phase> <goals><goal>document-compare</goal></goals>
                         <configuration> <inFile>${basedir}/src/main/resources/schema/xml/ChuanOrder.xml</inFile>
                         <outFile>${basedir}/src/main/resources/schema/xml/CTshiporder.xml</outFile>
                         </configuration> </execution> -->
                 </executions>
             </plugin>
-            <!-- hk.hkjc.yzh.schema.test.jibx end -->
+            <!-- com.lol.jibx end -->
 
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -487,7 +504,7 @@
                         <configuration>
                             <sources>
                                 <!-- choise one source -->
-                                <!-- hk.hkjc.yzh.schema.test.jibx auto to ${basedir}/target/generated-sources,and it is
+                                <!-- com.lol.jibx auto to ${basedir}/target/generated-sources,and it is
                                     fixed can bot be changed -->
                                 <source>${basedir}/target/generated-sources</source>
                                 <!-- jaxb need config,can be any where -->
@@ -548,18 +565,18 @@
 
     <!-- 配置部署的远程仓库 -->
     <!-- 用于配置分发管理，配置相应的产品发布信息,主要用于发布，在执行mvn deploy后表示要发布的位置 -->
-    <!--<distributionManagement>-->
-    <!--<snapshotRepository>-->
-    <!--<id>nexus-snapshots-testCoder</id>-->
-    <!--<name>nexus testCoder Snapshot repository</name>-->
-    <!--<url>http://127.0.0.1:8081/nexus/content/repositories/testCoder-Snapshot</url>-->
-    <!--</snapshotRepository>-->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nexus-snapshots-testCoder</id>
+            <name>nexus testCoder Snapshot repository</name>
+            <url>http://127.0.0.1:8081/nexus/content/repositories/testCoder-Snapshot</url>
+        </snapshotRepository>
 
-    <!-- 配置到文件系统 -->
-    <!--<repository>-->
-    <!--<id>nexus-releases-testCoder</id>-->
-    <!--<name>nexus testCoder Releases repository</name>-->
-    <!--<url>http://127.0.0.1:8081/nexus/content/repositories/testCoder-Releases</url>-->
-    <!--</repository>-->
-    <!--</distributionManagement>-->
+        <!-- 配置到文件系统 -->
+        <repository>
+            <id>nexus-releases-testCoder</id>
+            <name>nexus testCoder Releases repository</name>
+            <url>http://127.0.0.1:8081/nexus/content/repositories/testCoder-Releases</url>
+        </repository>
+    </distributionManagement>
 </project>

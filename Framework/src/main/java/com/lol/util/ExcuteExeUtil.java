@@ -68,7 +68,7 @@ public class ExcuteExeUtil {
 
     // 第一种方式：利用cmd方式
     public static String executeCmd(String command) {
-        logger.info("Execute command : " + command);
+        logger.info("Execute command : {}",command);
         Runtime runtime = Runtime.getRuntime();
         StringBuilder build = new StringBuilder();
         try {
@@ -81,14 +81,14 @@ public class ExcuteExeUtil {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            logger.error("应用程序：" + command + "不存在 : {}", e.getMessage(), e);
+            logger.error("应用程序：{} 不存在: {}",command , e.getMessage(), e);
         }
         return build.toString();
     }
 
     // 第二种方式：利用ProcessBuilder调用cmd方式
     public static void startProgram2(String programPath) {
-        logger.info("启动应用程序：" + programPath);
+        logger.info("启动应用程序：{}", programPath);
         if (StringUtils.isNotBlank(programPath)) {
             try {
                 String programName = programPath.substring(programPath.lastIndexOf("/") + 1, programPath.lastIndexOf("."));
@@ -102,20 +102,20 @@ public class ExcuteExeUtil {
                 pBuilder.start();
             } catch (Exception e) {
                 e.printStackTrace();
-                logger.error("应用程序：" + programPath + "不存在 : {}", e.getMessage(), e);
+                logger.error("应用程序：{} 不存在: {}",programPath , e.getMessage(), e);
             }
         }
     }
 
     // 第三种方式：使用Desktop启动应用程序
     public static void startProgram3(String programPath) {
-        logger.info("启动应用程序：" + programPath);
+        logger.info("启动应用程序：{}", programPath);
         if (StringUtils.isNotBlank(programPath)) {
             try {
                 Desktop.getDesktop().open(new File(programPath));
             } catch (Exception e) {
                 e.printStackTrace();
-                logger.error("应用程序：" + programPath + "不存在 : {}", e.getMessage(), e);
+                logger.error("应用程序：{} 不存在: {}",programPath , e.getMessage(), e);
             }
         }
     }

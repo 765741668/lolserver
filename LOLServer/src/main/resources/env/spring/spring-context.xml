@@ -12,7 +12,14 @@
             http://www.springframework.org/schema/tx
             http://www.springframework.org/schema/tx/spring-tx.xsd
             http://www.springframework.org/schema/context
-            http://www.springframework.org/schema/context/spring-context.xsd">
+            http://www.springframework.org/schema/context/spring-context.xsd"
+       default-autowire="byName">
+    <!-- default-autowire="byName" >>>> 没有的话注解时找不到实例化的sessionFactory，
+    而注入了一个空的,在hibernate检查的时候就报“ 'sessionFactory' or 'hibernateTemplate' is required” -->
+
+    <!--通知 Spring自动扫描被@Aspect标注的切面-->
+    <!-- 让代理机制起到作用,simple-spring-memcached主要是基于AOP的代理  -->
+    <aop:aspectj-autoproxy />
 
     <!-- 加载配置文件 -->
     <context:property-placeholder location="classpath*:env/db/db.properties"
@@ -76,20 +83,18 @@
     <!--  配置事务传播特性 -->
     <!-- 使用annotation定义数据库事务，这样可以在类或方法中直接使用@Transactional注解来声明事务 -->
     <!-- <tx:annotation-driven transaction-manager="transactionManager" /> -->
-    <tx:annotation-driven/>
+    <tx:annotation-driven />
     <tx:advice id="transAdvice" transaction-manager="transactionManager">
         <!-- 事务属性定义 -->
         <tx:attributes>
             <!--SUPPORTS: 如果其他bean调用这个方法,在其他bean中声明事务,那就用事务.如果其他bean没有声明事务,那就不用事务. -->
-            <tx:method name="get*" propagation="SUPPORTS"/>
+            <tx:method name="get*" propagation="REQUIRED"/>
+            <tx:method name="find*" propagation="REQUIRED"/>
             <tx:method name="set*" propagation="SUPPORTS"/>
             <tx:method name="select*" propagation="SUPPORTS"/>
-            <tx:method name="find*" propagation="SUPPORTS"/>
             <tx:method name="load*" propagation="SUPPORTS"/>
             <tx:method name="search*" propagation="SUPPORTS"/>
             <!--REQUIRED: 如果有事务,那么加入事务,没有的话新建一个(不写的情况下) -->
-            <tx:method name="*" propagation="REQUIRED" rollback-for="com.lol.db.DAOException,
-                        com.lol.db.ServiceException" isolation="DEFAULT"/>
             <tx:method name="add*" propagation="REQUIRED"/>
             <tx:method name="update*" propagation="REQUIRED"/>
             <tx:method name="del*" propagation="REQUIRED"/>
@@ -100,11 +105,14 @@
             <tx:method name="delete*" propagation="REQUIRED"/>
             <tx:method name="verify*" propagation="REQUIRED"/>
             <tx:method name="modify*" propagation="REQUIRED"/>
+
+            <tx:method name="*" propagation="REQUIRED" rollback-for="com.lol.db.DAOException,
+                        com.lol.db.ServiceException" isolation="DEFAULT"/>
         </tx:attributes>
     </tx:advice>
 
     <!--  配置参与事务的类 -->
-    <aop:config proxy-target-class="true">
+    <aop:config proxy-target-class="false">
         <!--
         （* com.evan.crm.service.*.*（..））中几个通配符的含义：
         |第一个 * —— 通配 随便率性返回值类型|
@@ -118,6 +126,7 @@
         <!--<aop:advisor advice-ref="transAdvice" pointcut-ref="serviceMethod" />-->
 
         <aop:advisor advice-ref="transAdvice" pointcut="execution(* com.lol.service.impl..*.*(..))"/>
+        <aop:advisor advice-ref="transAdvice" pointcut="execution(* com.lol.dao.impl..*.*(..))"/>
         <!--<aop:advisor advice-ref="transAdvice" pointcut="execution(* com.zds.core.service.sequence.impl..*.*(..))"/>-->
     </aop:config>
 </beans>

@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+option java_package = "com.lol.demo.encode.protobuf";
+option java_outer_classname = "MessageUpProto";
+
+//客户端请求上行消息
+message MessageUp{
+    MsgHeader header = 1;
+    MsgUpBody body = 2;
+}
+
+//消息头
+message MsgHeader{
+
+	//一级协议 用于区分所属模块
+	int32 msgType = 1;
+
+    //二级协议 用于区分 模块下所属子模块
+    int32 area = 2;
+
+    // 三级协议  用于区分当前处理逻辑功能
+    int32 cmd = 3;
+}
+
+//上行消息体
+message MsgUpBody{
+    LoginUpBody login = 1;
+    PlayerUpBody player = 2;
+    MatchUpBody match = 3;
+    SelectUpBody select = 4;
+    FightUpBody fight = 5;
+}
+
+message LoginUpBody{
+    string acount = 1;
+    string password = 2;
+}
+
+message PlayerUpBody{
+    string nickName = 1;
+}
+
+message MatchUpBody{
+    int32 teamMax = 1;
+}
+
+message SelectUpBody{
+    int32 select = 1;
+    string talk = 2;
+    string roomName = 3;
+}
+
+message FightUpBody{
+    int32 attackOrSkillUp = 1;
+    string roomName = 2;
+    MoveInfo move = 3;
+    DamageInfo damage = 4;
+    SkillAtkModel skillAtk = 5;
+}
+
+message MoveInfo{
+    int32 playerId = 1;
+    float x = 2;
+    float y = 3;
+    float z = 4;
+}
+
+message DamageInfo{
+    int32 playerId = 1;
+    int32 skill = 2;
+    repeated Target target = 3[packed = false];
+}
+
+//用于支持 DamageInfo.target 二维数组,因此客户端要封装Target实体类
+message Target{
+    repeated int32 target = 1[packed = true];
+}
+
+message SkillAtkModel{
+    int32 playerId = 1;
+    int32 type = 2;
+    int32 skill = 3;
+    repeated float position = 4[packed = true];
+    int32 target = 5;
+}

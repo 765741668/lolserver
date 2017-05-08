@@ -8,10 +8,7 @@ import com.lol.buffer.GameUpBuffer;
 import com.lol.channel.GameRoomChannelManager;
 import com.lol.core.Connection;
 import com.lol.dao.bean.Player;
-import com.lol.protobuf.MessageUpProto;
 import com.lol.service.IPlayerService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -22,12 +19,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class BaseProsesor {
 
-    private Logger logger = LoggerFactory.getLogger(BaseProsesor.class);
-
     @Autowired
-    private IPlayerService playerService;
+    protected IPlayerService playerService;
 
-    private int area;
+    private int roomIndex;
+
+    private boolean isInMatch;
+    private boolean isInSelect;
+    private boolean isInFight;
 
     /**
      * 用户进入当前子模块 添加连接
@@ -35,9 +34,8 @@ public class BaseProsesor {
      * @param buffer
      * @return
      */
-    public boolean preEnter(GameUpBuffer buffer) {
-
-        return GameRoomChannelManager.getInstance().addRoomChannel(getArea())
+    protected boolean preEnter(GameUpBuffer buffer) {
+        return GameRoomChannelManager.getInstance().addRoomChannel(roomIndex)
                 .addRoomConnection(buffer.getConnection());
     }
 
@@ -47,7 +45,7 @@ public class BaseProsesor {
      * @param connection
      * @return
      */
-    public final Player getPlayerByConnection(Connection connection) {
+    protected final Player getPlayerByConnection(Connection connection) {
         return playerService.getPlayerByConnection(connection);
     }
 
@@ -57,7 +55,7 @@ public class BaseProsesor {
      * @param id
      * @return
      */
-    public final Player getPlayerById(int id) {
+    protected final Player getPlayerById(int id) {
         return playerService.getPlayerById(id);
     }
 
@@ -75,17 +73,13 @@ public class BaseProsesor {
         return player.getId();
     }
 
-    //获取房间名
-    public long getRoomName(GameUpBuffer buffer) {
-        long name = 0;
-        MessageUpProto.SelectUpBody select = buffer.getBody().getSelect();
-        MessageUpProto.FightUpBody fight = buffer.getBody().getFight();
-        if (select != null) {
-            name = select.getRoomName();
-        } else if (fight != null) {
-            name = fight.getRoomName();
-        }
-        return name;
+    /**
+     * 通过playerId获取连接对象
+     * @param playerId
+     * @return
+     */
+    protected Connection getConnectionByPlayerId(int playerId){
+        return playerService.getConnection(playerId);
     }
 
     /**
@@ -96,7 +90,7 @@ public class BaseProsesor {
      */
     protected boolean isEntered(GameUpBuffer buffer) {
         //TODO:: check logic
-        return GameRoomChannelManager.getInstance().getRoomChannel(getRoomName(buffer))
+        return GameRoomChannelManager.getInstance().getRoomChannel(roomIndex)
                 .isEnteredRoom(buffer.getConnection());
     }
 
@@ -106,16 +100,41 @@ public class BaseProsesor {
      * @param buffer
      * @return
      */
-    public final boolean leave(GameUpBuffer buffer) {
-        return GameRoomChannelManager.getInstance().getRoomChannel(getRoomName(buffer))
-                .removeRoomConnection(buffer.getConnection());
+    protected final void leave(GameUpBuffer buffer) {
+            GameRoomChannelManager.getInstance().getRoomChannel(roomIndex)
+                    .removeRoomConnection(buffer.getConnection());
+
     }
 
-    public int getArea() {
-        return area;
+    protected void setRoomIndex(int roomIndex) {
+        this.roomIndex = roomIndex;
     }
 
-    public void setArea(int area) {
-        this.area = area;
+    protected int getRoomIndex() {
+        return roomIndex;
+    }
+
+    public boolean isInSelect() {
+        return isInSelect;
+    }
+
+    public void setInSelect(boolean isInSelect) {
+        this.isInSelect = isInSelect;
+    }
+
+    public boolean isInMatch() {
+        return isInMatch;
+    }
+
+    public void setInMatch(boolean isInMatch) {
+        this.isInMatch = isInMatch;
+    }
+
+    public boolean isInFight() {
+        return isInFight;
+    }
+
+    public void setInFight(boolean isInFight) {
+        this.isInFight = isInFight;
     }
 }

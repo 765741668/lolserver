@@ -3,14 +3,14 @@ package com.lol.tool;
 import java.util.Date;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.LongAdder;
 
 public class ScheduleUtil {
     //等待执行的任务表
     private final ConcurrentHashMap<Integer, TimeTaskModel> mission = new ConcurrentHashMap<>();
     //等待移除的任务列表
     private final CopyOnWriteArrayList<Integer> removelist = new CopyOnWriteArrayList<>();
-    private AtomicInteger index = new AtomicInteger();
+    private LongAdder index = new LongAdder();
 
     private ScheduleUtil() {
 
@@ -24,7 +24,7 @@ public class ScheduleUtil {
         synchronized (removelist) {
             removelist.forEach(mission::remove);
             removelist.clear();
-            mission.values().stream().filter(item -> item.time <= new Date().getTime()).forEach(item -> {
+            mission.values().parallelStream().filter(item -> item.time <= new Date().getTime()).forEach(item -> {
                 item.run();
                 removelist.add(item.id);
             });
@@ -53,7 +53,8 @@ public class ScheduleUtil {
      */
     private int schedulemms(Runnable task, long delay) {
         synchronized (mission) {
-            int id = index.getAndIncrement();
+            index.increment();
+            int id = index.intValue();
             TimeTaskModel model = new TimeTaskModel(id, task, getMicroSeconds(new Date()) + delay);
             model.run();
             mission.put(id, model);

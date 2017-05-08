@@ -13,7 +13,7 @@ public interface IPlayerService {
      * @param name
      * @return
      */
-    boolean create(Connection connection, String name) throws ServiceException;
+    int create(Connection connection, String name) throws ServiceException;
 
     /**
      * 过连接对象 获取玩家ID
@@ -34,10 +34,10 @@ public interface IPlayerService {
     /**
      * 通过ID获取用户信息
      *
-     * @param id
+     * @param playerId
      * @return
      */
-    Player getPlayerById(int id);
+    Player getPlayerById(int playerId);
 
     /**
      * 用户上线
@@ -55,12 +55,12 @@ public interface IPlayerService {
     void offline(Connection connection);
 
     /**
-     * 通过id获取连接对象
+     * 通过playerId获取连接对象
      *
-     * @param id
+     * @param playerId
      * @return
      */
-    Connection getConnection(int id);
+    Connection getConnection(int playerId);
 
     /**
      * 通过帐号的连接对象获取 仅在初始登录验证角色时有效

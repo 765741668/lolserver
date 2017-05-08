@@ -18,7 +18,7 @@ public class MatchProtocol {
      */
     public static final int LEAVE_SRES = 3;
     /**
-     * 匹配完毕，通知进入 选择界面广播
+     * 匹配完毕，发送通知
      */
-    public static final int ENTER_SELECT_BRO = 4;
+    public static final int MATCH_COMPLETED = 4;
 }

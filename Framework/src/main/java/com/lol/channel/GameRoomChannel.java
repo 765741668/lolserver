@@ -21,8 +21,8 @@ public class GameRoomChannel {
      */
     private DefaultChannelGroup roomChannel;
 
-    public GameRoomChannel(Long name) {
-        roomChannel = new DefaultChannelGroup(name + "", GlobalEventExecutor.INSTANCE);
+    public GameRoomChannel(Integer name) {
+        roomChannel = new DefaultChannelGroup(name+"", GlobalEventExecutor.INSTANCE);
     }
 
     public boolean isEnteredRoom(Connection connection) {
@@ -72,7 +72,7 @@ public class GameRoomChannel {
      * @throws Exception
      */
     public void broadcastRoom(GameDownBuffer buffer, Channel channelExcept) throws Exception {
-        roomChannel.stream().filter(channel -> channel != channelExcept).forEach(channel -> channel.writeAndFlush(buffer));
+        roomChannel.parallelStream().filter(channel -> channel != channelExcept).forEach(channel -> channel.writeAndFlush(buffer.getBuffer()));
     }
 
     /**
@@ -83,6 +83,6 @@ public class GameRoomChannel {
      * @throws Exception
      */
     public void broadcastRoom(GameDownBuffer buffer, List<Channel> channels) throws Exception {
-        roomChannel.stream().filter(channels::contains).forEach(channel -> channel.writeAndFlush(buffer));
+        roomChannel.parallelStream().filter(channels::contains).forEach(channel -> channel.writeAndFlush(buffer.getBuffer()));
     }
 }

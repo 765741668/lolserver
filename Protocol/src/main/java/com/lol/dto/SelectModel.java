@@ -2,7 +2,7 @@ package com.lol.dto;
 
 public class SelectModel {
     /**
-     * 用户ID
+     * 玩家ID
      */
     private int playerId;
     /**

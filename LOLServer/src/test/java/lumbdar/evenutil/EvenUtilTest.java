@@ -4,7 +4,6 @@ package lumbdar.evenutil;/**
  *  19:35
  */
 
-import com.lol.buffer.GameUpBuffer;
 import com.lol.tool.EventUtil;
 
 import java.util.Arrays;
@@ -26,7 +25,7 @@ public class EvenUtilTest {
 
 class ClassSelect {
     public void init() {
-        EventUtil.initSelectRoom.init(Arrays.asList(1, 2), Arrays.asList(3, 4), null);
+        EventUtil.initSelectRoom.init(Arrays.asList(1, 2), Arrays.asList(3, 4));
     }
 }
 
@@ -35,9 +34,8 @@ class ClassSelectRoom {
         EventUtil.initSelectRoom = this::init;
     }
 
-    public void init(List<Integer> teamOne, List<Integer> teamTwo, GameUpBuffer data) {
-        teamOne.stream().forEach(System.out::println);
-        teamTwo.stream().forEach(System.out::println);
-        System.out.println(data);
+    public void init(List<Integer> teamOne, List<Integer> teamTwo) {
+        teamOne.parallelStream().forEach(System.out::println);
+        teamTwo.parallelStream().forEach(System.out::println);
     }
 }

@@ -20,6 +20,7 @@ public class Acount {
 //    @GenericGenerator(name = "customIdGenerate" ,strategy = "uuid")
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
+    @Column(unique = true,nullable = false)
     private String acount;
     private String password;
 

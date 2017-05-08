@@ -8,6 +8,7 @@
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-aop/4.3.7.RELEASE/spring-aop-4.3.7.RELEASE-sources.jar!/" />
+      <root url="file://C:/Users/YangZH/AppData/Local/Temp/intellijad" />
     </SOURCES>
   </library>
 </component>
