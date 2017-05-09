@@ -6,13 +6,13 @@ package com.lol.procesors;/**
 
 import com.lol.MatchProtocol;
 import com.lol.Protocol;
-import com.lol.buffer.GameDownBuffer;
-import com.lol.buffer.GameUpBuffer;
-import com.lol.core.Connection;
-import com.lol.handler.GameProcessor;
+import com.lol.fwk.buffer.GameDownBuffer;
+import com.lol.fwk.buffer.GameUpBuffer;
+import com.lol.fwk.core.Connection;
+import com.lol.fwk.handler.GameProcessor;
 import com.lol.logic.match.MatchRoom;
 import com.lol.tool.EventUtil;
-import com.lol.util.Utils;
+import com.lol.fwk.util.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

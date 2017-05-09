@@ -1,8 +1,8 @@
 package com.lol.connect;
 
 
-import com.lol.buffer.GameUpBuffer;
-import com.lol.handler.GameProcessor;
+import com.lol.fwk.buffer.GameUpBuffer;
+import com.lol.fwk.handler.GameProcessor;
 import org.springframework.stereotype.Component;
 
 /**

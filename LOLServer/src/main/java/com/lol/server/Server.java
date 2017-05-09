@@ -1,7 +1,7 @@
 package com.lol.server;
 
-import com.lol.core.GameBoss;
-import com.lol.core.GameProcessorWorker;
+import com.lol.fwk.core.GameBoss;
+import com.lol.fwk.core.GameProcessorWorker;
 
 /**
  * 服务启动类

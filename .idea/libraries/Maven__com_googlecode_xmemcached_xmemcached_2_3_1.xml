@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Maven: com.googlecode.xmemcached:xmemcached:2.3.1">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/googlecode/xmemcached/xmemcached/2.3.1/xmemcached-2.3.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/googlecode/xmemcached/xmemcached/2.3.1/xmemcached-2.3.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/googlecode/xmemcached/xmemcached/2.3.1/xmemcached-2.3.1-sources.jar!/" />
+      <root url="file://C:/Users/YangZH/AppData/Local/Temp/intellijad" />
+    </SOURCES>
+  </library>
+</component>

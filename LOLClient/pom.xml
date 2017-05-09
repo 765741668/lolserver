@@ -431,7 +431,7 @@
                 </configuration>
             </plugin>
 
-            <!-- com.lol.jibx start -->
+            <!-- com.lolfwkfwk.jibx start -->
             <plugin>
                 <groupId>org.jibx</groupId>
                 <artifactId>jibx-maven-plugin</artifactId>
@@ -482,13 +482,13 @@
                         </configuration>
                     </execution>
 
-                    <!-- <execution> <id>compare-com.lol.jibx-docs</id> <phase>test</phase> <goals><goal>document-compare</goal></goals>
+                    <!-- <execution> <id>compare-com.lolfwkfwk.jibx-docs</id> <phase>test</phase> <goals><goal>document-compare</goal></goals>
                         <configuration> <inFile>${basedir}/src/main/resources/schema/xml/ChuanOrder.xml</inFile>
                         <outFile>${basedir}/src/main/resources/schema/xml/CTshiporder.xml</outFile>
                         </configuration> </execution> -->
                 </executions>
             </plugin>
-            <!-- com.lol.jibx end -->
+            <!-- com.lolfwkfwk.jibx end -->
 
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -504,7 +504,7 @@
                         <configuration>
                             <sources>
                                 <!-- choise one source -->
-                                <!-- com.lol.jibx auto to ${basedir}/target/generated-sources,and it is
+                                <!-- com.lolfwkfwk.jibx auto to ${basedir}/target/generated-sources,and it is
                                     fixed can bot be changed -->
                                 <source>${basedir}/target/generated-sources</source>
                                 <!-- jaxb need config,can be any where -->

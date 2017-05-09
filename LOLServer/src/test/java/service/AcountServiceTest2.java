@@ -1,9 +1,9 @@
 package service;
 
-import com.lol.db.ServiceException;
-import com.lol.service.IAcountService;
-import com.lol.service.impl.AcountServiceImpl;
-import com.lol.util.jdbc.JdbcHelper;
+import com.lol.fwk.db.ServiceException;
+import com.lol.fwk.util.jdbc.JdbcHelper;
+import com.lol.fwk.service.acount.IAcountService;
+import com.lol.fwk.service.acount.impl.AcountServiceImpl;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -12,10 +12,9 @@ import org.springframework.security.crypto.password.StandardPasswordEncoder;
 public class AcountServiceTest2 {
 
 
-    private ApplicationContext applicationContext = null;
     private IAcountService acountService = null;
     {
-        applicationContext = new ClassPathXmlApplicationContext("classpath*:/env/spring/config.xml");
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath*:/env/spring/config.xml");
         acountService = applicationContext.getBean(AcountServiceImpl.class);
     }
 

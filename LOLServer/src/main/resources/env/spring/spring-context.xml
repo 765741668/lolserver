@@ -17,10 +17,6 @@
     <!-- default-autowire="byName" >>>> 没有的话注解时找不到实例化的sessionFactory，
     而注入了一个空的,在hibernate检查的时候就报“ 'sessionFactory' or 'hibernateTemplate' is required” -->
 
-    <!--通知 Spring自动扫描被@Aspect标注的切面-->
-    <!-- 让代理机制起到作用,simple-spring-memcached主要是基于AOP的代理  -->
-    <aop:aspectj-autoproxy />
-
     <!-- 加载配置文件 -->
     <context:property-placeholder location="classpath*:env/db/db.properties"
                                   file-encoding="utf-8" ignore-unresolvable="true"/>
@@ -47,7 +43,8 @@
         <property name="dataSource" ref="dataSource"/>
         <property name="packagesToScan">
             <list>
-                <value>com.lol.dao.bean</value>
+                <value>com.lol.fwk.dao.bean</value>
+                <value>com.lol.fwk.dao.bean</value>
             </list>
         </property>
         <!--定义Hibernate的SessionFactory的属性 -->
@@ -106,12 +103,16 @@
             <tx:method name="verify*" propagation="REQUIRED"/>
             <tx:method name="modify*" propagation="REQUIRED"/>
 
-            <tx:method name="*" propagation="REQUIRED" rollback-for="com.lol.db.DAOException,
-                        com.lol.db.ServiceException" isolation="DEFAULT"/>
+            <tx:method name="*" propagation="REQUIRED" rollback-for="com.lol.fwk.db.DAOException,
+                        com.lol.fwk.db.ServiceException" isolation="DEFAULT"/>
         </tx:attributes>
     </tx:advice>
 
     <!--  配置参与事务的类 -->
+    <!--proxy-target-class属性值决定是基于接口的还是基于类的代理被创建。
+        如果proxy-target-class 属性值被设置为true，那么基于类的代理将起作用（这时需要cglib库）。
+        如果proxy-target-class属值被设置为false或者这个属性被省略，那么标准的JDK 基于接口的代理
+    -->
     <aop:config proxy-target-class="false">
         <!--
         （* com.evan.crm.service.*.*（..））中几个通配符的含义：
@@ -121,12 +122,10 @@
         |第四个 .. —— 通配 办法可以有0个或多个参数|
          -->
         <!-- 通过aop定义事务增强切面 -->
-        <!--<aop:pointcut expression=" execution(* com.lol.service..*(..))" id="serviceMethod" />-->
+        <!--<aop:pointcut expression=" execution(* com.lolfwkfwk.service..*(..))" id="serviceMethod" />-->
         <!-- 引用事务增强 -->
         <!--<aop:advisor advice-ref="transAdvice" pointcut-ref="serviceMethod" />-->
-
-        <aop:advisor advice-ref="transAdvice" pointcut="execution(* com.lol.service.impl..*.*(..))"/>
-        <aop:advisor advice-ref="transAdvice" pointcut="execution(* com.lol.dao.impl..*.*(..))"/>
-        <!--<aop:advisor advice-ref="transAdvice" pointcut="execution(* com.zds.core.service.sequence.impl..*.*(..))"/>-->
+        <aop:advisor advice-ref="transAdvice" pointcut="execution(* com.lol.fwk.service.*.impl..*.*(..))"/>
+        <aop:advisor advice-ref="transAdvice" pointcut="execution(* com.lol.fwk.dao.*.impl..*.*(..))"/>
     </aop:config>
 </beans>

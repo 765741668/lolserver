@@ -17,11 +17,18 @@
     <!-- default-autowire="byName" >>>> 没有的话注解时找不到实例化的sessionFactory，
     而注入了一个空的,在hibernate检查的时候就报“ 'sessionFactory' or 'hibernateTemplate' is required” -->
 
+    <!--通知 Spring自动扫描被@Aspect标注的切面-->
+    <!-- 让代理机制起到作用,simple-spring-memcached主要是基于AOP的代理  -->
+    <aop:aspectj-autoproxy/>
+
     <import resource="spring-context.xml"/>
+    <import resource="../memcached/spring-memcached.xml" />
 
 
     <!-- 包含了 <context:annotation-config /> 处理器-->
-    <context:component-scan base-package=",com.lol.connect,com.lol.dao,com.lol.service,com.lol.procesors"/>
+    <!-- 配合AOP织入的事务地址 -->
+    <context:component-scan base-package="com.lol.connect,com.lol.fwk.memcached,
+        com.lol.fwk.dao,com.lol.fwk.service,com.lol.procesors"/>
     <!--启用注解的模式，默认是不启用的，<context:annotation-config /> 如果是springmvc，<mvc:annotation-driven />-->
     <!--<context:annotation-config />-->
     <!--<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>-->

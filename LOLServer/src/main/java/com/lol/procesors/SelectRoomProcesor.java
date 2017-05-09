@@ -6,17 +6,17 @@ package com.lol.procesors;/**
 
 import com.lol.Protocol;
 import com.lol.SelectProtocol;
-import com.lol.buffer.GameDownBuffer;
-import com.lol.buffer.GameUpBuffer;
-import com.lol.channel.GameRoomChannel;
-import com.lol.channel.GameRoomChannelManager;
-import com.lol.dao.bean.Player;
+import com.lol.fwk.dao.bean.player.Player;
 import com.lol.dto.SelectModel;
-import com.lol.handler.GameProcessor;
-import com.lol.protobuf.MessageDownProto;
+import com.lol.fwk.buffer.GameDownBuffer;
+import com.lol.fwk.buffer.GameUpBuffer;
+import com.lol.fwk.channel.GameRoomChannel;
+import com.lol.fwk.channel.GameRoomChannelManager;
+import com.lol.fwk.handler.GameProcessor;
+import com.lol.fwk.protobuf.MessageDownProto;
+import com.lol.fwk.util.Utils;
 import com.lol.tool.EventUtil;
 import com.lol.tool.ScheduleUtil;
-import com.lol.util.Utils;
 import io.netty.channel.Channel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

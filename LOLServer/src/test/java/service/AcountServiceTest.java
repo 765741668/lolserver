@@ -1,10 +1,10 @@
 package service;
 
-import com.lol.dao.IAcountDAO;
-import com.lol.dao.bean.Acount;
-import com.lol.db.DAOException;
-import com.lol.db.ServiceException;
-import com.lol.service.IAcountService;
+import com.lol.fwk.dao.acount.IAcountDAO;
+import com.lol.fwk.dao.bean.acount.Acount;
+import com.lol.fwk.db.DAOException;
+import com.lol.fwk.db.ServiceException;
+import com.lol.fwk.service.acount.IAcountService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

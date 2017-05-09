@@ -4,11 +4,11 @@ package com.lol.procesors;/**
  *  19:25
  */
 
-import com.lol.buffer.GameUpBuffer;
-import com.lol.channel.GameRoomChannelManager;
-import com.lol.core.Connection;
-import com.lol.dao.bean.Player;
-import com.lol.service.IPlayerService;
+import com.lol.fwk.dao.bean.player.Player;
+import com.lol.fwk.buffer.GameUpBuffer;
+import com.lol.fwk.channel.GameRoomChannelManager;
+import com.lol.fwk.core.Connection;
+import com.lol.fwk.service.player.IPlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

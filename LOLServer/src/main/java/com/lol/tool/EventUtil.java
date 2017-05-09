@@ -1,9 +1,9 @@
 package com.lol.tool;
 
 
-import com.lol.buffer.GameUpBuffer;
-import com.lol.core.Connection;
 import com.lol.dto.SelectModel;
+import com.lol.fwk.buffer.GameUpBuffer;
+import com.lol.fwk.core.Connection;
 
 import java.util.List;
 import java.util.function.Consumer;

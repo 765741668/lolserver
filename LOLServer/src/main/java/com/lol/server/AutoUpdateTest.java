@@ -1,6 +1,6 @@
 package com.lol.server;
 
-import com.lol.util.ModuleUtil;
+import com.lol.fwk.util.ModuleUtil;
 
 /**
  * 自动更新测试

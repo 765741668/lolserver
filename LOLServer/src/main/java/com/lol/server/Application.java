@@ -4,7 +4,7 @@ package com.lol.server;/**
  *  17:53
  */
 
-import com.lol.db.ServiceException;
+import com.lol.fwk.db.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;

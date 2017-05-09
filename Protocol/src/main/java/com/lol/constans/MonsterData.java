@@ -1,5 +1,6 @@
 package com.lol.constans;
 
+
 import com.lol.util.Utils;
 
 public class MonsterData {
