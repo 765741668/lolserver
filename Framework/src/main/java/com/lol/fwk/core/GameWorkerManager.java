@@ -24,11 +24,11 @@ public class GameWorkerManager {
     /**
      * 工作线程对象集合
      */
-    private HashMap<String, GameWorker> workers = new HashMap<String, GameWorker>();
+    private HashMap<Integer, GameWorker> workers = new HashMap<>();
     /**
      * 工作线程集合
      */
-    private HashMap<String, Thread> threads = new HashMap<String, Thread>();
+    private HashMap<Integer, Thread> threads = new HashMap<>();
 
     public static GameWorkerManager getInstance() {
         return instance;
@@ -48,42 +48,42 @@ public class GameWorkerManager {
      */
     public void init() {
         for (String w : workerSet) {
-            final GameWorker worker = new GameWorker(w);
-            setWorker(w, worker);
+            final GameWorker worker = new GameWorker(Integer.valueOf(w));
+            setWorker(Integer.valueOf(w), worker);
         }
     }
 
     /**
      * 启动工作线程
      *
-     * @param module
+     * @param msgType
      * @param worker
      */
-    public void setWorker(String module, GameWorker worker) {
-        workers.put(module, worker);
-        threads.put(module, new Thread(worker));
-        threads.get(module).start();
-        logger.info("work thread:" + module + " has been started...");
+    public void setWorker(Integer msgType, GameWorker worker) {
+        workers.put(msgType, worker);
+        threads.put(msgType, new Thread(worker));
+        threads.get(msgType).start();
+        logger.info("work thread:" + msgType + " has been started...");
     }
 
     /**
      * 获取工作线程对象
      *
-     * @param type_aera
+     * @param msgType
      * @return
      */
-    private GameWorker getWorker(String type_aera) {
-        return workers.get(type_aera);
+    private GameWorker getWorker(Integer msgType) {
+        return workers.get(msgType);
     }
 
     /**
      * 获取工作线程
      *
-     * @param module
+     * @param msgType
      * @return
      */
-    public Thread getThread(String module) {
-        return threads.get(module);
+    public Thread getThread(Integer msgType) {
+        return threads.get(msgType);
     }
 
     /**
@@ -93,7 +93,7 @@ public class GameWorkerManager {
      */
     public void pushDataToWorker(GameUpBuffer buffer) {
         if (buffer.getArea() >= 0) {
-            GameWorker worker = getWorker(buffer.getMsgType() + "-" + buffer.getArea());
+            GameWorker worker = getWorker(buffer.getMsgType());
             if (worker != null) {
                 worker.pushUpstreamBuffer(buffer);
             } else {

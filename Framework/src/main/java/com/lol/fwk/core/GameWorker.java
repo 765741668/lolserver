@@ -4,7 +4,8 @@ import com.lol.fwk.buffer.GameUpBuffer;
 import com.lol.fwk.handler.GameProcessor;
 import com.lol.fwk.handler.GameProcessorManager;
 import com.lol.fwk.util.StackTraceUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -17,12 +18,12 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  */
 public class GameWorker implements Runnable {
 
-    private static Logger logger = Logger.getLogger(GameWorker.class);
+    private static Logger logger = LoggerFactory.getLogger(GameWorker.class);
     /**
      * 消息队列
      */
-    final Queue<GameUpBuffer> msgQueue = new ConcurrentLinkedQueue<GameUpBuffer>();
-    private String name;
+    final Queue<GameUpBuffer> msgQueue = new ConcurrentLinkedQueue<>();
+    private Integer name;
     /**
      * 线程运行标志
      */
@@ -33,7 +34,7 @@ public class GameWorker implements Runnable {
      *
      * @param name
      */
-    GameWorker(String name) {
+    GameWorker(Integer name) {
         this.name = name;
     }
 
@@ -83,14 +84,13 @@ public class GameWorker implements Runnable {
                 }
             }
 
-            GameUpBuffer c = null;
+            GameUpBuffer c;
             while ((c = msgQueue.poll()) != null) {
+                logger.info("开始处理消息...");
                 int cmd = c.getCmd();
                 try {
-                    System.out.println("cmd: " + cmd);
-                    System.out.println("name: " + name);
-//                    GameProcessor handler = GameProcessorManager.getInstance().getProcessor(cmd + "-" + name);
-                    GameProcessor handler = GameProcessorManager.getInstance().getProcessor(cmd);
+                    logger.info("处理模块(msgType-cmd) : {}-{} ", name, cmd);
+                    GameProcessor handler = GameProcessorManager.getInstance().getProcessor(name);
                     if (handler != null) {
                         //记录执行时间过长的指令
                         long startTime = System.currentTimeMillis();
@@ -98,10 +98,12 @@ public class GameWorker implements Runnable {
                         long endTime = System.currentTimeMillis();
 
                         if ((startTime - endTime) > 500) {
-                            logger.error("process too long time, cmd:" + cmd + "-" + name);
+                            logger.error("处理时间过长,大于500毫秒({}), msgType-cmd : {}-{} ", (endTime - startTime),name,cmd);
+                        }else{
+                            logger.info("消息(msgType-cmd)处理时间: {} ({}-{}) ", (endTime - startTime), name, cmd);
                         }
                     } else {
-                        logger.error("error cmd = " + cmd);
+                        logger.warn("未知模块消息，不处理。 msgType-cmd : {}-{} ", name, cmd);
                     }
                 } catch (Exception e) {
                     logger.error(StackTraceUtil.getStackTrace(e));

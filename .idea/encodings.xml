@@ -2,10 +2,6 @@
 <project version="4">
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/Framework" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/Framework/src/main/java/com/lol/service/acount/IAcountService.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/Framework/src/main/java/com/lol/service/acount/impl/AcountServiceImpl.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/Framework/src/main/java/com/lol/service/acount/impl/PlayerServiceImpl.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/Framework/src/main/java/com/lol/service/player/IPlayerService.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/LOLClient" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/LOLClient/src/main/java/com/lol/demo/util/SerializeProtobufUtil.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/LOLServer" charset="UTF-8" />

@@ -48,11 +48,12 @@ public class ServerInit {
     public void WorkerRunStatusCheck() {
         String[] workers = GameWorkerManager.getInstance().getWorkerSet();
         for (String worker : workers) {
-            Thread t = GameWorkerManager.getInstance().getThread(worker);
+            int w = Integer.valueOf(worker);
+            Thread t = GameWorkerManager.getInstance().getThread(w);
             if (t == null || !t.isAlive()) {
                 logger.error("work thread:" + worker + " was crashed.");
-                final GameWorker gw = new GameWorker(worker);
-                GameWorkerManager.getInstance().setWorker(worker, gw);
+                final GameWorker gw = new GameWorker(w);
+                GameWorkerManager.getInstance().setWorker(w, gw);
             }
         }
     }
