@@ -4,7 +4,8 @@
  *  1:27
  */
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -16,20 +17,17 @@ import java.util.List;
 public class TestArry_ {
 
     public static void main(String[] args) {
-        int[] a = {1, 2, 3};
-        List b = Arrays.asList(a);
-        b.stream().forEach(System.out::println);
-        System.out.println("size: " + b.size());
+        Comparable c = x->0;
 
-        Integer[] a2 = {1, 2, 3};
-        List b2 = Arrays.asList(a2);
-        b2.stream().forEach(System.out::println);
-        System.out.println("size: " + b2.size());
+        Comparator c2 = (o1, o2) -> o2.hashCode()-o1.hashCode();
 
-        String[] aa = {"1", "2", "3"};
+        List a = new ArrayList<>();
+        for (int i=3;i >= 0;i--){
+            a.add("abcd".charAt(i));
+        }
 
-        List bb = Arrays.asList(aa);
-        bb.stream().forEach(System.out::print);
-        System.out.println("size: " + bb.size());
+        System.out.println(a.toString());
+
+        a.stream().sorted((o1, o2) -> o2.hashCode()-o1.hashCode()).forEach(f -> System.out.println(f));
     }
 }
