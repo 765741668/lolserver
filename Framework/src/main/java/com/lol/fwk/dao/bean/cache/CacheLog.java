@@ -28,7 +28,7 @@ public class CacheLog {
      * 创建时间
      */
     @Column
-    private String creatTime;
+    private String createTime;
 
     public String getUuid() {
         return uuid;
@@ -54,11 +54,11 @@ public class CacheLog {
         this.cacheKey = cacheKey;
     }
 
-    public String getCreatTime() {
-        return creatTime;
+    public String getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatTime(String creatTime) {
-        this.creatTime = creatTime;
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 }

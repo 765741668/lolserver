@@ -128,7 +128,7 @@ public class CacheAop {
                                 cacheLogBean.setUuid(UUID.randomUUID().toString());
                                 cacheLogBean.setPrefix(prefix);
                                 cacheLogBean.setCacheKey(key);
-                                cacheLogBean.setCreatTime(DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"));
+                                cacheLogBean.setCreateTime(DateUtils.getCurrentDate("yyyy-MM-dd HH:mm:ss"));
                                 this.cacheLogService.addCacheLog(cacheLogBean);
 
                                 logger.info("新增数据库缓存记录完成，ID：" + cacheLogBean.getUuid() + " cacheKey: " + key);

@@ -20,7 +20,7 @@ public class CacheLogBean implements Serializable {
     /**
      * 创建时间
      */
-    private String creatTime;
+    private String createTime;
 
     public String getUuid() {
         return uuid;
@@ -46,11 +46,11 @@ public class CacheLogBean implements Serializable {
         this.cacheKey = cacheKey;
     }
 
-    public String getCreatTime() {
-        return creatTime;
+    public String getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatTime(String creatTime) {
-        this.creatTime = creatTime;
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 }
