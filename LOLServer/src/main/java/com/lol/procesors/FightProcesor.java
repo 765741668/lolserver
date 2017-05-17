@@ -97,6 +97,9 @@ public class FightProcesor extends BaseProsesor implements GameProcessor {
 
             //将房间丢进缓存队列 供下次选择使用
             cache.push(room);
+
+            index.decrement();
+            room.setRoomIndex(index.intValue());
         }
     }
 

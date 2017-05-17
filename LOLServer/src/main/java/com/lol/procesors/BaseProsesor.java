@@ -114,27 +114,27 @@ public class BaseProsesor {
         return roomIndex;
     }
 
-    public boolean isInSelect() {
+    protected boolean isInSelect() {
         return isInSelect;
     }
 
-    public void setInSelect(boolean isInSelect) {
+    protected void setInSelect(boolean isInSelect) {
         this.isInSelect = isInSelect;
     }
 
-    public boolean isInMatch() {
+    protected boolean isInMatch() {
         return isInMatch;
     }
 
-    public void setInMatch(boolean isInMatch) {
+    protected void setInMatch(boolean isInMatch) {
         this.isInMatch = isInMatch;
     }
 
-    public boolean isInFight() {
+    protected boolean isInFight() {
         return isInFight;
     }
 
-    public void setInFight(boolean isInFight) {
+    protected void setInFight(boolean isInFight) {
         this.isInFight = isInFight;
     }
 }

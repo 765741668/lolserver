@@ -30,15 +30,10 @@ public class ServerHandler extends SimpleChannelInboundHandler<MessageUpProto.Me
     private static final AttributeKey<Connection> conn = AttributeKey.valueOf("Conn.attr");
 
     @Override
-    protected void messageReceived(ChannelHandlerContext ctx, MessageUpProto.MessageUp msg) throws Exception {
-        GameBoss.getInstance().getProcessor().process(new GameUpBuffer(msg, ctx.attr(conn).get()));
-    }
-
-    @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         logger.info("有客户端连接了 : {}", ctx.channel().remoteAddress());
         Connection c = ConnectionManager.getInstance().addConnection("userAcount_yzh", ctx);
-        ctx.attr(conn).set(c);
+        ctx.channel().attr(conn).set(c);
         GameOnlineChannelManager.getInstance().addOnlineChannel("Online").addOnlineConnection(c);
         super.channelActive(ctx);
     }
@@ -65,4 +60,8 @@ public class ServerHandler extends SimpleChannelInboundHandler<MessageUpProto.Me
         ctx.close();
     }
 
+    @Override
+    protected void channelRead0(ChannelHandlerContext ctx, MessageUpProto.MessageUp messageUp) throws Exception {
+        GameBoss.getInstance().getProcessor().process(new GameUpBuffer(messageUp, ctx.channel().attr(conn).get()));
+    }
 }

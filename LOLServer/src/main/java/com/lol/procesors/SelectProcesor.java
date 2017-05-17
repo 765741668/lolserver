@@ -141,6 +141,9 @@ public class SelectProcesor extends BaseProsesor implements GameProcessor {
             room.teamTwo.clear();
             //将房间丢进堆栈顶部缓存队列 供下次选择使用
             cache.push(room);
+
+            index.decrement();
+            room.setRoomIndex(index.intValue());
         }
     }
 

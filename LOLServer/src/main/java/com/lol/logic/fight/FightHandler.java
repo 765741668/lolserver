@@ -20,19 +20,6 @@ public class FightHandler extends SimpleChannelInboundHandler<MessageUpProto.Mes
     private MessageUpProto.MessageUp tempMessage = null;
 
     @Override
-    protected void messageReceived(ChannelHandlerContext ctx, MessageUpProto.MessageUp message) throws Exception {
-        if (message.getHeader().getMsgType() == Protocol.TYPE_FIGHT) {
-            MessageUpProto.FightUpBody fight = message.getBody().getFight();
-            if (fight != null) {
-                logger.info("收到战斗模块消息: {} ({})",fight,ctx.channel().remoteAddress());
-                GameBoss.getInstance().getProcessor().process(new GameUpBuffer(message, ctx.attr(Constans.conn).get()));
-            }
-        }else {
-            ctx.fireChannelRead(message);
-        }
-    }
-
-    @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
 
     }
@@ -59,5 +46,18 @@ public class FightHandler extends SimpleChannelInboundHandler<MessageUpProto.Mes
 //        logger.error("服务器异常!",cause);
         ctx.fireExceptionCaught(cause);
         ctx.close();
+    }
+
+    @Override
+    protected void channelRead0(ChannelHandlerContext ctx, MessageUpProto.MessageUp messageUp) throws Exception {
+        if (messageUp.getHeader().getMsgType() == Protocol.TYPE_FIGHT) {
+            MessageUpProto.FightUpBody fight = messageUp.getBody().getFight();
+            if (fight != null) {
+                logger.info("收到战斗模块消息: {} ({})",fight,ctx.channel().remoteAddress());
+                GameBoss.getInstance().getProcessor().process(new GameUpBuffer(messageUp, ctx.channel().attr(Constans.conn).get()));
+            }
+        }else {
+            ctx.fireChannelRead(messageUp);
+        }
     }
 }
