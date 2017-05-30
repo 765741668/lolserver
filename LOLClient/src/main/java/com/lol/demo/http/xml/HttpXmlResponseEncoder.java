@@ -43,7 +43,7 @@ public class HttpXmlResponseEncoder extends AbstractHttpXmlEncoder<HttpXmlRespon
         }
 
         response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/xml");
-        HttpHeaderUtil.setContentLength(response, body.readableBytes());
+        HttpHeaders.setContentLength(response, body.readableBytes());
         out.add(response);
 
     }

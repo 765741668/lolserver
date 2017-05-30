@@ -9,8 +9,6 @@ import java.io.FileNotFoundException;
 import java.io.RandomAccessFile;
 
 import static io.netty.handler.codec.http.HttpHeaderNames.CONNECTION;
-import static io.netty.handler.codec.http.HttpHeaderUtil.isKeepAlive;
-import static io.netty.handler.codec.http.HttpHeaderUtil.setContentLength;
 import static io.netty.handler.codec.http.HttpMethod.GET;
 import static io.netty.handler.codec.http.HttpResponseStatus.*;
 import static io.netty.handler.codec.http.HttpVersion.HTTP_1_1;
@@ -30,7 +28,15 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
     }
 
     @Override
-    protected void messageReceived(ChannelHandlerContext ctx, FullHttpRequest request) throws Exception {
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+        cause.printStackTrace();
+        if (ctx.channel().isActive()) {
+            HttpUrlKit.sendError(ctx, INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    protected void channelRead0(ChannelHandlerContext ctx, FullHttpRequest request) throws Exception {
         // 如果出现编码错误，跳转404路径错误页面
         if (!request.decoderResult().isSuccess()) {
             HttpUrlKit.sendError(ctx, BAD_REQUEST);
@@ -80,10 +86,10 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
         // 获取文件的长度，构造http答应消息
         long fileLength = raf.length();
         HttpResponse hresp = new DefaultHttpResponse(HTTP_1_1, OK);
-        setContentLength(request, fileLength);
+        HttpHeaders.setContentLength(request, fileLength);
         // 设置响应文件的mime类型，即文件的扩展名，而客户端浏览器获取这个类型以后，根绝mime来决定采用什么应用程序来处理数据
         HttpUrlKit.setContentTypeHeader(hresp, file);
-        if (isKeepAlive(request)) {
+        if (HttpHeaders.isKeepAlive(request)) {
             hresp.headers().set(CONNECTION, HttpHeaderValues.KEEP_ALIVE);
         }
         // 发送消息
@@ -111,16 +117,8 @@ public class HttpFileServerHandler extends SimpleChannelInboundHandler<FullHttpR
         // 发送编码结束的空消息体，标识消息体发送完成，同时小勇flush方法将发送消息缓冲区的消息刷新到SocketChannel
         ChannelFuture lastContentFuture = ctx.writeAndFlush(LastHttpContent.EMPTY_LAST_CONTENT);
         // 如果非keepalive则标识发送完成，关闭连接
-        if (!isKeepAlive(request)) {
+        if (!HttpHeaders.isKeepAlive(request)) {
             lastContentFuture.addListener(ChannelFutureListener.CLOSE);
-        }
-    }
-
-    @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        cause.printStackTrace();
-        if (ctx.channel().isActive()) {
-            HttpUrlKit.sendError(ctx, INTERNAL_SERVER_ERROR);
         }
     }
 }

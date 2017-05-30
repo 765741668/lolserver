@@ -17,8 +17,8 @@
 package com.lol.demo4_1.http2.tiles;
 
 import static io.netty.buffer.Unpooled.EMPTY_BUFFER;
-import static io.netty.example.http2.Http2ExampleUtil.firstValue;
-import static io.netty.example.http2.Http2ExampleUtil.toInt;
+import static com.lol.demo4_1.http2.Http2ExampleUtil.firstValue;
+import static com.lol.demo4_1.http2.Http2ExampleUtil.toInt;
 import static io.netty.handler.codec.http.HttpHeaderNames.CONTENT_TYPE;
 import static io.netty.handler.codec.http.HttpUtil.setContentLength;
 import static io.netty.handler.codec.http.HttpResponseStatus.BAD_REQUEST;
@@ -38,9 +38,9 @@ import io.netty.handler.codec.http2.InboundHttp2ToHttpAdapter;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Handles all the requests for data. It receives a {@link FullHttpRequest},
- * which has been converted by a {@link InboundHttp2ToHttpAdapter} before it
- * arrived here. For further details, check {@link Http2OrHttpHandler} where the
+ * Handles all the requests for data. It receives a {@link io.netty.handler.codec.http.FullHttpRequest},
+ * which has been converted by a {@link io.netty.handler.codec.http2.InboundHttp2ToHttpAdapter} before it
+ * arrived here. For further details, check {@link com.lol.demo4_1.http2.tiles.Http2OrHttpHandler} where the
  * pipeline is setup.
  */
 public class Http2RequestHandler extends SimpleChannelInboundHandler<FullHttpRequest> {

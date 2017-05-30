@@ -24,14 +24,14 @@
 package com.lol.demo.heartbeat.jbossmarshall;
 
 import com.lol.demo.common.NettyMessage;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.SocketAddress;
 
-public class HeartBeatRespHandler extends ChannelHandlerAdapter {
+public class HeartBeatRespHandler extends SimpleChannelInboundHandler {
     private static Logger logger = LoggerFactory.getLogger(HeartBeatRespHandler.class);
 
     @Override
@@ -43,7 +43,7 @@ public class HeartBeatRespHandler extends ChannelHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    public void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
         NettyMessage message = (NettyMessage) msg;
         logger.info("Server receive heart beat message from client : ---> {}({})", message, ctx.channel().localAddress());
 //        if(message.getHeader() != null && message.getHeader().getType() == MessageType.HEARTBEAT_REQ.getValue()){

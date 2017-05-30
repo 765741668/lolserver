@@ -2,14 +2,14 @@ package com.lol.demo.game;
 
 import com.lol.demo.common.NettyMessage;
 import com.lol.demo.enums.MessageType;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.SocketAddress;
 
-public class GameServerChannelHandler extends ChannelHandlerAdapter {
+public class GameServerChannelHandler extends SimpleChannelInboundHandler {
     private static Monster monster;
     private static Integer monster_damage_fx;
     private static Double percentage;
@@ -25,7 +25,7 @@ public class GameServerChannelHandler extends ChannelHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg)
+    public void channelRead0(ChannelHandlerContext ctx, Object msg)
             throws Exception {
 //        percentage = Integer.valueOf(Utils.get0_1PercentageArea(2,0.8,1));
 //        percentage = Utils.get0_1PercentageArea(2,0.8,1);

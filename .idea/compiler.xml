@@ -23,6 +23,7 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="LOLClient" />
+        <module name="LOLJemeterPlugin" />
         <module name="LOLServer" />
         <module name="Protocol" />
       </profile>

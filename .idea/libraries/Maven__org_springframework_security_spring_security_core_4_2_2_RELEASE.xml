@@ -8,6 +8,7 @@
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/org/springframework/security/spring-security-core/4.2.2.RELEASE/spring-security-core-4.2.2.RELEASE-sources.jar!/" />
+      <root url="file://C:/Users/YangZH/AppData/Local/Temp/intellijad" />
     </SOURCES>
   </library>
 </component>

@@ -28,7 +28,7 @@ import io.netty.handler.ssl.SslContext;
 import io.netty.handler.stream.ChunkedWriteHandler;
 
 /**
- * Please refer to the {@link CorsConfig} javadocs for information about all the
+ * Please refer to the {@link io.netty.handler.codec.http.cors.CorsConfig} javadocs for information about all the
  * configuration options available.
  *
  * Below are some of configuration discussed in this example:

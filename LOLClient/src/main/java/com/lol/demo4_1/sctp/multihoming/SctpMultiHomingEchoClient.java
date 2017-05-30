@@ -23,7 +23,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.sctp.SctpChannel;
 import io.netty.channel.sctp.SctpChannelOption;
 import io.netty.channel.sctp.nio.NioSctpChannel;
-import io.netty.example.sctp.SctpEchoClientHandler;
+import com.lol.demo4_1.sctp.SctpEchoClientHandler;
 import io.netty.util.internal.SocketUtils;
 
 import java.net.InetAddress;

@@ -20,7 +20,7 @@ public class LoginHandler extends SimpleChannelInboundHandler<MessageUpProto.Mes
     private MessageUpProto.MessageUp tempMessage = null;
 
     @Override
-    protected void messageReceived(ChannelHandlerContext ctx, MessageUpProto.MessageUp message) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, MessageUpProto.MessageUp message) throws Exception {
         if (message.getHeader().getMsgType() == Protocol.TYPE_LOGIN) {
             MessageUpProto.LoginUpBody login = message.getBody().getLogin();
             if (login != null) {
@@ -60,4 +60,5 @@ public class LoginHandler extends SimpleChannelInboundHandler<MessageUpProto.Mes
         ctx.fireExceptionCaught(cause);
         ctx.close();
     }
+
 }

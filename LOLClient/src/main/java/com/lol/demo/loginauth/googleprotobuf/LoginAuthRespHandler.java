@@ -27,8 +27,8 @@ import com.lol.demo.encode.protobuf.SubscribeReqProto.SubscribeReq;
 import com.lol.demo.encode.protobuf.SubscribeRespProto.SubscribeResp;
 import com.lol.demo.encode.protobuf.SubscribeRespProto.SubscribeResp.MsgType;
 import com.lol.demo.util.PropertiesExUtil;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +37,7 @@ import java.net.SocketAddress;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class LoginAuthRespHandler extends ChannelHandlerAdapter {
+public class LoginAuthRespHandler extends SimpleChannelInboundHandler<SubscribeReq> {
     private static Map<String, Boolean> nodeCheck = new ConcurrentHashMap<String, Boolean>();
     private final Logger logger = LoggerFactory.getLogger(LoginAuthRespHandler.class);
     private String whiteList = PropertiesExUtil.getInstance()
@@ -52,8 +52,7 @@ public class LoginAuthRespHandler extends ChannelHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        SubscribeReq message = (SubscribeReq) msg;
+    public void channelRead0(ChannelHandlerContext ctx, SubscribeReq message) throws Exception {
 
         com.lol.demo.encode.protobuf.SubscribeReqProto.ProtoHeader.MsgType requestMsgType =
                 com.lol.demo.encode.protobuf.SubscribeReqProto.ProtoHeader.MsgType.LOGIN_REQ;

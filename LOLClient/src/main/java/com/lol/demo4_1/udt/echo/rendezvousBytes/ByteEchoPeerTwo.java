@@ -15,7 +15,7 @@
  */
 package com.lol.demo4_1.udt.echo.rendezvousBytes;
 
-import io.netty.example.udt.echo.rendezvous.Config;
+import com.lol.demo4_1.udt.echo.rendezvous.Config;
 import io.netty.util.internal.SocketUtils;
 
 import java.net.InetSocketAddress;

@@ -2,12 +2,12 @@ package com.lol.demo.test;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TestClientChannelHandler extends ChannelHandlerAdapter {
+public class TestClientChannelHandler extends SimpleChannelInboundHandler {
 
     private final Logger logger = LoggerFactory.getLogger(TestClientChannelHandler.class);
     private ByteBuf msg;
@@ -25,7 +25,7 @@ public class TestClientChannelHandler extends ChannelHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg)
+    public void channelRead0(ChannelHandlerContext ctx, Object msg)
             throws Exception {
         logger.info("Client get respond from server.");
         ByteBuf buf = (ByteBuf) msg;

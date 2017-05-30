@@ -17,7 +17,7 @@
 package com.lol.demo4_1.http2.tiles;
 
 import static io.netty.buffer.Unpooled.unreleasableBuffer;
-import static io.netty.example.http2.Http2ExampleUtil.toByteBuf;
+import static com.lol.demo4_1.http2.Http2ExampleUtil.toByteBuf;
 import io.netty.buffer.ByteBuf;
 
 import java.io.IOException;

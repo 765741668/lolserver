@@ -5,14 +5,14 @@ import com.lol.Protocol;
 import com.lol.demo.encode.protobuf.MessageDownProto;
 import com.lol.demo.encode.protobuf.MessageUpProto;
 import com.lol.demo.util.Utils;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.SocketAddress;
 
-public class LOLClientLoginHandler extends ChannelHandlerAdapter {
+public class LOLClientLoginHandler extends ChannelInboundHandlerAdapter {
 
     private Logger logger = LoggerFactory.getLogger(LOLClientLoginHandler.class);
 

@@ -84,24 +84,33 @@
     <tx:advice id="transAdvice" transaction-manager="transactionManager">
         <!-- 事务属性定义 -->
         <tx:attributes>
-            <!--SUPPORTS: 如果其他bean调用这个方法,在其他bean中声明事务,那就用事务.如果其他bean没有声明事务,那就不用事务. -->
-            <tx:method name="get*" propagation="REQUIRED"/>
-            <tx:method name="find*" propagation="REQUIRED"/>
-            <tx:method name="set*" propagation="SUPPORTS"/>
-            <tx:method name="select*" propagation="SUPPORTS"/>
-            <tx:method name="load*" propagation="SUPPORTS"/>
-            <tx:method name="search*" propagation="SUPPORTS"/>
-            <!--REQUIRED: 如果有事务,那么加入事务,没有的话新建一个(不写的情况下) -->
-            <tx:method name="add*" propagation="REQUIRED"/>
-            <tx:method name="update*" propagation="REQUIRED"/>
-            <tx:method name="del*" propagation="REQUIRED"/>
+            <!--
+                REQUIRED：如果当前没有事务，就新建一个事务，如果已经存在一个事务，就加入到这个事务中。这是最常见的选择。
+                SUPPORTS：支持当前事务，如果当前没有事务，就以非事务方式执行。
+                MANDATORY：使用当前的事务，如果当前没有事务，就抛出异常。
+                REQUIRES_NEW：新建事务，如果当前存在事务，把当前事务挂起。
+                NOT_SUPPORTED：以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。
+                NEVER：以非事务方式执行，如果当前存在事务，则抛出异常。
+                NESTED：如果当前存在事务，则在嵌套事务内执行。如果当前没有事务，则执行与REQUIRED类似的操作。
+            -->
+            <tx:method name="get*"     propagation="REQUIRED"/>
+            <tx:method name="find*"    propagation="REQUIRED"/>
+
+            <tx:method name="set*"     propagation="SUPPORTS"/>
+            <tx:method name="select*"  propagation="SUPPORTS"/>
+            <tx:method name="load*"    propagation="SUPPORTS"/>
+            <tx:method name="search*"  propagation="SUPPORTS"/>
+
+            <tx:method name="add*"     propagation="REQUIRED"/>
+            <tx:method name="update*"  propagation="REQUIRED"/>
+            <tx:method name="del*"     propagation="REQUIRED"/>
             <tx:method name="disable*" propagation="REQUIRED"/>
-            <tx:method name="save*" propagation="REQUIRED"/>
-            <tx:method name="insert*" propagation="REQUIRED"/>
-            <tx:method name="remove*" propagation="REQUIRED"/>
-            <tx:method name="delete*" propagation="REQUIRED"/>
-            <tx:method name="verify*" propagation="REQUIRED"/>
-            <tx:method name="modify*" propagation="REQUIRED"/>
+            <tx:method name="save*"    propagation="REQUIRED"/>
+            <tx:method name="insert*"  propagation="REQUIRED"/>
+            <tx:method name="remove*"  propagation="REQUIRED"/>
+            <tx:method name="delete*"  propagation="REQUIRED"/>
+            <tx:method name="verify*"  propagation="REQUIRED"/>
+            <tx:method name="modify*"  propagation="REQUIRED"/>
 
             <tx:method name="*" propagation="REQUIRED" rollback-for="com.lol.fwk.db.DAOException,
                         com.lol.fwk.db.ServiceException" isolation="DEFAULT"/>
@@ -123,7 +132,7 @@
          -->
         <!-- 通过aop定义事务增强切面 -->
         <!--<aop:pointcut expression=" execution(* com.lolfwkfwk.service..*(..))" id="serviceMethod" />-->
-        <!-- 引用事务增强 -->
+        <!-- 引用事务增强 把嵌套事物的public方法都工作于同一事务环境下，出现异常全回滚-->
         <!--<aop:advisor advice-ref="transAdvice" pointcut-ref="serviceMethod" />-->
         <aop:advisor advice-ref="transAdvice" pointcut="execution(* com.lol.fwk.service.*.impl..*.*(..))"/>
         <aop:advisor advice-ref="transAdvice" pointcut="execution(* com.lol.fwk.dao.*.impl..*.*(..))"/>

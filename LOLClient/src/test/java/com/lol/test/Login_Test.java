@@ -17,6 +17,7 @@ import com.lol.demo.encode.protobuf.lol.LOLNettyClient;
 public class Login_Test {
 
     public static void main(String[] args) throws Exception {
+        args = new String[]{"1"};
         GameHandlerManager.getInstance().clearHandlers();
         GameHandlerManager.getInstance().registerHandler(1, new LOLClientLoginHandler());
         LOLNettyClient.main(args);

@@ -20,7 +20,6 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.udt.UdtMessage;
-import io.netty.channel.udt.nio.NioUdtProvider;
 
 /**
  * Handler implementation for the echo peer. It initiates the ping-pong traffic
@@ -42,7 +41,7 @@ public class MsgEchoPeerHandler extends SimpleChannelInboundHandler<UdtMessage> 
 
     @Override
     public void channelActive(final ChannelHandlerContext ctx) {
-        System.err.println("ECHO active " + NioUdtProvider.socketUDT(ctx.channel()).toStringOptions());
+//        System.err.println("ECHO active " + NioUdtProvider.socketUDT(ctx.channel()).toStringOptions());
         ctx.writeAndFlush(message);
     }
 

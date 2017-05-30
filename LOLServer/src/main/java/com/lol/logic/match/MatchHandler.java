@@ -29,7 +29,7 @@ public class MatchHandler extends SimpleChannelInboundHandler<MessageUpProto.Mes
     private MessageUpProto.MessageUp tempMessage = null;
 
     @Override
-    protected void messageReceived(ChannelHandlerContext ctx, MessageUpProto.MessageUp message) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, MessageUpProto.MessageUp message) throws Exception {
         if (message.getHeader().getMsgType() == Protocol.TYPE_MATCH) {
             MessageUpProto.MatchUpBody match = message.getBody().getMatch();
             if (match != null) {
@@ -63,4 +63,5 @@ public class MatchHandler extends SimpleChannelInboundHandler<MessageUpProto.Mes
         ctx.fireExceptionCaught(cause);
         ctx.close();
     }
+
 }

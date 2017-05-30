@@ -3,15 +3,15 @@ package com.lol.demo.encode.protobuf;
 import com.lol.demo.encode.protobuf.SubscribeReqProto.ProtoBody;
 import com.lol.demo.encode.protobuf.SubscribeReqProto.ProtoHeader;
 import com.lol.demo.encode.protobuf.SubscribeRespProto.SubscribeResp;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubReqClientHandler extends ChannelHandlerAdapter {
+public class SubReqClientHandler extends SimpleChannelInboundHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(SubReqClientHandler.class.getName());
 
@@ -56,7 +56,7 @@ public class SubReqClientHandler extends ChannelHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg)
+    public void channelRead0(ChannelHandlerContext ctx, Object msg)
             throws Exception {
         SubscribeResp resp = (SubscribeResp) msg;
         System.out.println("receive server response:[");

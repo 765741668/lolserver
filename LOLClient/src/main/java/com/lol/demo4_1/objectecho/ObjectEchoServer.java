@@ -22,7 +22,7 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.example.echo.EchoServer;
+import com.lol.demo4_1.echo.EchoServer;
 import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
@@ -33,7 +33,7 @@ import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.SelfSignedCertificate;
 
 /**
- * Modification of {@link EchoServer} which utilizes Java object serialization.
+ * Modification of {@link com.lol.demo4_1.echo.EchoServer} which utilizes Java object serialization.
  */
 public final class ObjectEchoServer {
 

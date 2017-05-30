@@ -508,7 +508,7 @@ public final class SubscribeReqProto {
        * <code>optional .netty.ProtoHeader header = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lol.demo.encode.protobuf.SubscribeReqProto.ProtoHeader, com.lol.demo.encode.protobuf.SubscribeReqProto.ProtoHeader.Builder, com.lol.demo.encode.protobuf.SubscribeReqProto.ProtoHeaderOrBuilder>
+          com.lol.demo.encode.protobuf.SubscribeReqProto.ProtoHeader, com.lol.demo.encode.protobuf.SubscribeReqProto.ProtoHeader.Builder, com.lol.demo.encode.protobuf.SubscribeReqProto.ProtoHeaderOrBuilder> 
           getHeaderFieldBuilder() {
         if (headerBuilder_ == null) {
           headerBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -625,7 +625,7 @@ public final class SubscribeReqProto {
        * <code>optional .netty.ProtoBody body = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lol.demo.encode.protobuf.SubscribeReqProto.ProtoBody, com.lol.demo.encode.protobuf.SubscribeReqProto.ProtoBody.Builder, com.lol.demo.encode.protobuf.SubscribeReqProto.ProtoBodyOrBuilder>
+          com.lol.demo.encode.protobuf.SubscribeReqProto.ProtoBody, com.lol.demo.encode.protobuf.SubscribeReqProto.ProtoBody.Builder, com.lol.demo.encode.protobuf.SubscribeReqProto.ProtoBodyOrBuilder> 
           getBodyFieldBuilder() {
         if (bodyBuilder_ == null) {
           bodyBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -1653,7 +1653,7 @@ public final class SubscribeReqProto {
           java.lang.String, com.lol.demo.encode.protobuf.SubscribeReqProto.ProtoHeader> defaultEntry =
               com.google.protobuf.MapEntry
               .<java.lang.String, com.lol.demo.encode.protobuf.SubscribeReqProto.ProtoHeader>newDefaultInstance(
-                  com.lol.demo.encode.protobuf.SubscribeReqProto.internal_static_netty_ProtoBody_HeaderMapEntry_descriptor,
+                  com.lol.demo.encode.protobuf.SubscribeReqProto.internal_static_netty_ProtoBody_HeaderMapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.STRING,
                   "",
                   com.google.protobuf.WireFormat.FieldType.MESSAGE,

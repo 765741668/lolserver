@@ -18,7 +18,7 @@ package com.lol.demo4_1.spdy.client;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.example.http.snoop.HttpSnoopClientHandler;
+import com.lol.demo4_1.http.snoop.HttpSnoopClientHandler;
 import io.netty.handler.codec.http.HttpContent;
 import io.netty.handler.codec.http.HttpUtil;
 import io.netty.handler.codec.http.HttpObject;
@@ -30,7 +30,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * This is a modified version of {@link HttpSnoopClientHandler} that uses a {@link java.util.concurrent.BlockingQueue} to wait until an
+ * This is a modified version of {@link com.lol.demo4_1.http.snoop.HttpSnoopClientHandler} that uses a {@link java.util.concurrent.BlockingQueue} to wait until an
  * HTTPResponse is received.
  */
 public class HttpResponseClientHandler extends SimpleChannelInboundHandler<HttpObject> {

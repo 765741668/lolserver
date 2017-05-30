@@ -27,8 +27,8 @@ import com.lol.demo.common.NettyMessage;
 import com.lol.demo.enums.MessageType;
 import com.lol.demo.game.Header;
 import com.lol.demo.util.PropertiesExUtil;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +37,7 @@ import java.net.SocketAddress;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class LoginAuthRespHandler extends ChannelHandlerAdapter {
+public class LoginAuthRespHandler extends SimpleChannelInboundHandler {
     private static Map<String, Boolean> nodeCheck = new ConcurrentHashMap<String, Boolean>();
     private final Logger logger = LoggerFactory.getLogger(LoginAuthRespHandler.class);
     private String whiteList = PropertiesExUtil.getInstance()
@@ -52,7 +52,7 @@ public class LoginAuthRespHandler extends ChannelHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    public void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
         NettyMessage message = (NettyMessage) msg;
         if (message.getHeader() != null && message.getHeader().getType() == MessageType.LOGIN_REQ.getValue()) {
             logger.info("Server reveived Login auth message from Client : ---> {}({})", message, ctx.channel().localAddress());

@@ -54,7 +54,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
         }
         // 如果是非Keep-Alive，关闭连接
         ChannelFuture f = ctx.channel().writeAndFlush(res);
-        if (HttpHeaderUtil.isKeepAlive(req) || res.status().code() != 200) {
+        if (HttpHeaders.isKeepAlive(req) || res.status().code() != 200) {
             f.addListener(ChannelFutureListener.CLOSE);
         }
     }
@@ -75,7 +75,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
     }
 
     @Override
-    protected void messageReceived(ChannelHandlerContext ctx, Object msg)
+    protected void channelRead0(ChannelHandlerContext ctx, Object msg)
             throws Exception {
         if (msg instanceof FullHttpRequest) {
             handleHttpRequest(ctx, ((FullHttpRequest) msg));

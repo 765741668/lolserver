@@ -516,7 +516,7 @@ public final class MessageUpProto {
        * <code>optional .MsgHeader header = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lol.demo.encode.protobuf.MessageUpProto.MsgHeader, com.lol.demo.encode.protobuf.MessageUpProto.MsgHeader.Builder, com.lol.demo.encode.protobuf.MessageUpProto.MsgHeaderOrBuilder>
+          com.lol.demo.encode.protobuf.MessageUpProto.MsgHeader, com.lol.demo.encode.protobuf.MessageUpProto.MsgHeader.Builder, com.lol.demo.encode.protobuf.MessageUpProto.MsgHeaderOrBuilder> 
           getHeaderFieldBuilder() {
         if (headerBuilder_ == null) {
           headerBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -633,7 +633,7 @@ public final class MessageUpProto {
        * <code>optional .MsgUpBody body = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lol.demo.encode.protobuf.MessageUpProto.MsgUpBody, com.lol.demo.encode.protobuf.MessageUpProto.MsgUpBody.Builder, com.lol.demo.encode.protobuf.MessageUpProto.MsgUpBodyOrBuilder>
+          com.lol.demo.encode.protobuf.MessageUpProto.MsgUpBody, com.lol.demo.encode.protobuf.MessageUpProto.MsgUpBody.Builder, com.lol.demo.encode.protobuf.MessageUpProto.MsgUpBodyOrBuilder> 
           getBodyFieldBuilder() {
         if (bodyBuilder_ == null) {
           bodyBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -1969,7 +1969,7 @@ public final class MessageUpProto {
        * <code>optional .LoginUpBody login = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lol.demo.encode.protobuf.MessageUpProto.LoginUpBody, com.lol.demo.encode.protobuf.MessageUpProto.LoginUpBody.Builder, com.lol.demo.encode.protobuf.MessageUpProto.LoginUpBodyOrBuilder>
+          com.lol.demo.encode.protobuf.MessageUpProto.LoginUpBody, com.lol.demo.encode.protobuf.MessageUpProto.LoginUpBody.Builder, com.lol.demo.encode.protobuf.MessageUpProto.LoginUpBodyOrBuilder> 
           getLoginFieldBuilder() {
         if (loginBuilder_ == null) {
           loginBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -2086,7 +2086,7 @@ public final class MessageUpProto {
        * <code>optional .PlayerUpBody player = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lol.demo.encode.protobuf.MessageUpProto.PlayerUpBody, com.lol.demo.encode.protobuf.MessageUpProto.PlayerUpBody.Builder, com.lol.demo.encode.protobuf.MessageUpProto.PlayerUpBodyOrBuilder>
+          com.lol.demo.encode.protobuf.MessageUpProto.PlayerUpBody, com.lol.demo.encode.protobuf.MessageUpProto.PlayerUpBody.Builder, com.lol.demo.encode.protobuf.MessageUpProto.PlayerUpBodyOrBuilder> 
           getPlayerFieldBuilder() {
         if (playerBuilder_ == null) {
           playerBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -2203,7 +2203,7 @@ public final class MessageUpProto {
        * <code>optional .MatchUpBody match = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lol.demo.encode.protobuf.MessageUpProto.MatchUpBody, com.lol.demo.encode.protobuf.MessageUpProto.MatchUpBody.Builder, com.lol.demo.encode.protobuf.MessageUpProto.MatchUpBodyOrBuilder>
+          com.lol.demo.encode.protobuf.MessageUpProto.MatchUpBody, com.lol.demo.encode.protobuf.MessageUpProto.MatchUpBody.Builder, com.lol.demo.encode.protobuf.MessageUpProto.MatchUpBodyOrBuilder> 
           getMatchFieldBuilder() {
         if (matchBuilder_ == null) {
           matchBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -2320,7 +2320,7 @@ public final class MessageUpProto {
        * <code>optional .SelectUpBody select = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lol.demo.encode.protobuf.MessageUpProto.SelectUpBody, com.lol.demo.encode.protobuf.MessageUpProto.SelectUpBody.Builder, com.lol.demo.encode.protobuf.MessageUpProto.SelectUpBodyOrBuilder>
+          com.lol.demo.encode.protobuf.MessageUpProto.SelectUpBody, com.lol.demo.encode.protobuf.MessageUpProto.SelectUpBody.Builder, com.lol.demo.encode.protobuf.MessageUpProto.SelectUpBodyOrBuilder> 
           getSelectFieldBuilder() {
         if (selectBuilder_ == null) {
           selectBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -2437,7 +2437,7 @@ public final class MessageUpProto {
        * <code>optional .FightUpBody fight = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lol.demo.encode.protobuf.MessageUpProto.FightUpBody, com.lol.demo.encode.protobuf.MessageUpProto.FightUpBody.Builder, com.lol.demo.encode.protobuf.MessageUpProto.FightUpBodyOrBuilder>
+          com.lol.demo.encode.protobuf.MessageUpProto.FightUpBody, com.lol.demo.encode.protobuf.MessageUpProto.FightUpBody.Builder, com.lol.demo.encode.protobuf.MessageUpProto.FightUpBodyOrBuilder> 
           getFightFieldBuilder() {
         if (fightBuilder_ == null) {
           fightBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -5322,7 +5322,7 @@ public final class MessageUpProto {
        * <code>optional .MoveInfo move = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lol.demo.encode.protobuf.MessageUpProto.MoveInfo, com.lol.demo.encode.protobuf.MessageUpProto.MoveInfo.Builder, com.lol.demo.encode.protobuf.MessageUpProto.MoveInfoOrBuilder>
+          com.lol.demo.encode.protobuf.MessageUpProto.MoveInfo, com.lol.demo.encode.protobuf.MessageUpProto.MoveInfo.Builder, com.lol.demo.encode.protobuf.MessageUpProto.MoveInfoOrBuilder> 
           getMoveFieldBuilder() {
         if (moveBuilder_ == null) {
           moveBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -5439,7 +5439,7 @@ public final class MessageUpProto {
        * <code>optional .DamageInfo damage = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lol.demo.encode.protobuf.MessageUpProto.DamageInfo, com.lol.demo.encode.protobuf.MessageUpProto.DamageInfo.Builder, com.lol.demo.encode.protobuf.MessageUpProto.DamageInfoOrBuilder>
+          com.lol.demo.encode.protobuf.MessageUpProto.DamageInfo, com.lol.demo.encode.protobuf.MessageUpProto.DamageInfo.Builder, com.lol.demo.encode.protobuf.MessageUpProto.DamageInfoOrBuilder> 
           getDamageFieldBuilder() {
         if (damageBuilder_ == null) {
           damageBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -5556,7 +5556,7 @@ public final class MessageUpProto {
        * <code>optional .SkillAtkModel skillAtk = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModel, com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModel.Builder, com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModelOrBuilder>
+          com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModel, com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModel.Builder, com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModelOrBuilder> 
           getSkillAtkFieldBuilder() {
         if (skillAtkBuilder_ == null) {
           skillAtkBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -6188,7 +6188,7 @@ public final class MessageUpProto {
     /**
      * <code>repeated .Target target = 3 [packed = false];</code>
      */
-    java.util.List<com.lol.demo.encode.protobuf.MessageUpProto.Target>
+    java.util.List<com.lol.demo.encode.protobuf.MessageUpProto.Target> 
         getTargetList();
     /**
      * <code>repeated .Target target = 3 [packed = false];</code>
@@ -6201,7 +6201,7 @@ public final class MessageUpProto {
     /**
      * <code>repeated .Target target = 3 [packed = false];</code>
      */
-    java.util.List<? extends com.lol.demo.encode.protobuf.MessageUpProto.TargetOrBuilder>
+    java.util.List<? extends com.lol.demo.encode.protobuf.MessageUpProto.TargetOrBuilder> 
         getTargetOrBuilderList();
     /**
      * <code>repeated .Target target = 3 [packed = false];</code>
@@ -6325,7 +6325,7 @@ public final class MessageUpProto {
     /**
      * <code>repeated .Target target = 3 [packed = false];</code>
      */
-    public java.util.List<? extends com.lol.demo.encode.protobuf.MessageUpProto.TargetOrBuilder>
+    public java.util.List<? extends com.lol.demo.encode.protobuf.MessageUpProto.TargetOrBuilder> 
         getTargetOrBuilderList() {
       return target_;
     }
@@ -6869,7 +6869,7 @@ public final class MessageUpProto {
       /**
        * <code>repeated .Target target = 3 [packed = false];</code>
        */
-      public java.util.List<? extends com.lol.demo.encode.protobuf.MessageUpProto.TargetOrBuilder>
+      public java.util.List<? extends com.lol.demo.encode.protobuf.MessageUpProto.TargetOrBuilder> 
            getTargetOrBuilderList() {
         if (targetBuilder_ != null) {
           return targetBuilder_.getMessageOrBuilderList();
@@ -6895,12 +6895,12 @@ public final class MessageUpProto {
       /**
        * <code>repeated .Target target = 3 [packed = false];</code>
        */
-      public java.util.List<com.lol.demo.encode.protobuf.MessageUpProto.Target.Builder>
+      public java.util.List<com.lol.demo.encode.protobuf.MessageUpProto.Target.Builder> 
            getTargetBuilderList() {
         return getTargetFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lol.demo.encode.protobuf.MessageUpProto.Target, com.lol.demo.encode.protobuf.MessageUpProto.Target.Builder, com.lol.demo.encode.protobuf.MessageUpProto.TargetOrBuilder>
+          com.lol.demo.encode.protobuf.MessageUpProto.Target, com.lol.demo.encode.protobuf.MessageUpProto.Target.Builder, com.lol.demo.encode.protobuf.MessageUpProto.TargetOrBuilder> 
           getTargetFieldBuilder() {
         if (targetBuilder_ == null) {
           targetBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<

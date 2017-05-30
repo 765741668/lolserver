@@ -13,6 +13,9 @@ import io.netty.handler.codec.protobuf.ProtobufDecoder;
 import io.netty.handler.codec.protobuf.ProtobufEncoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
+import io.netty.handler.timeout.IdleStateHandler;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Description :
@@ -30,6 +33,8 @@ public class GameChannelInitializer extends ChannelInitializer<SocketChannel> {
         ch.pipeline().addLast(new ProtobufDecoder(MessageDownProto.MessageDown.getDefaultInstance(), registry));
         ch.pipeline().addLast(new ProtobufVarint32LengthFieldPrepender());
         ch.pipeline().addLast(new ProtobufEncoder());
+
+        ch.pipeline().addLast("PING",new IdleStateHandler(10,0,0, TimeUnit.SECONDS));
 
         for (ChannelHandler channel : GameHandlerManager.getInstance().getAllHandler().values()) {
             ch.pipeline().addLast(channel);

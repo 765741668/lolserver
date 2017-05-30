@@ -25,7 +25,7 @@ import io.netty.handler.codec.string.StringEncoder;
 import io.netty.handler.ssl.SslContext;
 
 /**
- * Creates a newly configured {@link ChannelPipeline} for a new channel.
+ * Creates a newly configured {@link io.netty.channel.ChannelPipeline} for a new channel.
  */
 public class TelnetServerInitializer extends ChannelInitializer<SocketChannel> {
 

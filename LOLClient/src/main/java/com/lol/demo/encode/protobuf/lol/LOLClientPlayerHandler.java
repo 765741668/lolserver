@@ -6,14 +6,14 @@ import com.lol.Protocol;
 import com.lol.demo.encode.protobuf.MessageDownProto;
 import com.lol.demo.encode.protobuf.MessageUpProto;
 import com.lol.demo.util.Utils;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.SocketAddress;
 
-public class LOLClientPlayerHandler extends ChannelHandlerAdapter {
+public class LOLClientPlayerHandler extends SimpleChannelInboundHandler<MessageDownProto.MessageDown> {
 
     private Logger logger = LoggerFactory.getLogger(LOLClientLoginHandler.class);
 
@@ -69,9 +69,7 @@ public class LOLClientPlayerHandler extends ChannelHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg)
-            throws Exception {
-        MessageDownProto.MessageDown resp = (MessageDownProto.MessageDown) msg;
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, MessageDownProto.MessageDown resp) throws Exception {
         String respStr;
         if(resp.getHeader().getMsgType() == Protocol.TYPE_PLYAER){
             switch (resp.getHeader().getCmd()){

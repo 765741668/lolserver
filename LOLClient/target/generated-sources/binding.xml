@@ -1,7 +1,0 @@
-<binding xmlns:ns2="http://www.yzh.hkjc.hk/Schema/Test/Jibx/ChuanOrder_v1" xmlns:ns1="http://www.yzh.hkjc.hk/Schema/Test/Jibx/ShipOrder_V1" name="binding" package="com.lol.jibx" trim-whitespace="true">
-  <format label="ns2:country" type="com.lol.jibx.chuanorderv1.Country" enum-value-method="xmlValue"/>
-  <format label="ns1:countryType" type="com.lol.jibx.shiporderv1.CountryType" enum-value-method="xmlValue"/>
-  <include path="Schema_Test_Jibx_CommonBinding.xml"/>
-  <include path="Schema_Test_Jibx_ChuanOrderv1Binding.xml"/>
-  <include path="Schema_Test_Jibx_ShipOrderV1Binding.xml"/>
-</binding>

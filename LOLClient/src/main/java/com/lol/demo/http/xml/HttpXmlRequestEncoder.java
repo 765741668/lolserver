@@ -49,7 +49,7 @@ public class HttpXmlRequestEncoder extends AbstractHttpXmlEncoder<HttpXmlRequest
             headers.set(HttpHeaderNames.USER_AGENT, "Netty xml Http Client side");
             headers.set(HttpHeaderNames.ACCEPT, "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
 
-            HttpHeaderUtil.setContentLength(request, body.readableBytes());
+            HttpHeaders.setContentLength(request, body.readableBytes());
 
             out.add(request);
         }

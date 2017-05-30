@@ -482,7 +482,7 @@ public final class TestV3Proto {
           java.lang.String, java.lang.Integer> defaultEntry =
               com.google.protobuf.MapEntry
               .<java.lang.String, java.lang.Integer>newDefaultInstance(
-                  com.lol.demo.encode.protobuf.TestV3Proto.internal_static_netty_TestV3_EnummapEntry_descriptor,
+                  com.lol.demo.encode.protobuf.TestV3Proto.internal_static_netty_TestV3_EnummapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.STRING,
                   "",
                   com.google.protobuf.WireFormat.FieldType.ENUM,
@@ -1434,7 +1434,7 @@ public final class TestV3Proto {
      *定义list,list里边item类型为uint64
      * </pre>
      */
-    java.util.List<com.lol.demo.encode.protobuf.TestV3Proto.TestV3>
+    java.util.List<com.lol.demo.encode.protobuf.TestV3Proto.TestV3> 
         getEnumlistList();
     /**
      * <code>repeated .netty.TestV3 enumlist = 3;</code>
@@ -1459,7 +1459,7 @@ public final class TestV3Proto {
      *定义list,list里边item类型为uint64
      * </pre>
      */
-    java.util.List<? extends com.lol.demo.encode.protobuf.TestV3Proto.TestV3OrBuilder>
+    java.util.List<? extends com.lol.demo.encode.protobuf.TestV3Proto.TestV3OrBuilder> 
         getEnumlistOrBuilderList();
     /**
      * <code>repeated .netty.TestV3 enumlist = 3;</code>
@@ -1574,7 +1574,7 @@ public final class TestV3Proto {
           java.lang.String, com.lol.demo.encode.protobuf.TestV3Proto.TestV3> defaultEntry =
               com.google.protobuf.MapEntry
               .<java.lang.String, com.lol.demo.encode.protobuf.TestV3Proto.TestV3>newDefaultInstance(
-                  com.lol.demo.encode.protobuf.TestV3Proto.internal_static_netty_TestV3Array_ObjmmapEntry_descriptor,
+                  com.lol.demo.encode.protobuf.TestV3Proto.internal_static_netty_TestV3Array_ObjmmapEntry_descriptor, 
                   com.google.protobuf.WireFormat.FieldType.STRING,
                   "",
                   com.google.protobuf.WireFormat.FieldType.MESSAGE,
@@ -1622,7 +1622,7 @@ public final class TestV3Proto {
      *定义list,list里边item类型为uint64
      * </pre>
      */
-    public java.util.List<? extends com.lol.demo.encode.protobuf.TestV3Proto.TestV3OrBuilder>
+    public java.util.List<? extends com.lol.demo.encode.protobuf.TestV3Proto.TestV3OrBuilder> 
         getEnumlistOrBuilderList() {
       return enumlist_;
     }
@@ -2250,7 +2250,7 @@ public final class TestV3Proto {
        *定义list,list里边item类型为uint64
        * </pre>
        */
-      public java.util.List<? extends com.lol.demo.encode.protobuf.TestV3Proto.TestV3OrBuilder>
+      public java.util.List<? extends com.lol.demo.encode.protobuf.TestV3Proto.TestV3OrBuilder> 
            getEnumlistOrBuilderList() {
         if (enumlistBuilder_ != null) {
           return enumlistBuilder_.getMessageOrBuilderList();
@@ -2288,12 +2288,12 @@ public final class TestV3Proto {
        *定义list,list里边item类型为uint64
        * </pre>
        */
-      public java.util.List<com.lol.demo.encode.protobuf.TestV3Proto.TestV3.Builder>
+      public java.util.List<com.lol.demo.encode.protobuf.TestV3Proto.TestV3.Builder> 
            getEnumlistBuilderList() {
         return getEnumlistFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lol.demo.encode.protobuf.TestV3Proto.TestV3, com.lol.demo.encode.protobuf.TestV3Proto.TestV3.Builder, com.lol.demo.encode.protobuf.TestV3Proto.TestV3OrBuilder>
+          com.lol.demo.encode.protobuf.TestV3Proto.TestV3, com.lol.demo.encode.protobuf.TestV3Proto.TestV3.Builder, com.lol.demo.encode.protobuf.TestV3Proto.TestV3OrBuilder> 
           getEnumlistFieldBuilder() {
         if (enumlistBuilder_ == null) {
           enumlistBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<

@@ -19,7 +19,7 @@ import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.example.telnet.TelnetServer;
+import com.lol.demo4_1.telnet.TelnetServer;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.ssl.SslContext;
@@ -27,7 +27,7 @@ import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.SelfSignedCertificate;
 
 /**
- * Simple SSL chat server modified from {@link TelnetServer}.
+ * Simple SSL chat server modified from {@link com.lol.demo4_1.telnet.TelnetServer}.
  */
 public final class SecureChatServer {
 

@@ -28,7 +28,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Sends a list of continent/city pairs to a {@link WorldClockServer} to
+ * Sends a list of continent/city pairs to a {@link com.lol.demo4_1.worldclock.WorldClockServer} to
  * get the local times of the specified cities.
  */
 public final class WorldClockClient {

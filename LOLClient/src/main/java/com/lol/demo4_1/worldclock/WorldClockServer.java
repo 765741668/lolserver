@@ -26,7 +26,7 @@ import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.SelfSignedCertificate;
 
 /**
- * Receives a list of continent/city pairs from a {@link WorldClockClient} to
+ * Receives a list of continent/city pairs from a {@link com.lol.demo4_1.worldclock.WorldClockClient} to
  * get the local times of the specified cities.
  */
 public final class WorldClockServer {

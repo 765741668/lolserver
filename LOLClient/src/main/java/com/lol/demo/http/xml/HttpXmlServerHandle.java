@@ -27,8 +27,8 @@ import com.lol.jibx.shiporderv1.CTshiporder;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.*;
 import io.netty.util.CharsetUtil;
 import io.netty.util.concurrent.Future;
@@ -36,7 +36,7 @@ import io.netty.util.concurrent.GenericFutureListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HttpXmlServerHandle extends ChannelHandlerAdapter {
+public class HttpXmlServerHandle extends SimpleChannelInboundHandler<HttpXmlRequest> {
     private final Logger logger = LoggerFactory.getLogger(HttpXmlServerHandle.class);
 
     @Override
@@ -47,13 +47,12 @@ public class HttpXmlServerHandle extends ChannelHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        HttpXmlRequest request = (HttpXmlRequest) msg;
+    public void channelRead0(ChannelHandlerContext ctx, HttpXmlRequest request) throws Exception {
         CTshiporder order = (CTshiporder) request.getBody();
         logger.info("Server reveived request from Client: ---> {}({})", order, ctx.channel().remoteAddress());
         ChannelFuture cf = ctx.writeAndFlush(new HttpXmlResponse(null, order));
         //send response msg,over than close http connection
-        if (HttpHeaderUtil.isKeepAlive(request.getRequest())) {
+        if (HttpHeaders.isKeepAlive(request.getRequest())) {
             cf.addListener(new GenericFutureListener<Future<? super Void>>() {
                 @Override
                 public void operationComplete(Future<? super Void> arg0) throws Exception {

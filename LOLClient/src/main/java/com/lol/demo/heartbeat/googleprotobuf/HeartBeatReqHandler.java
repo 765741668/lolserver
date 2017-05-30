@@ -27,8 +27,8 @@ import com.lol.demo.encode.protobuf.SubscribeReqProto.ProtoHeader;
 import com.lol.demo.encode.protobuf.SubscribeReqProto.SubscribeReq;
 import com.lol.demo.encode.protobuf.SubscribeRespProto.SubscribeResp;
 import com.lol.demo.encode.protobuf.SubscribeRespProto.SubscribeResp.MsgType;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.concurrent.ScheduledFuture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +36,7 @@ import org.slf4j.LoggerFactory;
 import java.net.SocketAddress;
 import java.util.concurrent.TimeUnit;
 
-public class HeartBeatReqHandler extends ChannelHandlerAdapter {
+public class HeartBeatReqHandler extends SimpleChannelInboundHandler<SubscribeResp> {
     private final Logger logger = LoggerFactory.getLogger(HeartBeatReqHandler.class);
     private volatile ScheduledFuture<?> heartBeat;
 
@@ -49,8 +49,7 @@ public class HeartBeatReqHandler extends ChannelHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        SubscribeResp message = (SubscribeResp) msg;
+    public void channelRead0(ChannelHandlerContext ctx, SubscribeResp message) throws Exception {
         if (message != null && message.getMsgType() == MsgType.LOGIN_RESP) {
             logger.info("Login Auth request is over, start to send Heart Beat request ... ");
             heartBeat = ctx.executor().scheduleAtFixedRate(new HeartBeatTask(ctx), 0, 5, TimeUnit.SECONDS);

@@ -25,7 +25,7 @@ import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 
 /**
- * Sends a sequence of integers to a {@link FactorialServer} to calculate
+ * Sends a sequence of integers to a {@link com.lol.demo4_1.factorial.FactorialServer} to calculate
  * the factorial of the specified integer.
  */
 public final class FactorialClient {

@@ -27,14 +27,14 @@ import com.lol.demo.common.NettyMessage;
 import com.lol.demo.encode.jbossmarshall.NettyClient;
 import com.lol.demo.enums.MessageType;
 import com.lol.demo.game.Header;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.SocketAddress;
 
-public class LoginAuthReqHandler extends ChannelHandlerAdapter {
+public class LoginAuthReqHandler extends SimpleChannelInboundHandler {
     private final Logger logger = LoggerFactory.getLogger(LoginAuthReqHandler.class);
     NettyClient client;
 
@@ -59,7 +59,7 @@ public class LoginAuthReqHandler extends ChannelHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    public void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
         NettyMessage message = (NettyMessage) msg;
         if (message.getHeader() != null && message.getHeader().getType() == MessageType.LOGIN_RESP.getValue()) {
             logger.info("Client reveived Login auth message from server : ---> {} ({})" + message,ctx.channel().remoteAddress());

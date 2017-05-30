@@ -17,12 +17,12 @@ package com.lol.demo4_1.worldclock;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.example.worldclock.WorldClockProtocol.Continent;
-import io.netty.example.worldclock.WorldClockProtocol.DayOfWeek;
-import io.netty.example.worldclock.WorldClockProtocol.LocalTime;
-import io.netty.example.worldclock.WorldClockProtocol.LocalTimes;
-import io.netty.example.worldclock.WorldClockProtocol.Location;
-import io.netty.example.worldclock.WorldClockProtocol.Locations;
+import com.lol.demo4_1.worldclock.WorldClockProtocol.Continent;
+import com.lol.demo4_1.worldclock.WorldClockProtocol.DayOfWeek;
+import com.lol.demo4_1.worldclock.WorldClockProtocol.LocalTime;
+import com.lol.demo4_1.worldclock.WorldClockProtocol.LocalTimes;
+import com.lol.demo4_1.worldclock.WorldClockProtocol.Location;
+import com.lol.demo4_1.worldclock.WorldClockProtocol.Locations;
 
 import java.util.Calendar;
 import java.util.TimeZone;

@@ -32,7 +32,7 @@ import io.netty.handler.ssl.util.SelfSignedCertificate;
  * a html page that is loaded to try out CORS support in a web browser.
  * <p>
  *
- * CORS is configured in {@link HttpCorsServerInitializer} and by updating the config you can
+ * CORS is configured in {@link com.lol.demo4_1.http.cors.HttpCorsServerInitializer} and by updating the config you can
  * try out various combinations, like using a specific origin instead of a
  * wildcard origin ('*').
  * <p>
@@ -68,7 +68,7 @@ import io.netty.handler.ssl.util.SelfSignedCertificate;
  * If you inspect the headers being sent using your browser you'll see that the 'Origin'
  * request header is {@code 'null'}. This is expected and happens when you load a file from the
  * local file system. Netty can handle this by configuring the CorsHandler which is done
- * in the {@link HttpCorsServerInitializer}.
+ * in the {@link com.lol.demo4_1.http.cors.HttpCorsServerInitializer}.
  *
  */
 public final class HttpCorsServer {

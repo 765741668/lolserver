@@ -34,7 +34,7 @@ import io.netty.util.CharsetUtil;
 
 import static io.netty.buffer.Unpooled.copiedBuffer;
 import static io.netty.buffer.Unpooled.unreleasableBuffer;
-import static io.netty.example.http2.Http2ExampleUtil.UPGRADE_RESPONSE_HEADER;
+import static com.lol.demo4_1.http2.Http2ExampleUtil.UPGRADE_RESPONSE_HEADER;
 import static io.netty.handler.codec.http.HttpResponseStatus.OK;
 
 /**

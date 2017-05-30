@@ -19,8 +19,9 @@ public class SelectHandler extends SimpleChannelInboundHandler<MessageUpProto.Me
 
     private MessageUpProto.MessageUp tempMessage = null;
 
+
     @Override
-    protected void messageReceived(ChannelHandlerContext ctx, MessageUpProto.MessageUp message) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, MessageUpProto.MessageUp message) throws Exception {
         if (message.getHeader().getMsgType() == Protocol.TYPE_SELECT) {
             MessageUpProto.SelectUpBody match = message.getBody().getSelect();
             if (match != null) {
@@ -54,4 +55,5 @@ public class SelectHandler extends SimpleChannelInboundHandler<MessageUpProto.Me
         ctx.fireExceptionCaught(cause);
         ctx.close();
     }
+
 }

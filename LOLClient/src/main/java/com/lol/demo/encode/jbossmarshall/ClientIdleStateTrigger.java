@@ -26,14 +26,14 @@ package com.lol.demo.encode.jbossmarshall;
 import com.lol.demo.common.NettyMessage;
 import com.lol.demo.enums.MessageType;
 import com.lol.demo.game.Header;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ClientIdleStateTrigger extends ChannelHandlerAdapter {
+public class ClientIdleStateTrigger extends ChannelInboundHandlerAdapter {
     private static Logger logger = LoggerFactory.getLogger(ClientIdleStateTrigger.class);
 
     @Override

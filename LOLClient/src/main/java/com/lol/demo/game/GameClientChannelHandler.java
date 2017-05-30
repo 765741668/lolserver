@@ -2,14 +2,14 @@ package com.lol.demo.game;
 
 import com.lol.demo.common.NettyMessage;
 import com.lol.demo.enums.MessageType;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.SocketAddress;
 
-public class GameClientChannelHandler extends ChannelHandlerAdapter {
+public class GameClientChannelHandler extends SimpleChannelInboundHandler<NettyMessage> {
     private final Logger logger = LoggerFactory.getLogger(GameClientChannelHandler.class);
 
     @Override
@@ -29,10 +29,9 @@ public class GameClientChannelHandler extends ChannelHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg)
+    public void channelRead0(ChannelHandlerContext ctx, NettyMessage msg)
             throws Exception {
-        NettyMessage message = (NettyMessage) msg;
-        logger.info("Client received Game message from server : ---> {}({})", message, ctx.channel().remoteAddress());
+        logger.info("Client received Game message from server : ---> {}({})", msg, ctx.channel().remoteAddress());
 
     }
 

@@ -6,6 +6,8 @@ package com.lol.test;/**
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.TreeMap;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
@@ -22,7 +24,11 @@ public class WorkTest {
 
         wt.test2(new Integer[]{9,8, 1, 2, 5,13});
 
-
+        AtomicInteger integer = new AtomicInteger();
+        TreeMap<Integer, String> treeMap = new TreeMap<Integer, String>();
+        treeMap.put(10, "10");
+        treeMap.put(85, "85");
+        treeMap.put(15, "15");
 
     }
 

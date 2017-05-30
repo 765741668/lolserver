@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Framework/Framework.iml" filepath="$PROJECT_DIR$/Framework/Framework.iml" />
       <module fileurl="file://$PROJECT_DIR$/LOLClient/LOLClient.iml" filepath="$PROJECT_DIR$/LOLClient/LOLClient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LOLJemeterPlugin/LOLJemeterPlugin.iml" filepath="$PROJECT_DIR$/LOLJemeterPlugin/LOLJemeterPlugin.iml" />
       <module fileurl="file://$PROJECT_DIR$/LOLServer/LOLServer.iml" filepath="$PROJECT_DIR$/LOLServer/LOLServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/Protocol/Protocol.iml" filepath="$PROJECT_DIR$/Protocol/Protocol.iml" />
     </modules>

@@ -15,7 +15,7 @@
 package com.lol.demo4_1.http2.helloworld.multiplex.server;
 
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.example.http2.helloworld.server.HelloWorldHttp1Handler;
+import com.lol.demo4_1.http2.helloworld.server.HelloWorldHttp1Handler;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http2.Http2CodecBuilder;

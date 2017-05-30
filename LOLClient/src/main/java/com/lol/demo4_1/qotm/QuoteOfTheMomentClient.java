@@ -27,7 +27,7 @@ import io.netty.util.CharsetUtil;
 import io.netty.util.internal.SocketUtils;
 
 /**
- * A UDP broadcast client that asks for a quote of the moment (QOTM) to {@link QuoteOfTheMomentServer}.
+ * A UDP broadcast client that asks for a quote of the moment (QOTM) to {@link com.lol.demo4_1.qotm.QuoteOfTheMomentServer}.
  *
  * Inspired by <a href="http://docs.oracle.com/javase/tutorial/networking/datagrams/clientServer.html">the official
  * Java tutorial</a>.

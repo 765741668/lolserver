@@ -350,14 +350,9 @@ public class TestThreadPool {
         ExecutorService es = Executors.newFixedThreadPool(10);
         CompletionService<Integer> service = new ExecutorCompletionService<Integer>(es);
         for (int i = 0; i < 10; i++) {
-            Callable<Integer> c = new Callable<Integer>() {
-                @Override
-                public Integer call() throws Exception {
-                    return new Random().nextInt(10);
-                }
-            };
+            Callable<Integer> c = () -> new Random().nextInt(10);
 
-            service.submit(c);
+            service.submit(() -> new Random().nextInt(10));
         }
 
         int sum = 0;

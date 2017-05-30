@@ -49,7 +49,7 @@ import java.util.List;
 import java.util.Map.Entry;
 
 /**
- * This class is meant to be run against {@link HttpUploadServer}.
+ * This class is meant to be run against {@link com.lol.demo4_1.http.upload.HttpUploadServer}.
  */
 public final class HttpUploadClient {
 

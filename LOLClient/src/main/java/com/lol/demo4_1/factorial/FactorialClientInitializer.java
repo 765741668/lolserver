@@ -23,7 +23,7 @@ import io.netty.handler.codec.compression.ZlibWrapper;
 import io.netty.handler.ssl.SslContext;
 
 /**
- * Creates a newly configured {@link ChannelPipeline} for a client-side channel.
+ * Creates a newly configured {@link io.netty.channel.ChannelPipeline} for a client-side channel.
  */
 public class FactorialClientInitializer extends ChannelInitializer<SocketChannel> {
 

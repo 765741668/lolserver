@@ -36,6 +36,8 @@ public class GameChannelInitializer extends ChannelInitializer<SocketChannel> {
 //        ch.pipeline().addLast("readTimeOutHandler", new ReadTimeoutHandler(Integer.parseInt(
 //                ProReaderUtil.getInstance().getNettyPro().get("heartBeatTimeOut"))));
 
+
+
         for (ChannelHandler channel : GameHandlerManager.getInstance().getAllHandler().values()) {
             ch.pipeline().addLast(channel);
         }

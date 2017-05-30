@@ -22,7 +22,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioDatagramChannel;
 
 /**
- * A UDP server that responds to the QOTM (quote of the moment) request to a {@link QuoteOfTheMomentClient}.
+ * A UDP server that responds to the QOTM (quote of the moment) request to a {@link com.lol.demo4_1.qotm.QuoteOfTheMomentClient}.
  *
  * Inspired by <a href="http://docs.oracle.com/javase/tutorial/networking/datagrams/clientServer.html">the official
  * Java tutorial</a>.

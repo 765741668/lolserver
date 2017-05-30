@@ -1,12 +1,12 @@
 package com.lol.demo.encode.protobuf;
 
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
 
-public class SubReqServerHandler extends ChannelHandlerAdapter {
+public class SubReqServerHandler extends SimpleChannelInboundHandler {
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg)
+    public void channelRead0(ChannelHandlerContext ctx, Object msg)
             throws Exception {
         SubscribeReqProto.SubscribeReq req = (SubscribeReqProto.SubscribeReq) msg;
         //System.out.println("SubReqServerHandler channelRead:"+ req.getUserName());  

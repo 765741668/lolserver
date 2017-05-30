@@ -27,8 +27,8 @@ import com.lol.demo.encode.protobuf.SubscribeReqProto.ProtoBody;
 import com.lol.demo.encode.protobuf.SubscribeReqProto.ProtoHeader;
 import com.lol.demo.encode.protobuf.SubscribeReqProto.SubscribeReq;
 import com.lol.demo.encode.protobuf.SubscribeRespProto.SubscribeResp;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,7 +36,7 @@ import java.net.SocketAddress;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoginAuthReqHandler extends ChannelHandlerAdapter {
+public class LoginAuthReqHandler extends SimpleChannelInboundHandler<SubscribeResp> {
     private final Logger logger = LoggerFactory.getLogger(LoginAuthReqHandler.class);
 
     @Override
@@ -55,8 +55,7 @@ public class LoginAuthReqHandler extends ChannelHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        SubscribeResp message = (SubscribeResp) msg;
+    public void channelRead0(ChannelHandlerContext ctx, SubscribeResp message) throws Exception {
         if (message != null && message.getRespCode().equals("0")) {
             logger.info("Client reveived Login auth message from server : ---> {} ({})" + message,ctx.channel().remoteAddress());
             String loginResult = message.getRespCode();

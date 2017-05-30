@@ -24,12 +24,12 @@
 package com.lol.demo.http.xml;
 
 import com.lol.demo.jibx.ObjectFactory;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HttpXmlClientHandle extends ChannelHandlerAdapter {
+public class HttpXmlClientHandle extends SimpleChannelInboundHandler<HttpXmlResponse> {
     private final Logger logger = LoggerFactory.getLogger(HttpXmlClientHandle.class);
 
     @Override
@@ -47,8 +47,7 @@ public class HttpXmlClientHandle extends ChannelHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        HttpXmlResponse response = (HttpXmlResponse) msg;
+    public void channelRead0(ChannelHandlerContext ctx, HttpXmlResponse response) throws Exception {
         logger.info("Client reveived response of http header from server : ---> {}({})",
                 response.getHttpResponse().headers().names(), ctx.channel().remoteAddress());
         logger.info("Client reveived response of http header from server : ---> {}({})",

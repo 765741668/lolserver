@@ -18,7 +18,6 @@ package com.lol.demo4_1.udt.echo.message;
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import io.netty.channel.udt.nio.NioUdtProvider;
 
 /**
  * Handler implementation for the echo server.
@@ -28,7 +27,7 @@ public class MsgEchoServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(final ChannelHandlerContext ctx) {
-        System.err.println("ECHO active " + NioUdtProvider.socketUDT(ctx.channel()).toStringOptions());
+//        System.err.println("ECHO active " + NioUdtProvider.socketUDT(ctx.channel()).toStringOptions());
     }
 
     @Override

@@ -23,12 +23,12 @@
  ******************************************************************************/
 package com.lol.demo.encode.jbossmarshall;
 
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 
-public class ServerIdleStateTrigger extends ChannelHandlerAdapter {
+public class ServerIdleStateTrigger extends ChannelInboundHandlerAdapter {
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
         if (evt instanceof IdleStateEvent) {

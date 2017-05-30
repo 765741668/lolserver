@@ -29,7 +29,7 @@ public class PlayerHandler extends SimpleChannelInboundHandler<MessageUpProto.Me
     private MessageUpProto.MessageUp tempMessage = null;
 
     @Override
-    protected void messageReceived(ChannelHandlerContext ctx, MessageUpProto.MessageUp message) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, MessageUpProto.MessageUp message) throws Exception {
         if (message.getHeader().getMsgType() == Protocol.TYPE_PLYAER) {
             logger.info("收到玩家模块消息: {}",ctx.channel().remoteAddress());
             MessageUpProto.PlayerUpBody player = message.getBody().getPlayer();
@@ -62,4 +62,5 @@ public class PlayerHandler extends SimpleChannelInboundHandler<MessageUpProto.Me
         ctx.fireExceptionCaught(cause);
         ctx.close();
     }
+
 }

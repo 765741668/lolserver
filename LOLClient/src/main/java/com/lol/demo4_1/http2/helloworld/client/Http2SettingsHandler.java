@@ -22,7 +22,7 @@ import io.netty.handler.codec.http2.Http2Settings;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Reads the first {@link Http2Settings} object and notifies a {@link io.netty.channel.ChannelPromise}
+ * Reads the first {@link io.netty.handler.codec.http2.Http2Settings} object and notifies a {@link io.netty.channel.ChannelPromise}
  */
 public class Http2SettingsHandler extends SimpleChannelInboundHandler<Http2Settings> {
     private final ChannelPromise promise;

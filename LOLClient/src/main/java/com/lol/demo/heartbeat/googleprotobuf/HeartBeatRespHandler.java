@@ -26,14 +26,14 @@ package com.lol.demo.heartbeat.googleprotobuf;
 import com.lol.demo.encode.protobuf.SubscribeReqProto.SubscribeReq;
 import com.lol.demo.encode.protobuf.SubscribeRespProto.SubscribeResp;
 import com.lol.demo.encode.protobuf.SubscribeRespProto.SubscribeResp.MsgType;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.SocketAddress;
 
-public class HeartBeatRespHandler extends ChannelHandlerAdapter {
+public class HeartBeatRespHandler extends SimpleChannelInboundHandler {
     private static Logger logger = LoggerFactory.getLogger(HeartBeatRespHandler.class);
 
     @Override
@@ -45,7 +45,7 @@ public class HeartBeatRespHandler extends ChannelHandlerAdapter {
     }
 
     @Override
-    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    public void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
         SubscribeReq message = (SubscribeReq) msg;
 
         com.lol.demo.encode.protobuf.SubscribeReqProto.ProtoHeader.MsgType requestMsgType =

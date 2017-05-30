@@ -9,6 +9,7 @@ import com.lol.fwk.core.ConnectionManager;
 import com.lol.fwk.core.GameBoss;
 import com.lol.fwk.protobuf.MessageUpProto;
 import com.lol.fwk.util.Utils;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.AttributeKey;
@@ -21,6 +22,7 @@ import org.slf4j.LoggerFactory;
  * @author Randy
  *         2015-1-30
  */
+@ChannelHandler.Sharable
 public class ServerHandler extends SimpleChannelInboundHandler<MessageUpProto.MessageUp> {
 
     private static Logger logger = LoggerFactory.getLogger(ServerHandler.class);
