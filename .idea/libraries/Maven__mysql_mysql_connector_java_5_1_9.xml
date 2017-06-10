@@ -8,6 +8,7 @@
     </JAVADOC>
     <SOURCES>
       <root url="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.9/mysql-connector-java-5.1.9-sources.jar!/" />
+      <root url="file://C:/Users/YangZH/AppData/Local/Temp/intellijad" />
     </SOURCES>
   </library>
 </component>

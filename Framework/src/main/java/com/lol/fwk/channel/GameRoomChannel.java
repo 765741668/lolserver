@@ -55,6 +55,17 @@ public class GameRoomChannel {
     }
 
     /**
+     * 从频道中删除连接
+     *
+     * @param c
+     * @return
+     */
+    public Channel getChannel(Connection c) {
+        //默认房间号自减
+        return roomChannel.find(c.getChannel().id());
+    }
+
+    /**
      * 向频道中的连接广播数据
      *
      * @param buffer
