@@ -28,7 +28,7 @@ public class LOLClientLoginHandler extends ChannelInboundHandlerAdapter {
         MessageUpProto.MessageUp messageUp = Utils.packgeUpData(Protocol.TYPE_LOGIN, 1, LoginProtocol.REG_CREQ, loginUpBody.build());
         ctx.writeAndFlush(messageUp);
 
-        Thread.sleep(3000);
+//        Thread.sleep(3000);
 
         //登陆
         logger.info("发送登陆信息： {}",loginUpBody.build().toString());
@@ -46,6 +46,7 @@ public class LOLClientLoginHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+        logger.info("消息读取完毕。。。");
         ctx.flush();
     }
 

@@ -14,30 +14,22 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.net.UnknownHostException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class LOLNettyClient {
-    private final Logger logger = LoggerFactory.getLogger(LOLNettyClient.class);
+    private static final Logger logger = LoggerFactory.getLogger(LOLNettyClient.class);
 
     private ChannelFutureListener channelFutureListener;
     private Bootstrap bootstrap;
 
     public static void main(String[] args) throws Exception {
-        new LOLNettyClient().start(args[0]);
+        new LOLNettyClient().start();
+        logger.info(">>>>>>>>>>>>>>>>>>>>同步等待");
     }
 
-    public void start(String clientCount) throws UnknownHostException {
-        int size = Integer.valueOf(clientCount);
-        ExecutorService es = Executors.newFixedThreadPool(size);
-        for (int i = 1; i <= size; i++) {
-            String ip = "127.0.0.";
-            ip += i;
-            SocketAddress remoteAddress = new InetSocketAddress(InetAddress.getByName(ip), 9001);
-            es.execute(() -> init(remoteAddress));
-        }
-        es.shutdown();
+    public void start() throws UnknownHostException {
+        SocketAddress remoteAddress = new InetSocketAddress(InetAddress.getByName("127.0.0.1"), 9001);
+        init(remoteAddress);
     }
 
     public void init(SocketAddress remoteAddress) {
@@ -78,7 +70,8 @@ public class LOLNettyClient {
     private void doConnect(SocketAddress remoteAddress){
         logger.info("start connect...");
         try {
-            ChannelFuture f = bootstrap.connect(remoteAddress).sync();
+//            ChannelFuture f = bootstrap.connect(remoteAddress).sync();//异步
+            ChannelFuture f = bootstrap.connect(remoteAddress).channel().closeFuture().await();//同步
             f.addListener(channelFutureListener);
         } catch (InterruptedException e) {
             e.printStackTrace();

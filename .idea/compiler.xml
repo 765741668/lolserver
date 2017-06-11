@@ -22,6 +22,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="itstack-demo-netty-future" />
         <module name="LOLClient" />
         <module name="LOLJemeterPlugin" />
         <module name="LOLServer" />
@@ -30,6 +31,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
       <module name="Framework" target="1.8" />
+      <module name="itstack-demo-netty-future" target="1.6" />
       <module name="LOLClient" target="1.8" />
       <module name="LOLServer" target="1.8" />
       <module name="Protocol" target="1.8" />
