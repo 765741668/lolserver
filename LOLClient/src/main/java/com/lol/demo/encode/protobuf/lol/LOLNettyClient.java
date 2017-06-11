@@ -71,7 +71,7 @@ public class LOLNettyClient {
         logger.info("start connect...");
         try {
 //            ChannelFuture f = bootstrap.connect(remoteAddress).sync();//异步
-            ChannelFuture f = bootstrap.connect(remoteAddress).channel().closeFuture().await();//同步
+            ChannelFuture f = bootstrap.connect(remoteAddress).channel().closeFuture().await();//同步等待
             f.addListener(channelFutureListener);
         } catch (InterruptedException e) {
             e.printStackTrace();
