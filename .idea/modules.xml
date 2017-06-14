@@ -7,7 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/LOLJemeterPlugin/LOLJemeterPlugin.iml" filepath="$PROJECT_DIR$/LOLJemeterPlugin/LOLJemeterPlugin.iml" />
       <module fileurl="file://$PROJECT_DIR$/LOLServer/LOLServer.iml" filepath="$PROJECT_DIR$/LOLServer/LOLServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/Protocol/Protocol.iml" filepath="$PROJECT_DIR$/Protocol/Protocol.iml" />
-      <module fileurl="file://$USER_HOME$/桌面/netty-future/netty-future.iml" filepath="$USER_HOME$/桌面/netty-future/netty-future.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../TJWRPC/TTRPC.iml" filepath="$PROJECT_DIR$/../../TJWRPC/TTRPC.iml" />
     </modules>
   </component>
 </project>

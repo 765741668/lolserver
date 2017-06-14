@@ -24,6 +24,8 @@
 package com.lol.demo.heartbeat.jbossmarshall;
 
 import com.lol.demo.common.NettyMessage;
+import com.lol.demo.enums.MessageType;
+import com.lol.demo.game.Header;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
@@ -46,12 +48,12 @@ public class HeartBeatRespHandler extends SimpleChannelInboundHandler {
     public void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
         NettyMessage message = (NettyMessage) msg;
         logger.info("Server receive heart beat message from client : ---> {}({})", message, ctx.channel().localAddress());
-//        if(message.getHeader() != null && message.getHeader().getType() == MessageType.HEARTBEAT_REQ.getValue()){
-//            NettyMessage sendMsg = buildMessage();
-//            logger.info("Server send heart beat message to client : ---> {}({})",sendMsg,ctx.channel().localAddress());
-//        }else{
-//            ctx.fireChannelRead(message);
-//        }
+        if(message.getHeader() != null && message.getHeader().getType() == MessageType.HEARTBEAT_REQ.getValue()){
+            NettyMessage sendMsg = buildMessage();
+            logger.info("Server send heart beat message to client : ---> {}({})",sendMsg,ctx.channel().localAddress());
+        }else{
+            ctx.fireChannelRead(message);
+        }
     }
 
     @Override
@@ -62,5 +64,14 @@ public class HeartBeatRespHandler extends SimpleChannelInboundHandler {
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         ctx.close();
+    }
+
+    private NettyMessage buildMessage() {
+        NettyMessage message = new NettyMessage();
+        Header header = new Header();
+
+        header.setType(MessageType.HEARTBEAT_RESP.getValue());
+        message.setHeader(header);
+        return message;
     }
 }

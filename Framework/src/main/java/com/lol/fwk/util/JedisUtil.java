@@ -1,6 +1,7 @@
 package com.lol.fwk.util;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
@@ -27,7 +28,7 @@ import java.util.Map;
  */
 public class JedisUtil {
 
-    private static Logger logger = Logger.getLogger(JedisUtil.class.getName());
+    private static Logger logger = LoggerFactory.getLogger(JedisUtil.class.getName());
     private static Map<String, JedisPool> maps = new HashMap<String, JedisPool>();
 
     /**
@@ -127,5 +128,13 @@ public class JedisUtil {
          * 静态初始化器，由JVM来保证线程安全
          */
         private static JedisUtil instance = new JedisUtil();
+    }
+
+    public static void main(String[] args) {
+        Jedis jedis = JedisUtil.getInstance().getJedis("127.0.0.1", 6379);
+        System.out.println(jedis.get("keyid"));
+        jedis.del("keyid");
+        System.out.println(jedis.get("keyid"));
+        jedis.set("keyid","yzh2");
     }
 }

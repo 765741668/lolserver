@@ -16,7 +16,13 @@
         <option value="$PROJECT_DIR$/LOLClient/pom.xml" />
         <option value="$PROJECT_DIR$/LOLJemeterPlugin/pom.xml" />
         <option value="$USER_HOME$/桌面/itstack-demo-netty-future/pom.xml" />
+        <option value="$PROJECT_DIR$/../../TJWRPC/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$USER_HOME$/桌面/netty-future/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">

@@ -19,8 +19,8 @@ import java.util.concurrent.TimeUnit;
 public class LOLNettyClient {
     private static final Logger logger = LoggerFactory.getLogger(LOLNettyClient.class);
 
-    private ChannelFutureListener channelFutureListener;
-    private Bootstrap bootstrap;
+    private static ChannelFutureListener channelFutureListener;
+    private static Bootstrap bootstrap;
 
     public static void main(String[] args) throws Exception {
         new LOLNettyClient().start();
@@ -49,7 +49,6 @@ public class LOLNettyClient {
 
                 if (channelFuture.isSuccess()) {
                     logger.info("连接服务器成功");
-
                 } else {
                     logger.info("连接服务器失败,开始重新连接...");
                     //  5秒后重新连接
@@ -67,11 +66,11 @@ public class LOLNettyClient {
         }
     }
 
-    private void doConnect(SocketAddress remoteAddress){
+    public static void doConnect(SocketAddress remoteAddress){
         logger.info("start connect...");
         try {
-//            ChannelFuture f = bootstrap.connect(remoteAddress).sync();//异步
-            ChannelFuture f = bootstrap.connect(remoteAddress).channel().closeFuture().await();//同步等待
+            ChannelFuture f = bootstrap.connect(remoteAddress).sync();//异步
+//            ChannelFuture f = bootstrap.connect(remoteAddress).channel().closeFuture().await();//同步等待
             f.addListener(channelFutureListener);
         } catch (InterruptedException e) {
             e.printStackTrace();

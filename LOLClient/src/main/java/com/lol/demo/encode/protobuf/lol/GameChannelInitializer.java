@@ -5,6 +5,7 @@ package com.lol.demo.encode.protobuf.lol;/**
  */
 
 import com.google.protobuf.ExtensionRegistry;
+import com.lol.Protocol;
 import com.lol.demo.encode.protobuf.MessageDownProto;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelInitializer;
@@ -37,6 +38,7 @@ public class GameChannelInitializer extends ChannelInitializer<SocketChannel> {
         ch.pipeline().addLast("PING",new IdleStateHandler(10,0,0, TimeUnit.SECONDS));
 
         for (ChannelHandler channel : GameHandlerManager.getInstance().getAllHandler().values()) {
+            GameHandlerManager.getInstance().getHandler(Protocol.TYPE_LOGIN);
             ch.pipeline().addLast(channel);
         }
     }

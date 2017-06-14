@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.SocketAddress;
+import java.util.concurrent.TimeUnit;
 
 public class LOLClientLoginHandler extends ChannelInboundHandlerAdapter {
 
@@ -41,6 +42,11 @@ public class LOLClientLoginHandler extends ChannelInboundHandlerAdapter {
         SocketAddress remoteAddress = ctx.channel().remoteAddress();
         logger.info("{} is inactive .....", remoteAddress);
         super.channelInactive(ctx);
+
+        ctx.channel().eventLoop().schedule(() -> {
+            LOLNettyClient.doConnect(remoteAddress);
+        }, 5, TimeUnit.SECONDS);
+
         ctx.close();
     }
 
@@ -97,5 +103,4 @@ public class LOLClientLoginHandler extends ChannelInboundHandlerAdapter {
         ctx.fireExceptionCaught(cause);
         ctx.close();
     }
-
 }
