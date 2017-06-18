@@ -21,8 +21,18 @@ public class TestMap {
      姓名存入到该list中然后打印到控制台上。 （题目中的去重，不是去除所有重复元素，而是去除一个重复元素，保留一个）
      */
     public static void main(String[] args) {
-        Map<String, Map> map = map2();
+        Map<String, Map> map = new HashMap<>();
+        map.put("a",map2());
+        map.put("b",map22());
+        System.out.println(map);
 
+        for(Map m : map.values()){
+            distinct(m);
+        }
+        System.out.println(map);
+    }
+
+    static void distinct(Map<String, Map> map){
         //创建list,先接收键，相当于数组中的索引
         List<String> list = new ArrayList<>();
         for (String s : map.keySet()) {
@@ -51,7 +61,6 @@ public class TestMap {
 
         //打印list
         System.out.println(list);
-
     }
 
     static void test(){
@@ -134,9 +143,9 @@ public class TestMap {
         map2222.put("memue_id","3");
         map2222.put("name","3");
         Map<String,String> map22222 = new HashMap<>();
-        map2222.put("role_id","2");
-        map2222.put("memue_id","2");
-        map2222.put("name","2");
+        map22222.put("role_id","2");
+        map22222.put("memue_id","2");
+        map22222.put("name","2");
 
         map.put("1",map2);
         map.put("2",map22);
