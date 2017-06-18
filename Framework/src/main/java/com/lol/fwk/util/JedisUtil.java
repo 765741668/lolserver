@@ -6,6 +6,7 @@ import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -132,9 +133,27 @@ public class JedisUtil {
 
     public static void main(String[] args) {
         Jedis jedis = JedisUtil.getInstance().getJedis("127.0.0.1", 6379);
+        jedis.ping();
         System.out.println(jedis.get("keyid"));
-        jedis.del("keyid");
+        jedis.del("keyid");//该命令用于在 key 存在时删除 key。
         System.out.println(jedis.get("keyid"));
         jedis.set("keyid","yzh2");
+
+        jedis.exists("keyid");
+        jedis.dump("keyid");//序列化给定 key ，并返回被序列化的值。
+        jedis.expire("keyid",3000);//为给定 key 设置过期时间。
+        jedis.expireAt("keyid",new Timestamp(System.currentTimeMillis()+10000).getTime());//为 key 设置过期时间。(unix timestamp)。
+        jedis.pexpire("keyid",System.currentTimeMillis()+10000);//设置 key 的过期时间以毫秒计。
+        jedis.keys("key");//查找所有符合给定模式( pattern)的 key 。
+        jedis.move("keyid",1);//将当前数据库的 key 移动到给定的数据库 db 当中。
+        jedis.persist("keyid");//移除 key 的过期时间，key 将持久保持。
+        jedis.pttl("keyid");//以毫秒为单位返回 key 的剩余的过期时间。
+        jedis.ttl("keyid");//以秒为单位，返回给定 key 的剩余生存时间(TTL, time to live)。
+        jedis.randomKey();//从当前数据库中随机返回一个 key 。
+        jedis.rename("keyid","keyid_new");
+        jedis.renamenx("keyid","keyid_new");//仅当 newkey 不存在时，将 key 改名为 newkey 。
+        jedis.type("keyid");//返回 key 所储存的值的类型。
+
+
     }
 }
