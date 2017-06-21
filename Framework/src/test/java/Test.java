@@ -6,6 +6,7 @@
 
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Description :
@@ -19,6 +20,7 @@ public class Test {
         for (int[] a : aa) {
             System.out.println(a[0]);
         }
+        System.out.println( 1<< 30);
     }
 
 
