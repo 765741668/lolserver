@@ -133,13 +133,13 @@ under the License.
     -->
     <server>  
         <id>releases</id>  
-        <username>admin</username>  
-        <password>admin123</password>  
+        <username>yzh</username>  
+        <password>123456</password>  
     </server>  
     <server>  
         <id>snapshots</id>  
-        <username>admin</username>  
-        <password>admin123</password>  
+        <username>yzh</username>  
+        <password>123456</password>  
     </server>  
   </servers>
 
