@@ -57,8 +57,8 @@
         </property>
     </bean>
     <!-- Use factory bean to build memcached client -->
-    <bean name="memcachedClient" factory-bean="memcachedClientBuilder"
-          factory-method="build" destroy-method="shutdown"/>
+    <!-- <bean name="memcachedClient" factory-bean="memcachedClientBuilder"
+          factory-method="build" destroy-method="shutdown"/> -->
 </beans>
 
 						

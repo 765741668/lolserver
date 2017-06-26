@@ -37,4 +37,8 @@ public class Protocol {
      * 心跳检测模块
      */
     public static final byte TYPE_HEARTBEAT = 8;
+    /**
+     * Http->tcp
+     */
+    public static final byte TYPE_HTTP2TCP = 9;
 }

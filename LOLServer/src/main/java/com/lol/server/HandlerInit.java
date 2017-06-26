@@ -7,6 +7,7 @@ import com.lol.connect.OnDisconnect;
 import com.lol.fwk.handler.GameHandlerManager;
 import com.lol.fwk.handler.GameProcessorManager;
 import com.lol.logic.fight.FightHandler;
+import com.lol.logic.login.HttpLoginHandle;
 import com.lol.logic.login.LoginHandler;
 import com.lol.logic.match.MatchHandler;
 import com.lol.logic.player.PlayerHandler;
@@ -55,6 +56,7 @@ public class HandlerInit {
     }
 
     public static void initHandler() throws Exception {
+    	GameHandlerManager.getInstance().registerHandler(Protocol.TYPE_HTTP2TCP, new HttpLoginHandle());
         GameHandlerManager.getInstance().registerHandler(Protocol.TYPE_LOGIN, new LoginHandler());
         GameHandlerManager.getInstance().registerHandler(Protocol.TYPE_PLYAER, new PlayerHandler());
         GameHandlerManager.getInstance().registerHandler(Protocol.TYPE_MATCH, new MatchHandler());

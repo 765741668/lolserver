@@ -48,7 +48,7 @@ public class TestThreadPool {
          * 1
          * //
          */
-        callablesPoolInt();
+        // callablesPoolInt();
         // futureTaskPoolInt();
         // callablesPoolStr();
         // futureTaskPoolStr();
@@ -89,7 +89,7 @@ public class TestThreadPool {
         // completableFuture_runAsync2();
 //         completableFuture_supplyAsync();
 //        completableFuture_handleAsync();
-//        completableFuture_thenAplyAsync();
+        completableFuture_thenAplyAsync();
 //        completableFuture_thenAcceptAsync();
 //        completableFuture_thenAcceptBothAsync();
 //        completableFuture_thenComposeAsync();

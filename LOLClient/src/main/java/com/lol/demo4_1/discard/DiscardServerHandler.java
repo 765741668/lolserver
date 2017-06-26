@@ -21,11 +21,12 @@ import io.netty.channel.SimpleChannelInboundHandler;
 /**
  * Handles a server-side channel.
  */
-public class DiscardServerHandler extends SimpleChannelInboundHandler<Object> {
+public class DiscardServerHandler extends SimpleChannelInboundHandler<String> {
 
     @Override
-    public void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
-        // discard
+    public void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
+        System.out.println("Receive from client : " + msg);
+        ctx.writeAndFlush("Msg from server");
     }
 
     @Override

@@ -95,6 +95,9 @@ public class LoginAuthRespHandler extends SimpleChannelInboundHandler {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
+    	cause.printStackTrace();
+        nodeCheck.remove(ctx.channel().remoteAddress().toString());// 删除缓存
+        ctx.close();
         ctx.fireExceptionCaught(cause);
     }
 

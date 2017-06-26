@@ -14,6 +14,8 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.net.UnknownHostException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class LOLNettyClient {
@@ -23,11 +25,11 @@ public class LOLNettyClient {
     private static Bootstrap bootstrap;
 
     public static void main(String[] args) throws Exception {
-        new LOLNettyClient().start();
-        logger.info(">>>>>>>>>>>>>>>>>>>>同步等待");
+        new LOLNettyClient().start(args[0]);
+        System.out.println("异步等待服务返回结果.................");
     }
 
-    public void start() throws UnknownHostException {
+    public void start(String clientCount) throws UnknownHostException {
         SocketAddress remoteAddress = new InetSocketAddress(InetAddress.getByName("127.0.0.1"), 9001);
         init(remoteAddress);
     }
@@ -45,18 +47,20 @@ public class LOLNettyClient {
                     .option(ChannelOption.ALLOW_HALF_CLOSURE, true)
                     .handler(new GameChannelInitializer());
 
-            channelFutureListener = channelFuture -> {
-
-                if (channelFuture.isSuccess()) {
-                    logger.info("连接服务器成功");
-                } else {
-                    logger.info("连接服务器失败,开始重新连接...");
-                    //  5秒后重新连接
-                    channelFuture.channel().eventLoop().schedule(() -> {
-                        doConnect(remoteAddress);
-                    }, 5, TimeUnit.SECONDS);
-                }
-            };
+            channelFutureListener = new ChannelFutureListener() {
+				@Override
+				public void operationComplete(ChannelFuture channelFuture) throws Exception {
+					if (channelFuture.isSuccess()) {
+	                    logger.info("检测到成功连接到服务器。。。");
+	                }else {
+	                    logger.info("连接服务器失败,开始重新连接...");
+	                    //  5秒后重新连接
+	                    channelFuture.channel().eventLoop().schedule(() -> {
+	                        doConnect(remoteAddress);
+	                    }, 5, TimeUnit.SECONDS);
+	                }
+				}
+			};
 
             doConnect(remoteAddress);
 
@@ -69,8 +73,7 @@ public class LOLNettyClient {
     public static void doConnect(SocketAddress remoteAddress){
         logger.info("start connect...");
         try {
-            ChannelFuture f = bootstrap.connect(remoteAddress).sync();//异步
-//            ChannelFuture f = bootstrap.connect(remoteAddress).channel().closeFuture().await();//同步等待
+            ChannelFuture f = bootstrap.connect(remoteAddress).sync();
             f.addListener(channelFutureListener);
         } catch (InterruptedException e) {
             e.printStackTrace();

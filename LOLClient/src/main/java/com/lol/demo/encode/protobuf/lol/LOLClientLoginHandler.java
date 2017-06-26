@@ -20,21 +20,21 @@ public class LOLClientLoginHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         logger.info("链接到服务器：[{}]",ctx.channel().remoteAddress().toString());
-        MessageUpProto.LoginUpBody.Builder loginUpBody = MessageUpProto.LoginUpBody.newBuilder();
-        loginUpBody.setAcount("yzh");
-        loginUpBody.setPassword("123456");
-
-        //注册新账户
-        logger.info("发送注册新账户信息: {}",loginUpBody.build().toString());
-        MessageUpProto.MessageUp messageUp = Utils.packgeUpData(Protocol.TYPE_LOGIN, 1, LoginProtocol.REG_CREQ, loginUpBody.build());
-        ctx.writeAndFlush(messageUp);
-
+//        MessageUpProto.LoginUpBody.Builder loginUpBody = MessageUpProto.LoginUpBody.newBuilder();
+//        loginUpBody.setAcount("yzh");
+//        loginUpBody.setPassword("123456");
+//
+//        //注册新账户
+//        logger.info("发送注册新账户信息: {}",loginUpBody.build().toString());
+//        MessageUpProto.MessageUp messageUp = Utils.packgeUpData(Protocol.TYPE_LOGIN, 1, LoginProtocol.REG_CREQ, loginUpBody.build());
+//        ctx.writeAndFlush(messageUp);
+//
 //        Thread.sleep(3000);
-
-        //登陆
-        logger.info("发送登陆信息： {}",loginUpBody.build().toString());
-        MessageUpProto.MessageUp messageUpLogin = Utils.packgeUpData(Protocol.TYPE_LOGIN, 1, LoginProtocol.LOGIN_CREQ, loginUpBody.build());
-        ctx.writeAndFlush(messageUpLogin);
+//
+//        //登陆
+//        logger.info("发送登陆信息： {}",loginUpBody.build().toString());
+//        MessageUpProto.MessageUp messageUpLogin = Utils.packgeUpData(Protocol.TYPE_LOGIN, 1, LoginProtocol.LOGIN_CREQ, loginUpBody.build());
+//        ctx.writeAndFlush(messageUpLogin);
     }
 
     @Override
@@ -42,17 +42,16 @@ public class LOLClientLoginHandler extends ChannelInboundHandlerAdapter {
         SocketAddress remoteAddress = ctx.channel().remoteAddress();
         logger.info("{} is inactive .....", remoteAddress);
         super.channelInactive(ctx);
-
-        ctx.channel().eventLoop().schedule(() -> {
-            LOLNettyClient.doConnect(remoteAddress);
-        }, 5, TimeUnit.SECONDS);
-
+        
+        ctx.channel().eventLoop().schedule(()->{
+        	LOLNettyClient.doConnect(remoteAddress);
+        },5, TimeUnit.SECONDS);
+        
         ctx.close();
     }
 
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-        logger.info("消息读取完毕。。。");
         ctx.flush();
     }
 
@@ -103,4 +102,5 @@ public class LOLClientLoginHandler extends ChannelInboundHandlerAdapter {
         ctx.fireExceptionCaught(cause);
         ctx.close();
     }
+
 }
