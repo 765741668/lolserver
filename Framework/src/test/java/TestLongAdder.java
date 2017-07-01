@@ -4,6 +4,7 @@
  *  15:01
  */
 
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.LongAdder;
 
 /**
@@ -22,5 +23,8 @@ public class TestLongAdder {
         System.out.println(la.longValue());
         la.decrement();
         System.out.println(la.intValue());
+        AtomicInteger a = new AtomicInteger();
+        a.addAndGet(1);
+        System.out.println(a);
     }
 }

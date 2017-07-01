@@ -39,8 +39,9 @@ public class TestLumbdar {
 
         System.out.println("~~~~~~~~~~~~~~~~~~~~~~3~~~~~~~~~~~~~~~~~~~~~~~");
         //Function: call apply to set input arg with first arg and and it should be return with second arg
-        Function<String, Integer> fu = (f) -> getSomething(f);
+        Function<String, Integer> fu = f -> getSomething(f);
         Integer _fu = fu.apply("1111");
+        System.out.println("Function: " + _fu);
 
         System.out.println("~~~~~~~~~~~~~~~~~~~~~4~~~~~~~~~~~~~~~~~~~~~~~~");
         //Supplier:call get to return input arg type
