@@ -28,5 +28,5 @@
 最近一直没什么时间写这个了，有想研究netty的朋友可以forks and pull，后续有空再持续更新！
 
 # 开源地址
-- 中国开源社区地址：https://gitee.com/thekingoffighter765741668/lolserver/tree/yzh_netty4/
-- 全球github开源地址：https://github.com/
+- 中国开源社区地址(支持一把国产)：https://gitee.com/thekingoffighter765741668/lolserver/tree/yzh_netty4/
+- 全球github开源地址(有空再放上去)：https://github.com/
