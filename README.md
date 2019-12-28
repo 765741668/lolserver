@@ -1,5 +1,5 @@
 # LOLServer java服务器netty版
-个人喜欢竞技类游戏，能锻炼人的反应能力以及意识，更重要的是啪啪啪的敲代码速度也更快了。EQ：LOL PVP游戏，或者MMORPG 中的PVP也差不多。
+个人喜欢竞技类游戏，能锻炼人的反应能力以及意识，业余时间写的一个单机版PVP服务器，练手netty4与netty5。
 
 # 技术点
 1. jdk8、spi、aop、tcp/socket/websocket/http
@@ -31,5 +31,5 @@
 最近一直没什么时间写这个了，有想研究netty的朋友可以forks and pull，后续有空再持续更新！
 
 # 开源地址
-- 中国开源社区地址(支持一把国人)：https://gitee.com/thekingoffighter765741668/lolserver/tree/yzh_netty4/
-- 全球github开源地址(有空再放上去)：https://github.com/
+- https://gitee.com/thekingoffighter765741668/lolserver/tree/yzh_netty4/
+- https://github.com/765741668/lolserver/tree/yzh_netty4
