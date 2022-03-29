@@ -14,7 +14,8 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -27,7 +28,7 @@ import java.util.Map;
  */
 public class HttpUtil {
 
-    private static Logger logger = Logger.getLogger(HttpUtil.class);
+    private static Logger logger = LoggerFactory.getLogger(HttpUtil.class);
 
     /**
      * http客户端
@@ -156,7 +157,7 @@ public class HttpUtil {
             }
             return result;
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.getMessage(), e);
         } finally {
             if (entity != null) EntityUtils.consume(entity);
             if (response != null) response.close();
@@ -213,7 +214,7 @@ public class HttpUtil {
             EntityUtils.consume(entity);
             return result;
         } catch (Exception e) {
-            logger.error(e);
+            logger.error(e.getMessage(), e);
         } finally {
             if (entity != null) EntityUtils.consume(entity);
             if (response != null) response.close();

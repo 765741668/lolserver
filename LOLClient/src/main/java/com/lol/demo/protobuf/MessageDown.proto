@@ -5,8 +5,8 @@ option java_outer_classname = "MessageDownProto";
 
 //服务响应下行消息
 message MessageDown{
-    MsgHeader header = 1;
-    MsgDownBody body = 2;
+    MsgHeader header = 1; //消息头
+    MsgDownBody body = 2; //消息体
 }
 
 //消息头
@@ -24,97 +24,97 @@ message MsgHeader{
 
 //下行消息体
 message MsgDownBody{
-    LoginDownBody login = 1;
-    PlayerDownBody player = 2;
-    SelectDownBody select = 3;
-    FightDownBody fight = 4;
+    LoginDownBody login = 1; //登陆模块
+    PlayerDownBody player = 2;//玩家模块
+    SelectDownBody select = 3;//选人模块
+    FightDownBody fight = 4;//战斗模块
 }
 
 message LoginDownBody{
-    int32 result = 1;
+    int32 result = 1; //登陆响应结果
 }
 
 message PlayerDownBody{
-    int32 create = 1;
-    Player playerModel = 2;
+    int32 create = 1; //创建
+    Player playerModel = 2; //玩家信息
 }
 
 message SelectDownBody{
-    string talkRes = 1;
-    int32 playerId = 2;
-    SelectModel select = 3;
-    SelectRoom selectRoom = 4;
+    string talkRes = 1; //聊天信息
+    int32 playerId = 2; //玩家ID
+    SelectModel select = 3; //选人前模块
+    SelectRoom selectRoom = 4;//房间内选人模块
 }
 
 message FightDownBody{
-    FightRoomModel fightRoom = 1;
-    MoveInfo moveInfo = 2;
-    AttackInfo attackInfo = 3;
-    DamageInfo damageInfo = 4;
-    FightSkill fightSkill = 5;
-    SkillAtkModel skillAtk = 6;
+    FightRoomModel fightRoom = 1; //战斗房间信息
+    MoveInfo moveInfo = 2; //战斗场景移动指令
+    AttackInfo attackInfo = 3; //战斗场景平A指令
+    DamageInfo damageInfo = 4; //战斗场景伤害指令
+    FightSkill fightSkill = 5; //战斗场景技能释放指令
+    SkillAtkModel skillAtk = 6; //战斗场景技能攻击指令
 }
 
 message Player{
-    int32 id = 1;
-    string nickName = 2;
-    int32 level = 3;
-    int32 winCount = 4;
-    int32 loseCount = 5;
-    int32 ranCount = 6;
-    repeated int32 hero = 7[packed = true];
+    int32 id = 1; //id
+    string nickName = 2; //昵称
+    int32 level = 3; //等级
+    int32 winCount = 4; //胜利场数
+    int32 loseCount = 5; //失败场数
+    int32 ranCount = 6; //段位
+    repeated int32 hero = 7[packed = true]; //拥有的英雄数
 }
 
 message SelectModel{
-    int32 playerId = 1;
-    string nickName = 2;
-    int32 hero = 3;
-    bool enter = 4;
-    bool ready = 5;
+    int32 playerId = 1; //玩家ID
+    string nickName = 2; //昵称
+    int32 hero = 3; //已选英雄
+    bool enter = 4; //预进入选人房间
+    bool ready = 5; //是否全员OK
 }
 
 message SelectRoom{
-    string roomName = 1;
-    repeated SelectModel teamOne = 2[packed = false];
-    repeated SelectModel teamTwo = 3[packed = false];
+    string roomName = 1; //房间名称
+    repeated SelectModel teamOne = 2[packed = false]; //选人阶段-队伍1
+    repeated SelectModel teamTwo = 3[packed = false]; //选人阶段-队伍2
 }
 
 message FightRoomModel{
-    repeated FightModel teamOne = 1[packed = false]; //只能打包原始数据类型
-    repeated FightModel teamTwo = 2[packed = false];
+    repeated FightModel teamOne = 1[packed = false]; //战斗阶段-队伍1
+    repeated FightModel teamTwo = 2[packed = false]; //战斗阶段-队伍2
 }
 
 message MoveInfo{
-    int32 playerId = 1;
-    float x = 2;
-    float y = 3;
-    float z = 4;
+    int32 playerId = 1; //玩家
+    float x = 2; //3D向量轴-X
+    float y = 3; //3D向量轴-Y
+    float z = 4; //3D向量轴-Z
 }
 
 message DamageInfo{
-    int32 playerId = 1;
-    int32 skill = 2;
-    repeated Target target = 3[packed = false];
+    int32 playerId = 1; //玩家ID
+    int32 skill = 2; //技能
+    repeated Target target = 3[packed = false]; //目标
 }
 
 //用于支持 DamageInfo.target 二维数组,因此客户端要封装Target实体类
 message Target{
-    repeated int32 target = 1[packed = true];
+    repeated int32 target = 1[packed = true]; //目标的目标
 }
 
 message SkillAtkModel{
-    int32 playerId = 1;
-    int32 type = 2;
-    int32 skill = 3;
-    repeated float position = 4[packed = true];
+    int32 playerId = 1; //玩家
+    int32 type = 2; //类型
+    int32 skill = 3; //技能
+    repeated float position = 4[packed = true]; //位置
     int32 target = 5;
 }
 
 message FightModel{
 
     enum ModelType {
-        BUILD = 0;
-        HUMAN = 1;
+        BUILD = 0; //建筑
+        HUMAN = 1; //生物(人)
     }
 
     int32 id = 1; //战斗区域中 唯一识别码
@@ -140,21 +140,21 @@ message AttackInfo{
 message FightSkill{
 
     enum SkillType{
-        SELF_CENTER = 0;
-        TARGET_CENTER = 1;
-        POSITION = 2;
-        PASSIVE = 3;
+        SELF_CENTER = 0;  //以自身为中心进行释放
+        TARGET_CENTER = 1; //以目标为中心进行释放
+        POSITION = 2; //以鼠标点击位置为目标释放技能
+        PASSIVE = 3; //被动技能
     }
 
     enum SkillTarget{
-        SELF = 0;
-        F_H = 1;
-        F_N_B = 2;
-        F_ALL = 4;
-        E_H = 5;
-        E_N_B = 6;
-        E_S_N = 7;
-        N_F_ALL = 8;
+        SELF = 0; //自身释放
+        F_H = 1; //友方英雄
+        F_N_B = 2; //友方非建筑单位
+        F_ALL = 4; //友方全体
+        E_H = 5; //敌方英雄
+        E_N_B = 6; //敌方非建筑
+        E_S_N = 7; //敌方和中立单位
+        N_F_ALL = 8; //非友方单位
     }
 
     int32 code = 1; //策划编码

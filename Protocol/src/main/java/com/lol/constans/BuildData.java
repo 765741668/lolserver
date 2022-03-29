@@ -4,7 +4,7 @@ package com.lol.constans;
  * 建筑属性配置表
  */
 public class BuildData {
-    public static final java.util.HashMap<Integer, BuildDataModel> buildMap = new java.util.HashMap<>();
+    public static final java.util.HashMap<Integer, BuildDataModel> buildMap = new java.util.HashMap<Integer, BuildDataModel>();
 
     /**
      静态构造 初次访问的时候自动调用

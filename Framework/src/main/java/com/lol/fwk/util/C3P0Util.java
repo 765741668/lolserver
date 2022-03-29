@@ -16,7 +16,7 @@ public class C3P0Util {
             DbConfig config = new DbConfig();
             // Logger log = Logger.getLogger("com.mchange"); // 日志
             // log.setLevel(Level.WARNING);
-            ds = new ComboPooledDataSource();
+            ds = new ComboPooledDataSource("c3p0DS");
             // 设置JDBC的Driver类
             ds.setDriverClass(config.getDriver());  // 参数由 Config 类根据配置文件读取
             // 设置JDBC的URL

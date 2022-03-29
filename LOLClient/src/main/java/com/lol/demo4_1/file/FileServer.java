@@ -16,11 +16,7 @@
 package com.lol.demo4_1.file;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.ChannelPipeline;
-import io.netty.channel.EventLoopGroup;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -79,11 +75,12 @@ public final class FileServer {
                  }
              });
 
-            // Start the server.
-            ChannelFuture f = b.bind(PORT).sync();
+            Channel ch = b.bind(PORT).sync().channel();
 
-            // Wait until the server socket is closed.
-            f.channel().closeFuture().sync();
+            System.err.println("Open your web browser and navigate to " +
+                    (SSL? "https" : "http") + "://127.0.0.1:" + PORT + '/');
+
+            ch.closeFuture().sync();
         } finally {
             // Shut down all event loops to terminate all threads.
             bossGroup.shutdownGracefully();

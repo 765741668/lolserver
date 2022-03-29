@@ -16,6 +16,7 @@
 package com.lol.demo4_1.telnet;
 
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.channel.Channel;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -52,7 +53,10 @@ public final class TelnetServer {
              .handler(new LoggingHandler(LogLevel.INFO))
              .childHandler(new TelnetServerInitializer(sslCtx));
 
-            b.bind(PORT).sync().channel().closeFuture().sync();
+            Channel ch = b.bind(9000).sync().channel();
+            System.out.println("server start up on ports:" + 9000);
+
+            ch.closeFuture().sync();
         } finally {
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();

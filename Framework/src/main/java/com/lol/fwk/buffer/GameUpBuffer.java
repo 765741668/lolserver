@@ -3,6 +3,7 @@ package com.lol.fwk.buffer;
 import com.lol.dto.AcountInfoDTO;
 import com.lol.fwk.core.Connection;
 import com.lol.fwk.protobuf.MessageUpProto;
+import io.netty.channel.ChannelHandlerContext;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -11,12 +12,15 @@ import org.apache.commons.lang3.StringUtils;
  * @author Randy
  *         2015-2-3
  */
+
 public class GameUpBuffer {
 
     /**
      * 客户端连接
      */
     private Connection connection;
+
+    private ChannelHandlerContext ctx;
 
     /**
      * 接收数据包
@@ -28,9 +32,26 @@ public class GameUpBuffer {
         this.buffer = buffer;
     }
 
+    public GameUpBuffer(MessageUpProto.MessageUp buffer, ChannelHandlerContext ctx) {
+        this.ctx = ctx;
+        this.buffer = buffer;
+    }
+
 
     public Connection getConnection() {
         return connection;
+    }
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+
+    public ChannelHandlerContext getCtx() {
+        return ctx;
+    }
+
+    public void setCtx(ChannelHandlerContext ctx) {
+        this.ctx = ctx;
     }
 
     public MessageUpProto.MessageUp getBuffer() {
@@ -65,26 +86,6 @@ public class GameUpBuffer {
     }
 
     /**
-     * 获取登陆用户数据
-     *
-     * @return
-     */
-    public AcountInfoDTO getAcountInfo() {
-        AcountInfoDTO acount = new AcountInfoDTO();
-        MessageUpProto.LoginUpBody acountInfo = buffer.getBody().getLogin();
-        if (acountInfo == null) {
-            return null;
-        }
-        if (!StringUtils.isEmpty(connection.getAcount())) {
-            acount.setacount(connection.getAcount());
-        }
-        if (!StringUtils.isEmpty(acountInfo.getPassword())) {
-            acount.setPassword(acountInfo.getPassword());
-        }
-        return acount;
-    }
-
-    /**
      * 获取玩家角色数据
      *
      * @return PlayerDTO
@@ -102,4 +103,11 @@ public class GameUpBuffer {
         return buffer.getBody();
     }
 
+    @Override
+    public String toString() {
+        return "GameUpBuffer{" +
+                "connection=" + connection +
+                ", buffer=" + buffer +
+                '}';
+    }
 }

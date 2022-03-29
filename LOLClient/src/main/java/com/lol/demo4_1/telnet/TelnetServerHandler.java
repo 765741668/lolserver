@@ -15,24 +15,34 @@
  */
 package com.lol.demo4_1.telnet;
 
+import com.lol.demo.encode.protobuf.NettyServer;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.InetAddress;
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Handles a server-side channel.
  */
 @Sharable
 public class TelnetServerHandler extends SimpleChannelInboundHandler<String> {
+    private final Logger logger = LoggerFactory.getLogger(TelnetServerHandler.class);
+    private AtomicInteger counter;
+    public TelnetServerHandler(AtomicInteger atomicInteger){
+        this.counter = atomicInteger;
+    }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         // Send greeting for a new connection.
+        logger.info(ctx.channel().remoteAddress() + " is active, current connections:" + counter.incrementAndGet());
         ctx.write("Welcome to " + InetAddress.getLocalHost().getHostName() + "!\r\n");
         ctx.write("It is " + new Date() + " now.\r\n");
         ctx.flush();
@@ -72,5 +82,12 @@ public class TelnetServerHandler extends SimpleChannelInboundHandler<String> {
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         cause.printStackTrace();
         ctx.close();
+    }
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        super.channelInactive(ctx);
+        ctx.close();
+        System.out.println(ctx.channel().remoteAddress() + " is inActive, current connections:" + counter.decrementAndGet());
     }
 }

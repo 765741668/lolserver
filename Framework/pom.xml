@@ -24,6 +24,23 @@
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.4.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>1.3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
+            <version>1.3.5</version>
+        </dependency>
+
         <dependency>
             <groupId>com.lol</groupId>
             <artifactId>protocol</artifactId>
@@ -130,12 +147,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.4.0</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.mchange</groupId>
             <artifactId>c3p0</artifactId>
             <version>${c3p0.version}</version>
@@ -232,6 +243,13 @@
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
             <version>4.1.11.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.11.Final</version>
+            <classifier>sources</classifier>
         </dependency>
 
         <dependency>
@@ -366,7 +384,6 @@
 
     <build>
         <plugins>
-
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>properties-maven-plugin</artifactId>
@@ -388,7 +405,20 @@
                 </executions>
             </plugin>
 
-            <!-- 这样，批处理命令的输出默认会出现在maven的build结果中 -->
+            <!-- mybatis 自动生成 -->
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.3.5</version>
+                <!--run maven 参数： mybatis-generator:generate  -e -->
+                <configuration>
+                    <verbose>true</verbose>
+                    <overwrite>true</overwrite>
+                </configuration>
+
+            </plugin>
+
+            <!-- 批处理命令的输出默认会出现在maven的build结果中 -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -411,7 +441,6 @@
                             </arguments>
                         </configuration>
                     </execution>
-
                     <!-- way 2 for maven: -->
                      <!--<execution>-->
                         <!--<id>maven excute command bat2</id>-->
@@ -439,61 +468,61 @@
             </plugin>
 
             <!-- com.lolfwkfwk.jibx start -->
-            <plugin>
-                <groupId>org.jibx</groupId>
-                <artifactId>jibx-maven-plugin</artifactId>
-                <version>1.2.6</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.bcel</groupId>
-                        <artifactId>bcel</artifactId>
-                        <version>6.0-SNAPSHOT</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <id>generate-java-conde-from-schema</id>
-                        <goals>
-                            <goal>schema-codegen</goal>
-                        </goals>
-                        <phase>clean</phase>
-                        <configuration>
-                            <schemaLocation>${basedir}/src/main/resources/schema</schemaLocation>
-                            <includeSchemas>
-                                <includeSchema>*.xsd</includeSchema>
-                                <includeSchema>**/*.xsd</includeSchema>
-                                <includeSchema>**/*.xml</includeSchema>
-                                <includeSchema>*.xml</includeSchema>
-                            </includeSchemas>
-                            <!-- <options>
-                                <package>test</package>
-                            </options> -->
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>compile-binding</id>
-                        <goals>
-                            <goal>bind</goal>
-                        </goals>
-                        <phase>compile</phase>
-                        <configuration>
-                            <schemaBindingDirectory>${basedir}/target/generated-sources</schemaBindingDirectory>
-                            <includeSchemaBindings>
-                                <includeSchemaBindings>binding.xml</includeSchemaBindings>
-                            </includeSchemaBindings>
-                            <load>true</load>
-                            <validate>true</validate>
-                            <verify>true</verify>
-                            <verbose>true</verbose>
-                        </configuration>
-                    </execution>
+<!--            <plugin>-->
+<!--                <groupId>org.jibx</groupId>-->
+<!--                <artifactId>jibx-maven-plugin</artifactId>-->
+<!--                <version>1.2.6</version>-->
+<!--                <dependencies>-->
+<!--                    <dependency>-->
+<!--                        <groupId>org.apache.bcel</groupId>-->
+<!--                        <artifactId>bcel</artifactId>-->
+<!--                        <version>6.0-SNAPSHOT</version>-->
+<!--                    </dependency>-->
+<!--                </dependencies>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>generate-java-conde-from-schema</id>-->
+<!--                        <goals>-->
+<!--                            <goal>schema-codegen</goal>-->
+<!--                        </goals>-->
+<!--                        <phase>clean</phase>-->
+<!--                        <configuration>-->
+<!--                            <schemaLocation>${basedir}/src/main/resources/schema</schemaLocation>-->
+<!--                            <includeSchemas>-->
+<!--                                <includeSchema>*.xsd</includeSchema>-->
+<!--                                <includeSchema>**/*.xsd</includeSchema>-->
+<!--                                <includeSchema>**/*.xml</includeSchema>-->
+<!--                                <includeSchema>*.xml</includeSchema>-->
+<!--                            </includeSchemas>-->
+<!--                            &lt;!&ndash; <options>-->
+<!--                                <package>test</package>-->
+<!--                            </options> &ndash;&gt;-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                    <execution>-->
+<!--                        <id>compile-binding</id>-->
+<!--                        <goals>-->
+<!--                            <goal>bind</goal>-->
+<!--                        </goals>-->
+<!--                        <phase>compile</phase>-->
+<!--                        <configuration>-->
+<!--                            <schemaBindingDirectory>${basedir}/target/generated-sources</schemaBindingDirectory>-->
+<!--                            <includeSchemaBindings>-->
+<!--                                <includeSchemaBindings>binding.xml</includeSchemaBindings>-->
+<!--                            </includeSchemaBindings>-->
+<!--                            <load>true</load>-->
+<!--                            <validate>true</validate>-->
+<!--                            <verify>true</verify>-->
+<!--                            <verbose>true</verbose>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
 
-                    <!-- <execution> <id>compare-com.lolfwkfwk.jibx-docs</id> <phase>test</phase> <goals><goal>document-compare</goal></goals>
-                        <configuration> <inFile>${basedir}/src/main/resources/schema/xml/ChuanOrder.xml</inFile>
-                        <outFile>${basedir}/src/main/resources/schema/xml/CTshiporder.xml</outFile>
-                        </configuration> </execution> -->
-                </executions>
-            </plugin>
+<!--                    &lt;!&ndash; <execution> <id>compare-com.lolfwkfwk.jibx-docs</id> <phase>test</phase> <goals><goal>document-compare</goal></goals>-->
+<!--                        <configuration> <inFile>${basedir}/src/main/resources/schema/xml/ChuanOrder.xml</inFile>-->
+<!--                        <outFile>${basedir}/src/main/resources/schema/xml/CTshiporder.xml</outFile>-->
+<!--                        </configuration> </execution> &ndash;&gt;-->
+<!--                </executions>-->
+<!--            </plugin>-->
             <!-- com.lolfwkfwk.jibx end -->
 
             <plugin>
@@ -571,18 +600,18 @@
 
     <!-- 配置部署的远程仓库 -->
     <!-- 用于配置分发管理，配置相应的产品发布信息,主要用于发布，在执行mvn deploy后表示要发布的位置 -->
-    <!-- <distributionManagement>
-        <snapshotRepository>
-            <id>nexus-snapshots-testCoder</id>
-            <name>nexus testCoder Snapshot repository</name>
-            <url>http://127.0.0.1:8081/nexus/content/repositories/testCoder-Snapshot</url>
-        </snapshotRepository>
+<!--    <distributionManagement>-->
+<!--        <snapshotRepository>-->
+<!--            <id>nexus-snapshots-testCoder</id>-->
+<!--            <name>nexus testCoder Snapshot repository</name>-->
+<!--            <url>http://127.0.0.1:8081/nexus/content/repositories/testCoder-Snapshot</url>-->
+<!--        </snapshotRepository>-->
 
-        配置到文件系统
-        <repository>
-            <id>nexus-releases-testCoder</id>
-            <name>nexus testCoder Releases repository</name>
-            <url>http://127.0.0.1:8081/nexus/content/repositories/testCoder-Releases</url>
-        </repository>
-    </distributionManagement> -->
+<!--        &lt;!&ndash; 配置到文件系统 &ndash;&gt;-->
+<!--        <repository>-->
+<!--            <id>nexus-releases-testCoder</id>-->
+<!--            <name>nexus testCoder Releases repository</name>-->
+<!--            <url>http://127.0.0.1:8081/nexus/content/repositories/testCoder-Releases</url>-->
+<!--        </repository>-->
+<!--    </distributionManagement>-->
 </project>

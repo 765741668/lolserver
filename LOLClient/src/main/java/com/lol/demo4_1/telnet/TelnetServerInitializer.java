@@ -24,6 +24,8 @@ import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.handler.ssl.SslContext;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * Creates a newly configured {@link io.netty.channel.ChannelPipeline} for a new channel.
  */
@@ -32,7 +34,7 @@ public class TelnetServerInitializer extends ChannelInitializer<SocketChannel> {
     private static final StringDecoder DECODER = new StringDecoder();
     private static final StringEncoder ENCODER = new StringEncoder();
 
-    private static final TelnetServerHandler SERVER_HANDLER = new TelnetServerHandler();
+    private static final TelnetServerHandler SERVER_HANDLER = new TelnetServerHandler(new AtomicInteger());
 
     private final SslContext sslCtx;
 

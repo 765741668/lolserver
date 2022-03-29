@@ -16,5 +16,5 @@ public interface GameUpProcessor {
      *
      * @param buffer
      */
-    public abstract void process(final GameUpBuffer buffer);
+    public abstract void pushToServer(final GameUpBuffer buffer);
 }

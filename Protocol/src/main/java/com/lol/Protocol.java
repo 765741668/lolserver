@@ -41,4 +41,8 @@ public class Protocol {
      * Http->tcp
      */
     public static final byte TYPE_HTTP2TCP = 9;
+    /**
+     * Http
+     */
+    public static final byte TYPE_HTTP = 10;
 }

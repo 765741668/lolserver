@@ -4,6 +4,11 @@ public class AcountInfoDTO {
     private String acount;
     private String password;
 
+    public AcountInfoDTO(String acount, String password) {
+        this.acount = acount;
+        this.password = password;
+    }
+
     public String getacount() {
         return acount;
     }

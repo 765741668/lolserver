@@ -729,6 +729,24 @@ public final class MessageDownProto {
      * </pre>
      */
     int getCmd();
+
+    /**
+     * <code>optional string token = 4;</code>
+     *
+     * <pre>
+     * token, 认证授权
+     * </pre>
+     */
+    java.lang.String getToken();
+    /**
+     * <code>optional string token = 4;</code>
+     *
+     * <pre>
+     * token, 认证授权
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getTokenBytes();
   }
   /**
    * Protobuf type {@code MsgHeader}
@@ -749,6 +767,7 @@ public final class MessageDownProto {
       msgType_ = 0;
       area_ = 0;
       cmd_ = 0;
+      token_ = "";
     }
 
     @java.lang.Override
@@ -788,6 +807,12 @@ public final class MessageDownProto {
             case 24: {
 
               cmd_ = input.readInt32();
+              break;
+            }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+
+              token_ = bs;
               break;
             }
           }
@@ -853,6 +878,50 @@ public final class MessageDownProto {
       return cmd_;
     }
 
+    public static final int TOKEN_FIELD_NUMBER = 4;
+    private volatile java.lang.Object token_;
+    /**
+     * <code>optional string token = 4;</code>
+     *
+     * <pre>
+     * token, 认证授权
+     * </pre>
+     */
+    public java.lang.String getToken() {
+      java.lang.Object ref = token_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          token_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string token = 4;</code>
+     *
+     * <pre>
+     * token, 认证授权
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getTokenBytes() {
+      java.lang.Object ref = token_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        token_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -874,6 +943,9 @@ public final class MessageDownProto {
       if (cmd_ != 0) {
         output.writeInt32(3, cmd_);
       }
+      if (!getTokenBytes().isEmpty()) {
+        output.writeBytes(4, getTokenBytes());
+      }
     }
 
     private int memoizedSerializedSize = -1;
@@ -893,6 +965,10 @@ public final class MessageDownProto {
       if (cmd_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, cmd_);
+      }
+      if (!getTokenBytes().isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getTokenBytes());
       }
       memoizedSerializedSize = size;
       return size;
@@ -1015,6 +1091,8 @@ public final class MessageDownProto {
 
         cmd_ = 0;
 
+        token_ = "";
+
         return this;
       }
 
@@ -1040,6 +1118,7 @@ public final class MessageDownProto {
         result.msgType_ = msgType_;
         result.area_ = area_;
         result.cmd_ = cmd_;
+        result.token_ = token_;
         onBuilt();
         return result;
       }
@@ -1063,6 +1142,10 @@ public final class MessageDownProto {
         }
         if (other.getCmd() != 0) {
           setCmd(other.getCmd());
+        }
+        if (!other.getToken().isEmpty()) {
+          token_ = other.token_;
+          onChanged();
         }
         onChanged();
         return this;
@@ -1200,6 +1283,96 @@ public final class MessageDownProto {
       public Builder clearCmd() {
         
         cmd_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object token_ = "";
+      /**
+       * <code>optional string token = 4;</code>
+       *
+       * <pre>
+       * token, 认证授权
+       * </pre>
+       */
+      public java.lang.String getToken() {
+        java.lang.Object ref = token_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            token_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string token = 4;</code>
+       *
+       * <pre>
+       * token, 认证授权
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getTokenBytes() {
+        java.lang.Object ref = token_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          token_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string token = 4;</code>
+       *
+       * <pre>
+       * token, 认证授权
+       * </pre>
+       */
+      public Builder setToken(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        token_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string token = 4;</code>
+       *
+       * <pre>
+       * token, 认证授权
+       * </pre>
+       */
+      public Builder clearToken() {
+        
+        token_ = getDefaultInstance().getToken();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string token = 4;</code>
+       *
+       * <pre>
+       * token, 认证授权
+       * </pre>
+       */
+      public Builder setTokenBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        token_ = value;
         onChanged();
         return this;
       }
@@ -15731,57 +15904,58 @@ public final class MessageDownProto {
     java.lang.String[] descriptorData = {
       "\n\021MessageDown.proto\"E\n\013MessageDown\022\032\n\006he" +
       "ader\030\001 \001(\0132\n.MsgHeader\022\032\n\004body\030\002 \001(\0132\014.M" +
-      "sgDownBody\"7\n\tMsgHeader\022\017\n\007msgType\030\001 \001(\005" +
-      "\022\014\n\004area\030\002 \001(\005\022\013\n\003cmd\030\003 \001(\005\"\215\001\n\013MsgDownB" +
-      "ody\022\035\n\005login\030\001 \001(\0132\016.LoginDownBody\022\037\n\006pl" +
-      "ayer\030\002 \001(\0132\017.PlayerDownBody\022\037\n\006select\030\003 " +
-      "\001(\0132\017.SelectDownBody\022\035\n\005fight\030\004 \001(\0132\016.Fi" +
-      "ghtDownBody\"\037\n\rLoginDownBody\022\016\n\006result\030\001" +
-      " \001(\005\">\n\016PlayerDownBody\022\016\n\006create\030\001 \001(\005\022\034" +
-      "\n\013playerModel\030\002 \001(\0132\007.Player\"r\n\016SelectDo",
-      "wnBody\022\017\n\007talkRes\030\001 \001(\t\022\020\n\010playerId\030\002 \001(" +
-      "\005\022\034\n\006select\030\003 \001(\0132\014.SelectModel\022\037\n\nselec" +
-      "tRoom\030\004 \001(\0132\013.SelectRoom\"\325\001\n\rFightDownBo" +
-      "dy\022\"\n\tfightRoom\030\001 \001(\0132\017.FightRoomModel\022\033" +
-      "\n\010moveInfo\030\002 \001(\0132\t.MoveInfo\022\037\n\nattackInf" +
-      "o\030\003 \001(\0132\013.AttackInfo\022\037\n\ndamageInfo\030\004 \001(\013" +
-      "2\013.DamageInfo\022\037\n\nfightSkill\030\005 \001(\0132\013.Figh" +
-      "tSkill\022 \n\010skillAtk\030\006 \001(\0132\016.SkillAtkModel" +
-      "\"z\n\006Player\022\n\n\002id\030\001 \001(\005\022\020\n\010nickName\030\002 \001(\t" +
-      "\022\r\n\005level\030\003 \001(\005\022\020\n\010winCount\030\004 \001(\005\022\021\n\tlos",
-      "eCount\030\005 \001(\005\022\020\n\010ranCount\030\006 \001(\005\022\014\n\004hero\030\007" +
-      " \001(\t\"]\n\013SelectModel\022\020\n\010playerId\030\001 \001(\005\022\020\n" +
-      "\010nickName\030\002 \001(\t\022\014\n\004hero\030\003 \001(\005\022\r\n\005enter\030\004" +
-      " \001(\010\022\r\n\005ready\030\005 \001(\010\"R\n\nSelectRoom\022!\n\007tea" +
-      "mOne\030\001 \003(\0132\014.SelectModelB\002\020\000\022!\n\007teamTwo\030" +
-      "\002 \003(\0132\014.SelectModelB\002\020\000\"T\n\016FightRoomMode" +
-      "l\022 \n\007teamOne\030\001 \003(\0132\013.FightModelB\002\020\000\022 \n\007t" +
-      "eamTwo\030\002 \003(\0132\013.FightModelB\002\020\000\"=\n\010MoveInf" +
-      "o\022\020\n\010playerId\030\001 \001(\005\022\t\n\001x\030\002 \001(\002\022\t\n\001y\030\003 \001(" +
-      "\002\022\t\n\001z\030\004 \001(\002\"J\n\nDamageInfo\022\020\n\010playerId\030\001",
-      " \001(\005\022\r\n\005skill\030\002 \001(\005\022\033\n\006target\030\003 \003(\0132\007.Ta" +
-      "rgetB\002\020\000\"\034\n\006Target\022\022\n\006target\030\001 \003(\005B\002\020\001\"d" +
-      "\n\rSkillAtkModel\022\020\n\010playerId\030\001 \001(\005\022\014\n\004typ" +
-      "e\030\002 \001(\005\022\r\n\005skill\030\003 \001(\005\022\024\n\010position\030\004 \003(\002" +
-      "B\002\020\001\022\016\n\006target\030\005 \001(\005\"\200\002\n\nFightModel\022\n\n\002i" +
-      "d\030\001 \001(\005\022#\n\004type\030\002 \001(\0162\025.FightModel.Model" +
-      "Type\022\014\n\004code\030\003 \001(\005\022\n\n\002hp\030\004 \001(\005\022\r\n\005maxHp\030" +
-      "\005 \001(\005\022\013\n\003atk\030\006 \001(\005\022\013\n\003def\030\007 \001(\005\022\014\n\004name\030" +
-      "\010 \001(\t\022\r\n\005speed\030\t \001(\002\022\016\n\006aSpeed\030\n \001(\002\022\016\n\006" +
-      "aRange\030\013 \001(\002\022\020\n\010eyeRange\030\014 \001(\002\022\014\n\004team\030\r",
-      " \001(\005\"!\n\tModelType\022\t\n\005BUILD\020\000\022\t\n\005HUMAN\020\001\"" +
-      "0\n\nAttackInfo\022\020\n\010playerId\030\001 \001(\005\022\020\n\010targe" +
-      "tId\030\002 \001(\005\"\363\002\n\nFightSkill\022\014\n\004code\030\001 \001(\005\022\r" +
-      "\n\005level\030\002 \001(\005\022\021\n\tnextLevel\030\003 \001(\005\022\014\n\004time" +
-      "\030\004 \001(\005\022\014\n\004name\030\005 \001(\t\022\r\n\005range\030\006 \001(\002\022\014\n\004i" +
-      "nfo\030\007 \001(\t\022\'\n\006target\030\010 \001(\0162\027.FightSkill.S" +
-      "killTarget\022#\n\004type\030\t \001(\0162\025.FightSkill.Sk" +
-      "illType\"J\n\tSkillType\022\017\n\013SELF_CENTER\020\000\022\021\n" +
-      "\rTARGET_CENTER\020\001\022\014\n\010POSITION\020\002\022\013\n\007PASSIV" +
-      "E\020\003\"b\n\013SkillTarget\022\010\n\004SELF\020\000\022\007\n\003F_H\020\001\022\t\n",
-      "\005F_N_B\020\002\022\t\n\005F_ALL\020\004\022\007\n\003E_H\020\005\022\t\n\005E_N_B\020\006\022" +
-      "\t\n\005E_S_N\020\007\022\013\n\007N_F_ALL\020\010B(\n\024com.lol.fwk.p" +
-      "rotobufB\020MessageDownProtob\006proto3"
+      "sgDownBody\"F\n\tMsgHeader\022\017\n\007msgType\030\001 \001(\005" +
+      "\022\014\n\004area\030\002 \001(\005\022\013\n\003cmd\030\003 \001(\005\022\r\n\005token\030\004 \001" +
+      "(\t\"\215\001\n\013MsgDownBody\022\035\n\005login\030\001 \001(\0132\016.Logi" +
+      "nDownBody\022\037\n\006player\030\002 \001(\0132\017.PlayerDownBo" +
+      "dy\022\037\n\006select\030\003 \001(\0132\017.SelectDownBody\022\035\n\005f" +
+      "ight\030\004 \001(\0132\016.FightDownBody\"\037\n\rLoginDownB" +
+      "ody\022\016\n\006result\030\001 \001(\005\">\n\016PlayerDownBody\022\016\n" +
+      "\006create\030\001 \001(\005\022\034\n\013playerModel\030\002 \001(\0132\007.Pla",
+      "yer\"r\n\016SelectDownBody\022\017\n\007talkRes\030\001 \001(\t\022\020" +
+      "\n\010playerId\030\002 \001(\005\022\034\n\006select\030\003 \001(\0132\014.Selec" +
+      "tModel\022\037\n\nselectRoom\030\004 \001(\0132\013.SelectRoom\"" +
+      "\325\001\n\rFightDownBody\022\"\n\tfightRoom\030\001 \001(\0132\017.F" +
+      "ightRoomModel\022\033\n\010moveInfo\030\002 \001(\0132\t.MoveIn" +
+      "fo\022\037\n\nattackInfo\030\003 \001(\0132\013.AttackInfo\022\037\n\nd" +
+      "amageInfo\030\004 \001(\0132\013.DamageInfo\022\037\n\nfightSki" +
+      "ll\030\005 \001(\0132\013.FightSkill\022 \n\010skillAtk\030\006 \001(\0132" +
+      "\016.SkillAtkModel\"z\n\006Player\022\n\n\002id\030\001 \001(\005\022\020\n" +
+      "\010nickName\030\002 \001(\t\022\r\n\005level\030\003 \001(\005\022\020\n\010winCou",
+      "nt\030\004 \001(\005\022\021\n\tloseCount\030\005 \001(\005\022\020\n\010ranCount\030" +
+      "\006 \001(\005\022\014\n\004hero\030\007 \001(\t\"]\n\013SelectModel\022\020\n\010pl" +
+      "ayerId\030\001 \001(\005\022\020\n\010nickName\030\002 \001(\t\022\014\n\004hero\030\003" +
+      " \001(\005\022\r\n\005enter\030\004 \001(\010\022\r\n\005ready\030\005 \001(\010\"R\n\nSe" +
+      "lectRoom\022!\n\007teamOne\030\001 \003(\0132\014.SelectModelB" +
+      "\002\020\000\022!\n\007teamTwo\030\002 \003(\0132\014.SelectModelB\002\020\000\"T" +
+      "\n\016FightRoomModel\022 \n\007teamOne\030\001 \003(\0132\013.Figh" +
+      "tModelB\002\020\000\022 \n\007teamTwo\030\002 \003(\0132\013.FightModel" +
+      "B\002\020\000\"=\n\010MoveInfo\022\020\n\010playerId\030\001 \001(\005\022\t\n\001x\030" +
+      "\002 \001(\002\022\t\n\001y\030\003 \001(\002\022\t\n\001z\030\004 \001(\002\"J\n\nDamageInf",
+      "o\022\020\n\010playerId\030\001 \001(\005\022\r\n\005skill\030\002 \001(\005\022\033\n\006ta" +
+      "rget\030\003 \003(\0132\007.TargetB\002\020\000\"\034\n\006Target\022\022\n\006tar" +
+      "get\030\001 \003(\005B\002\020\001\"d\n\rSkillAtkModel\022\020\n\010player" +
+      "Id\030\001 \001(\005\022\014\n\004type\030\002 \001(\005\022\r\n\005skill\030\003 \001(\005\022\024\n" +
+      "\010position\030\004 \003(\002B\002\020\001\022\016\n\006target\030\005 \001(\005\"\200\002\n\n" +
+      "FightModel\022\n\n\002id\030\001 \001(\005\022#\n\004type\030\002 \001(\0162\025.F" +
+      "ightModel.ModelType\022\014\n\004code\030\003 \001(\005\022\n\n\002hp\030" +
+      "\004 \001(\005\022\r\n\005maxHp\030\005 \001(\005\022\013\n\003atk\030\006 \001(\005\022\013\n\003def" +
+      "\030\007 \001(\005\022\014\n\004name\030\010 \001(\t\022\r\n\005speed\030\t \001(\002\022\016\n\006a" +
+      "Speed\030\n \001(\002\022\016\n\006aRange\030\013 \001(\002\022\020\n\010eyeRange\030",
+      "\014 \001(\002\022\014\n\004team\030\r \001(\005\"!\n\tModelType\022\t\n\005BUIL" +
+      "D\020\000\022\t\n\005HUMAN\020\001\"0\n\nAttackInfo\022\020\n\010playerId" +
+      "\030\001 \001(\005\022\020\n\010targetId\030\002 \001(\005\"\363\002\n\nFightSkill\022" +
+      "\014\n\004code\030\001 \001(\005\022\r\n\005level\030\002 \001(\005\022\021\n\tnextLeve" +
+      "l\030\003 \001(\005\022\014\n\004time\030\004 \001(\005\022\014\n\004name\030\005 \001(\t\022\r\n\005r" +
+      "ange\030\006 \001(\002\022\014\n\004info\030\007 \001(\t\022\'\n\006target\030\010 \001(\016" +
+      "2\027.FightSkill.SkillTarget\022#\n\004type\030\t \001(\0162" +
+      "\025.FightSkill.SkillType\"J\n\tSkillType\022\017\n\013S" +
+      "ELF_CENTER\020\000\022\021\n\rTARGET_CENTER\020\001\022\014\n\010POSIT" +
+      "ION\020\002\022\013\n\007PASSIVE\020\003\"b\n\013SkillTarget\022\010\n\004SEL",
+      "F\020\000\022\007\n\003F_H\020\001\022\t\n\005F_N_B\020\002\022\t\n\005F_ALL\020\004\022\007\n\003E_" +
+      "H\020\005\022\t\n\005E_N_B\020\006\022\t\n\005E_S_N\020\007\022\013\n\007N_F_ALL\020\010B(" +
+      "\n\024com.lol.fwk.protobufB\020MessageDownProto" +
+      "b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -15806,7 +15980,7 @@ public final class MessageDownProto {
     internal_static_MsgHeader_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_MsgHeader_descriptor,
-        new java.lang.String[] { "MsgType", "Area", "Cmd", });
+        new java.lang.String[] { "MsgType", "Area", "Cmd", "Token", });
     internal_static_MsgDownBody_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_MsgDownBody_fieldAccessorTable = new

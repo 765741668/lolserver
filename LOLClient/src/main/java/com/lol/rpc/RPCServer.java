@@ -31,13 +31,13 @@ public class RPCServer {
                                 pipeline.addLast(new LengthFieldPrepender(4));
                                 pipeline.addLast("encoder", new ObjectEncoder());
                                 pipeline.addLast("decoder", new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.cacheDisabled(null)));
-                                pipeline.addLast(new InvokerHandler());   
+                                pipeline.addLast(new InvokerHandler());
                         }  
                     }).option(ChannelOption.SO_BACKLOG, 128)
                     .childOption(ChannelOption.SO_KEEPALIVE, true);  
             ChannelFuture future = serverBootstrap.bind(port).sync();
-            System.out.println("Server start listen at " + port );    
-            future.channel().closeFuture().sync();    
+            System.out.println("Server start listen at " + port );
+            future.channel().closeFuture().sync();
         } catch (Exception e) {  
              bossGroup.shutdownGracefully();    
              workerGroup.shutdownGracefully();  
@@ -48,7 +48,7 @@ public class RPCServer {
         if (args.length > 0) {    
             port = Integer.parseInt(args[0]);    
         } else {    
-            port = 8080;    
+            port = 8082;
         }    
         new RPCServer(port).start();    
     }    

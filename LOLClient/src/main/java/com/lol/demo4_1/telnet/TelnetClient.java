@@ -27,6 +27,8 @@ import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 
 /**
  * Simplistic telnet client.
@@ -55,7 +57,7 @@ public final class TelnetClient {
              .handler(new TelnetClientInitializer(sslCtx));
 
             // Start the connection attempt.
-            Channel ch = b.connect(HOST, PORT).sync().channel();
+            Channel ch = b.connect(new InetSocketAddress(InetAddress.getByName("10.66.11.97"), 9000),new InetSocketAddress(InetAddress.getByName("10.66.11.97"), 18000)).sync().channel();
 
             // Read commands from the stdin.
             ChannelFuture lastWriteFuture = null;

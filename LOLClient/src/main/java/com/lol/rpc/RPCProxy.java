@@ -17,9 +17,9 @@ import java.lang.reflect.Proxy;
 
 public class RPCProxy {
           
-    @SuppressWarnings("unchecked")  
+    @SuppressWarnings("unchecked")
     public static <T> T create(Object target){  
-               
+
         return (T) Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(), new InvocationHandler() {
 
             @Override
@@ -51,7 +51,7 @@ public class RPCProxy {
                                 }
                             });
 
-                    ChannelFuture future = b.connect("localhost", 8080).sync();
+                    ChannelFuture future = b.connect("localhost", 8082).sync();
                     future.channel().writeAndFlush(classInfo).sync();
                     future.channel().closeFuture().sync();
                 } finally {

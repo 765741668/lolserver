@@ -11,13 +11,13 @@ import org.itstack.demo.netty.msg.Request;
  */
 public class MyClientHandler extends SimpleChannelInboundHandler<Request> {
 
+
     @Override
-    protected void messageReceived(ChannelHandlerContext ctx, Request msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, Request msg) throws Exception {
         String requestId = msg.getRequestId();
         SyncWriteFuture future = (SyncWriteFuture) SyncWriteMap.syncKey.get(requestId);
         if (future != null) {
             future.setResponse(msg);
         }
     }
-
 }

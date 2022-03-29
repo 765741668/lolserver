@@ -12,7 +12,7 @@ import java.util.List;
  * 游戏房间频道类
  *
  * @author Randy
- *         2015-2-5
+ * 2015-2-5
  */
 public class GameRoomChannel {
 
@@ -22,7 +22,7 @@ public class GameRoomChannel {
     private DefaultChannelGroup roomChannel;
 
     public GameRoomChannel(Integer name) {
-        roomChannel = new DefaultChannelGroup(name+"", GlobalEventExecutor.INSTANCE);
+        roomChannel = new DefaultChannelGroup(name + "", GlobalEventExecutor.INSTANCE);
     }
 
     public boolean isEnteredRoom(Connection connection) {
@@ -72,7 +72,12 @@ public class GameRoomChannel {
      * @throws Exception
      */
     public void broadcastRoom(GameDownBuffer buffer, Channel channelExcept) throws Exception {
-        roomChannel.parallelStream().filter(channel -> channel != channelExcept).forEach(channel -> channel.writeAndFlush(buffer.getBuffer()));
+        roomChannel.parallelStream()
+                .filter(channel ->
+                        channel != channelExcept
+                ).forEach(channel ->
+                        channel.writeAndFlush(buffer.getBuffer())
+        );
     }
 
     /**

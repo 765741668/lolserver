@@ -1,7 +1,6 @@
 package com.lol.server;
 
 import com.lol.fwk.core.GameBoss;
-import com.lol.fwk.core.GameWorkerManager;
 import com.lol.fwk.core.ServerInit;
 
 /**
@@ -31,6 +30,6 @@ public class Server {
         //5秒检测一次线程状态，若线程终止则重启线程
 //        TimerTaskUtil.getInstance().scheduleAtFixedRate(() -> ServerInit.getInstance().WorkerRunStatusCheck(),
 //                5, TimeUnit.SECONDS);
-        GameBoss.getInstance().boot(GameWorkerManager.getInstance()::pushDataToWorker);
+        GameBoss.getInstance().boot();
     }
 }

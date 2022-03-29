@@ -1,9 +1,10 @@
 package com.lol.fwk.util;
 
-import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.net.URL;
@@ -18,7 +19,7 @@ import java.util.*;
  */
 public class ModuleUtil {
 
-    private static Logger logger = Logger.getLogger(ModuleUtil.class);
+    private static Logger logger = LoggerFactory.getLogger(ModuleUtil.class);
     private static ModuleUtil instance = new ModuleUtil();
     /**
      * 模块信息集合(moduleName->(handlerName->className))

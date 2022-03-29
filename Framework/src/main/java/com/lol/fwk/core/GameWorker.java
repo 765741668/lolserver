@@ -34,7 +34,7 @@ public class GameWorker implements Runnable {
      *
      * @param name
      */
-    GameWorker(Integer name) {
+    public GameWorker(Integer name) {
         this.name = name;
     }
 

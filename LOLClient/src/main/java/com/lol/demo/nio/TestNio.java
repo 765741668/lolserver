@@ -214,7 +214,7 @@ public class TestNio {
          * view path
          */
         long start9 = System.currentTimeMillis();
-        System.out.println(new NioUtil().getDirs(Paths.get("D:\\nio\\create")));
+        System.out.println(new NioUtil().getDirs(Paths.get("D:\\data")));
         System.out.println(System.currentTimeMillis() - start9);
 
     }
@@ -225,7 +225,7 @@ public class TestNio {
     @Test
     public void event() {
         long start10 = System.currentTimeMillis();
-        util.event(Paths.get("D:\\nio"));
+        util.event(Paths.get("D:\\data"));
         System.out.println("cast time : " + (System.currentTimeMillis() - start10));
 
     }
@@ -246,7 +246,8 @@ public class TestNio {
         int txtCount = 0;
         int javaCount = 0;
         int xmlCount = 0;
-        for (String str : util.getFiles(Paths.get("D:\\nio"))) {
+        int PPTCount = 0;
+        for (String str : util.getFiles(Paths.get("C:\\"))) {
             if (str.endsWith(".txt")) {
                 txtCount++;
             }
@@ -256,12 +257,27 @@ public class TestNio {
             if (str.endsWith(".xml") | str.endsWith(".XML")) {
                 xmlCount++;
             }
-            System.out.println(str);
+            if (str.toLowerCase().endsWith(".ppt") || str.toLowerCase().endsWith(".pptx")) {
+                PPTCount++;
+                System.out.println(str);
+            }
         }
 
         System.out.println("txtCount : " + txtCount);
         System.out.println("javaCount : " + javaCount);
         System.out.println("xmlCount : " + xmlCount);
+        System.out.println("PPTCount : " + PPTCount);
+    }
+
+    @Test
+    public void getPPTFiles() {
+        int PPTCount = 0;
+        for (String str : util.getFiles(Paths.get("C:\\"),".ppt")) {
+            PPTCount++;
+            System.out.println(str);
+        }
+
+        System.out.println("PPTCount : " + PPTCount);
     }
 
     /**

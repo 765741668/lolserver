@@ -20,6 +20,10 @@ message MsgHeader{
 
     // 三级协议  用于区分当前处理逻辑功能
     int32 cmd = 3;
+
+    // token, 认证授权
+    string token = 4;
+
 }
 
 //下行消息体

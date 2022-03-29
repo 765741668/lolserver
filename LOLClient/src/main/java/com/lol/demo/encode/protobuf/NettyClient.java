@@ -1,7 +1,7 @@
 package com.lol.demo.encode.protobuf;
 
 import com.lol.demo.heartbeat.googleprotobuf.HeartBeatReqHandler;
-import com.lol.demo.loginauth.googleprotobuf.LoginAuthReqHandler;
+import com.lol.demo.loginauth.googleprotobuf.LoginAuthClientHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -64,7 +64,7 @@ public class NettyClient {
                                     .addLast(new ProtobufVarint32LengthFieldPrepender())
                                     .addLast(new ProtobufEncoder())
 //                                    .addLast(new ReadTimeoutHandler(50))
-                                    .addLast(new LoginAuthReqHandler())
+                                    .addLast(new LoginAuthClientHandler())
                                     .addLast(new HeartBeatReqHandler())
                                     .addLast(new SubReqClientHandler());
                         }

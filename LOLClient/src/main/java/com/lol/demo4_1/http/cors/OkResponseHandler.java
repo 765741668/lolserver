@@ -15,6 +15,7 @@
  */
 package com.lol.demo4_1.http.cors;
 
+import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -28,9 +29,10 @@ import io.netty.handler.codec.http.HttpVersion;
  * response for any request.
  */
 public class OkResponseHandler extends SimpleChannelInboundHandler<Object> {
+    private static final byte[] CONTENT = { 'C', 'o', 'r', 's', ' ', 'h', 't', 't', 'p', ' ','s','e','r','v','e','r' };
     @Override
     public void channelRead0(ChannelHandlerContext ctx, Object msg) {
-        final FullHttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK);
+        final FullHttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK,  Unpooled.wrappedBuffer(CONTENT));
         response.headers().set("custom-response-header", "Some value");
         ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
     }

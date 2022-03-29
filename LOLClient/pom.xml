@@ -382,43 +382,43 @@
             </plugin>
 
             <!-- 这样，批处理命令的输出默认会出现在maven的build结果中 -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.5.0</version>
-                <executions>
-                    <!-- way 1 for java code: -->
-                    <execution>
-                        <id>java excute command</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>java</goal>
-                        </goals>
-                        <configuration>
-                            <mainClass>com.lol.demo.util.ExcuteExeUtil</mainClass>
-                            <arguments>
-                                <argument>${protobuf.location}</argument>
-                                <argument>${protobuf.output}</argument>
-                                <!--多个文件 以,分隔-->
-                                <argument>${protobuf.source.files}</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
+<!--            <plugin>-->
+<!--                <groupId>org.codehaus.mojo</groupId>-->
+<!--                <artifactId>exec-maven-plugin</artifactId>-->
+<!--                <version>1.5.0</version>-->
+<!--                <executions>-->
+<!--                    &lt;!&ndash; way 1 for java code: &ndash;&gt;-->
+<!--                    <execution>-->
+<!--                        <id>java excute command</id>-->
+<!--                        <phase>generate-sources</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>java</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <mainClass>com.lol.demo.util.ExcuteExeUtil</mainClass>-->
+<!--                            <arguments>-->
+<!--                                <argument>${protobuf.location}</argument>-->
+<!--                                <argument>${protobuf.output}</argument>-->
+<!--                                &lt;!&ndash;多个文件 以,分隔&ndash;&gt;-->
+<!--                                <argument>${protobuf.source.files}</argument>-->
+<!--                            </arguments>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
 
-                    <!-- way 2 for maven: -->
-                    <!--<execution>-->
-                    <!--<id>maven excute command bat2</id>-->
-                    <!--<phase>generate-sources</phase>-->
-                    <!--<goals><goal>exec</goal></goals>-->
-                    <!--<configuration>-->
-                    <!--<executable>${mainResources}/env/netty/protobuf/bin/generate.bat</executable>-->
-                    <!--<arguments>-->
-                    <!--<argument>${mainResources}/env/netty/protobuf/config/cmdargs.properties</argument>-->
-                    <!--</arguments>-->
-                    <!--</configuration>-->
-                    <!--</execution>-->
-                </executions>
-            </plugin>
+<!--                    &lt;!&ndash; way 2 for maven: &ndash;&gt;-->
+<!--                    &lt;!&ndash;<execution>&ndash;&gt;-->
+<!--                    &lt;!&ndash;<id>maven excute command bat2</id>&ndash;&gt;-->
+<!--                    &lt;!&ndash;<phase>generate-sources</phase>&ndash;&gt;-->
+<!--                    &lt;!&ndash;<goals><goal>exec</goal></goals>&ndash;&gt;-->
+<!--                    &lt;!&ndash;<configuration>&ndash;&gt;-->
+<!--                    &lt;!&ndash;<executable>${mainResources}/env/netty/protobuf/bin/generate.bat</executable>&ndash;&gt;-->
+<!--                    &lt;!&ndash;<arguments>&ndash;&gt;-->
+<!--                    &lt;!&ndash;<argument>${mainResources}/env/netty/protobuf/config/cmdargs.properties</argument>&ndash;&gt;-->
+<!--                    &lt;!&ndash;</arguments>&ndash;&gt;-->
+<!--                    &lt;!&ndash;</configuration>&ndash;&gt;-->
+<!--                    &lt;!&ndash;</execution>&ndash;&gt;-->
+<!--                </executions>-->
+<!--            </plugin>-->
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -432,62 +432,62 @@
             </plugin>
 
             <!-- com.lolfwkfwk.jibx start -->
-            <plugin>
-                <groupId>org.jibx</groupId>
-                <artifactId>jibx-maven-plugin</artifactId>
-                <version>1.2.6</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.bcel</groupId>
-                        <artifactId>bcel</artifactId>
-                        <version>6.0-SNAPSHOT</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <id>generate-java-conde-from-schema</id>
-                        <goals>
-                            <goal>schema-codegen</goal>
-                        </goals>
-                        <phase>clean</phase>
-                        <configuration>
-                            <schemaLocation>${basedir}/src/main/resources/schema</schemaLocation>
-                            <includeSchemas>
-                                <includeSchema>*.xsd</includeSchema>
-                                <includeSchema>**/*.xsd</includeSchema>
-                                <includeSchema>**/*.xml</includeSchema>
-                                <includeSchema>*.xml</includeSchema>
-                            </includeSchemas>
-                            <!-- <options>
-                                <package>test</package>
-                            </options> -->
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>compile-binding</id>
-                        <goals>
-                            <goal>bind</goal>
-                        </goals>
-                        <phase>compile</phase>
-                        <configuration>
-                            <!-- 手动将 ${basedir}/target/generated-sources下面的包 拖到 ${mainJava}-->
-                            <schemaBindingDirectory>${mainJava}</schemaBindingDirectory>
-                            <includeSchemaBindings>
-                                <includeSchemaBindings>binding.xml</includeSchemaBindings>
-                            </includeSchemaBindings>
-                            <load>true</load>
-                            <validate>true</validate>
-                            <verify>true</verify>
-                            <verbose>true</verbose>
-                        </configuration>
-                    </execution>
+<!--            <plugin>-->
+<!--                <groupId>org.jibx</groupId>-->
+<!--                <artifactId>jibx-maven-plugin</artifactId>-->
+<!--                <version>1.2.6</version>-->
+<!--                <dependencies>-->
+<!--                    <dependency>-->
+<!--                        <groupId>org.apache.bcel</groupId>-->
+<!--                        <artifactId>bcel</artifactId>-->
+<!--                        <version>6.0-SNAPSHOT</version>-->
+<!--                    </dependency>-->
+<!--                </dependencies>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>generate-java-conde-from-schema</id>-->
+<!--                        <goals>-->
+<!--                            <goal>schema-codegen</goal>-->
+<!--                        </goals>-->
+<!--                        <phase>clean</phase>-->
+<!--                        <configuration>-->
+<!--                            <schemaLocation>${basedir}/src/main/resources/schema</schemaLocation>-->
+<!--                            <includeSchemas>-->
+<!--                                <includeSchema>*.xsd</includeSchema>-->
+<!--                                <includeSchema>**/*.xsd</includeSchema>-->
+<!--                                <includeSchema>**/*.xml</includeSchema>-->
+<!--                                <includeSchema>*.xml</includeSchema>-->
+<!--                            </includeSchemas>-->
+<!--                            &lt;!&ndash; <options>-->
+<!--                                <package>test</package>-->
+<!--                            </options> &ndash;&gt;-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                    <execution>-->
+<!--                        <id>compile-binding</id>-->
+<!--                        <goals>-->
+<!--                            <goal>bind</goal>-->
+<!--                        </goals>-->
+<!--                        <phase>compile</phase>-->
+<!--                        <configuration>-->
+<!--                            &lt;!&ndash; 手动将 ${basedir}/target/generated-sources下面的包 拖到 ${mainJava}&ndash;&gt;-->
+<!--                            <schemaBindingDirectory>${mainJava}</schemaBindingDirectory>-->
+<!--                            <includeSchemaBindings>-->
+<!--                                <includeSchemaBindings>binding.xml</includeSchemaBindings>-->
+<!--                            </includeSchemaBindings>-->
+<!--                            <load>true</load>-->
+<!--                            <validate>true</validate>-->
+<!--                            <verify>true</verify>-->
+<!--                            <verbose>true</verbose>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
 
-                    <!-- <execution> <id>compare-com.lolfwkfwk.jibx-docs</id> <phase>test</phase> <goals><goal>document-compare</goal></goals>
-                        <configuration> <inFile>${basedir}/src/main/resources/schema/xml/ChuanOrder.xml</inFile>
-                        <outFile>${basedir}/src/main/resources/schema/xml/CTshiporder.xml</outFile>
-                        </configuration> </execution> -->
-                </executions>
-            </plugin>
+<!--                    &lt;!&ndash; <execution> <id>compare-com.lolfwkfwk.jibx-docs</id> <phase>test</phase> <goals><goal>document-compare</goal></goals>-->
+<!--                        <configuration> <inFile>${basedir}/src/main/resources/schema/xml/ChuanOrder.xml</inFile>-->
+<!--                        <outFile>${basedir}/src/main/resources/schema/xml/CTshiporder.xml</outFile>-->
+<!--                        </configuration> </execution> &ndash;&gt;-->
+<!--                </executions>-->
+<!--            </plugin>-->
             <!-- com.lolfwkfwk.jibx end -->
 
             <plugin>
@@ -565,18 +565,18 @@
 
     <!-- 配置部署的远程仓库 -->
     <!-- 用于配置分发管理，配置相应的产品发布信息,主要用于发布，在执行mvn deploy后表示要发布的位置 -->
-    <distributionManagement>
-        <snapshotRepository>
-            <id>nexus-snapshots-testCoder</id>
-            <name>nexus testCoder Snapshot repository</name>
-            <url>http://127.0.0.1:8081/nexus/content/repositories/testCoder-Snapshot</url>
-        </snapshotRepository>
+<!--    <distributionManagement>-->
+<!--        <snapshotRepository>-->
+<!--            <id>nexus-snapshots-testCoder</id>-->
+<!--            <name>nexus testCoder Snapshot repository</name>-->
+<!--            <url>http://127.0.0.1:8081/nexus/content/repositories/testCoder-Snapshot</url>-->
+<!--        </snapshotRepository>-->
 
-        <!-- 配置到文件系统 -->
-        <repository>
-            <id>nexus-releases-testCoder</id>
-            <name>nexus testCoder Releases repository</name>
-            <url>http://127.0.0.1:8081/nexus/content/repositories/testCoder-Releases</url>
-        </repository>
-    </distributionManagement>
+<!--        &lt;!&ndash; 配置到文件系统 &ndash;&gt;-->
+<!--        <repository>-->
+<!--            <id>nexus-releases-testCoder</id>-->
+<!--            <name>nexus testCoder Releases repository</name>-->
+<!--            <url>http://127.0.0.1:8081/nexus/content/repositories/testCoder-Releases</url>-->
+<!--        </repository>-->
+<!--    </distributionManagement>-->
 </project>

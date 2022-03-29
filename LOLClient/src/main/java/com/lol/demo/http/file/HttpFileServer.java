@@ -21,7 +21,7 @@ import io.netty.handler.stream.ChunkedWriteHandler;
  */
 public class HttpFileServer {
     //    private static final String DEFAULT_URL = "/src/main/resources/";
-    private static final String DEFAULT_URL = "D:/maven_repository";
+    private static final String DEFAULT_URL = "E:/repo";
 
     /**
      * @param args
@@ -29,7 +29,7 @@ public class HttpFileServer {
      */
     public static void main(String[] args) throws Exception {
         String url = DEFAULT_URL;
-        int port = 8080;
+        int port = 8081;
         if (args != null && args.length > 0) {
             try {
                 port = Integer.valueOf(args[0]);

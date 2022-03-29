@@ -5,7 +5,7 @@ package com.lol.constans;
  */
 public class HeroData {
 
-    public static final java.util.HashMap<Integer, HeroDataModel> heroMap = new java.util.HashMap<>();
+    public static final java.util.HashMap<Integer, HeroDataModel> heroMap = new java.util.HashMap<Integer, HeroDataModel>();
 
     /**
      静态构造 初次访问的时候自动调用

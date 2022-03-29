@@ -1,6 +1,7 @@
 package com.lol.fwk.util;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
@@ -27,7 +28,7 @@ import java.util.Map;
  */
 public class JedisUtil {
 
-    private static Logger logger = Logger.getLogger(JedisUtil.class.getName());
+    private static Logger logger = LoggerFactory.getLogger(JedisUtil.class.getName());
     private static Map<String, JedisPool> maps = new HashMap<String, JedisPool>();
 
     /**

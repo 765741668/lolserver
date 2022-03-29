@@ -13,7 +13,7 @@ import org.itstack.demo.netty.msg.Response;
 public class MyServerHandler extends SimpleChannelInboundHandler<Response> {
 
     @Override
-    protected void messageReceived(ChannelHandlerContext ctx, Response msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, Response msg) throws Exception {
         //反馈
         Request request = new Request();
         request.setRequestId(msg.getRequestId());
@@ -22,5 +22,4 @@ public class MyServerHandler extends SimpleChannelInboundHandler<Response> {
         //释放
         ReferenceCountUtil.release(msg);
     }
-
 }

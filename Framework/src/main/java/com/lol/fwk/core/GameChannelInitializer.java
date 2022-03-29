@@ -14,6 +14,10 @@ import io.netty.handler.codec.protobuf.ProtobufDecoder;
 import io.netty.handler.codec.protobuf.ProtobufEncoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Map;
 
 
 /**
@@ -23,6 +27,8 @@ import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
  */
 
 public class GameChannelInitializer extends ChannelInitializer<SocketChannel> {
+
+    private static Logger logger = LoggerFactory.getLogger(GameHandlerManager.class);
 
     private static ExtensionRegistry registry = ExtensionRegistry.newInstance();
 
@@ -36,11 +42,21 @@ public class GameChannelInitializer extends ChannelInitializer<SocketChannel> {
 //        ch.pipeline().addLast("readTimeOutHandler", new ReadTimeoutHandler(Integer.parseInt(
 //                ProReaderUtil.getInstance().getNettyPro().get("heartBeatTimeOut"))));
 
-
-
-        for (ChannelHandler channel : GameHandlerManager.getInstance().getAllHandler().values()) {
-            ch.pipeline().addLast(channel);
+        try {
+            for (Map.Entry<Integer, ChannelHandler> channel : GameHandlerManager.getInstance().getAllHandler().entrySet()) {
+                ChannelHandler handler = channel.getValue();
+                if(logger.isDebugEnabled()){
+                    logger.debug("{} has been registed...", handler.getClass().getName());
+                }
+                if(channel.getKey() != 10){
+                    ch.pipeline().addLast(handler);
+                }
+            }
+        }catch (Exception e){
+            logger.error("InitChannel error:{}", e.getMessage(), e);
+            throw e;
         }
+
     }
 
 

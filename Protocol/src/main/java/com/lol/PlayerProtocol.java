@@ -2,21 +2,21 @@ package com.lol;
 
 public class PlayerProtocol {
     /**
-     * 获取自身数据
-     */
-    public static final int INFO_CREQ = 0;
-    /**
-     * 返回自身数据
-     */
-    public static final int INFO_SRES = 1;
-    /**
      * 申请创建角色
      */
-    public static final int CREATE_CREQ = 2;
+    public static final int CREATE_CREQ = 0;
     /**
      * 返回创建结果
      */
-    public static final int CREATE_SRES = 3;
+    public static final int CREATE_SRES = 1;
+    /**
+     * 获取自身数据
+     */
+    public static final int INFO_CREQ = 2;
+    /**
+     * 返回自身数据
+     */
+    public static final int INFO_SRES = 3;
     /**
      * 用户上线
      */

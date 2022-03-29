@@ -7,19 +7,27 @@ import com.lol.fwk.protobuf.MessageDownProto;
 import com.lol.fwk.protobuf.MessageUpProto;
 import org.apache.commons.lang3.RandomUtils;
 
+import java.util.concurrent.atomic.LongAdder;
+
 /**
  * 工具类
  *
  * @author Randy
  */
 public class Utils {
-    /**
-     * 取得指定范围随机数
-     *
-     * @param min
-     * @param max
-     * @return
-     */
+    private static LongAdder accountIncrId = new LongAdder();
+    private static LongAdder playerIncrId = new LongAdder();
+
+    public static int getAccountIncrId() {
+        accountIncrId.increment();
+        return accountIncrId.intValue();
+    }
+
+    public static int getPlayerIncrId() {
+        playerIncrId.increment();
+        return playerIncrId.intValue();
+    }
+
     public static int getRandomNum(int min, int max) {
         return RandomUtils.nextInt(min, max + 1);
     }
@@ -79,11 +87,40 @@ public class Utils {
             }
             builder.setBody(body);
         }
-
         builder.setHeader(header);
         buffer.setBuffer(builder.build());
 
         return buffer;
+
+    }
+
+    public static MessageDownProto.MessageDown packgeDownData2(int msgType, int area, int cmd, Object data) {
+
+        MessageDownProto.MessageDown.Builder builder = MessageDownProto.MessageDown.newBuilder();
+        MessageDownProto.MsgHeader.Builder header = MessageDownProto.MsgHeader.newBuilder();
+
+        header.setMsgType(msgType);
+        header.setArea(area);
+        header.setCmd(cmd);
+
+        if (data instanceof MessageDownProto.MsgDownBody) {
+            builder.setBody((MessageDownProto.MsgDownBody) data);
+        } else {
+            MessageDownProto.MsgDownBody.Builder body = MessageDownProto.MsgDownBody.newBuilder();
+            if (data instanceof MessageDownProto.LoginDownBody) {
+                body.setLogin((MessageDownProto.LoginDownBody) data);
+            } else if (data instanceof MessageDownProto.PlayerDownBody) {
+                body.setPlayer((MessageDownProto.PlayerDownBody) data);
+            } else if (data instanceof MessageDownProto.SelectDownBody) {
+                body.setSelect((MessageDownProto.SelectDownBody) data);
+            } else if (data instanceof MessageDownProto.FightDownBody) {
+                body.setFight((MessageDownProto.FightDownBody) data);
+            }
+            builder.setBody(body);
+        }
+
+        builder.setHeader(header);
+        return builder.build();
 
     }
 
@@ -96,7 +133,7 @@ public class Utils {
      * @param data
      * @return
      */
-    public static GameUpBuffer packgeUpData(Connection connection, int msgType, int area, int cmd, Object data) {
+    public static GameUpBuffer packageUpData(Connection connection, int msgType, int area, int cmd, Object data) {
 
         MessageUpProto.MessageUp.Builder builder = MessageUpProto.MessageUp.newBuilder();
         MessageUpProto.MsgHeader.Builder header = MessageUpProto.MsgHeader.newBuilder();
@@ -137,7 +174,7 @@ public class Utils {
      * @param data
      * @return
      */
-    public static MessageUpProto.MessageUp packgeUpData(int msgType, int area, int cmd, Object data) {
+    public static MessageUpProto.MessageUp packageUpData(int msgType, int area, int cmd, Object data) {
 
         MessageUpProto.MessageUp.Builder builder = MessageUpProto.MessageUp.newBuilder();
         MessageUpProto.MsgHeader.Builder header = MessageUpProto.MsgHeader.newBuilder();

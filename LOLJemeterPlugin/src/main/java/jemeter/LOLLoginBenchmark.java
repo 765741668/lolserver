@@ -19,8 +19,8 @@ import java.util.Iterator;
 
 
 
-public class LOLLoginBenchmark extends AbstractJavaSamplerClient
-{
+public class LOLLoginBenchmark extends AbstractJavaSamplerClient {
+
     private static final Logger log = LoggerFactory.getLogger(LOLLoginBenchmark.class);
 
     /**
@@ -62,6 +62,7 @@ public class LOLLoginBenchmark extends AbstractJavaSamplerClient
      * 从 context 参数可以获得参数值；
      * @return
      */
+    @Override
     public SampleResult runTest(JavaSamplerContext context) {
         SampleResult sp = new SampleResult(); //采样结果
         MessageDownProto.MessageDown resp;
@@ -162,4 +163,5 @@ public class LOLLoginBenchmark extends AbstractJavaSamplerClient
 
         return params;
     }
+
 }

@@ -106,9 +106,12 @@ public class ProReaderUtil {
     public HashMap<String, String> getNettyPro() {
         HashMap<String, String> conf = new HashMap<String, String>();
         ConfigurablePropertyResolver properties = getPro("/netty/config/netty");
-        conf.put("port", properties.getProperty("netty.port").trim());
-        conf.put("host", properties.getProperty("netty.host").trim());
-        conf.put("heartBeatTimeOut", properties.getProperty("netty.heartBeatTimeOut").trim());
+        conf.put("tcpPort", properties.getProperty("netty.tcp.port").trim());
+        conf.put("tcpHost", properties.getProperty("netty.tcp.host").trim());
+        conf.put("tcpHeartBeatTimeOut", properties.getProperty("netty.tcp.heartBeatTimeOut").trim());
+
+        conf.put("httpPort", properties.getProperty("netty.http.port").trim());
+        conf.put("httpHost", properties.getProperty("netty.http.host").trim());
 
         return conf;
     }

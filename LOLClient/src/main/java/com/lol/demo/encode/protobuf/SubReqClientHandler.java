@@ -3,6 +3,7 @@ package com.lol.demo.encode.protobuf;
 import com.lol.demo.encode.protobuf.SubscribeReqProto.ProtoBody;
 import com.lol.demo.encode.protobuf.SubscribeReqProto.ProtoHeader;
 import com.lol.demo.encode.protobuf.SubscribeRespProto.SubscribeResp;
+import com.lol.demo.encode.protobuf.SubscribeReqProto.SubscribeReq;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import org.slf4j.Logger;
@@ -11,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SubReqClientHandler extends SimpleChannelInboundHandler {
+public class SubReqClientHandler extends SimpleChannelInboundHandler<SubscribeResp> {
 
     private static final Logger logger = LoggerFactory.getLogger(SubReqClientHandler.class.getName());
 
@@ -22,12 +23,14 @@ public class SubReqClientHandler extends SimpleChannelInboundHandler {
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         for (int i = 0; i < 10; i++) {
-            ctx.write(req(i));
+            System.out.println("send msg to server....");
+            SubscribeReq req = req(i);
+            ctx.writeAndFlush(req);
         }
         ctx.flush();
     }
 
-    private SubscribeReqProto.SubscribeReq req(int i) {
+    private SubscribeReq req(int i) {
         ProtoHeader.Builder header = ProtoHeader.newBuilder();
         header.setSubReqID(i);
         header.setMsgType(ProtoHeader.MsgType.LOGIN_OK);
@@ -42,7 +45,7 @@ public class SubReqClientHandler extends SimpleChannelInboundHandler {
         body.addAllAddress(address);
         body.getMutableHeaderMap().put("head1", header.build());
 
-        SubscribeReqProto.SubscribeReq.Builder r = SubscribeReqProto.SubscribeReq.newBuilder();
+        SubscribeReq.Builder r = SubscribeReq.newBuilder();
         r.setHeader(header);
         r.setBody(body);
 
@@ -56,11 +59,10 @@ public class SubReqClientHandler extends SimpleChannelInboundHandler {
     }
 
     @Override
-    public void channelRead0(ChannelHandlerContext ctx, Object msg)
+    public void channelRead0(ChannelHandlerContext ctx, SubscribeResp msg)
             throws Exception {
-        SubscribeResp resp = (SubscribeResp) msg;
         System.out.println("receive server response:[");
-        System.out.println(resp);
+        System.out.println(msg);
         System.out.println("]");
     }
 

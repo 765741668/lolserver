@@ -6,7 +6,7 @@
  * Created Date: Dec 3, 2015
  * Last Updated By: java
  * Last Updated Date: Dec 3, 2015
- * Description: 
+ * Description:
  *
  *******************************************************************************
 
@@ -40,6 +40,9 @@ import java.nio.channels.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.attribute.FileAttribute;
+import java.nio.file.attribute.PosixFilePermission;
+import java.nio.file.attribute.PosixFilePermissions;
 import java.security.MessageDigest;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -463,7 +466,7 @@ public class NioUtil {
             for (int i = 0; i < 18; i++) {
                 // read/write will be throws exception if not exist path or file
                 try (FileChannel inc = FileChannel.open(path, StandardOpenOption.READ);) {
-
+//                    ByteBuffer bb = ByteBuffer.allocateDirect((int) inc.size());
                     ByteBuffer bb = ByteBuffer.allocate((int) inc.size());
                     int br = inc.read(bb);
                     while (br != -1) {
@@ -714,6 +717,32 @@ public class NioUtil {
 
         return list;
     }
+
+    public List<String> getFiles(Path path, String suffix) {
+        LinkedList<String> list = new LinkedList<>();
+        Set<PosixFilePermission> permissions = PosixFilePermissions.fromString("rwxrwxrwx");
+        FileAttribute<Set<PosixFilePermission>> fileAttributes = PosixFilePermissions.asFileAttribute(permissions);
+        if (Files.exists(path, new LinkOption[]{LinkOption.NOFOLLOW_LINKS})) {
+            try {
+                Files.walkFileTree(path, new SimpleFileVisitor<Path>() {
+
+                    public FileVisitResult visitFile(Path dir, BasicFileAttributes attrs)
+                            throws IOException {
+                        if(dir.getFileName().endsWith(suffix)){
+                            String path = dir.getParent() + File.separator + dir.getFileName();
+                            list.add(path);
+                        }
+                        return FileVisitResult.CONTINUE;
+                    }
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return list;
+    }
+
 
     public List<Path> getFilesPath(Path path) {
         LinkedList<Path> list = new LinkedList<>();

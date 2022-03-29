@@ -2,7 +2,8 @@ package com.lol.fwk.core;
 
 import com.lol.fwk.util.ModuleUtil;
 import com.lol.fwk.util.ProReaderUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * 服务初始化类
@@ -12,7 +13,7 @@ import org.apache.log4j.Logger;
  */
 public class ServerInit {
 
-    private static Logger logger = Logger.getLogger(ServerInit.class);
+    private static Logger logger = LoggerFactory.getLogger(ServerInit.class);
 
     private static ServerInit instance = new ServerInit();
 

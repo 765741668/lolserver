@@ -1,3 +1,3 @@
 E:
-cd E:\workspaces\IntelliJ13.1\LOL_Branch\yzh\Framework/src/main/java/com/lol/fwk/protobuf
-protoc MessageDown.proto --java_out=E:\workspaces\IntelliJ13.1\LOL_Branch\yzh\Framework/src/main/java
+cd E:\workerspase\demo\lolserver\Framework\src\main\java\com\lol\fwk\protobuf
+protoc MessageDown.proto --java_out=E:\workerspase\demo\lolserver\Framework\src\main\java

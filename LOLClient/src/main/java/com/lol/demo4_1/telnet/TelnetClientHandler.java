@@ -18,16 +18,31 @@ package com.lol.demo4_1.telnet;
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.net.InetAddress;
 
 /**
  * Handles a client-side channel.
  */
 @Sharable
 public class TelnetClientHandler extends SimpleChannelInboundHandler<String> {
+    private final Logger logger = LoggerFactory.getLogger(TelnetClientHandler.class);
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        logger.info(ctx.channel().localAddress() + " client active...");
+    }
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
-        System.err.println(msg);
+        logger.info(msg);
+    }
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("channelInactive~~~~~~~~~~~~~~~~~~~~~");
+        super.channelInactive(ctx);
     }
 
     @Override

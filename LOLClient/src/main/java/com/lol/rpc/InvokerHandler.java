@@ -23,8 +23,10 @@ public class InvokerHandler extends ChannelInboundHandlerAdapter {
             claszz = classMap.get(classInfo.getClassName());  
         }
         Method method = claszz.getClass().getMethod(classInfo.getMethodName(), classInfo.getTypes());
-        Object result = method.invoke(claszz, classInfo.getObjects());   
-        ctx.write(result);  
+        Object result = method.invoke(claszz, classInfo.getObjects());
+        System.out.println("server 收到: " + classInfo.getObjects()[0].toString());
+        System.out.println("server 返回: " + result);
+        ctx.write(result);
         ctx.flush();    
         ctx.close();  
     }    

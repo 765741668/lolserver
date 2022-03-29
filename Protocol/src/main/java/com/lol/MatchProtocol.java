@@ -6,7 +6,7 @@ public class MatchProtocol {
      */
     public static final int ENTER_CREQ = 0;
     /**
-     * 返回申请结果
+     * 返回申请匹配结果
      */
     public static final int ENTER_SRES = 1;
     /**

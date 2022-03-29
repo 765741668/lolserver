@@ -29,12 +29,12 @@ public class GameBoss {
     /**
      * 启动服务
      *
-     * @param processor
      * @throws Exception
      */
-    public void boot(GameUpProcessor processor) throws Exception {
-        this.processor = processor;
-        new Bootstrap().run();
+    public void boot() throws Exception {
+        this.processor = GameWorkerManager.getInstance()::pushDataToWorker;
+        new TCPBootstrap().run();
+        new HttpBootstrap().run();
     }
 
     private static final class GameBossHolder {

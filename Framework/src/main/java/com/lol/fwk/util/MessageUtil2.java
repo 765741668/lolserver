@@ -1,7 +1,6 @@
 package com.lol.fwk.util;
 
-import com.lol.fwk.db.ServiceErrorCode;
-import com.lol.fwk.db.ServiceException;
+import com.lol.fwk.exception.ServiceException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -48,8 +47,7 @@ public class MessageUtil2 {
 			sb.append("&content=").append(URLEncoder.encode(content, "gb2312"));
 		} catch (UnsupportedEncodingException e1) {
 			e1.printStackTrace();
-			throw new ServiceException(ServiceErrorCode.ADD.toString(),
-					"发送信息转码失败!");
+			throw new ServiceException("发送信息转码失败!");
 		}
 		try {
 			URL url = new URL(sb.toString());

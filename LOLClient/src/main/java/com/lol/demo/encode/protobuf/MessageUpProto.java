@@ -56,7 +56,7 @@ public final class MessageUpProto {
     private MessageUp() {
     }
 
-    @java.lang.Override
+    @Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
@@ -123,7 +123,7 @@ public final class MessageUpProto {
       return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_MessageUp_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_MessageUp_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -276,9 +276,9 @@ public final class MessageUpProto {
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -298,7 +298,7 @@ public final class MessageUpProto {
         return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_MessageUp_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_MessageUp_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -311,7 +311,7 @@ public final class MessageUpProto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -497,7 +497,7 @@ public final class MessageUpProto {
        * <code>optional .MsgHeader header = 1;</code>
        */
       public com.lol.demo.encode.protobuf.MessageUpProto.MsgHeader.Builder getHeaderBuilder() {
-        
+
         onChanged();
         return getHeaderFieldBuilder().getBuilder();
       }
@@ -516,7 +516,7 @@ public final class MessageUpProto {
        * <code>optional .MsgHeader header = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lol.demo.encode.protobuf.MessageUpProto.MsgHeader, com.lol.demo.encode.protobuf.MessageUpProto.MsgHeader.Builder, com.lol.demo.encode.protobuf.MessageUpProto.MsgHeaderOrBuilder> 
+          com.lol.demo.encode.protobuf.MessageUpProto.MsgHeader, com.lol.demo.encode.protobuf.MessageUpProto.MsgHeader.Builder, com.lol.demo.encode.protobuf.MessageUpProto.MsgHeaderOrBuilder>
           getHeaderFieldBuilder() {
         if (headerBuilder_ == null) {
           headerBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -614,7 +614,7 @@ public final class MessageUpProto {
        * <code>optional .MsgUpBody body = 2;</code>
        */
       public com.lol.demo.encode.protobuf.MessageUpProto.MsgUpBody.Builder getBodyBuilder() {
-        
+
         onChanged();
         return getBodyFieldBuilder().getBuilder();
       }
@@ -633,7 +633,7 @@ public final class MessageUpProto {
        * <code>optional .MsgUpBody body = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lol.demo.encode.protobuf.MessageUpProto.MsgUpBody, com.lol.demo.encode.protobuf.MessageUpProto.MsgUpBody.Builder, com.lol.demo.encode.protobuf.MessageUpProto.MsgUpBodyOrBuilder> 
+          com.lol.demo.encode.protobuf.MessageUpProto.MsgUpBody, com.lol.demo.encode.protobuf.MessageUpProto.MsgUpBody.Builder, com.lol.demo.encode.protobuf.MessageUpProto.MsgUpBodyOrBuilder>
           getBodyFieldBuilder() {
         if (bodyBuilder_ == null) {
           bodyBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -688,7 +688,7 @@ public final class MessageUpProto {
       }
     };
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<MessageUp> getParserForType() {
       return PARSER;
     }
@@ -729,6 +729,24 @@ public final class MessageUpProto {
      * </pre>
      */
     int getCmd();
+
+    /**
+     * <code>optional string token = 4;</code>
+     *
+     * <pre>
+     * token, 认证授权
+     * </pre>
+     */
+    String getToken();
+    /**
+     * <code>optional string token = 4;</code>
+     *
+     * <pre>
+     * token, 认证授权
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getTokenBytes();
   }
   /**
    * Protobuf type {@code MsgHeader}
@@ -749,9 +767,10 @@ public final class MessageUpProto {
       msgType_ = 0;
       area_ = 0;
       cmd_ = 0;
+      token_ = "";
     }
 
-    @java.lang.Override
+    @Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
@@ -790,6 +809,12 @@ public final class MessageUpProto {
               cmd_ = input.readInt32();
               break;
             }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+
+              token_ = bs;
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -807,7 +832,7 @@ public final class MessageUpProto {
       return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_MsgHeader_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_MsgHeader_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -853,6 +878,50 @@ public final class MessageUpProto {
       return cmd_;
     }
 
+    public static final int TOKEN_FIELD_NUMBER = 4;
+    private volatile Object token_;
+    /**
+     * <code>optional string token = 4;</code>
+     *
+     * <pre>
+     * token, 认证授权
+     * </pre>
+     */
+    public String getToken() {
+      Object ref = token_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs =
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          token_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string token = 4;</code>
+     *
+     * <pre>
+     * token, 认证授权
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getTokenBytes() {
+      Object ref = token_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b =
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (String) ref);
+        token_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -874,6 +943,9 @@ public final class MessageUpProto {
       if (cmd_ != 0) {
         output.writeInt32(3, cmd_);
       }
+      if (!getTokenBytes().isEmpty()) {
+        output.writeBytes(4, getTokenBytes());
+      }
     }
 
     private int memoizedSerializedSize = -1;
@@ -893,6 +965,10 @@ public final class MessageUpProto {
       if (cmd_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, cmd_);
+      }
+      if (!getTokenBytes().isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getTokenBytes());
       }
       memoizedSerializedSize = size;
       return size;
@@ -964,9 +1040,9 @@ public final class MessageUpProto {
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -986,7 +1062,7 @@ public final class MessageUpProto {
         return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_MsgHeader_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_MsgHeader_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -999,7 +1075,7 @@ public final class MessageUpProto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -1014,6 +1090,8 @@ public final class MessageUpProto {
         area_ = 0;
 
         cmd_ = 0;
+
+        token_ = "";
 
         return this;
       }
@@ -1040,6 +1118,7 @@ public final class MessageUpProto {
         result.msgType_ = msgType_;
         result.area_ = area_;
         result.cmd_ = cmd_;
+        result.token_ = token_;
         onBuilt();
         return result;
       }
@@ -1063,6 +1142,10 @@ public final class MessageUpProto {
         }
         if (other.getCmd() != 0) {
           setCmd(other.getCmd());
+        }
+        if (!other.getToken().isEmpty()) {
+          token_ = other.token_;
+          onChanged();
         }
         onChanged();
         return this;
@@ -1109,7 +1192,7 @@ public final class MessageUpProto {
        * </pre>
        */
       public Builder setMsgType(int value) {
-        
+
         msgType_ = value;
         onChanged();
         return this;
@@ -1122,7 +1205,7 @@ public final class MessageUpProto {
        * </pre>
        */
       public Builder clearMsgType() {
-        
+
         msgType_ = 0;
         onChanged();
         return this;
@@ -1147,7 +1230,7 @@ public final class MessageUpProto {
        * </pre>
        */
       public Builder setArea(int value) {
-        
+
         area_ = value;
         onChanged();
         return this;
@@ -1160,7 +1243,7 @@ public final class MessageUpProto {
        * </pre>
        */
       public Builder clearArea() {
-        
+
         area_ = 0;
         onChanged();
         return this;
@@ -1185,7 +1268,7 @@ public final class MessageUpProto {
        * </pre>
        */
       public Builder setCmd(int value) {
-        
+
         cmd_ = value;
         onChanged();
         return this;
@@ -1198,8 +1281,98 @@ public final class MessageUpProto {
        * </pre>
        */
       public Builder clearCmd() {
-        
+
         cmd_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private Object token_ = "";
+      /**
+       * <code>optional string token = 4;</code>
+       *
+       * <pre>
+       * token, 认证授权
+       * </pre>
+       */
+      public String getToken() {
+        Object ref = token_;
+        if (!(ref instanceof String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            token_ = s;
+          }
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      /**
+       * <code>optional string token = 4;</code>
+       *
+       * <pre>
+       * token, 认证授权
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getTokenBytes() {
+        Object ref = token_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b =
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (String) ref);
+          token_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string token = 4;</code>
+       *
+       * <pre>
+       * token, 认证授权
+       * </pre>
+       */
+      public Builder setToken(
+          String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+
+        token_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string token = 4;</code>
+       *
+       * <pre>
+       * token, 认证授权
+       * </pre>
+       */
+      public Builder clearToken() {
+
+        token_ = getDefaultInstance().getToken();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string token = 4;</code>
+       *
+       * <pre>
+       * token, 认证授权
+       * </pre>
+       */
+      public Builder setTokenBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+
+        token_ = value;
         onChanged();
         return this;
       }
@@ -1246,7 +1419,7 @@ public final class MessageUpProto {
       }
     };
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<MsgHeader> getParserForType() {
       return PARSER;
     }
@@ -1344,7 +1517,7 @@ public final class MessageUpProto {
     private MsgUpBody() {
     }
 
-    @java.lang.Override
+    @Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
@@ -1450,7 +1623,7 @@ public final class MessageUpProto {
       return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_MsgUpBody_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_MsgUpBody_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -1687,9 +1860,9 @@ public final class MessageUpProto {
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -1709,7 +1882,7 @@ public final class MessageUpProto {
         return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_MsgUpBody_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_MsgUpBody_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -1722,7 +1895,7 @@ public final class MessageUpProto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -1950,7 +2123,7 @@ public final class MessageUpProto {
        * <code>optional .LoginUpBody login = 1;</code>
        */
       public com.lol.demo.encode.protobuf.MessageUpProto.LoginUpBody.Builder getLoginBuilder() {
-        
+
         onChanged();
         return getLoginFieldBuilder().getBuilder();
       }
@@ -1969,7 +2142,7 @@ public final class MessageUpProto {
        * <code>optional .LoginUpBody login = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lol.demo.encode.protobuf.MessageUpProto.LoginUpBody, com.lol.demo.encode.protobuf.MessageUpProto.LoginUpBody.Builder, com.lol.demo.encode.protobuf.MessageUpProto.LoginUpBodyOrBuilder> 
+          com.lol.demo.encode.protobuf.MessageUpProto.LoginUpBody, com.lol.demo.encode.protobuf.MessageUpProto.LoginUpBody.Builder, com.lol.demo.encode.protobuf.MessageUpProto.LoginUpBodyOrBuilder>
           getLoginFieldBuilder() {
         if (loginBuilder_ == null) {
           loginBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -2067,7 +2240,7 @@ public final class MessageUpProto {
        * <code>optional .PlayerUpBody player = 2;</code>
        */
       public com.lol.demo.encode.protobuf.MessageUpProto.PlayerUpBody.Builder getPlayerBuilder() {
-        
+
         onChanged();
         return getPlayerFieldBuilder().getBuilder();
       }
@@ -2086,7 +2259,7 @@ public final class MessageUpProto {
        * <code>optional .PlayerUpBody player = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lol.demo.encode.protobuf.MessageUpProto.PlayerUpBody, com.lol.demo.encode.protobuf.MessageUpProto.PlayerUpBody.Builder, com.lol.demo.encode.protobuf.MessageUpProto.PlayerUpBodyOrBuilder> 
+          com.lol.demo.encode.protobuf.MessageUpProto.PlayerUpBody, com.lol.demo.encode.protobuf.MessageUpProto.PlayerUpBody.Builder, com.lol.demo.encode.protobuf.MessageUpProto.PlayerUpBodyOrBuilder>
           getPlayerFieldBuilder() {
         if (playerBuilder_ == null) {
           playerBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -2184,7 +2357,7 @@ public final class MessageUpProto {
        * <code>optional .MatchUpBody match = 3;</code>
        */
       public com.lol.demo.encode.protobuf.MessageUpProto.MatchUpBody.Builder getMatchBuilder() {
-        
+
         onChanged();
         return getMatchFieldBuilder().getBuilder();
       }
@@ -2203,7 +2376,7 @@ public final class MessageUpProto {
        * <code>optional .MatchUpBody match = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lol.demo.encode.protobuf.MessageUpProto.MatchUpBody, com.lol.demo.encode.protobuf.MessageUpProto.MatchUpBody.Builder, com.lol.demo.encode.protobuf.MessageUpProto.MatchUpBodyOrBuilder> 
+          com.lol.demo.encode.protobuf.MessageUpProto.MatchUpBody, com.lol.demo.encode.protobuf.MessageUpProto.MatchUpBody.Builder, com.lol.demo.encode.protobuf.MessageUpProto.MatchUpBodyOrBuilder>
           getMatchFieldBuilder() {
         if (matchBuilder_ == null) {
           matchBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -2301,7 +2474,7 @@ public final class MessageUpProto {
        * <code>optional .SelectUpBody select = 4;</code>
        */
       public com.lol.demo.encode.protobuf.MessageUpProto.SelectUpBody.Builder getSelectBuilder() {
-        
+
         onChanged();
         return getSelectFieldBuilder().getBuilder();
       }
@@ -2320,7 +2493,7 @@ public final class MessageUpProto {
        * <code>optional .SelectUpBody select = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lol.demo.encode.protobuf.MessageUpProto.SelectUpBody, com.lol.demo.encode.protobuf.MessageUpProto.SelectUpBody.Builder, com.lol.demo.encode.protobuf.MessageUpProto.SelectUpBodyOrBuilder> 
+          com.lol.demo.encode.protobuf.MessageUpProto.SelectUpBody, com.lol.demo.encode.protobuf.MessageUpProto.SelectUpBody.Builder, com.lol.demo.encode.protobuf.MessageUpProto.SelectUpBodyOrBuilder>
           getSelectFieldBuilder() {
         if (selectBuilder_ == null) {
           selectBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -2418,7 +2591,7 @@ public final class MessageUpProto {
        * <code>optional .FightUpBody fight = 5;</code>
        */
       public com.lol.demo.encode.protobuf.MessageUpProto.FightUpBody.Builder getFightBuilder() {
-        
+
         onChanged();
         return getFightFieldBuilder().getBuilder();
       }
@@ -2437,7 +2610,7 @@ public final class MessageUpProto {
        * <code>optional .FightUpBody fight = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lol.demo.encode.protobuf.MessageUpProto.FightUpBody, com.lol.demo.encode.protobuf.MessageUpProto.FightUpBody.Builder, com.lol.demo.encode.protobuf.MessageUpProto.FightUpBodyOrBuilder> 
+          com.lol.demo.encode.protobuf.MessageUpProto.FightUpBody, com.lol.demo.encode.protobuf.MessageUpProto.FightUpBody.Builder, com.lol.demo.encode.protobuf.MessageUpProto.FightUpBodyOrBuilder>
           getFightFieldBuilder() {
         if (fightBuilder_ == null) {
           fightBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -2492,7 +2665,7 @@ public final class MessageUpProto {
       }
     };
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<MsgUpBody> getParserForType() {
       return PARSER;
     }
@@ -2510,7 +2683,7 @@ public final class MessageUpProto {
     /**
      * <code>optional string acount = 1;</code>
      */
-    java.lang.String getAcount();
+    String getAcount();
     /**
      * <code>optional string acount = 1;</code>
      */
@@ -2520,7 +2693,7 @@ public final class MessageUpProto {
     /**
      * <code>optional string password = 2;</code>
      */
-    java.lang.String getPassword();
+    String getPassword();
     /**
      * <code>optional string password = 2;</code>
      */
@@ -2543,7 +2716,7 @@ public final class MessageUpProto {
       password_ = "";
     }
 
-    @java.lang.Override
+    @Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
@@ -2596,7 +2769,7 @@ public final class MessageUpProto {
       return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_LoginUpBody_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_LoginUpBody_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -2604,18 +2777,18 @@ public final class MessageUpProto {
     }
 
     public static final int ACOUNT_FIELD_NUMBER = 1;
-    private volatile java.lang.Object acount_;
+    private volatile Object acount_;
     /**
      * <code>optional string acount = 1;</code>
      */
-    public java.lang.String getAcount() {
-      java.lang.Object ref = acount_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    public String getAcount() {
+      Object ref = acount_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
+        com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           acount_ = s;
         }
@@ -2627,11 +2800,11 @@ public final class MessageUpProto {
      */
     public com.google.protobuf.ByteString
         getAcountBytes() {
-      java.lang.Object ref = acount_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
+      Object ref = acount_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b =
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         acount_ = b;
         return b;
       } else {
@@ -2640,18 +2813,18 @@ public final class MessageUpProto {
     }
 
     public static final int PASSWORD_FIELD_NUMBER = 2;
-    private volatile java.lang.Object password_;
+    private volatile Object password_;
     /**
      * <code>optional string password = 2;</code>
      */
-    public java.lang.String getPassword() {
-      java.lang.Object ref = password_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    public String getPassword() {
+      Object ref = password_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
+        com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           password_ = s;
         }
@@ -2663,11 +2836,11 @@ public final class MessageUpProto {
      */
     public com.google.protobuf.ByteString
         getPasswordBytes() {
-      java.lang.Object ref = password_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
+      Object ref = password_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b =
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         password_ = b;
         return b;
       } else {
@@ -2779,9 +2952,9 @@ public final class MessageUpProto {
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -2797,7 +2970,7 @@ public final class MessageUpProto {
         return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_LoginUpBody_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_LoginUpBody_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -2810,7 +2983,7 @@ public final class MessageUpProto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -2897,22 +3070,22 @@ public final class MessageUpProto {
         return this;
       }
 
-      private java.lang.Object acount_ = "";
+      private Object acount_ = "";
       /**
        * <code>optional string acount = 1;</code>
        */
-      public java.lang.String getAcount() {
-        java.lang.Object ref = acount_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getAcount() {
+        Object ref = acount_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             acount_ = s;
           }
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
@@ -2920,11 +3093,11 @@ public final class MessageUpProto {
        */
       public com.google.protobuf.ByteString
           getAcountBytes() {
-        java.lang.Object ref = acount_;
+        Object ref = acount_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           acount_ = b;
           return b;
         } else {
@@ -2935,11 +3108,11 @@ public final class MessageUpProto {
        * <code>optional string acount = 1;</code>
        */
       public Builder setAcount(
-          java.lang.String value) {
+          String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  
+
         acount_ = value;
         onChanged();
         return this;
@@ -2948,7 +3121,7 @@ public final class MessageUpProto {
        * <code>optional string acount = 1;</code>
        */
       public Builder clearAcount() {
-        
+
         acount_ = getDefaultInstance().getAcount();
         onChanged();
         return this;
@@ -2961,28 +3134,28 @@ public final class MessageUpProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  
+
         acount_ = value;
         onChanged();
         return this;
       }
 
-      private java.lang.Object password_ = "";
+      private Object password_ = "";
       /**
        * <code>optional string password = 2;</code>
        */
-      public java.lang.String getPassword() {
-        java.lang.Object ref = password_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getPassword() {
+        Object ref = password_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             password_ = s;
           }
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
@@ -2990,11 +3163,11 @@ public final class MessageUpProto {
        */
       public com.google.protobuf.ByteString
           getPasswordBytes() {
-        java.lang.Object ref = password_;
+        Object ref = password_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           password_ = b;
           return b;
         } else {
@@ -3005,11 +3178,11 @@ public final class MessageUpProto {
        * <code>optional string password = 2;</code>
        */
       public Builder setPassword(
-          java.lang.String value) {
+          String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  
+
         password_ = value;
         onChanged();
         return this;
@@ -3018,7 +3191,7 @@ public final class MessageUpProto {
        * <code>optional string password = 2;</code>
        */
       public Builder clearPassword() {
-        
+
         password_ = getDefaultInstance().getPassword();
         onChanged();
         return this;
@@ -3031,7 +3204,7 @@ public final class MessageUpProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  
+
         password_ = value;
         onChanged();
         return this;
@@ -3079,7 +3252,7 @@ public final class MessageUpProto {
       }
     };
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<LoginUpBody> getParserForType() {
       return PARSER;
     }
@@ -3097,7 +3270,7 @@ public final class MessageUpProto {
     /**
      * <code>optional string nickName = 1;</code>
      */
-    java.lang.String getNickName();
+    String getNickName();
     /**
      * <code>optional string nickName = 1;</code>
      */
@@ -3119,7 +3292,7 @@ public final class MessageUpProto {
       nickName_ = "";
     }
 
-    @java.lang.Override
+    @Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
@@ -3166,7 +3339,7 @@ public final class MessageUpProto {
       return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_PlayerUpBody_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_PlayerUpBody_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -3174,18 +3347,18 @@ public final class MessageUpProto {
     }
 
     public static final int NICKNAME_FIELD_NUMBER = 1;
-    private volatile java.lang.Object nickName_;
+    private volatile Object nickName_;
     /**
      * <code>optional string nickName = 1;</code>
      */
-    public java.lang.String getNickName() {
-      java.lang.Object ref = nickName_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    public String getNickName() {
+      Object ref = nickName_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
+        com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           nickName_ = s;
         }
@@ -3197,11 +3370,11 @@ public final class MessageUpProto {
      */
     public com.google.protobuf.ByteString
         getNickNameBytes() {
-      java.lang.Object ref = nickName_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
+      Object ref = nickName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b =
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         nickName_ = b;
         return b;
       } else {
@@ -3306,9 +3479,9 @@ public final class MessageUpProto {
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -3324,7 +3497,7 @@ public final class MessageUpProto {
         return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_PlayerUpBody_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_PlayerUpBody_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -3337,7 +3510,7 @@ public final class MessageUpProto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -3417,22 +3590,22 @@ public final class MessageUpProto {
         return this;
       }
 
-      private java.lang.Object nickName_ = "";
+      private Object nickName_ = "";
       /**
        * <code>optional string nickName = 1;</code>
        */
-      public java.lang.String getNickName() {
-        java.lang.Object ref = nickName_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getNickName() {
+        Object ref = nickName_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             nickName_ = s;
           }
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
@@ -3440,11 +3613,11 @@ public final class MessageUpProto {
        */
       public com.google.protobuf.ByteString
           getNickNameBytes() {
-        java.lang.Object ref = nickName_;
+        Object ref = nickName_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           nickName_ = b;
           return b;
         } else {
@@ -3455,11 +3628,11 @@ public final class MessageUpProto {
        * <code>optional string nickName = 1;</code>
        */
       public Builder setNickName(
-          java.lang.String value) {
+          String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  
+
         nickName_ = value;
         onChanged();
         return this;
@@ -3468,7 +3641,7 @@ public final class MessageUpProto {
        * <code>optional string nickName = 1;</code>
        */
       public Builder clearNickName() {
-        
+
         nickName_ = getDefaultInstance().getNickName();
         onChanged();
         return this;
@@ -3481,7 +3654,7 @@ public final class MessageUpProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  
+
         nickName_ = value;
         onChanged();
         return this;
@@ -3529,7 +3702,7 @@ public final class MessageUpProto {
       }
     };
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<PlayerUpBody> getParserForType() {
       return PARSER;
     }
@@ -3545,7 +3718,12 @@ public final class MessageUpProto {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int32 teamMax = 1;</code>
+     * <code>optional bool agreed = 1;</code>
+     */
+    boolean getAgreed();
+
+    /**
+     * <code>optional int32 teamMax = 2;</code>
      */
     int getTeamMax();
   }
@@ -3561,10 +3739,11 @@ public final class MessageUpProto {
       super(builder);
     }
     private MatchUpBody() {
+      agreed_ = false;
       teamMax_ = 0;
     }
 
-    @java.lang.Override
+    @Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
@@ -3590,6 +3769,11 @@ public final class MessageUpProto {
             }
             case 8: {
 
+              agreed_ = input.readBool();
+              break;
+            }
+            case 16: {
+
               teamMax_ = input.readInt32();
               break;
             }
@@ -3610,17 +3794,26 @@ public final class MessageUpProto {
       return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_MatchUpBody_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_MatchUpBody_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.lol.demo.encode.protobuf.MessageUpProto.MatchUpBody.class, com.lol.demo.encode.protobuf.MessageUpProto.MatchUpBody.Builder.class);
     }
 
-    public static final int TEAMMAX_FIELD_NUMBER = 1;
+    public static final int AGREED_FIELD_NUMBER = 1;
+    private boolean agreed_;
+    /**
+     * <code>optional bool agreed = 1;</code>
+     */
+    public boolean getAgreed() {
+      return agreed_;
+    }
+
+    public static final int TEAMMAX_FIELD_NUMBER = 2;
     private int teamMax_;
     /**
-     * <code>optional int32 teamMax = 1;</code>
+     * <code>optional int32 teamMax = 2;</code>
      */
     public int getTeamMax() {
       return teamMax_;
@@ -3638,8 +3831,11 @@ public final class MessageUpProto {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (agreed_ != false) {
+        output.writeBool(1, agreed_);
+      }
       if (teamMax_ != 0) {
-        output.writeInt32(1, teamMax_);
+        output.writeInt32(2, teamMax_);
       }
     }
 
@@ -3649,9 +3845,13 @@ public final class MessageUpProto {
       if (size != -1) return size;
 
       size = 0;
+      if (agreed_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(1, agreed_);
+      }
       if (teamMax_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, teamMax_);
+          .computeInt32Size(2, teamMax_);
       }
       memoizedSerializedSize = size;
       return size;
@@ -3723,9 +3923,9 @@ public final class MessageUpProto {
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -3741,7 +3941,7 @@ public final class MessageUpProto {
         return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_MatchUpBody_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_MatchUpBody_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -3754,7 +3954,7 @@ public final class MessageUpProto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -3764,6 +3964,8 @@ public final class MessageUpProto {
       }
       public Builder clear() {
         super.clear();
+        agreed_ = false;
+
         teamMax_ = 0;
 
         return this;
@@ -3788,6 +3990,7 @@ public final class MessageUpProto {
 
       public com.lol.demo.encode.protobuf.MessageUpProto.MatchUpBody buildPartial() {
         com.lol.demo.encode.protobuf.MessageUpProto.MatchUpBody result = new com.lol.demo.encode.protobuf.MessageUpProto.MatchUpBody(this);
+        result.agreed_ = agreed_;
         result.teamMax_ = teamMax_;
         onBuilt();
         return result;
@@ -3804,6 +4007,9 @@ public final class MessageUpProto {
 
       public Builder mergeFrom(com.lol.demo.encode.protobuf.MessageUpProto.MatchUpBody other) {
         if (other == com.lol.demo.encode.protobuf.MessageUpProto.MatchUpBody.getDefaultInstance()) return this;
+        if (other.getAgreed() != false) {
+          setAgreed(other.getAgreed());
+        }
         if (other.getTeamMax() != 0) {
           setTeamMax(other.getTeamMax());
         }
@@ -3833,27 +4039,53 @@ public final class MessageUpProto {
         return this;
       }
 
+      private boolean agreed_ ;
+      /**
+       * <code>optional bool agreed = 1;</code>
+       */
+      public boolean getAgreed() {
+        return agreed_;
+      }
+      /**
+       * <code>optional bool agreed = 1;</code>
+       */
+      public Builder setAgreed(boolean value) {
+
+        agreed_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional bool agreed = 1;</code>
+       */
+      public Builder clearAgreed() {
+
+        agreed_ = false;
+        onChanged();
+        return this;
+      }
+
       private int teamMax_ ;
       /**
-       * <code>optional int32 teamMax = 1;</code>
+       * <code>optional int32 teamMax = 2;</code>
        */
       public int getTeamMax() {
         return teamMax_;
       }
       /**
-       * <code>optional int32 teamMax = 1;</code>
+       * <code>optional int32 teamMax = 2;</code>
        */
       public Builder setTeamMax(int value) {
-        
+
         teamMax_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional int32 teamMax = 1;</code>
+       * <code>optional int32 teamMax = 2;</code>
        */
       public Builder clearTeamMax() {
-        
+
         teamMax_ = 0;
         onChanged();
         return this;
@@ -3901,7 +4133,7 @@ public final class MessageUpProto {
       }
     };
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<MatchUpBody> getParserForType() {
       return PARSER;
     }
@@ -3924,7 +4156,7 @@ public final class MessageUpProto {
     /**
      * <code>optional string talk = 2;</code>
      */
-    java.lang.String getTalk();
+    String getTalk();
     /**
      * <code>optional string talk = 2;</code>
      */
@@ -3932,14 +4164,9 @@ public final class MessageUpProto {
         getTalkBytes();
 
     /**
-     * <code>optional string roomName = 3;</code>
+     * <code>optional bool isTeamTalk = 3;</code>
      */
-    java.lang.String getRoomName();
-    /**
-     * <code>optional string roomName = 3;</code>
-     */
-    com.google.protobuf.ByteString
-        getRoomNameBytes();
+    boolean getIsTeamTalk();
   }
   /**
    * Protobuf type {@code SelectUpBody}
@@ -3955,10 +4182,10 @@ public final class MessageUpProto {
     private SelectUpBody() {
       select_ = 0;
       talk_ = "";
-      roomName_ = "";
+      isTeamTalk_ = false;
     }
 
-    @java.lang.Override
+    @Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
@@ -3993,10 +4220,9 @@ public final class MessageUpProto {
               talk_ = bs;
               break;
             }
-            case 26: {
-              com.google.protobuf.ByteString bs = input.readBytes();
+            case 24: {
 
-              roomName_ = bs;
+              isTeamTalk_ = input.readBool();
               break;
             }
           }
@@ -4016,7 +4242,7 @@ public final class MessageUpProto {
       return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_SelectUpBody_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_SelectUpBody_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -4033,18 +4259,18 @@ public final class MessageUpProto {
     }
 
     public static final int TALK_FIELD_NUMBER = 2;
-    private volatile java.lang.Object talk_;
+    private volatile Object talk_;
     /**
      * <code>optional string talk = 2;</code>
      */
-    public java.lang.String getTalk() {
-      java.lang.Object ref = talk_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
+    public String getTalk() {
+      Object ref = talk_;
+      if (ref instanceof String) {
+        return (String) ref;
       } else {
-        com.google.protobuf.ByteString bs = 
+        com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
+        String s = bs.toStringUtf8();
         if (bs.isValidUtf8()) {
           talk_ = s;
         }
@@ -4056,11 +4282,11 @@ public final class MessageUpProto {
      */
     public com.google.protobuf.ByteString
         getTalkBytes() {
-      java.lang.Object ref = talk_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
+      Object ref = talk_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b =
             com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
+                (String) ref);
         talk_ = b;
         return b;
       } else {
@@ -4068,40 +4294,13 @@ public final class MessageUpProto {
       }
     }
 
-    public static final int ROOMNAME_FIELD_NUMBER = 3;
-    private volatile java.lang.Object roomName_;
+    public static final int ISTEAMTALK_FIELD_NUMBER = 3;
+    private boolean isTeamTalk_;
     /**
-     * <code>optional string roomName = 3;</code>
+     * <code>optional bool isTeamTalk = 3;</code>
      */
-    public java.lang.String getRoomName() {
-      java.lang.Object ref = roomName_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          roomName_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string roomName = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getRoomNameBytes() {
-      java.lang.Object ref = roomName_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        roomName_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+    public boolean getIsTeamTalk() {
+      return isTeamTalk_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -4122,8 +4321,8 @@ public final class MessageUpProto {
       if (!getTalkBytes().isEmpty()) {
         output.writeBytes(2, getTalkBytes());
       }
-      if (!getRoomNameBytes().isEmpty()) {
-        output.writeBytes(3, getRoomNameBytes());
+      if (isTeamTalk_ != false) {
+        output.writeBool(3, isTeamTalk_);
       }
     }
 
@@ -4141,9 +4340,9 @@ public final class MessageUpProto {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(2, getTalkBytes());
       }
-      if (!getRoomNameBytes().isEmpty()) {
+      if (isTeamTalk_ != false) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, getRoomNameBytes());
+          .computeBoolSize(3, isTeamTalk_);
       }
       memoizedSerializedSize = size;
       return size;
@@ -4215,9 +4414,9 @@ public final class MessageUpProto {
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -4233,7 +4432,7 @@ public final class MessageUpProto {
         return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_SelectUpBody_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_SelectUpBody_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -4246,7 +4445,7 @@ public final class MessageUpProto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -4260,7 +4459,7 @@ public final class MessageUpProto {
 
         talk_ = "";
 
-        roomName_ = "";
+        isTeamTalk_ = false;
 
         return this;
       }
@@ -4286,7 +4485,7 @@ public final class MessageUpProto {
         com.lol.demo.encode.protobuf.MessageUpProto.SelectUpBody result = new com.lol.demo.encode.protobuf.MessageUpProto.SelectUpBody(this);
         result.select_ = select_;
         result.talk_ = talk_;
-        result.roomName_ = roomName_;
+        result.isTeamTalk_ = isTeamTalk_;
         onBuilt();
         return result;
       }
@@ -4309,9 +4508,8 @@ public final class MessageUpProto {
           talk_ = other.talk_;
           onChanged();
         }
-        if (!other.getRoomName().isEmpty()) {
-          roomName_ = other.roomName_;
-          onChanged();
+        if (other.getIsTeamTalk() != false) {
+          setIsTeamTalk(other.getIsTeamTalk());
         }
         onChanged();
         return this;
@@ -4350,7 +4548,7 @@ public final class MessageUpProto {
        * <code>optional int32 select = 1;</code>
        */
       public Builder setSelect(int value) {
-        
+
         select_ = value;
         onChanged();
         return this;
@@ -4359,28 +4557,28 @@ public final class MessageUpProto {
        * <code>optional int32 select = 1;</code>
        */
       public Builder clearSelect() {
-        
+
         select_ = 0;
         onChanged();
         return this;
       }
 
-      private java.lang.Object talk_ = "";
+      private Object talk_ = "";
       /**
        * <code>optional string talk = 2;</code>
        */
-      public java.lang.String getTalk() {
-        java.lang.Object ref = talk_;
-        if (!(ref instanceof java.lang.String)) {
+      public String getTalk() {
+        Object ref = talk_;
+        if (!(ref instanceof String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
+          String s = bs.toStringUtf8();
           if (bs.isValidUtf8()) {
             talk_ = s;
           }
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
       /**
@@ -4388,11 +4586,11 @@ public final class MessageUpProto {
        */
       public com.google.protobuf.ByteString
           getTalkBytes() {
-        java.lang.Object ref = talk_;
+        Object ref = talk_;
         if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
+          com.google.protobuf.ByteString b =
               com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
+                  (String) ref);
           talk_ = b;
           return b;
         } else {
@@ -4403,11 +4601,11 @@ public final class MessageUpProto {
        * <code>optional string talk = 2;</code>
        */
       public Builder setTalk(
-          java.lang.String value) {
+          String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  
+
         talk_ = value;
         onChanged();
         return this;
@@ -4416,7 +4614,7 @@ public final class MessageUpProto {
        * <code>optional string talk = 2;</code>
        */
       public Builder clearTalk() {
-        
+
         talk_ = getDefaultInstance().getTalk();
         onChanged();
         return this;
@@ -4429,78 +4627,34 @@ public final class MessageUpProto {
         if (value == null) {
     throw new NullPointerException();
   }
-  
+
         talk_ = value;
         onChanged();
         return this;
       }
 
-      private java.lang.Object roomName_ = "";
+      private boolean isTeamTalk_ ;
       /**
-       * <code>optional string roomName = 3;</code>
+       * <code>optional bool isTeamTalk = 3;</code>
        */
-      public java.lang.String getRoomName() {
-        java.lang.Object ref = roomName_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            roomName_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      public boolean getIsTeamTalk() {
+        return isTeamTalk_;
       }
       /**
-       * <code>optional string roomName = 3;</code>
+       * <code>optional bool isTeamTalk = 3;</code>
        */
-      public com.google.protobuf.ByteString
-          getRoomNameBytes() {
-        java.lang.Object ref = roomName_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          roomName_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string roomName = 3;</code>
-       */
-      public Builder setRoomName(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        roomName_ = value;
+      public Builder setIsTeamTalk(boolean value) {
+
+        isTeamTalk_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional string roomName = 3;</code>
+       * <code>optional bool isTeamTalk = 3;</code>
        */
-      public Builder clearRoomName() {
-        
-        roomName_ = getDefaultInstance().getRoomName();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string roomName = 3;</code>
-       */
-      public Builder setRoomNameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        roomName_ = value;
+      public Builder clearIsTeamTalk() {
+
+        isTeamTalk_ = false;
         onChanged();
         return this;
       }
@@ -4547,7 +4701,7 @@ public final class MessageUpProto {
       }
     };
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<SelectUpBody> getParserForType() {
       return PARSER;
     }
@@ -4568,51 +4722,41 @@ public final class MessageUpProto {
     int getAttackOrSkillUp();
 
     /**
-     * <code>optional string roomName = 2;</code>
-     */
-    java.lang.String getRoomName();
-    /**
-     * <code>optional string roomName = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getRoomNameBytes();
-
-    /**
-     * <code>optional .MoveInfo move = 3;</code>
+     * <code>optional .MoveInfo move = 2;</code>
      */
     boolean hasMove();
     /**
-     * <code>optional .MoveInfo move = 3;</code>
+     * <code>optional .MoveInfo move = 2;</code>
      */
     com.lol.demo.encode.protobuf.MessageUpProto.MoveInfo getMove();
     /**
-     * <code>optional .MoveInfo move = 3;</code>
+     * <code>optional .MoveInfo move = 2;</code>
      */
     com.lol.demo.encode.protobuf.MessageUpProto.MoveInfoOrBuilder getMoveOrBuilder();
 
     /**
-     * <code>optional .DamageInfo damage = 4;</code>
+     * <code>optional .DamageInfo damage = 3;</code>
      */
     boolean hasDamage();
     /**
-     * <code>optional .DamageInfo damage = 4;</code>
+     * <code>optional .DamageInfo damage = 3;</code>
      */
     com.lol.demo.encode.protobuf.MessageUpProto.DamageInfo getDamage();
     /**
-     * <code>optional .DamageInfo damage = 4;</code>
+     * <code>optional .DamageInfo damage = 3;</code>
      */
     com.lol.demo.encode.protobuf.MessageUpProto.DamageInfoOrBuilder getDamageOrBuilder();
 
     /**
-     * <code>optional .SkillAtkModel skillAtk = 5;</code>
+     * <code>optional .SkillAtkModel skillAtk = 4;</code>
      */
     boolean hasSkillAtk();
     /**
-     * <code>optional .SkillAtkModel skillAtk = 5;</code>
+     * <code>optional .SkillAtkModel skillAtk = 4;</code>
      */
     com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModel getSkillAtk();
     /**
-     * <code>optional .SkillAtkModel skillAtk = 5;</code>
+     * <code>optional .SkillAtkModel skillAtk = 4;</code>
      */
     com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModelOrBuilder getSkillAtkOrBuilder();
   }
@@ -4629,10 +4773,9 @@ public final class MessageUpProto {
     }
     private FightUpBody() {
       attackOrSkillUp_ = 0;
-      roomName_ = "";
     }
 
-    @java.lang.Override
+    @Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
@@ -4662,12 +4805,6 @@ public final class MessageUpProto {
               break;
             }
             case 18: {
-              com.google.protobuf.ByteString bs = input.readBytes();
-
-              roomName_ = bs;
-              break;
-            }
-            case 26: {
               com.lol.demo.encode.protobuf.MessageUpProto.MoveInfo.Builder subBuilder = null;
               if (move_ != null) {
                 subBuilder = move_.toBuilder();
@@ -4680,7 +4817,7 @@ public final class MessageUpProto {
 
               break;
             }
-            case 34: {
+            case 26: {
               com.lol.demo.encode.protobuf.MessageUpProto.DamageInfo.Builder subBuilder = null;
               if (damage_ != null) {
                 subBuilder = damage_.toBuilder();
@@ -4693,7 +4830,7 @@ public final class MessageUpProto {
 
               break;
             }
-            case 42: {
+            case 34: {
               com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModel.Builder subBuilder = null;
               if (skillAtk_ != null) {
                 subBuilder = skillAtk_.toBuilder();
@@ -4723,7 +4860,7 @@ public final class MessageUpProto {
       return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_FightUpBody_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_FightUpBody_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -4739,100 +4876,64 @@ public final class MessageUpProto {
       return attackOrSkillUp_;
     }
 
-    public static final int ROOMNAME_FIELD_NUMBER = 2;
-    private volatile java.lang.Object roomName_;
-    /**
-     * <code>optional string roomName = 2;</code>
-     */
-    public java.lang.String getRoomName() {
-      java.lang.Object ref = roomName_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          roomName_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>optional string roomName = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getRoomNameBytes() {
-      java.lang.Object ref = roomName_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        roomName_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int MOVE_FIELD_NUMBER = 3;
+    public static final int MOVE_FIELD_NUMBER = 2;
     private com.lol.demo.encode.protobuf.MessageUpProto.MoveInfo move_;
     /**
-     * <code>optional .MoveInfo move = 3;</code>
+     * <code>optional .MoveInfo move = 2;</code>
      */
     public boolean hasMove() {
       return move_ != null;
     }
     /**
-     * <code>optional .MoveInfo move = 3;</code>
+     * <code>optional .MoveInfo move = 2;</code>
      */
     public com.lol.demo.encode.protobuf.MessageUpProto.MoveInfo getMove() {
       return move_ == null ? com.lol.demo.encode.protobuf.MessageUpProto.MoveInfo.getDefaultInstance() : move_;
     }
     /**
-     * <code>optional .MoveInfo move = 3;</code>
+     * <code>optional .MoveInfo move = 2;</code>
      */
     public com.lol.demo.encode.protobuf.MessageUpProto.MoveInfoOrBuilder getMoveOrBuilder() {
       return getMove();
     }
 
-    public static final int DAMAGE_FIELD_NUMBER = 4;
+    public static final int DAMAGE_FIELD_NUMBER = 3;
     private com.lol.demo.encode.protobuf.MessageUpProto.DamageInfo damage_;
     /**
-     * <code>optional .DamageInfo damage = 4;</code>
+     * <code>optional .DamageInfo damage = 3;</code>
      */
     public boolean hasDamage() {
       return damage_ != null;
     }
     /**
-     * <code>optional .DamageInfo damage = 4;</code>
+     * <code>optional .DamageInfo damage = 3;</code>
      */
     public com.lol.demo.encode.protobuf.MessageUpProto.DamageInfo getDamage() {
       return damage_ == null ? com.lol.demo.encode.protobuf.MessageUpProto.DamageInfo.getDefaultInstance() : damage_;
     }
     /**
-     * <code>optional .DamageInfo damage = 4;</code>
+     * <code>optional .DamageInfo damage = 3;</code>
      */
     public com.lol.demo.encode.protobuf.MessageUpProto.DamageInfoOrBuilder getDamageOrBuilder() {
       return getDamage();
     }
 
-    public static final int SKILLATK_FIELD_NUMBER = 5;
+    public static final int SKILLATK_FIELD_NUMBER = 4;
     private com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModel skillAtk_;
     /**
-     * <code>optional .SkillAtkModel skillAtk = 5;</code>
+     * <code>optional .SkillAtkModel skillAtk = 4;</code>
      */
     public boolean hasSkillAtk() {
       return skillAtk_ != null;
     }
     /**
-     * <code>optional .SkillAtkModel skillAtk = 5;</code>
+     * <code>optional .SkillAtkModel skillAtk = 4;</code>
      */
     public com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModel getSkillAtk() {
       return skillAtk_ == null ? com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModel.getDefaultInstance() : skillAtk_;
     }
     /**
-     * <code>optional .SkillAtkModel skillAtk = 5;</code>
+     * <code>optional .SkillAtkModel skillAtk = 4;</code>
      */
     public com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModelOrBuilder getSkillAtkOrBuilder() {
       return getSkillAtk();
@@ -4853,17 +4954,14 @@ public final class MessageUpProto {
       if (attackOrSkillUp_ != 0) {
         output.writeInt32(1, attackOrSkillUp_);
       }
-      if (!getRoomNameBytes().isEmpty()) {
-        output.writeBytes(2, getRoomNameBytes());
-      }
       if (move_ != null) {
-        output.writeMessage(3, getMove());
+        output.writeMessage(2, getMove());
       }
       if (damage_ != null) {
-        output.writeMessage(4, getDamage());
+        output.writeMessage(3, getDamage());
       }
       if (skillAtk_ != null) {
-        output.writeMessage(5, getSkillAtk());
+        output.writeMessage(4, getSkillAtk());
       }
     }
 
@@ -4877,21 +4975,17 @@ public final class MessageUpProto {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, attackOrSkillUp_);
       }
-      if (!getRoomNameBytes().isEmpty()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, getRoomNameBytes());
-      }
       if (move_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(3, getMove());
+          .computeMessageSize(2, getMove());
       }
       if (damage_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, getDamage());
+          .computeMessageSize(3, getDamage());
       }
       if (skillAtk_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, getSkillAtk());
+          .computeMessageSize(4, getSkillAtk());
       }
       memoizedSerializedSize = size;
       return size;
@@ -4963,9 +5057,9 @@ public final class MessageUpProto {
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -4981,7 +5075,7 @@ public final class MessageUpProto {
         return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_FightUpBody_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_FightUpBody_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -4994,7 +5088,7 @@ public final class MessageUpProto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -5005,8 +5099,6 @@ public final class MessageUpProto {
       public Builder clear() {
         super.clear();
         attackOrSkillUp_ = 0;
-
-        roomName_ = "";
 
         if (moveBuilder_ == null) {
           move_ = null;
@@ -5049,7 +5141,6 @@ public final class MessageUpProto {
       public com.lol.demo.encode.protobuf.MessageUpProto.FightUpBody buildPartial() {
         com.lol.demo.encode.protobuf.MessageUpProto.FightUpBody result = new com.lol.demo.encode.protobuf.MessageUpProto.FightUpBody(this);
         result.attackOrSkillUp_ = attackOrSkillUp_;
-        result.roomName_ = roomName_;
         if (moveBuilder_ == null) {
           result.move_ = move_;
         } else {
@@ -5082,10 +5173,6 @@ public final class MessageUpProto {
         if (other == com.lol.demo.encode.protobuf.MessageUpProto.FightUpBody.getDefaultInstance()) return this;
         if (other.getAttackOrSkillUp() != 0) {
           setAttackOrSkillUp(other.getAttackOrSkillUp());
-        }
-        if (!other.getRoomName().isEmpty()) {
-          roomName_ = other.roomName_;
-          onChanged();
         }
         if (other.hasMove()) {
           mergeMove(other.getMove());
@@ -5133,7 +5220,7 @@ public final class MessageUpProto {
        * <code>optional int32 attackOrSkillUp = 1;</code>
        */
       public Builder setAttackOrSkillUp(int value) {
-        
+
         attackOrSkillUp_ = value;
         onChanged();
         return this;
@@ -5142,78 +5229,8 @@ public final class MessageUpProto {
        * <code>optional int32 attackOrSkillUp = 1;</code>
        */
       public Builder clearAttackOrSkillUp() {
-        
-        attackOrSkillUp_ = 0;
-        onChanged();
-        return this;
-      }
 
-      private java.lang.Object roomName_ = "";
-      /**
-       * <code>optional string roomName = 2;</code>
-       */
-      public java.lang.String getRoomName() {
-        java.lang.Object ref = roomName_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            roomName_ = s;
-          }
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string roomName = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getRoomNameBytes() {
-        java.lang.Object ref = roomName_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          roomName_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string roomName = 2;</code>
-       */
-      public Builder setRoomName(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        roomName_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string roomName = 2;</code>
-       */
-      public Builder clearRoomName() {
-        
-        roomName_ = getDefaultInstance().getRoomName();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string roomName = 2;</code>
-       */
-      public Builder setRoomNameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        roomName_ = value;
+        attackOrSkillUp_ = 0;
         onChanged();
         return this;
       }
@@ -5222,13 +5239,13 @@ public final class MessageUpProto {
       private com.google.protobuf.SingleFieldBuilder<
           com.lol.demo.encode.protobuf.MessageUpProto.MoveInfo, com.lol.demo.encode.protobuf.MessageUpProto.MoveInfo.Builder, com.lol.demo.encode.protobuf.MessageUpProto.MoveInfoOrBuilder> moveBuilder_;
       /**
-       * <code>optional .MoveInfo move = 3;</code>
+       * <code>optional .MoveInfo move = 2;</code>
        */
       public boolean hasMove() {
         return moveBuilder_ != null || move_ != null;
       }
       /**
-       * <code>optional .MoveInfo move = 3;</code>
+       * <code>optional .MoveInfo move = 2;</code>
        */
       public com.lol.demo.encode.protobuf.MessageUpProto.MoveInfo getMove() {
         if (moveBuilder_ == null) {
@@ -5238,7 +5255,7 @@ public final class MessageUpProto {
         }
       }
       /**
-       * <code>optional .MoveInfo move = 3;</code>
+       * <code>optional .MoveInfo move = 2;</code>
        */
       public Builder setMove(com.lol.demo.encode.protobuf.MessageUpProto.MoveInfo value) {
         if (moveBuilder_ == null) {
@@ -5254,7 +5271,7 @@ public final class MessageUpProto {
         return this;
       }
       /**
-       * <code>optional .MoveInfo move = 3;</code>
+       * <code>optional .MoveInfo move = 2;</code>
        */
       public Builder setMove(
           com.lol.demo.encode.protobuf.MessageUpProto.MoveInfo.Builder builderForValue) {
@@ -5268,7 +5285,7 @@ public final class MessageUpProto {
         return this;
       }
       /**
-       * <code>optional .MoveInfo move = 3;</code>
+       * <code>optional .MoveInfo move = 2;</code>
        */
       public Builder mergeMove(com.lol.demo.encode.protobuf.MessageUpProto.MoveInfo value) {
         if (moveBuilder_ == null) {
@@ -5286,7 +5303,7 @@ public final class MessageUpProto {
         return this;
       }
       /**
-       * <code>optional .MoveInfo move = 3;</code>
+       * <code>optional .MoveInfo move = 2;</code>
        */
       public Builder clearMove() {
         if (moveBuilder_ == null) {
@@ -5300,15 +5317,15 @@ public final class MessageUpProto {
         return this;
       }
       /**
-       * <code>optional .MoveInfo move = 3;</code>
+       * <code>optional .MoveInfo move = 2;</code>
        */
       public com.lol.demo.encode.protobuf.MessageUpProto.MoveInfo.Builder getMoveBuilder() {
-        
+
         onChanged();
         return getMoveFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .MoveInfo move = 3;</code>
+       * <code>optional .MoveInfo move = 2;</code>
        */
       public com.lol.demo.encode.protobuf.MessageUpProto.MoveInfoOrBuilder getMoveOrBuilder() {
         if (moveBuilder_ != null) {
@@ -5319,10 +5336,10 @@ public final class MessageUpProto {
         }
       }
       /**
-       * <code>optional .MoveInfo move = 3;</code>
+       * <code>optional .MoveInfo move = 2;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lol.demo.encode.protobuf.MessageUpProto.MoveInfo, com.lol.demo.encode.protobuf.MessageUpProto.MoveInfo.Builder, com.lol.demo.encode.protobuf.MessageUpProto.MoveInfoOrBuilder> 
+          com.lol.demo.encode.protobuf.MessageUpProto.MoveInfo, com.lol.demo.encode.protobuf.MessageUpProto.MoveInfo.Builder, com.lol.demo.encode.protobuf.MessageUpProto.MoveInfoOrBuilder>
           getMoveFieldBuilder() {
         if (moveBuilder_ == null) {
           moveBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -5339,13 +5356,13 @@ public final class MessageUpProto {
       private com.google.protobuf.SingleFieldBuilder<
           com.lol.demo.encode.protobuf.MessageUpProto.DamageInfo, com.lol.demo.encode.protobuf.MessageUpProto.DamageInfo.Builder, com.lol.demo.encode.protobuf.MessageUpProto.DamageInfoOrBuilder> damageBuilder_;
       /**
-       * <code>optional .DamageInfo damage = 4;</code>
+       * <code>optional .DamageInfo damage = 3;</code>
        */
       public boolean hasDamage() {
         return damageBuilder_ != null || damage_ != null;
       }
       /**
-       * <code>optional .DamageInfo damage = 4;</code>
+       * <code>optional .DamageInfo damage = 3;</code>
        */
       public com.lol.demo.encode.protobuf.MessageUpProto.DamageInfo getDamage() {
         if (damageBuilder_ == null) {
@@ -5355,7 +5372,7 @@ public final class MessageUpProto {
         }
       }
       /**
-       * <code>optional .DamageInfo damage = 4;</code>
+       * <code>optional .DamageInfo damage = 3;</code>
        */
       public Builder setDamage(com.lol.demo.encode.protobuf.MessageUpProto.DamageInfo value) {
         if (damageBuilder_ == null) {
@@ -5371,7 +5388,7 @@ public final class MessageUpProto {
         return this;
       }
       /**
-       * <code>optional .DamageInfo damage = 4;</code>
+       * <code>optional .DamageInfo damage = 3;</code>
        */
       public Builder setDamage(
           com.lol.demo.encode.protobuf.MessageUpProto.DamageInfo.Builder builderForValue) {
@@ -5385,7 +5402,7 @@ public final class MessageUpProto {
         return this;
       }
       /**
-       * <code>optional .DamageInfo damage = 4;</code>
+       * <code>optional .DamageInfo damage = 3;</code>
        */
       public Builder mergeDamage(com.lol.demo.encode.protobuf.MessageUpProto.DamageInfo value) {
         if (damageBuilder_ == null) {
@@ -5403,7 +5420,7 @@ public final class MessageUpProto {
         return this;
       }
       /**
-       * <code>optional .DamageInfo damage = 4;</code>
+       * <code>optional .DamageInfo damage = 3;</code>
        */
       public Builder clearDamage() {
         if (damageBuilder_ == null) {
@@ -5417,15 +5434,15 @@ public final class MessageUpProto {
         return this;
       }
       /**
-       * <code>optional .DamageInfo damage = 4;</code>
+       * <code>optional .DamageInfo damage = 3;</code>
        */
       public com.lol.demo.encode.protobuf.MessageUpProto.DamageInfo.Builder getDamageBuilder() {
-        
+
         onChanged();
         return getDamageFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .DamageInfo damage = 4;</code>
+       * <code>optional .DamageInfo damage = 3;</code>
        */
       public com.lol.demo.encode.protobuf.MessageUpProto.DamageInfoOrBuilder getDamageOrBuilder() {
         if (damageBuilder_ != null) {
@@ -5436,10 +5453,10 @@ public final class MessageUpProto {
         }
       }
       /**
-       * <code>optional .DamageInfo damage = 4;</code>
+       * <code>optional .DamageInfo damage = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lol.demo.encode.protobuf.MessageUpProto.DamageInfo, com.lol.demo.encode.protobuf.MessageUpProto.DamageInfo.Builder, com.lol.demo.encode.protobuf.MessageUpProto.DamageInfoOrBuilder> 
+          com.lol.demo.encode.protobuf.MessageUpProto.DamageInfo, com.lol.demo.encode.protobuf.MessageUpProto.DamageInfo.Builder, com.lol.demo.encode.protobuf.MessageUpProto.DamageInfoOrBuilder>
           getDamageFieldBuilder() {
         if (damageBuilder_ == null) {
           damageBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -5456,13 +5473,13 @@ public final class MessageUpProto {
       private com.google.protobuf.SingleFieldBuilder<
           com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModel, com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModel.Builder, com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModelOrBuilder> skillAtkBuilder_;
       /**
-       * <code>optional .SkillAtkModel skillAtk = 5;</code>
+       * <code>optional .SkillAtkModel skillAtk = 4;</code>
        */
       public boolean hasSkillAtk() {
         return skillAtkBuilder_ != null || skillAtk_ != null;
       }
       /**
-       * <code>optional .SkillAtkModel skillAtk = 5;</code>
+       * <code>optional .SkillAtkModel skillAtk = 4;</code>
        */
       public com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModel getSkillAtk() {
         if (skillAtkBuilder_ == null) {
@@ -5472,7 +5489,7 @@ public final class MessageUpProto {
         }
       }
       /**
-       * <code>optional .SkillAtkModel skillAtk = 5;</code>
+       * <code>optional .SkillAtkModel skillAtk = 4;</code>
        */
       public Builder setSkillAtk(com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModel value) {
         if (skillAtkBuilder_ == null) {
@@ -5488,7 +5505,7 @@ public final class MessageUpProto {
         return this;
       }
       /**
-       * <code>optional .SkillAtkModel skillAtk = 5;</code>
+       * <code>optional .SkillAtkModel skillAtk = 4;</code>
        */
       public Builder setSkillAtk(
           com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModel.Builder builderForValue) {
@@ -5502,7 +5519,7 @@ public final class MessageUpProto {
         return this;
       }
       /**
-       * <code>optional .SkillAtkModel skillAtk = 5;</code>
+       * <code>optional .SkillAtkModel skillAtk = 4;</code>
        */
       public Builder mergeSkillAtk(com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModel value) {
         if (skillAtkBuilder_ == null) {
@@ -5520,7 +5537,7 @@ public final class MessageUpProto {
         return this;
       }
       /**
-       * <code>optional .SkillAtkModel skillAtk = 5;</code>
+       * <code>optional .SkillAtkModel skillAtk = 4;</code>
        */
       public Builder clearSkillAtk() {
         if (skillAtkBuilder_ == null) {
@@ -5534,15 +5551,15 @@ public final class MessageUpProto {
         return this;
       }
       /**
-       * <code>optional .SkillAtkModel skillAtk = 5;</code>
+       * <code>optional .SkillAtkModel skillAtk = 4;</code>
        */
       public com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModel.Builder getSkillAtkBuilder() {
-        
+
         onChanged();
         return getSkillAtkFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .SkillAtkModel skillAtk = 5;</code>
+       * <code>optional .SkillAtkModel skillAtk = 4;</code>
        */
       public com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModelOrBuilder getSkillAtkOrBuilder() {
         if (skillAtkBuilder_ != null) {
@@ -5553,10 +5570,10 @@ public final class MessageUpProto {
         }
       }
       /**
-       * <code>optional .SkillAtkModel skillAtk = 5;</code>
+       * <code>optional .SkillAtkModel skillAtk = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
-          com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModel, com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModel.Builder, com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModelOrBuilder> 
+          com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModel, com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModel.Builder, com.lol.demo.encode.protobuf.MessageUpProto.SkillAtkModelOrBuilder>
           getSkillAtkFieldBuilder() {
         if (skillAtkBuilder_ == null) {
           skillAtkBuilder_ = new com.google.protobuf.SingleFieldBuilder<
@@ -5611,7 +5628,7 @@ public final class MessageUpProto {
       }
     };
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<FightUpBody> getParserForType() {
       return PARSER;
     }
@@ -5664,7 +5681,7 @@ public final class MessageUpProto {
       z_ = 0F;
     }
 
-    @java.lang.Override
+    @Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
@@ -5725,7 +5742,7 @@ public final class MessageUpProto {
       return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_MoveInfo_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_MoveInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -5886,9 +5903,9 @@ public final class MessageUpProto {
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -5904,7 +5921,7 @@ public final class MessageUpProto {
         return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_MoveInfo_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_MoveInfo_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -5917,7 +5934,7 @@ public final class MessageUpProto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -6025,7 +6042,7 @@ public final class MessageUpProto {
        * <code>optional int32 playerId = 1;</code>
        */
       public Builder setPlayerId(int value) {
-        
+
         playerId_ = value;
         onChanged();
         return this;
@@ -6034,7 +6051,7 @@ public final class MessageUpProto {
        * <code>optional int32 playerId = 1;</code>
        */
       public Builder clearPlayerId() {
-        
+
         playerId_ = 0;
         onChanged();
         return this;
@@ -6051,7 +6068,7 @@ public final class MessageUpProto {
        * <code>optional float x = 2;</code>
        */
       public Builder setX(float value) {
-        
+
         x_ = value;
         onChanged();
         return this;
@@ -6060,7 +6077,7 @@ public final class MessageUpProto {
        * <code>optional float x = 2;</code>
        */
       public Builder clearX() {
-        
+
         x_ = 0F;
         onChanged();
         return this;
@@ -6077,7 +6094,7 @@ public final class MessageUpProto {
        * <code>optional float y = 3;</code>
        */
       public Builder setY(float value) {
-        
+
         y_ = value;
         onChanged();
         return this;
@@ -6086,7 +6103,7 @@ public final class MessageUpProto {
        * <code>optional float y = 3;</code>
        */
       public Builder clearY() {
-        
+
         y_ = 0F;
         onChanged();
         return this;
@@ -6103,7 +6120,7 @@ public final class MessageUpProto {
        * <code>optional float z = 4;</code>
        */
       public Builder setZ(float value) {
-        
+
         z_ = value;
         onChanged();
         return this;
@@ -6112,7 +6129,7 @@ public final class MessageUpProto {
        * <code>optional float z = 4;</code>
        */
       public Builder clearZ() {
-        
+
         z_ = 0F;
         onChanged();
         return this;
@@ -6160,7 +6177,7 @@ public final class MessageUpProto {
       }
     };
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<MoveInfo> getParserForType() {
       return PARSER;
     }
@@ -6188,7 +6205,7 @@ public final class MessageUpProto {
     /**
      * <code>repeated .Target target = 3 [packed = false];</code>
      */
-    java.util.List<com.lol.demo.encode.protobuf.MessageUpProto.Target> 
+    java.util.List<com.lol.demo.encode.protobuf.MessageUpProto.Target>
         getTargetList();
     /**
      * <code>repeated .Target target = 3 [packed = false];</code>
@@ -6201,13 +6218,13 @@ public final class MessageUpProto {
     /**
      * <code>repeated .Target target = 3 [packed = false];</code>
      */
-    java.util.List<? extends com.lol.demo.encode.protobuf.MessageUpProto.TargetOrBuilder> 
+    java.util.List<? extends com.lol.demo.encode.protobuf.MessageUpProto.TargetOrBuilder>
         getTargetOrBuilderList();
     /**
      * <code>repeated .Target target = 3 [packed = false];</code>
      */
     com.lol.demo.encode.protobuf.MessageUpProto.TargetOrBuilder getTargetOrBuilder(
-        int index);
+            int index);
   }
   /**
    * Protobuf type {@code DamageInfo}
@@ -6226,7 +6243,7 @@ public final class MessageUpProto {
       target_ = java.util.Collections.emptyList();
     }
 
-    @java.lang.Override
+    @Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
@@ -6288,7 +6305,7 @@ public final class MessageUpProto {
       return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_DamageInfo_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_DamageInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -6325,7 +6342,7 @@ public final class MessageUpProto {
     /**
      * <code>repeated .Target target = 3 [packed = false];</code>
      */
-    public java.util.List<? extends com.lol.demo.encode.protobuf.MessageUpProto.TargetOrBuilder> 
+    public java.util.List<? extends com.lol.demo.encode.protobuf.MessageUpProto.TargetOrBuilder>
         getTargetOrBuilderList() {
       return target_;
     }
@@ -6460,9 +6477,9 @@ public final class MessageUpProto {
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -6478,7 +6495,7 @@ public final class MessageUpProto {
         return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_DamageInfo_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_DamageInfo_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -6491,7 +6508,7 @@ public final class MessageUpProto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -6587,7 +6604,7 @@ public final class MessageUpProto {
               targetBuilder_ = null;
               target_ = other.target_;
               bitField0_ = (bitField0_ & ~0x00000004);
-              targetBuilder_ = 
+              targetBuilder_ =
                 com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
                    getTargetFieldBuilder() : null;
             } else {
@@ -6633,7 +6650,7 @@ public final class MessageUpProto {
        * <code>optional int32 playerId = 1;</code>
        */
       public Builder setPlayerId(int value) {
-        
+
         playerId_ = value;
         onChanged();
         return this;
@@ -6642,7 +6659,7 @@ public final class MessageUpProto {
        * <code>optional int32 playerId = 1;</code>
        */
       public Builder clearPlayerId() {
-        
+
         playerId_ = 0;
         onChanged();
         return this;
@@ -6659,7 +6676,7 @@ public final class MessageUpProto {
        * <code>optional int32 skill = 2;</code>
        */
       public Builder setSkill(int value) {
-        
+
         skill_ = value;
         onChanged();
         return this;
@@ -6668,7 +6685,7 @@ public final class MessageUpProto {
        * <code>optional int32 skill = 2;</code>
        */
       public Builder clearSkill() {
-        
+
         skill_ = 0;
         onChanged();
         return this;
@@ -6812,7 +6829,7 @@ public final class MessageUpProto {
        * <code>repeated .Target target = 3 [packed = false];</code>
        */
       public Builder addAllTarget(
-          java.lang.Iterable<? extends com.lol.demo.encode.protobuf.MessageUpProto.Target> values) {
+          Iterable<? extends com.lol.demo.encode.protobuf.MessageUpProto.Target> values) {
         if (targetBuilder_ == null) {
           ensureTargetIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -6869,7 +6886,7 @@ public final class MessageUpProto {
       /**
        * <code>repeated .Target target = 3 [packed = false];</code>
        */
-      public java.util.List<? extends com.lol.demo.encode.protobuf.MessageUpProto.TargetOrBuilder> 
+      public java.util.List<? extends com.lol.demo.encode.protobuf.MessageUpProto.TargetOrBuilder>
            getTargetOrBuilderList() {
         if (targetBuilder_ != null) {
           return targetBuilder_.getMessageOrBuilderList();
@@ -6895,12 +6912,12 @@ public final class MessageUpProto {
       /**
        * <code>repeated .Target target = 3 [packed = false];</code>
        */
-      public java.util.List<com.lol.demo.encode.protobuf.MessageUpProto.Target.Builder> 
+      public java.util.List<com.lol.demo.encode.protobuf.MessageUpProto.Target.Builder>
            getTargetBuilderList() {
         return getTargetFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.lol.demo.encode.protobuf.MessageUpProto.Target, com.lol.demo.encode.protobuf.MessageUpProto.Target.Builder, com.lol.demo.encode.protobuf.MessageUpProto.TargetOrBuilder> 
+          com.lol.demo.encode.protobuf.MessageUpProto.Target, com.lol.demo.encode.protobuf.MessageUpProto.Target.Builder, com.lol.demo.encode.protobuf.MessageUpProto.TargetOrBuilder>
           getTargetFieldBuilder() {
         if (targetBuilder_ == null) {
           targetBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
@@ -6956,7 +6973,7 @@ public final class MessageUpProto {
       }
     };
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<DamageInfo> getParserForType() {
       return PARSER;
     }
@@ -6974,7 +6991,7 @@ public final class MessageUpProto {
     /**
      * <code>repeated int32 target = 1 [packed = true];</code>
      */
-    java.util.List<java.lang.Integer> getTargetList();
+    java.util.List<Integer> getTargetList();
     /**
      * <code>repeated int32 target = 1 [packed = true];</code>
      */
@@ -7003,7 +7020,7 @@ public final class MessageUpProto {
       target_ = java.util.Collections.emptyList();
     }
 
-    @java.lang.Override
+    @Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
@@ -7029,7 +7046,7 @@ public final class MessageUpProto {
             }
             case 8: {
               if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
-                target_ = new java.util.ArrayList<java.lang.Integer>();
+                target_ = new java.util.ArrayList<Integer>();
                 mutable_bitField0_ |= 0x00000001;
               }
               target_.add(input.readInt32());
@@ -7039,7 +7056,7 @@ public final class MessageUpProto {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               if (!((mutable_bitField0_ & 0x00000001) == 0x00000001) && input.getBytesUntilLimit() > 0) {
-                target_ = new java.util.ArrayList<java.lang.Integer>();
+                target_ = new java.util.ArrayList<Integer>();
                 mutable_bitField0_ |= 0x00000001;
               }
               while (input.getBytesUntilLimit() > 0) {
@@ -7068,7 +7085,7 @@ public final class MessageUpProto {
       return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_Target_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_Target_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -7076,11 +7093,11 @@ public final class MessageUpProto {
     }
 
     public static final int TARGET_FIELD_NUMBER = 1;
-    private java.util.List<java.lang.Integer> target_;
+    private java.util.List<Integer> target_;
     /**
      * <code>repeated int32 target = 1 [packed = true];</code>
      */
-    public java.util.List<java.lang.Integer>
+    public java.util.List<Integer>
         getTargetList() {
       return target_;
     }
@@ -7210,9 +7227,9 @@ public final class MessageUpProto {
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -7232,7 +7249,7 @@ public final class MessageUpProto {
         return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_Target_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_Target_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -7245,7 +7262,7 @@ public final class MessageUpProto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -7337,17 +7354,17 @@ public final class MessageUpProto {
       }
       private int bitField0_;
 
-      private java.util.List<java.lang.Integer> target_ = java.util.Collections.emptyList();
+      private java.util.List<Integer> target_ = java.util.Collections.emptyList();
       private void ensureTargetIsMutable() {
         if (!((bitField0_ & 0x00000001) == 0x00000001)) {
-          target_ = new java.util.ArrayList<java.lang.Integer>(target_);
+          target_ = new java.util.ArrayList<Integer>(target_);
           bitField0_ |= 0x00000001;
          }
       }
       /**
        * <code>repeated int32 target = 1 [packed = true];</code>
        */
-      public java.util.List<java.lang.Integer>
+      public java.util.List<Integer>
           getTargetList() {
         return java.util.Collections.unmodifiableList(target_);
       }
@@ -7386,7 +7403,7 @@ public final class MessageUpProto {
        * <code>repeated int32 target = 1 [packed = true];</code>
        */
       public Builder addAllTarget(
-          java.lang.Iterable<? extends java.lang.Integer> values) {
+          Iterable<? extends Integer> values) {
         ensureTargetIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
             values, target_);
@@ -7445,7 +7462,7 @@ public final class MessageUpProto {
       }
     };
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<Target> getParserForType() {
       return PARSER;
     }
@@ -7462,34 +7479,62 @@ public final class MessageUpProto {
 
     /**
      * <code>optional int32 playerId = 1;</code>
+     *
+     * <pre>
+     *玩家ID
+     * </pre>
      */
     int getPlayerId();
 
     /**
      * <code>optional int32 type = 2;</code>
+     *
+     * <pre>
+     *0表示目标攻击 1表示指定点
+     * </pre>
      */
     int getType();
 
     /**
      * <code>optional int32 skill = 3;</code>
+     *
+     * <pre>
+     *技能
+     * </pre>
      */
     int getSkill();
 
     /**
      * <code>repeated float position = 4 [packed = true];</code>
+     *
+     * <pre>
+     *位置
+     * </pre>
      */
-    java.util.List<java.lang.Float> getPositionList();
+    java.util.List<Float> getPositionList();
     /**
      * <code>repeated float position = 4 [packed = true];</code>
+     *
+     * <pre>
+     *位置
+     * </pre>
      */
     int getPositionCount();
     /**
      * <code>repeated float position = 4 [packed = true];</code>
+     *
+     * <pre>
+     *位置
+     * </pre>
      */
     float getPosition(int index);
 
     /**
      * <code>optional int32 target = 5;</code>
+     *
+     * <pre>
+     *目标
+     * </pre>
      */
     int getTarget();
   }
@@ -7512,7 +7557,7 @@ public final class MessageUpProto {
       target_ = 0;
     }
 
-    @java.lang.Override
+    @Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
@@ -7553,7 +7598,7 @@ public final class MessageUpProto {
             }
             case 37: {
               if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
-                position_ = new java.util.ArrayList<java.lang.Float>();
+                position_ = new java.util.ArrayList<Float>();
                 mutable_bitField0_ |= 0x00000008;
               }
               position_.add(input.readFloat());
@@ -7563,7 +7608,7 @@ public final class MessageUpProto {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
               if (!((mutable_bitField0_ & 0x00000008) == 0x00000008) && input.getBytesUntilLimit() > 0) {
-                position_ = new java.util.ArrayList<java.lang.Float>();
+                position_ = new java.util.ArrayList<Float>();
                 mutable_bitField0_ |= 0x00000008;
               }
               while (input.getBytesUntilLimit() > 0) {
@@ -7597,7 +7642,7 @@ public final class MessageUpProto {
       return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_SkillAtkModel_descriptor;
     }
 
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+    protected FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_SkillAtkModel_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
@@ -7609,6 +7654,10 @@ public final class MessageUpProto {
     private int playerId_;
     /**
      * <code>optional int32 playerId = 1;</code>
+     *
+     * <pre>
+     *玩家ID
+     * </pre>
      */
     public int getPlayerId() {
       return playerId_;
@@ -7618,6 +7667,10 @@ public final class MessageUpProto {
     private int type_;
     /**
      * <code>optional int32 type = 2;</code>
+     *
+     * <pre>
+     *0表示目标攻击 1表示指定点
+     * </pre>
      */
     public int getType() {
       return type_;
@@ -7627,28 +7680,44 @@ public final class MessageUpProto {
     private int skill_;
     /**
      * <code>optional int32 skill = 3;</code>
+     *
+     * <pre>
+     *技能
+     * </pre>
      */
     public int getSkill() {
       return skill_;
     }
 
     public static final int POSITION_FIELD_NUMBER = 4;
-    private java.util.List<java.lang.Float> position_;
+    private java.util.List<Float> position_;
     /**
      * <code>repeated float position = 4 [packed = true];</code>
+     *
+     * <pre>
+     *位置
+     * </pre>
      */
-    public java.util.List<java.lang.Float>
+    public java.util.List<Float>
         getPositionList() {
       return position_;
     }
     /**
      * <code>repeated float position = 4 [packed = true];</code>
+     *
+     * <pre>
+     *位置
+     * </pre>
      */
     public int getPositionCount() {
       return position_.size();
     }
     /**
      * <code>repeated float position = 4 [packed = true];</code>
+     *
+     * <pre>
+     *位置
+     * </pre>
      */
     public float getPosition(int index) {
       return position_.get(index);
@@ -7659,6 +7728,10 @@ public final class MessageUpProto {
     private int target_;
     /**
      * <code>optional int32 target = 5;</code>
+     *
+     * <pre>
+     *目标
+     * </pre>
      */
     public int getTarget() {
       return target_;
@@ -7801,9 +7874,9 @@ public final class MessageUpProto {
           ? new Builder() : new Builder().mergeFrom(this);
     }
 
-    @java.lang.Override
+    @Override
     protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
@@ -7819,7 +7892,7 @@ public final class MessageUpProto {
         return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_SkillAtkModel_descriptor;
       }
 
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      protected FieldAccessorTable
           internalGetFieldAccessorTable() {
         return com.lol.demo.encode.protobuf.MessageUpProto.internal_static_SkillAtkModel_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
@@ -7832,7 +7905,7 @@ public final class MessageUpProto {
       }
 
       private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -7953,24 +8026,36 @@ public final class MessageUpProto {
       private int playerId_ ;
       /**
        * <code>optional int32 playerId = 1;</code>
+       *
+       * <pre>
+       *玩家ID
+       * </pre>
        */
       public int getPlayerId() {
         return playerId_;
       }
       /**
        * <code>optional int32 playerId = 1;</code>
+       *
+       * <pre>
+       *玩家ID
+       * </pre>
        */
       public Builder setPlayerId(int value) {
-        
+
         playerId_ = value;
         onChanged();
         return this;
       }
       /**
        * <code>optional int32 playerId = 1;</code>
+       *
+       * <pre>
+       *玩家ID
+       * </pre>
        */
       public Builder clearPlayerId() {
-        
+
         playerId_ = 0;
         onChanged();
         return this;
@@ -7979,24 +8064,36 @@ public final class MessageUpProto {
       private int type_ ;
       /**
        * <code>optional int32 type = 2;</code>
+       *
+       * <pre>
+       *0表示目标攻击 1表示指定点
+       * </pre>
        */
       public int getType() {
         return type_;
       }
       /**
        * <code>optional int32 type = 2;</code>
+       *
+       * <pre>
+       *0表示目标攻击 1表示指定点
+       * </pre>
        */
       public Builder setType(int value) {
-        
+
         type_ = value;
         onChanged();
         return this;
       }
       /**
        * <code>optional int32 type = 2;</code>
+       *
+       * <pre>
+       *0表示目标攻击 1表示指定点
+       * </pre>
        */
       public Builder clearType() {
-        
+
         type_ = 0;
         onChanged();
         return this;
@@ -8005,57 +8102,85 @@ public final class MessageUpProto {
       private int skill_ ;
       /**
        * <code>optional int32 skill = 3;</code>
+       *
+       * <pre>
+       *技能
+       * </pre>
        */
       public int getSkill() {
         return skill_;
       }
       /**
        * <code>optional int32 skill = 3;</code>
+       *
+       * <pre>
+       *技能
+       * </pre>
        */
       public Builder setSkill(int value) {
-        
+
         skill_ = value;
         onChanged();
         return this;
       }
       /**
        * <code>optional int32 skill = 3;</code>
+       *
+       * <pre>
+       *技能
+       * </pre>
        */
       public Builder clearSkill() {
-        
+
         skill_ = 0;
         onChanged();
         return this;
       }
 
-      private java.util.List<java.lang.Float> position_ = java.util.Collections.emptyList();
+      private java.util.List<Float> position_ = java.util.Collections.emptyList();
       private void ensurePositionIsMutable() {
         if (!((bitField0_ & 0x00000008) == 0x00000008)) {
-          position_ = new java.util.ArrayList<java.lang.Float>(position_);
+          position_ = new java.util.ArrayList<Float>(position_);
           bitField0_ |= 0x00000008;
          }
       }
       /**
        * <code>repeated float position = 4 [packed = true];</code>
+       *
+       * <pre>
+       *位置
+       * </pre>
        */
-      public java.util.List<java.lang.Float>
+      public java.util.List<Float>
           getPositionList() {
         return java.util.Collections.unmodifiableList(position_);
       }
       /**
        * <code>repeated float position = 4 [packed = true];</code>
+       *
+       * <pre>
+       *位置
+       * </pre>
        */
       public int getPositionCount() {
         return position_.size();
       }
       /**
        * <code>repeated float position = 4 [packed = true];</code>
+       *
+       * <pre>
+       *位置
+       * </pre>
        */
       public float getPosition(int index) {
         return position_.get(index);
       }
       /**
        * <code>repeated float position = 4 [packed = true];</code>
+       *
+       * <pre>
+       *位置
+       * </pre>
        */
       public Builder setPosition(
           int index, float value) {
@@ -8066,6 +8191,10 @@ public final class MessageUpProto {
       }
       /**
        * <code>repeated float position = 4 [packed = true];</code>
+       *
+       * <pre>
+       *位置
+       * </pre>
        */
       public Builder addPosition(float value) {
         ensurePositionIsMutable();
@@ -8075,9 +8204,13 @@ public final class MessageUpProto {
       }
       /**
        * <code>repeated float position = 4 [packed = true];</code>
+       *
+       * <pre>
+       *位置
+       * </pre>
        */
       public Builder addAllPosition(
-          java.lang.Iterable<? extends java.lang.Float> values) {
+          Iterable<? extends Float> values) {
         ensurePositionIsMutable();
         com.google.protobuf.AbstractMessageLite.Builder.addAll(
             values, position_);
@@ -8086,6 +8219,10 @@ public final class MessageUpProto {
       }
       /**
        * <code>repeated float position = 4 [packed = true];</code>
+       *
+       * <pre>
+       *位置
+       * </pre>
        */
       public Builder clearPosition() {
         position_ = java.util.Collections.emptyList();
@@ -8097,24 +8234,36 @@ public final class MessageUpProto {
       private int target_ ;
       /**
        * <code>optional int32 target = 5;</code>
+       *
+       * <pre>
+       *目标
+       * </pre>
        */
       public int getTarget() {
         return target_;
       }
       /**
        * <code>optional int32 target = 5;</code>
+       *
+       * <pre>
+       *目标
+       * </pre>
        */
       public Builder setTarget(int value) {
-        
+
         target_ = value;
         onChanged();
         return this;
       }
       /**
        * <code>optional int32 target = 5;</code>
+       *
+       * <pre>
+       *目标
+       * </pre>
        */
       public Builder clearTarget() {
-        
+
         target_ = 0;
         onChanged();
         return this;
@@ -8162,7 +8311,7 @@ public final class MessageUpProto {
       }
     };
 
-    @java.lang.Override
+    @Override
     public com.google.protobuf.Parser<SkillAtkModel> getParserForType() {
       return PARSER;
     }
@@ -8241,31 +8390,32 @@ public final class MessageUpProto {
   private static com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
-    java.lang.String[] descriptorData = {
+    String[] descriptorData = {
       "\n\017MessageUp.proto\"A\n\tMessageUp\022\032\n\006header" +
       "\030\001 \001(\0132\n.MsgHeader\022\030\n\004body\030\002 \001(\0132\n.MsgUp" +
-      "Body\"7\n\tMsgHeader\022\017\n\007msgType\030\001 \001(\005\022\014\n\004ar" +
-      "ea\030\002 \001(\005\022\013\n\003cmd\030\003 \001(\005\"\240\001\n\tMsgUpBody\022\033\n\005l" +
-      "ogin\030\001 \001(\0132\014.LoginUpBody\022\035\n\006player\030\002 \001(\013" +
-      "2\r.PlayerUpBody\022\033\n\005match\030\003 \001(\0132\014.MatchUp" +
-      "Body\022\035\n\006select\030\004 \001(\0132\r.SelectUpBody\022\033\n\005f" +
-      "ight\030\005 \001(\0132\014.FightUpBody\"/\n\013LoginUpBody\022" +
-      "\016\n\006acount\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\" \n\014Pla" +
-      "yerUpBody\022\020\n\010nickName\030\001 \001(\t\"\036\n\013MatchUpBo",
-      "dy\022\017\n\007teamMax\030\001 \001(\005\">\n\014SelectUpBody\022\016\n\006s" +
-      "elect\030\001 \001(\005\022\014\n\004talk\030\002 \001(\t\022\020\n\010roomName\030\003 " +
-      "\001(\t\"\220\001\n\013FightUpBody\022\027\n\017attackOrSkillUp\030\001" +
-      " \001(\005\022\020\n\010roomName\030\002 \001(\t\022\027\n\004move\030\003 \001(\0132\t.M" +
-      "oveInfo\022\033\n\006damage\030\004 \001(\0132\013.DamageInfo\022 \n\010" +
-      "skillAtk\030\005 \001(\0132\016.SkillAtkModel\"=\n\010MoveIn" +
-      "fo\022\020\n\010playerId\030\001 \001(\005\022\t\n\001x\030\002 \001(\002\022\t\n\001y\030\003 \001" +
-      "(\002\022\t\n\001z\030\004 \001(\002\"J\n\nDamageInfo\022\020\n\010playerId\030" +
-      "\001 \001(\005\022\r\n\005skill\030\002 \001(\005\022\033\n\006target\030\003 \003(\0132\007.T" +
-      "argetB\002\020\000\"\034\n\006Target\022\022\n\006target\030\001 \003(\005B\002\020\001\"",
-      "d\n\rSkillAtkModel\022\020\n\010playerId\030\001 \001(\005\022\014\n\004ty" +
-      "pe\030\002 \001(\005\022\r\n\005skill\030\003 \001(\005\022\024\n\010position\030\004 \003(" +
-      "\002B\002\020\001\022\016\n\006target\030\005 \001(\005B.\n\034com.lol.demo.en" +
-      "code.protobufB\016MessageUpProtob\006proto3"
+      "Body\"F\n\tMsgHeader\022\017\n\007msgType\030\001 \001(\005\022\014\n\004ar" +
+      "ea\030\002 \001(\005\022\013\n\003cmd\030\003 \001(\005\022\r\n\005token\030\004 \001(\t\"\240\001\n" +
+      "\tMsgUpBody\022\033\n\005login\030\001 \001(\0132\014.LoginUpBody\022" +
+      "\035\n\006player\030\002 \001(\0132\r.PlayerUpBody\022\033\n\005match\030" +
+      "\003 \001(\0132\014.MatchUpBody\022\035\n\006select\030\004 \001(\0132\r.Se" +
+      "lectUpBody\022\033\n\005fight\030\005 \001(\0132\014.FightUpBody\"" +
+      "/\n\013LoginUpBody\022\016\n\006acount\030\001 \001(\t\022\020\n\010passwo" +
+      "rd\030\002 \001(\t\" \n\014PlayerUpBody\022\020\n\010nickName\030\001 \001",
+      "(\t\".\n\013MatchUpBody\022\016\n\006agreed\030\001 \001(\010\022\017\n\007tea" +
+      "mMax\030\002 \001(\005\"@\n\014SelectUpBody\022\016\n\006select\030\001 \001" +
+      "(\005\022\014\n\004talk\030\002 \001(\t\022\022\n\nisTeamTalk\030\003 \001(\010\"~\n\013" +
+      "FightUpBody\022\027\n\017attackOrSkillUp\030\001 \001(\005\022\027\n\004" +
+      "move\030\002 \001(\0132\t.MoveInfo\022\033\n\006damage\030\003 \001(\0132\013." +
+      "DamageInfo\022 \n\010skillAtk\030\004 \001(\0132\016.SkillAtkM" +
+      "odel\"=\n\010MoveInfo\022\020\n\010playerId\030\001 \001(\005\022\t\n\001x\030" +
+      "\002 \001(\002\022\t\n\001y\030\003 \001(\002\022\t\n\001z\030\004 \001(\002\"J\n\nDamageInf" +
+      "o\022\020\n\010playerId\030\001 \001(\005\022\r\n\005skill\030\002 \001(\005\022\033\n\006ta" +
+      "rget\030\003 \003(\0132\007.TargetB\002\020\000\"\034\n\006Target\022\022\n\006tar",
+      "get\030\001 \003(\005B\002\020\001\"d\n\rSkillAtkModel\022\020\n\010player" +
+      "Id\030\001 \001(\005\022\014\n\004type\030\002 \001(\005\022\r\n\005skill\030\003 \001(\005\022\024\n" +
+      "\010position\030\004 \003(\002B\002\020\001\022\016\n\006target\030\005 \001(\005B&\n\024c" +
+      "om.lol.fwk.protobufB\016MessageUpProtob\006pro" +
+      "to3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8284,73 +8434,73 @@ public final class MessageUpProto {
     internal_static_MessageUp_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_MessageUp_descriptor,
-        new java.lang.String[] { "Header", "Body", });
+        new String[] { "Header", "Body", });
     internal_static_MsgHeader_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_MsgHeader_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_MsgHeader_descriptor,
-        new java.lang.String[] { "MsgType", "Area", "Cmd", });
+        new String[] { "MsgType", "Area", "Cmd", "Token", });
     internal_static_MsgUpBody_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_MsgUpBody_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_MsgUpBody_descriptor,
-        new java.lang.String[] { "Login", "Player", "Match", "Select", "Fight", });
+        new String[] { "Login", "Player", "Match", "Select", "Fight", });
     internal_static_LoginUpBody_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_LoginUpBody_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_LoginUpBody_descriptor,
-        new java.lang.String[] { "Acount", "Password", });
+        new String[] { "Acount", "Password", });
     internal_static_PlayerUpBody_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_PlayerUpBody_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_PlayerUpBody_descriptor,
-        new java.lang.String[] { "NickName", });
+        new String[] { "NickName", });
     internal_static_MatchUpBody_descriptor =
       getDescriptor().getMessageTypes().get(5);
     internal_static_MatchUpBody_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_MatchUpBody_descriptor,
-        new java.lang.String[] { "TeamMax", });
+        new String[] { "Agreed", "TeamMax", });
     internal_static_SelectUpBody_descriptor =
       getDescriptor().getMessageTypes().get(6);
     internal_static_SelectUpBody_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_SelectUpBody_descriptor,
-        new java.lang.String[] { "Select", "Talk", "RoomName", });
+        new String[] { "Select", "Talk", "IsTeamTalk", });
     internal_static_FightUpBody_descriptor =
       getDescriptor().getMessageTypes().get(7);
     internal_static_FightUpBody_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_FightUpBody_descriptor,
-        new java.lang.String[] { "AttackOrSkillUp", "RoomName", "Move", "Damage", "SkillAtk", });
+        new String[] { "AttackOrSkillUp", "Move", "Damage", "SkillAtk", });
     internal_static_MoveInfo_descriptor =
       getDescriptor().getMessageTypes().get(8);
     internal_static_MoveInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_MoveInfo_descriptor,
-        new java.lang.String[] { "PlayerId", "X", "Y", "Z", });
+        new String[] { "PlayerId", "X", "Y", "Z", });
     internal_static_DamageInfo_descriptor =
       getDescriptor().getMessageTypes().get(9);
     internal_static_DamageInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_DamageInfo_descriptor,
-        new java.lang.String[] { "PlayerId", "Skill", "Target", });
+        new String[] { "PlayerId", "Skill", "Target", });
     internal_static_Target_descriptor =
       getDescriptor().getMessageTypes().get(10);
     internal_static_Target_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_Target_descriptor,
-        new java.lang.String[] { "Target", });
+        new String[] { "Target", });
     internal_static_SkillAtkModel_descriptor =
       getDescriptor().getMessageTypes().get(11);
     internal_static_SkillAtkModel_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_SkillAtkModel_descriptor,
-        new java.lang.String[] { "PlayerId", "Type", "Skill", "Position", "Target", });
+        new String[] { "PlayerId", "Type", "Skill", "Position", "Target", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

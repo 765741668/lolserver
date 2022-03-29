@@ -2,7 +2,8 @@ package com.lol.connect;
 
 import com.lol.fwk.buffer.GameUpBuffer;
 import com.lol.fwk.handler.GameProcessor;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class OnConnect implements GameProcessor {
 
-    private static Logger logger = Logger.getLogger(OnConnect.class);
+    private static Logger logger = LoggerFactory.getLogger(OnConnect.class);
 
     @Override
     public void process(GameUpBuffer buffer) throws Exception {

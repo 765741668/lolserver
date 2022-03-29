@@ -729,6 +729,24 @@ public final class MessageUpProto {
      * </pre>
      */
     int getCmd();
+
+    /**
+     * <code>optional string token = 4;</code>
+     *
+     * <pre>
+     * token, 认证授权
+     * </pre>
+     */
+    java.lang.String getToken();
+    /**
+     * <code>optional string token = 4;</code>
+     *
+     * <pre>
+     * token, 认证授权
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getTokenBytes();
   }
   /**
    * Protobuf type {@code MsgHeader}
@@ -749,6 +767,7 @@ public final class MessageUpProto {
       msgType_ = 0;
       area_ = 0;
       cmd_ = 0;
+      token_ = "";
     }
 
     @java.lang.Override
@@ -788,6 +807,12 @@ public final class MessageUpProto {
             case 24: {
 
               cmd_ = input.readInt32();
+              break;
+            }
+            case 34: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+
+              token_ = bs;
               break;
             }
           }
@@ -853,6 +878,50 @@ public final class MessageUpProto {
       return cmd_;
     }
 
+    public static final int TOKEN_FIELD_NUMBER = 4;
+    private volatile java.lang.Object token_;
+    /**
+     * <code>optional string token = 4;</code>
+     *
+     * <pre>
+     * token, 认证授权
+     * </pre>
+     */
+    public java.lang.String getToken() {
+      java.lang.Object ref = token_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          token_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string token = 4;</code>
+     *
+     * <pre>
+     * token, 认证授权
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getTokenBytes() {
+      java.lang.Object ref = token_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        token_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -874,6 +943,9 @@ public final class MessageUpProto {
       if (cmd_ != 0) {
         output.writeInt32(3, cmd_);
       }
+      if (!getTokenBytes().isEmpty()) {
+        output.writeBytes(4, getTokenBytes());
+      }
     }
 
     private int memoizedSerializedSize = -1;
@@ -893,6 +965,10 @@ public final class MessageUpProto {
       if (cmd_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(3, cmd_);
+      }
+      if (!getTokenBytes().isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getTokenBytes());
       }
       memoizedSerializedSize = size;
       return size;
@@ -1015,6 +1091,8 @@ public final class MessageUpProto {
 
         cmd_ = 0;
 
+        token_ = "";
+
         return this;
       }
 
@@ -1040,6 +1118,7 @@ public final class MessageUpProto {
         result.msgType_ = msgType_;
         result.area_ = area_;
         result.cmd_ = cmd_;
+        result.token_ = token_;
         onBuilt();
         return result;
       }
@@ -1063,6 +1142,10 @@ public final class MessageUpProto {
         }
         if (other.getCmd() != 0) {
           setCmd(other.getCmd());
+        }
+        if (!other.getToken().isEmpty()) {
+          token_ = other.token_;
+          onChanged();
         }
         onChanged();
         return this;
@@ -1200,6 +1283,96 @@ public final class MessageUpProto {
       public Builder clearCmd() {
         
         cmd_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object token_ = "";
+      /**
+       * <code>optional string token = 4;</code>
+       *
+       * <pre>
+       * token, 认证授权
+       * </pre>
+       */
+      public java.lang.String getToken() {
+        java.lang.Object ref = token_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            token_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string token = 4;</code>
+       *
+       * <pre>
+       * token, 认证授权
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getTokenBytes() {
+        java.lang.Object ref = token_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          token_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string token = 4;</code>
+       *
+       * <pre>
+       * token, 认证授权
+       * </pre>
+       */
+      public Builder setToken(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        token_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string token = 4;</code>
+       *
+       * <pre>
+       * token, 认证授权
+       * </pre>
+       */
+      public Builder clearToken() {
+        
+        token_ = getDefaultInstance().getToken();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string token = 4;</code>
+       *
+       * <pre>
+       * token, 认证授权
+       * </pre>
+       */
+      public Builder setTokenBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        token_ = value;
         onChanged();
         return this;
       }
@@ -8220,28 +8393,29 @@ public final class MessageUpProto {
     java.lang.String[] descriptorData = {
       "\n\017MessageUp.proto\"A\n\tMessageUp\022\032\n\006header" +
       "\030\001 \001(\0132\n.MsgHeader\022\030\n\004body\030\002 \001(\0132\n.MsgUp" +
-      "Body\"7\n\tMsgHeader\022\017\n\007msgType\030\001 \001(\005\022\014\n\004ar" +
-      "ea\030\002 \001(\005\022\013\n\003cmd\030\003 \001(\005\"\240\001\n\tMsgUpBody\022\033\n\005l" +
-      "ogin\030\001 \001(\0132\014.LoginUpBody\022\035\n\006player\030\002 \001(\013" +
-      "2\r.PlayerUpBody\022\033\n\005match\030\003 \001(\0132\014.MatchUp" +
-      "Body\022\035\n\006select\030\004 \001(\0132\r.SelectUpBody\022\033\n\005f" +
-      "ight\030\005 \001(\0132\014.FightUpBody\"/\n\013LoginUpBody\022" +
-      "\016\n\006acount\030\001 \001(\t\022\020\n\010password\030\002 \001(\t\" \n\014Pla" +
-      "yerUpBody\022\020\n\010nickName\030\001 \001(\t\".\n\013MatchUpBo",
-      "dy\022\016\n\006agreed\030\001 \001(\010\022\017\n\007teamMax\030\002 \001(\005\"@\n\014S" +
-      "electUpBody\022\016\n\006select\030\001 \001(\005\022\014\n\004talk\030\002 \001(" +
-      "\t\022\022\n\nisTeamTalk\030\003 \001(\010\"~\n\013FightUpBody\022\027\n\017" +
-      "attackOrSkillUp\030\001 \001(\005\022\027\n\004move\030\002 \001(\0132\t.Mo" +
-      "veInfo\022\033\n\006damage\030\003 \001(\0132\013.DamageInfo\022 \n\010s" +
-      "killAtk\030\004 \001(\0132\016.SkillAtkModel\"=\n\010MoveInf" +
-      "o\022\020\n\010playerId\030\001 \001(\005\022\t\n\001x\030\002 \001(\002\022\t\n\001y\030\003 \001(" +
-      "\002\022\t\n\001z\030\004 \001(\002\"J\n\nDamageInfo\022\020\n\010playerId\030\001" +
-      " \001(\005\022\r\n\005skill\030\002 \001(\005\022\033\n\006target\030\003 \003(\0132\007.Ta" +
-      "rgetB\002\020\000\"\034\n\006Target\022\022\n\006target\030\001 \003(\005B\002\020\001\"d",
-      "\n\rSkillAtkModel\022\020\n\010playerId\030\001 \001(\005\022\014\n\004typ" +
-      "e\030\002 \001(\005\022\r\n\005skill\030\003 \001(\005\022\024\n\010position\030\004 \003(\002" +
-      "B\002\020\001\022\016\n\006target\030\005 \001(\005B&\n\024com.lol.fwk.prot" +
-      "obufB\016MessageUpProtob\006proto3"
+      "Body\"F\n\tMsgHeader\022\017\n\007msgType\030\001 \001(\005\022\014\n\004ar" +
+      "ea\030\002 \001(\005\022\013\n\003cmd\030\003 \001(\005\022\r\n\005token\030\004 \001(\t\"\240\001\n" +
+      "\tMsgUpBody\022\033\n\005login\030\001 \001(\0132\014.LoginUpBody\022" +
+      "\035\n\006player\030\002 \001(\0132\r.PlayerUpBody\022\033\n\005match\030" +
+      "\003 \001(\0132\014.MatchUpBody\022\035\n\006select\030\004 \001(\0132\r.Se" +
+      "lectUpBody\022\033\n\005fight\030\005 \001(\0132\014.FightUpBody\"" +
+      "/\n\013LoginUpBody\022\016\n\006acount\030\001 \001(\t\022\020\n\010passwo" +
+      "rd\030\002 \001(\t\" \n\014PlayerUpBody\022\020\n\010nickName\030\001 \001",
+      "(\t\".\n\013MatchUpBody\022\016\n\006agreed\030\001 \001(\010\022\017\n\007tea" +
+      "mMax\030\002 \001(\005\"@\n\014SelectUpBody\022\016\n\006select\030\001 \001" +
+      "(\005\022\014\n\004talk\030\002 \001(\t\022\022\n\nisTeamTalk\030\003 \001(\010\"~\n\013" +
+      "FightUpBody\022\027\n\017attackOrSkillUp\030\001 \001(\005\022\027\n\004" +
+      "move\030\002 \001(\0132\t.MoveInfo\022\033\n\006damage\030\003 \001(\0132\013." +
+      "DamageInfo\022 \n\010skillAtk\030\004 \001(\0132\016.SkillAtkM" +
+      "odel\"=\n\010MoveInfo\022\020\n\010playerId\030\001 \001(\005\022\t\n\001x\030" +
+      "\002 \001(\002\022\t\n\001y\030\003 \001(\002\022\t\n\001z\030\004 \001(\002\"J\n\nDamageInf" +
+      "o\022\020\n\010playerId\030\001 \001(\005\022\r\n\005skill\030\002 \001(\005\022\033\n\006ta" +
+      "rget\030\003 \003(\0132\007.TargetB\002\020\000\"\034\n\006Target\022\022\n\006tar",
+      "get\030\001 \003(\005B\002\020\001\"d\n\rSkillAtkModel\022\020\n\010player" +
+      "Id\030\001 \001(\005\022\014\n\004type\030\002 \001(\005\022\r\n\005skill\030\003 \001(\005\022\024\n" +
+      "\010position\030\004 \003(\002B\002\020\001\022\016\n\006target\030\005 \001(\005B&\n\024c" +
+      "om.lol.fwk.protobufB\016MessageUpProtob\006pro" +
+      "to3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8266,7 +8440,7 @@ public final class MessageUpProto {
     internal_static_MsgHeader_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_MsgHeader_descriptor,
-        new java.lang.String[] { "MsgType", "Area", "Cmd", });
+        new java.lang.String[] { "MsgType", "Area", "Cmd", "Token", });
     internal_static_MsgUpBody_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_MsgUpBody_fieldAccessorTable = new

@@ -18,11 +18,12 @@ public class Utils {
      * @param data
      * @return
      */
-    public static MessageUpProto.MessageUp packgeUpData(int msgType, int area, int cmd, Object data) {
+    public static MessageUpProto.MessageUp packageUpData(String account, int msgType, int area, int cmd, Object data) {
 
         MessageUpProto.MessageUp.Builder builder = MessageUpProto.MessageUp.newBuilder();
         MessageUpProto.MsgHeader.Builder header = MessageUpProto.MsgHeader.newBuilder();
 
+        header.setToken(account);
         header.setMsgType(msgType);
         header.setArea(area);
         header.setCmd(cmd);

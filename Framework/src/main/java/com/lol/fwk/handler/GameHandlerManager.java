@@ -1,9 +1,12 @@
 package com.lol.fwk.handler;
 
 import io.netty.channel.ChannelHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * 业务逻辑管理类
@@ -12,11 +15,11 @@ import java.util.Map;
  *         2015-2-3
  */
 public class GameHandlerManager {
-
+    private static Logger logger = LoggerFactory.getLogger(GameHandlerManager.class);
     /**
      * 业务逻辑集合
      */
-    private Map<Integer, ChannelHandler> channelHandlerMap = new HashMap<>();
+    private Map<Integer, ChannelHandler> channelHandlerMap = new TreeMap<>();
 
     public static GameHandlerManager getInstance() {
         return GameHandlerManagerHolder.instance;
@@ -31,6 +34,7 @@ public class GameHandlerManager {
      */
     public void registerHandler(int protocol, ChannelHandler channel) throws Exception {
         channelHandlerMap.put(protocol, channel);
+        logger.info("{} handler has been registed...",protocol);
     }
 
     /**

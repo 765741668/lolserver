@@ -63,7 +63,7 @@
         <resetJUL>true</resetJUL>
     </contextListener>
 
-    <property resource="log/logback.properties"/>
+    <property resource="env/log/logback.properties"/>
     <!-- <property resource="jms/jms.properties" /> -->
 
     <!-- To enable JMX Management -->

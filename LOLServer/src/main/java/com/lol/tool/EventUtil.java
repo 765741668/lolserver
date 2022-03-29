@@ -60,22 +60,22 @@ public class EventUtil {
     public static Consumer<Connection> disconnect;
 
     @FunctionalInterface
-    public interface InitSelectRoom<List> {
-        void init(List teamOne, List teamTwo);
+    public interface InitSelectRoom<T> {
+        void init(T teamOne, T teamTwo);
     }
 
     @FunctionalInterface
-    public interface InitFightRoom<SelectModel> {
-        void init(SelectModel[] teamOne, SelectModel[] teamTwo);
+    public interface InitFightRoom<T> {
+        void init(T[] teamOne, T[] teamTwo);
     }
 
     @FunctionalInterface
-    public interface CreateSelect<List, GameUpBuffer> {
-        void create(List teamOne, List teamTwo, GameUpBuffer buffer);
+    public interface CreateSelect<T, U> {
+        void create(T teamOne, T teamTwo, U buffer);
     }
 
     @FunctionalInterface
-    public interface CreateFight<SelectModel, GameUpBuffer> {
-        void create(SelectModel[] teamOne, SelectModel[] teamTwo, GameUpBuffer buffer);
+    public interface CreateFight<T, U> {
+        void create(T[] teamOne, T[] teamTwo, U buffer);
     }
 }

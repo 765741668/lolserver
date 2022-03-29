@@ -143,19 +143,19 @@
 
     <!-- 配置部署的远程仓库 -->
     <!-- 用于配置分发管理，配置相应的产品发布信息,主要用于发布，在执行mvn deploy后表示要发布的位置 -->
-    <distributionManagement>
+   <!-- <distributionManagement>
         <snapshotRepository>
             <id>nexus-snapshots-testCoder</id>
             <name>nexus testCoder Snapshot repository</name>
             <url>http://127.0.0.1:8081/nexus/content/repositories/testCoder-Snapshot</url>
         </snapshotRepository>
 
-        <!-- 配置到文件系统 -->
+        &lt;!&ndash; 配置到文件系统 &ndash;&gt;
         <repository>
             <id>nexus-releases-testCoder</id>
             <name>nexus testCoder Releases repository</name>
             <url>http://127.0.0.1:8081/nexus/content/repositories/testCoder-Releases</url>
         </repository>
     </distributionManagement>
-
+-->
 </project>

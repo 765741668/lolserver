@@ -2,7 +2,8 @@ package com.lol.fwk.core;
 
 import com.lol.fwk.buffer.GameUpBuffer;
 import com.lol.fwk.util.ProReaderUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 
@@ -14,7 +15,7 @@ import java.util.HashMap;
  */
 public class GameWorkerManager {
 
-    private static Logger logger = Logger.getLogger(GameWorkerManager.class);
+    private static Logger logger = LoggerFactory.getLogger(GameWorkerManager.class);
 
     private static GameWorkerManager instance = new GameWorkerManager();
     /**

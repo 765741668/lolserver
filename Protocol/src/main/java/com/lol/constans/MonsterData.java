@@ -5,7 +5,7 @@ import com.lol.util.Utils;
 
 public class MonsterData {
 
-    public static final java.util.HashMap<Integer, MonsterModel> monsterMap = new java.util.HashMap<>();
+    public static final java.util.HashMap<Integer, MonsterModel> monsterMap = new java.util.HashMap<Integer, MonsterModel>();
 
     /**
      * 静态构造 初次访问的时候自动调用

@@ -14,6 +14,8 @@ import io.netty.handler.codec.protobuf.ProtobufEncoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32FrameDecoder;
 import io.netty.handler.codec.protobuf.ProtobufVarint32LengthFieldPrepender;
 import io.netty.handler.timeout.IdleStateHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -24,7 +26,6 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class GameChannelInitializer extends ChannelInitializer<SocketChannel> {
-
     private static ExtensionRegistry registry = ExtensionRegistry.newInstance();
 
     @Override
@@ -36,9 +37,7 @@ public class GameChannelInitializer extends ChannelInitializer<SocketChannel> {
 
         ch.pipeline().addLast("PING",new IdleStateHandler(10,0,0, TimeUnit.SECONDS));
 
-        for (ChannelHandler channel : GameHandlerManager.getInstance().getAllHandler().values()) {
-            ch.pipeline().addLast(channel);
-        }
+        ch.pipeline().addLast(new GameClientChannelHandler());
     }
 
 
